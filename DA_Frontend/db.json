@@ -1,0 +1,51 @@
+{
+  "staff": [],
+  "staffcategory": [
+    {
+      "id": 1,
+      "name": "Kỹ thuật viên bảo dưỡng"
+    },
+    {
+      "id": 2,
+      "name": "Nhân viên sửa chữa ô tô và kính"
+    },
+    {
+      "id": 3,
+      "name": "Kỹ thuật viên cơ khí và dịch vụ diesel"
+    },
+    {
+      "id": 4,
+      "name": "Thợ lắp đặt điện và điện tử"
+    },
+    {
+      "id": 5,
+      "name": "Công nhân bảo trì và sửa chữa chung"
+    },
+    {
+      "id": 6,
+      "name": "Thợ lắp đặt và sửa chữa thiết bị viễn thông trên ô tô"
+    },
+    {
+      "id": 7,
+      "name": "Nhân viên bảo trì, lắp đặt hệ thống sưởi, điều hòa không khí và điện lạnh"
+    },
+    {
+      "id": 8,
+      "name": "Kỹ thuật viên dịch vụ xe hạng nặng và thiết bị tự động"
+    }
+  ],
+  "booking": [],
+  "news": [
+    {
+      "title": "adsad",
+      "desc": "adsad",
+      "image": "sadasd",
+      "content": "asdasdas",
+      "type": "dasd",
+      "date": "2023-09-24",
+      "id": 1
+    }
+  ],
+  "reviews": [],
+  "reviewsconfirm": []
+}
