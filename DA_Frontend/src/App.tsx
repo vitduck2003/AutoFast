@@ -38,15 +38,24 @@ import ServicePage from "./pages/UserSide/Service/ServicePage";
 import ContactPage from "./pages/UserSide/Contact/ContactPage";
 import AboutUsPage from "./pages/UserSide/AboutUs/AboutUsPage";
 import TeamPage from "./pages/UserSide/Team/TeamPage";
-import ReviewPage from "./pages/UserSide/Reviews/ReviewPage";
+import BookingConfirmAdmin from "./pages/Admin/BookingAdmin/BookingConfirmAdmin";
+import { addBooking, addBookingConfirm, addBookingHT, deleteBooking, deleteBookingConfirm, deleteBookingHT, getBooking, getBookingConfirm, getBookingHT, updateBooking, updateBookingConfirm, updateBookingHT } from "./api/booking";
+import { IBooking } from "./interface/booking";
+import BookingHtAdmin from "./pages/Admin/BookingAdmin/BookingHtAdmin";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
+  const [booking, setBooking] = useState<IBooking[]>([]);
+  const [bookingConf, setBookingConf] = useState<IBooking[]>([]);
+  const [bookingHT, setBookingHT] = useState<IBooking[]>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
     getNews().then(({ data }) => setNews(data));
+    getBooking().then(({ data }) => setBooking(data));
+    getBookingConfirm().then(({ data }) => setBookingConf(data));
+    getBookingHT().then(({ data }) => setBookingHT(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -83,6 +92,56 @@ function App() {
     );
   };
 
+  // Booking
+  const onHandleBooking = (BookingItem: IBooking) => {
+    addBooking(BookingItem).then(() => getBooking().then(({ data }) => setBooking(data)));
+  };
+
+  const onHandleUpdateBooking = (BookingItem: IBooking) => {
+    updateBooking(BookingItem).then(() =>
+      getBooking().then(({ data }) => setBooking(data))
+    );
+  };
+
+  const onHandleRemoveBooking = (id: any) => {
+    deleteBooking(id).then(() =>
+      setBooking(booking.filter((item: IBooking) => item.id !== id))
+    );
+  };
+  // BookingConfirm
+
+  const onHandleBookingConfirm = (BookingItem: IBooking) => {
+    addBookingConfirm(BookingItem).then(() => getBookingConfirm().then(({ data }) => setBookingConf(data)));
+  };
+
+  const onHandleUpdateBookingConfirm = (BookingItem: IBooking) => {
+    updateBookingConfirm(BookingItem).then(() =>
+      getBookingConfirm().then(({ data }) => setBookingConf(data))
+    );
+  };
+
+  const onHandleRemoveBookingConfirm = (id: any) => {
+    deleteBookingConfirm(id).then(() =>
+      setBookingConf(bookingConf.filter((item: IBooking) => item.id !== id))
+    );
+  };
+
+  // BookingHT
+  const onHandleBookingHT = (BookingItem: IBooking) => {
+    addBookingHT(BookingItem).then(() => getBookingHT().then(({ data }) => setBookingHT(data)));
+  };
+
+  const onHandleUpdateBookingHT = (BookingItem: IBooking) => {
+    updateBookingHT(BookingItem).then(() =>
+      getBookingHT().then(({ data }) => setBookingHT(data))
+    );
+  };
+
+  const onHandleRemoveBookingHT = (id: any) => {
+    deleteBookingHT(id).then(() =>
+      setBookingHT(bookingHT.filter((item: IBooking) => item.id !== id))
+    );
+  };
   return (
     <div>
       <BrowserRouter>
@@ -129,7 +188,15 @@ function App() {
 
             {/* Booking Admin Page */}
             <Route path="booking">
-              <Route index element={<BookingAdmin />} />
+              <Route index element={<BookingAdmin booking={booking} onRemoveBooking={onHandleRemoveBooking} />} />
+            </Route>
+            {/* Booking Confirm Admin Page */}
+            <Route path="bookings">
+              <Route index element={<BookingConfirmAdmin bookingConfirm={bookingConf} onRemoveBookingConfirm={onHandleRemoveBookingConfirm} />} />
+            </Route>
+            {/* Booking HT Admin Page */}
+            <Route path="bookingHT">
+              <Route index element={<BookingHtAdmin bookingHT={bookingHT}  />} />
             </Route>
             {/*News Admin Page */}
             <Route path="news">

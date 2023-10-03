@@ -1,9 +1,11 @@
-export interface IStaff {
+export interface IBooking {
     id: number,
     full_name: string,
     email: string,
+    service: string,
     phone: number,
     time: any ,
+    desc: string,
     active: any,
     date: any,
     created_at: any,

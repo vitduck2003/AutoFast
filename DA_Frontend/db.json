@@ -34,7 +34,39 @@
       "name": "Kỹ thuật viên dịch vụ xe hạng nặng và thiết bị tự động"
     }
   ],
-  "booking": [],
+  "booking": [
+    {
+      "name": "Đức Phong",
+      "phone": "0943644564",
+      "date": "23/01/2024",
+      "active": "Chưa xác nhận",
+      "desc": "Ghi chú",
+      "service": "Bảo dưỡng",
+      "id": 1
+    }
+  ],
+  "bookings": [
+    {
+      "name": "Đức Phong",
+      "phone": "0943644564",
+      "date": "23/01/2024",
+      "active": "Đã xác nhận",
+      "desc": "Ghi chú",
+      "service": "Bảo dưỡng",
+      "id": 1
+    }
+  ],
+  "bookingHT": [
+    {
+      "name": "Đức Phong",
+      "phone": "0943644564",
+      "date": "23/01/2024",
+      "active": "Đã hoàn thành",
+      "desc": "Ghi chú",
+      "service": "Bảo dưỡng",
+      "id": 1
+    }
+  ],
   "news": [
     {
       "title": "adsad",
