@@ -59,6 +59,22 @@ const AdminLayout = () => {
             </div>
           </div>
         </li>
+        <li className="nav-item">
+          <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwooo" aria-expanded="true" aria-controls="collapseTwooo">
+            {/* <i className="fas fa-fw fa-cog"></i> */}
+            <i className="fas fa-fw fa-table"></i>
+            <span>Quản lý tài khoản</span>
+          </a>
+          <div id="collapseTwooo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div className="bg-white py-2 collapse-inner rounded">
+              <h6 className="collapse-header">User</h6>
+              <Link style={{ textDecoration: 'none' }} to="users" ><a  className="collapse-item" href="staffs/add">Danh sách tài khoản</a></Link>
+              <Link style={{ textDecoration: 'none' }} to="users/add" ><a  className="collapse-item" href="staffs/add">Thêm mới tài khoản</a></Link>
+              
+
+            </div>
+          </div>
+        </li>
 
         <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -101,9 +117,9 @@ const AdminLayout = () => {
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="charts.html">
+          <a className="nav-link" href="users">
             <i className="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span>
+            <span>Quản lý tài khoản</span>
           </a>
         </li>
 

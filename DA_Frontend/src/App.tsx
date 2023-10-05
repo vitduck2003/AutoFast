@@ -39,9 +39,25 @@ import ContactPage from "./pages/UserSide/Contact/ContactPage";
 import AboutUsPage from "./pages/UserSide/AboutUs/AboutUsPage";
 import TeamPage from "./pages/UserSide/Team/TeamPage";
 import BookingConfirmAdmin from "./pages/Admin/BookingAdmin/BookingConfirmAdmin";
-import { addBooking, addBookingConfirm, addBookingHT, deleteBooking, deleteBookingConfirm, deleteBookingHT, getBooking, getBookingConfirm, getBookingHT, updateBooking, updateBookingConfirm, updateBookingHT } from "./api/booking";
+import {
+  addBooking,
+  addBookingConfirm,
+  addBookingHT,
+  deleteBooking,
+  deleteBookingConfirm,
+  deleteBookingHT,
+  getBooking,
+  getBookingConfirm,
+  getBookingHT,
+  updateBooking,
+  updateBookingConfirm,
+  updateBookingHT,
+} from "./api/booking";
 import { IBooking } from "./interface/booking";
 import BookingHtAdmin from "./pages/Admin/BookingAdmin/BookingHtAdmin";
+import UserAdmin from "./pages/Admin/UsersAdmin/UserAdmin";
+import UserAdminAdd from "./pages/Admin/UsersAdmin/UserAdminAdd";
+import UserAdminEdit from "./pages/Admin/UsersAdmin/UserAdminEdit";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -94,7 +110,9 @@ function App() {
 
   // Booking
   const onHandleBooking = (BookingItem: IBooking) => {
-    addBooking(BookingItem).then(() => getBooking().then(({ data }) => setBooking(data)));
+    addBooking(BookingItem).then(() =>
+      getBooking().then(({ data }) => setBooking(data))
+    );
   };
 
   const onHandleUpdateBooking = (BookingItem: IBooking) => {
@@ -111,7 +129,9 @@ function App() {
   // BookingConfirm
 
   const onHandleBookingConfirm = (BookingItem: IBooking) => {
-    addBookingConfirm(BookingItem).then(() => getBookingConfirm().then(({ data }) => setBookingConf(data)));
+    addBookingConfirm(BookingItem).then(() =>
+      getBookingConfirm().then(({ data }) => setBookingConf(data))
+    );
   };
 
   const onHandleUpdateBookingConfirm = (BookingItem: IBooking) => {
@@ -128,7 +148,9 @@ function App() {
 
   // BookingHT
   const onHandleBookingHT = (BookingItem: IBooking) => {
-    addBookingHT(BookingItem).then(() => getBookingHT().then(({ data }) => setBookingHT(data)));
+    addBookingHT(BookingItem).then(() =>
+      getBookingHT().then(({ data }) => setBookingHT(data))
+    );
   };
 
   const onHandleUpdateBookingHT = (BookingItem: IBooking) => {
@@ -167,20 +189,19 @@ function App() {
             <Route path="service">
               <Route index element={<ServicePage />} />
             </Route>
-            
-          {/* About Page */}
-          <Route path="about">
+
+            {/* About Page */}
+            <Route path="about">
               <Route index element={<AboutUsPage />} />
             </Route>
             {/* Team Page */}
-          <Route path="technicians">
+            <Route path="technicians">
               <Route index element={<TeamPage />} />
             </Route>
-            
           </Route>
           {/* End User Side */}
-{/* Not Found Page */}
-<Route path='*' element={<NotFoundPage />} />
+          {/* Not Found Page */}
+          <Route path="*" element={<NotFoundPage />} />
 
           {/* Admin Side */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -188,15 +209,31 @@ function App() {
 
             {/* Booking Admin Page */}
             <Route path="booking">
-              <Route index element={<BookingAdmin booking={booking} onRemoveBooking={onHandleRemoveBooking} />} />
+              <Route
+                index
+                element={
+                  <BookingAdmin
+                    booking={booking}
+                    onRemoveBooking={onHandleRemoveBooking}
+                  />
+                }
+              />
             </Route>
             {/* Booking Confirm Admin Page */}
             <Route path="bookings">
-              <Route index element={<BookingConfirmAdmin bookingConfirm={bookingConf} onRemoveBookingConfirm={onHandleRemoveBookingConfirm} />} />
+              <Route
+                index
+                element={
+                  <BookingConfirmAdmin
+                    bookingConfirm={bookingConf}
+                    onRemoveBookingConfirm={onHandleRemoveBookingConfirm}
+                  />
+                }
+              />
             </Route>
             {/* Booking HT Admin Page */}
             <Route path="bookingHT">
-              <Route index element={<BookingHtAdmin bookingHT={bookingHT}  />} />
+              <Route index element={<BookingHtAdmin bookingHT={bookingHT} />} />
             </Route>
             {/*News Admin Page */}
             <Route path="news">
@@ -246,6 +283,27 @@ function App() {
                 }
               />
             </Route>
+            {/*User Admin Page */}
+            <Route path="users">
+              <Route
+                index
+                element={
+                  <UserAdmin  />
+                }
+              />{" "}
+              <Route
+                path="add"
+                element={<UserAdminAdd  />}
+              />
+              <Route
+                path=":id/edit"
+                element={
+                  <UserAdminEdit
+                    
+                  />
+                }
+              />
+            </Route>
           </Route>
           {/* End Admin Side */}
 
@@ -258,8 +316,6 @@ function App() {
           <Route path="signup">
             <Route index element={<SignupPage />} />
           </Route>
-
-          
         </Routes>
       </BrowserRouter>
     </div>
