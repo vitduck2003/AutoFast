@@ -7,23 +7,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * 
+     * Run the migrations.
+     *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->string('phone');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('address');
-            $table->string('password');
-            $table->string('avatar');
             $table->text('description');
-            $table->integer('role_id');
-            $table->rememberToken();
+            $table->string('avatar');
+            $table->float('salary');
+            $table->string('review');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('staff');
     }
 };

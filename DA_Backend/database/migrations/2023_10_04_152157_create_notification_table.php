@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking', function (Blueprint $table) {
+        Schema::create('notification', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
-            $table->date('target_date');
-            $table->text('note');
-            $table->string('name_car');
-            $table->string('status');
+            $table->string('title');
+            $table->text('content');
+            $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking');
+        Schema::dropIfExists('notification');
     }
 };

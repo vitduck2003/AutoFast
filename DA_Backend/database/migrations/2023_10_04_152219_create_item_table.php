@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking', function (Blueprint $table) {
+        Schema::create('item', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
-            $table->date('target_date');
-            $table->text('note');
-            $table->string('name_car');
-            $table->string('status');
+            $table->string('item_name');
+            $table->integer('quantity');
+            $table->float('price');
+            $table->float('total_price_item');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking');
+        Schema::dropIfExists('item');
     }
 };
