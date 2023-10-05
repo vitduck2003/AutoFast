@@ -58,6 +58,8 @@ import BookingHtAdmin from "./pages/Admin/BookingAdmin/BookingHtAdmin";
 import UserAdmin from "./pages/Admin/UsersAdmin/UserAdmin";
 import UserAdminAdd from "./pages/Admin/UsersAdmin/UserAdminAdd";
 import UserAdminEdit from "./pages/Admin/UsersAdmin/UserAdminEdit";
+import { IUser } from "./interface/user";
+import { addUsers, deleteUsers, getUsers, updateUsers } from "./api/user";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -65,6 +67,7 @@ function App() {
   const [booking, setBooking] = useState<IBooking[]>([]);
   const [bookingConf, setBookingConf] = useState<IBooking[]>([]);
   const [bookingHT, setBookingHT] = useState<IBooking[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -72,6 +75,7 @@ function App() {
     getBooking().then(({ data }) => setBooking(data));
     getBookingConfirm().then(({ data }) => setBookingConf(data));
     getBookingHT().then(({ data }) => setBookingHT(data));
+    getUsers().then(({ data }) => setUsers(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -162,6 +166,25 @@ function App() {
   const onHandleRemoveBookingHT = (id: any) => {
     deleteBookingHT(id).then(() =>
       setBookingHT(bookingHT.filter((item: IBooking) => item.id !== id))
+    );
+  };
+
+  // Users
+  const onHandleAddUsers = (users: IUser) => {
+    addUsers(users).then(() =>
+      getUsers().then(({ data }) => setUsers(data))
+    );
+  };
+
+  const onHandleUpdateUsers = (users: IUser) => {
+    updateUsers(users).then(() =>
+      getUsers().then(({ data }) => setUsers(data))
+    );
+  };
+
+  const onHandleRemoveUsers = (id: number) => {
+    deleteUsers(id).then(() =>
+      setUsers(users.filter((item: IUser) => item.id !== id))
     );
   };
   return (
@@ -288,18 +311,20 @@ function App() {
               <Route
                 index
                 element={
-                  <UserAdmin  />
+                  <UserAdmin users={users}
+                  onRemoveUsers={onHandleRemoveUsers}  />
                 }
               />{" "}
               <Route
                 path="add"
-                element={<UserAdminAdd  />}
+                element={<UserAdminAdd onAddUsers={onHandleAddUsers}  />}
               />
               <Route
                 path=":id/edit"
                 element={
                   <UserAdminEdit
-                    
+                  users={users}
+                  onUpdateUsers={onHandleUpdateUsers}
                   />
                 }
               />
