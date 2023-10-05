@@ -7,6 +7,7 @@ const SignupPage = () => {
     username?: string;
     password?: string;
     password2?: string;
+    role?: string;
     email?: string;
     remember?: string;
   };
@@ -42,6 +43,22 @@ const SignupPage = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
+                      
+                <Form.Item<FieldType>
+                          label=""
+                          name="role"
+                          rules={[
+                            {
+                              required: true,
+                              message: "",
+                            },
+                          ]}
+                          initialValue="member"
+                          style={{ display: 'none' }}
+                        >
+                          <Input />
+                        </Form.Item>
+                        
                         <Form.Item<FieldType>
                           label="Tên đăng nhập"
                           name="username"
@@ -54,6 +71,7 @@ const SignupPage = () => {
                         >
                           <Input />
                         </Form.Item>
+
                         <Form.Item<FieldType>
                           label="Email"
                           name="email"
