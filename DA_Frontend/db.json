@@ -80,5 +80,15 @@
   ],
   "reviews": [],
   "reviewsconfirm": [],
-  "users": []
+  "users": [
+    {
+      "name": "ten",
+      "username": "tentaikohan",
+      "email": "tentaikohan@gmail.com",
+      "role": "admin",
+      "password": "matkhau1312313",
+      "password2": "matradasd",
+      "id": 1
+    }
+  ]
 }
