@@ -89,6 +89,14 @@
       "password": "matkhau1312313",
       "password2": "matradasd",
       "id": 1
+    },
+    {
+      "role": "member",
+      "username": "asdfasd",
+      "email": "a@gmail.com",
+      "password": "123",
+      "password2": "123",
+      "id": 2
     }
   ]
 }

@@ -1,8 +1,11 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { IUser } from "../../../interface/user";
 
-const SignupPage = () => {
+const SignupPage = (props) => {
+  const navigate = useNavigate();
   type FieldType = {
     username?: string;
     password?: string;
@@ -11,9 +14,15 @@ const SignupPage = () => {
     email?: string;
     remember?: string;
   };
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
+console.log(props)
+
+const onFinish = (values:FieldType) => {
+  // Call the onAddUsers function with the user data
+  props.onAddUsers(values);
+  
+  // Redirect to the desired location after signup
+  navigate('/dashboard'); // You can change '/dashboard' to your desired route
+};
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);

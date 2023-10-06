@@ -334,12 +334,12 @@ function App() {
 
           {/* Signin Page */}
           <Route path="signin">
-            <Route index element={<SigninPage />} />
+            <Route index element={<SigninPage  />} />
           </Route>
 
           {/* Signup Page */}
           <Route path="signup">
-            <Route index element={<SignupPage />} />
+            <Route index element={<SignupPage onAddUsers={onHandleAddUsers}  />} />
           </Route>
         </Routes>
       </BrowserRouter>
