@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table='item';
+    protected $fillable=[
+        'item_name',
+        'quantity',
+        'price',
+        'total_price_item',
+    ];
 }

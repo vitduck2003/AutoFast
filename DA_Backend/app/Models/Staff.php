@@ -10,6 +10,17 @@ class Staff extends Model
 {
     use HasFactory, SoftDeletes;
 
-    
+    protected $table='staff';
+    protected $fillable=[
+        'name',
+        'email',
+        'phone',
+        'address',
+        'description',
+        'avatar',
+        'salary',
+        'review',
+        'status',
+    ];
 
 }
