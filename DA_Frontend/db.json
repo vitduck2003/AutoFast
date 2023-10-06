@@ -91,6 +91,7 @@
       "id": 1
     },
     {
+<<<<<<< HEAD
       "name": "Dinh Viet Duc",
       "username": "hiineno",
       "email": "Ducne123@gmail.com",
@@ -116,6 +117,14 @@
       "password": "Ducne123",
       "password2": "Ducne123",
       "id": 4
+=======
+      "role": "member",
+      "username": "asdfasd",
+      "email": "a@gmail.com",
+      "password": "123",
+      "password2": "123",
+      "id": 2
+>>>>>>> fbf165f6f857eed922ecfee4b905af636b325c92
     }
   ]
 }
