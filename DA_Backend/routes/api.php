@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\NewsApi;
-
+use App\Http\Controllers\Api\StaffApi;
+use App\Http\Controllers\Api\ItemApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('news',NewsApi::class);
+//api staff 
+Route::prefix('staff')->group(function () {
+    Route::get('/', [StaffApi::class, 'index']);
+    Route::post('/', [StaffApi::class, 'store']);
+    Route::get('/{id}', [StaffApi::class, 'show']);
+    Route::put('/{id}', [StaffApi::class, 'update']);
+    Route::delete('/{id}', [StaffApi::class, 'destroy']);
+});
+//api items
+Route::prefix('item')->group(function () {
+    Route::get('/', [ItemApiController::class, 'index']);
+    Route::post('/', [ItemApiController::class, 'store']);
+    Route::get('/{id}', [ItemApiController::class, 'show']);
+    Route::put('/{id}', [ItemApiController::class, 'update']);
+    Route::delete('/{id}', [ItemApiController::class, 'destroy']);
+});
