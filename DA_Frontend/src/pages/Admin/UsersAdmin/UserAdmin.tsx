@@ -33,15 +33,15 @@ const columns: ColumnsType<DataType> = [
     render: (number) => <a>{number}</a>,
   },
   {
-    title: 'Username',
-    dataIndex: 'username',
-    key: 'username',
+    title: 'Phone',
+    dataIndex: 'phone',
+    key: 'phone',
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Image',
-    dataIndex: 'img',
-    key: 'img',
+    title: 'Password',
+    dataIndex: 'password',
+    key: 'password',
   },
   {
     title: 'Role',

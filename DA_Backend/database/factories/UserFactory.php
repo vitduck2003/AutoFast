@@ -21,7 +21,6 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
-            'address' => fake()->address(),
             'email_verified_at' => now(),
             'password' => bcrypt(123456), // password
             'role_id' => fake()->numberBetween(1, 2),

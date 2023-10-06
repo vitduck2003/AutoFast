@@ -89,6 +89,33 @@
       "password": "matkhau1312313",
       "password2": "matradasd",
       "id": 1
+    },
+    {
+      "name": "Dinh Viet Duc",
+      "username": "hiineno",
+      "email": "Ducne123@gmail.com",
+      "role": "admin",
+      "password": "123456",
+      "password2": "123456",
+      "id": 2
+    },
+    {
+      "name": "Dinh Vuet dc",
+      "username": "HAha",
+      "email": "rewrew123@gnail.com",
+      "role": "admin",
+      "password": "24324",
+      "password2": "34324",
+      "id": 3
+    },
+    {
+      "name": "Demo",
+      "username": "demo123",
+      "email": "ducne@gmail.com",
+      "role": "admin",
+      "password": "Ducne123",
+      "password2": "Ducne123",
+      "id": 4
     }
   ]
 }
