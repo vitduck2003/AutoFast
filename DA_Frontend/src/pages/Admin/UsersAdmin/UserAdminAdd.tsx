@@ -11,7 +11,7 @@ interface IProps {
 
 const UserAdminAdd = (props: IProps) => {
   const navigate = useNavigate();
-
+console.log(props)
   const onFinish = (values: any) => {
     props.onAddUsers(values);
     alert("Success")
