@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
-
-=======
 Route::get('/', function () {
     return view('index');
 });
->>>>>>> 44f8b6754ab9e7352ed58cc7d3b5ff41b6befb38

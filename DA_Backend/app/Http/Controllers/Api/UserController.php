@@ -46,7 +46,7 @@ class UserController extends Controller
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
             // 'role_id' => $validatedData['role_id'],
-            'role_id' => '5',
+            'role_id' => '2',
             // 'address' => $validatedData['address'],
             'password' => Hash::make($validatedData['password']),
         ]);
@@ -73,8 +73,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'phone' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'role_id' => 'required|integer|min:0',
+        'password' => 'required|string|min:6',
+    ]);
+
+    $user = User::findOrFail($id);
+
+    $user->name = $validatedData['name'];
+    $user->phone = $validatedData['phone'];
+    $user->email = $validatedData['email'];
+    $user->role_id = $validatedData['role_id'];
+    $user->password = Hash::make($validatedData['password']);
+
+    $user->save();
+
+    return response()->json(['message' => 'Cập nhật người dùng thành công', 'user' => $user], 200);
+}
 
     /**
      * Remove the specified resource from storage.
@@ -84,6 +102,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user_id = User::FindOrFail($id);
+        if($user_id){
+            $user_id->delete();
+            return response()->json(['success' => "Xóa thành công tài khoản id:" .$id]);
+        }
     }
 }
