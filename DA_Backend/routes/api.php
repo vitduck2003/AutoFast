@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\API\NewsApi;
-use App\Http\Controllers\Api\StaffApi;
-use App\Http\Controllers\Api\ItemApiController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\NewsApi;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StaffApi;
+use App\Http\Controllers\Api\Auth\UserController;
+use App\Http\Controllers\Api\ItemApiController;
 
 /*
 |--------------------------------------------------------------------------

@@ -7,22 +7,22 @@ import { IUser } from "../../../interface/user";
 const SignupPage = (props) => {
   const navigate = useNavigate();
   type FieldType = {
-    username?: string;
+    name?: string;
     password?: string;
-    password2?: string;
-    role?: string;
+    // password2?: string;
+    role_id?: string;
     email?: string;
     remember?: string;
   };
-console.log(props)
+  console.log(props)
 
-const onFinish = (values:FieldType) => {
-  // Call the onAddUsers function with the user data
-  props.onAddUsers(values);
-  
-  // Redirect to the desired location after signup
-  navigate('/dashboard'); // You can change '/dashboard' to your desired route
-};
+  const onFinish = (values: FieldType) => {
+    // Call the onAddUsers function with the user data
+    props.onAddUsers(values);
+    console.log(values)
+    // Redirect to the desired location after signup
+    // navigate('/dashboard'); // You can change '/dashboard' to your desired route
+  };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
@@ -52,43 +52,49 @@ const onFinish = (values:FieldType) => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
-                      
-                <Form.Item<FieldType>
+
+                        <Form.Item<FieldType>
                           label=""
-                          name="role"
+                          name="role_id"
                           rules={[
                             {
                               required: true,
                               message: "",
                             },
                           ]}
-                          initialValue="member"
+                          initialValue="2"
                           style={{ display: 'none' }}
                         >
                           <Input />
                         </Form.Item>
-                        
+
                         <Form.Item<FieldType>
-                          label="Tên đăng nhập"
-                          name="username"
+                          label="Họ Và Tên"
+                          name="name"
                           rules={[
                             {
                               required: true,
-                              message: "Vui lòng không bỏ trống tên đăng nhập",
+                              message: "Vui lòng không bỏ trống tên",
                             },
                           ]}
                         >
                           <Input />
                         </Form.Item>
-
+                        <Form.Item
+                          label="Phone"
+                          name="phone"
+                          rules={[{ required: true, message: "Vui lòng nhập số điện thoại" }]}
+                        >
+                          <Input />
+                        </Form.Item>
                         <Form.Item<FieldType>
                           label="Email"
                           name="email"
                           rules={[
                             {
                               required: true,
-                              type: "email",
-                              message: "Vui lòng không bỏ trống email",
+                              pattern: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                              message: "Email không hợp lệ",
                             },
                           ]}
                         >
@@ -101,24 +107,26 @@ const onFinish = (values:FieldType) => {
                           rules={[
                             {
                               required: true,
-                              message: "Vui lòng không bỏ trống mật khẩu",
+                              message: "Vui lòng nhập mật khẩu",
+                              min: 6,
                             },
                           ]}
                         >
                           <Input.Password />
                         </Form.Item>
-                        <Form.Item<FieldType>
+                        {/* <Form.Item<FieldType>
                           label="Nhập lại mật khẩu"
                           name="password2"
                           rules={[
                             {
                               required: true,
-                              message: "Vui lòng nhập lại mật khẩu ",
+                              message: "Vui lòng nhập mật khẩu",
+                              min: 6,
                             },
                           ]}
                         >
                           <Input.Password />
-                        </Form.Item>
+                        </Form.Item> */}
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
