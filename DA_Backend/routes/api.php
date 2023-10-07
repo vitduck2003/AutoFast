@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\API\NewsApi;
 use App\Http\Controllers\Api\StaffApi;
+use App\Http\Controllers\Api\RoleApi;
 use App\Http\Controllers\Api\ItemApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,14 @@ Route::prefix('item')->group(function () {
     Route::get('/{id}', [ItemApiController::class, 'show']);
     Route::put('/{id}', [ItemApiController::class, 'update']);
     Route::delete('/{id}', [ItemApiController::class, 'destroy']);
+});
+
+//api role
+Route::prefix('role')->group(function () {
+    Route::get('/', [RoleApi::class, 'index']);
+    Route::post('/', [RoleApi::class, 'store']);
+    Route::get('/{id}', [RoleApi::class, 'show']);
+    Route::put('/{id}', [RoleApi::class, 'update']);
+    Route::delete('/{id}', [RoleApi::class, 'destroy']);
 });
 
