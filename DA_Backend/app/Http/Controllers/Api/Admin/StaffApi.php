@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Staff;
 
-use App\Models\Role;
+use App\Models\Staff;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\StaffResource;
 use Illuminate\Http\Request;
 
 class StaffApi extends Controller
@@ -16,9 +16,9 @@ class StaffApi extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $staffs = Staff::all();
         // return response()->json($staffs);
-        return RoleResource::collection($roles);
+        return StaffResource::collection($staffs);
         //
     }
 
@@ -31,9 +31,9 @@ class StaffApi extends Controller
     public function store(Request $request)
     {
         //
-        $roles = Role::create($request->all());
+        $staff = Staff::create($request->all());
         // return new StaffResource($staff);
-        return response()->json($roles, 201);
+        return response()->json($staff, 201);
     }
 
     /**
@@ -45,9 +45,9 @@ class StaffApi extends Controller
     public function show($id)
     {
         //
-        $roles = Role::findOrFail($id);
-        if ($roles) {
-            return response()->json($roles);
+        $staff = Staff::findOrFail($id);
+        if ($staff) {
+            return response()->json($staff);
         } else {
             return response()->json([
                 'error' => 'tài khoản không tồn tại'
@@ -65,10 +65,10 @@ class StaffApi extends Controller
     public function update(Request $request, $id)
     {
         //
-        $roles = Role::findOrFail($id);
-        if ($roles) {
-            $roles->update($request->all());
-            return response()->json($roles);
+        $staff = Staff::findOrFail($id);
+        if ($staff) {
+            $staff->update($request->all());
+            return response()->json($staff);
         } else {
             return response()->json([
                 'error' => 'update not found',
@@ -85,9 +85,9 @@ class StaffApi extends Controller
     public function destroy($id)
     {
         //
-        $roles = Role::findOrFail($id);
-        if ($roles) {
-            $roles->delete();
+        $staff = Staff::findOrFail($id);
+        if ($staff) {
+            $staff->delete();
             return response()->json(['message' => 'successfully']);
         } else {
             return response()->json([

@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
-use App\Models\Staff;
+use App\Models\Item;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\StaffResource;
+use App\Http\Resources\ItemResource;
 use Illuminate\Http\Request;
 
-class StaffApi extends Controller
+class ItemApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,9 @@ class StaffApi extends Controller
      */
     public function index()
     {
-        $staffs = Staff::all();
-        // return response()->json($staffs);
-        return StaffResource::collection($staffs);
         //
+        $items=Item::all();
+        return ItemResource::collection($items);
     }
 
     /**
@@ -31,9 +29,8 @@ class StaffApi extends Controller
     public function store(Request $request)
     {
         //
-        $staff = Staff::create($request->all());
-        // return new StaffResource($staff);
-        return response()->json($staff, 201);
+        $item=Item::create($request->all());
+        return new ItemResource($item);
     }
 
     /**
@@ -45,13 +42,11 @@ class StaffApi extends Controller
     public function show($id)
     {
         //
-        $staff = Staff::findOrFail($id);
-        if ($staff) {
-            return response()->json($staff);
-        } else {
-            return response()->json([
-                'error' => 'tài khoản không tồn tại'
-            ]);
+        $item=Item::findOrFail($id);
+        if($item){
+            return response()->json($item);
+        }else{
+            return response()->json(['error' => 'not found']);
         }
     }
 
@@ -65,14 +60,12 @@ class StaffApi extends Controller
     public function update(Request $request, $id)
     {
         //
-        $staff = Staff::findOrFail($id);
-        if ($staff) {
-            $staff->update($request->all());
-            return response()->json($staff);
-        } else {
-            return response()->json([
-                'error' => 'update not found',
-            ]);
+        $item=Item::findOrFail($id);
+        if($item){
+            $item->update($request->all());
+            return response()->json($item);
+        }else{
+            return response()->json(['error' => 'update not found']);
         }
     }
 
@@ -85,14 +78,12 @@ class StaffApi extends Controller
     public function destroy($id)
     {
         //
-        $staff = Staff::findOrFail($id);
-        if ($staff) {
-            $staff->delete();
-            return response()->json(['message' => 'successfully']);
-        } else {
-            return response()->json([
-                'error' => 'not found',
-            ]);
+        $item=Item::findOrFail($id);
+        if($item){
+            $item->delete();
+            return response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['error' => 'update not found']);
         }
     }
 }

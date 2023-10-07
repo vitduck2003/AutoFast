@@ -1,10 +1,13 @@
 <?php
+
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\NewsApi;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\StaffApi;
-use App\Http\Controllers\Api\Auth\UserController;
-use App\Http\Controllers\Api\ItemApiController;
+use App\Http\Controllers\Api\Admin\ItemApi;
+use App\Http\Controllers\API\Admin\NewsApi;
+use App\Http\Controllers\Api\Admin\RoleApi;
+use App\Http\Controllers\Api\Auth\LoginApi;
+use App\Http\Controllers\Api\Admin\StaffApi;
+use App\Http\Controllers\Api\Auth\RegisterApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,8 @@ use App\Http\Controllers\Api\ItemApiController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('users', UserController::class);
+Route::post('register', [RegisterApi::class, 'register']);
+Route::post('login', [LoginApi::class, 'login']);
 Route::resource('news',NewsApi::class);
 //api staff 
 Route::prefix('staff')->group(function () {
@@ -32,11 +36,11 @@ Route::prefix('staff')->group(function () {
 });
 //api items
 Route::prefix('item')->group(function () {
-    Route::get('/', [ItemApiController::class, 'index']);
-    Route::post('/', [ItemApiController::class, 'store']);
-    Route::get('/{id}', [ItemApiController::class, 'show']);
-    Route::put('/{id}', [ItemApiController::class, 'update']);
-    Route::delete('/{id}', [ItemApiController::class, 'destroy']);
+    Route::get('/', [ItemApi::class, 'index']);
+    Route::post('/', [ItemApi::class, 'store']);
+    Route::get('/{id}', [ItemApi::class, 'show']);
+    Route::put('/{id}', [ItemApi::class, 'update']);
+    Route::delete('/{id}', [ItemApi::class, 'destroy']);
 });
 
 //api role
