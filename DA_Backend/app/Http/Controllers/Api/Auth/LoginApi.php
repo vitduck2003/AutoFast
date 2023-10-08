@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginApi extends Controller
 {
@@ -15,61 +17,21 @@ class LoginApi extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('phone', 'password');
+        $request->validate([
+            'phone' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    if (Auth::attempt($credentials)) {
-        $user = Auth::user();
-        $roles = $user->roles;
-        return response()->json([
-            'roles' => $roles
-        ], 200);
-    } else {
-        return response()->json(['error' => 'Unauthorized'], 401);
-    }
-    }
+        $credentials = $request->only('email', 'password');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if (Auth::attempt($credentials)) {
+            $user = User::where('phone', $request->phone)->first();
+            $token = $user->createToken('access_token')->plainTextToken;
+            return response()->json(['access_token' => $token], 200, ['message' => 'Đăng nhập thành công']);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        throw ValidationException::withMessages([
+            'phone' => ['Phone lỗi.'],
+        ]);
     }
 }
