@@ -62,7 +62,7 @@ const SignupPage = (props) => {
                               message: "",
                             },
                           ]}
-                          initialValue="2"
+                          initialValue="3"
                           style={{ display: 'none' }}
                         >
                           <Input />
@@ -114,7 +114,7 @@ const SignupPage = (props) => {
                         >
                           <Input.Password />
                         </Form.Item>
-                        {/* <Form.Item<FieldType>
+                        <Form.Item<FieldType>
                           label="Nhập lại mật khẩu"
                           name="password2"
                           rules={[
@@ -126,7 +126,7 @@ const SignupPage = (props) => {
                           ]}
                         >
                           <Input.Password />
-                        </Form.Item> */}
+                        </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">

@@ -5,7 +5,7 @@ const getUsers = () => {
 };
 
 const addUsers = (users: IUser) => {
-  return instance.post("/regiter", users);
+  return instance.post("/register", users);
 };
 const updateUsers = (users: IUser) => {
   return instance.patch("/users/" + users.id, users);

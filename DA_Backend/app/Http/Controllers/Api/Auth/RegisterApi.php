@@ -23,8 +23,8 @@ class RegisterApi extends Controller
             'name' => $validatedData['name'],
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
-            // 'role_id' => $validatedData['role_id'],
-            'role_id' => '2',
+            'role_id' => $validatedData['role_id'],
+            // 'role_id' => '2',
             // 'address' => $validatedData['address'],
             'password' => Hash::make($validatedData['password']),
         ]);

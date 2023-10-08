@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\ItemApi;
 use App\Http\Controllers\API\Admin\NewsApi;
+use App\Http\Controllers\API\Admin\UserApi;
 use App\Http\Controllers\Api\Admin\RoleApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Admin\StaffApi;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::resource('news',NewsApi::class);
+Route::resource('users',UserApi::class);
 //api staff 
 Route::prefix('staff')->group(function () {
     Route::get('/', [StaffApi::class, 'index']);
