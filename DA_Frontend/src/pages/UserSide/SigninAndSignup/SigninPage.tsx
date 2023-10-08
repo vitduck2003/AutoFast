@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 
-const SigninPage = () => {
+const SigninPage = (props) => {
   type FieldType = {
     username?: string;
     password?: string;
@@ -10,7 +10,7 @@ const SigninPage = () => {
     remember?: string;
   };
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+   props.onSignin(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -334,7 +334,7 @@ function App() {
 
           {/* Signin Page */}
           <Route path="signin">
-            <Route index element={<SigninPage  />} />
+            <Route index element={<SigninPage onSignin={addUsers} />} />
           </Route>
 
           {/* Signup Page */}
