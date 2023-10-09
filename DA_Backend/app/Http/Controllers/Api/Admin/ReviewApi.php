@@ -30,10 +30,25 @@ class ReviewApi extends Controller
     public function store(Request $request)
     {
         //
-        {
-            $review = Review::create($request->all());
-            return response()->json($review, 201);
+
+        $userId = $request->input('user_id');
+        $existingReview = Review::where('user_id', $userId)->first();
+        if ($existingReview) {
+            return response()->json(['message' => 'Bạn đã có đánh giá.'], 422);
+        }else{
+            $userId = $request->input('user_id');
+            $serviceId = $request->input('service_id');
+            $content = $request->input('content');
+            
+            $review = new Review();
+            $review->user_id = $userId;
+            $review->service_id = $serviceId;
+            $review->content = $content;
+            $review->save();
+            
+            return response()->json(['message' => 'Đánh giá đã được lưu.']);
         }
+        
     }
 
     /**
