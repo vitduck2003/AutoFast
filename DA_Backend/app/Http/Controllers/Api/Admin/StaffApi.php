@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Staff;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Models\Staff;
 use App\Http\Controllers\Controller;
@@ -45,7 +45,7 @@ class StaffApi extends Controller
     public function show($id)
     {
         //
-        $staff = Staff::findOrFail($id);
+        $staff = Staff::find($id);
         if ($staff) {
             return response()->json($staff);
         } else {
@@ -65,7 +65,7 @@ class StaffApi extends Controller
     public function update(Request $request, $id)
     {
         //
-        $staff = Staff::findOrFail($id);
+        $staff = Staff::find($id);
         if ($staff) {
             $staff->update($request->all());
             return response()->json($staff);
@@ -85,7 +85,7 @@ class StaffApi extends Controller
     public function destroy($id)
     {
         //
-        $staff = Staff::findOrFail($id);
+        $staff = Staff::find($id);
         if ($staff) {
             $staff->delete();
             return response()->json(['message' => 'successfully']);
