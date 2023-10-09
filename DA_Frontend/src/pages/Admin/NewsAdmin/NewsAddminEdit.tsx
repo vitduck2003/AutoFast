@@ -76,7 +76,7 @@ const NewsAddminEdit = (props: IProps) => {
           <Input />
         </Form.Item>
 
-     
+
         <Form.Item
           label="Image"
           name="image"
@@ -114,7 +114,7 @@ const NewsAddminEdit = (props: IProps) => {
           name="date"
           rules={[{ required: true, message: "Vui lòng nhập mô tả" }]}
         >
-          <Input readOnly/>
+          <Input readOnly />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">

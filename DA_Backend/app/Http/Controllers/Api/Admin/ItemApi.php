@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 use App\Models\Item;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemResource;
@@ -42,7 +42,7 @@ class ItemApi extends Controller
     public function show($id)
     {
         //
-        $item=Item::findOrFail($id);
+        $item=Item::find($id);
         if($item){
             return response()->json($item);
         }else{
@@ -60,7 +60,7 @@ class ItemApi extends Controller
     public function update(Request $request, $id)
     {
         //
-        $item=Item::findOrFail($id);
+        $item=Item::find($id);
         if($item){
             $item->update($request->all());
             return response()->json($item);
@@ -78,7 +78,7 @@ class ItemApi extends Controller
     public function destroy($id)
     {
         //
-        $item=Item::findOrFail($id);
+        $item=Item::find($id);
         if($item){
             $item->delete();
             return response()->json(['message'=>'success']);

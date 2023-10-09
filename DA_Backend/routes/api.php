@@ -8,7 +8,9 @@ use App\Http\Controllers\API\Admin\UserApi;
 use App\Http\Controllers\Api\Admin\RoleApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Admin\StaffApi;
+use App\Http\Controllers\Api\Admin\ReviewApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,7 @@ Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::resource('news',NewsApi::class);
 Route::resource('users',UserApi::class);
+
 //api staff 
 Route::prefix('staff')->group(function () {
     Route::get('/', [StaffApi::class, 'index']);
@@ -52,5 +55,17 @@ Route::prefix('role')->group(function () {
     Route::get('/{id}', [RoleApi::class, 'show']);
     Route::put('/{id}', [RoleApi::class, 'update']);
     Route::delete('/{id}', [RoleApi::class, 'destroy']);
+});
+//api review
+Route::prefix('review')->group(function () {
+    Route::get('/', [ReviewApi::class, 'index']);
+    Route::post('/', [ReviewApi::class, 'store']);
+    Route::get('/{id}', [ReviewApi::class, 'show']);
+    Route::put('/{id}', [ReviewApi::class, 'update']);
+    Route::delete('/{id}', [ReviewApi::class, 'destroy']);
+    // lấy review qua người dùng
+    Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
+    // lấy review qua dịch vụ
+    Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
 });
 
