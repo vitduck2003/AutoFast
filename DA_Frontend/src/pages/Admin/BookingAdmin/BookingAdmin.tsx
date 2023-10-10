@@ -35,8 +35,8 @@ const BookingAdmin = (props: IProps) => {
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'full_name',
+    key: 'full_name',
     render: (number) => <a>{number}</a>,
   },
   {
