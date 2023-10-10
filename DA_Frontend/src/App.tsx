@@ -191,16 +191,21 @@ function App() {
       setUsers(users.filter((item: IUser) => item.id !== id))
     );
   };
+
+  const onHandleAdd = (booking: IBooking) => {
+    addBooking(booking).then(() => getBooking().then(({ data }) => setBooking(data)))
+  }
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
           {/* User Side */}
           <Route path="/" element={<BaseLayout />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePage onAddBooking={onHandleAdd} />} />
             {/* Booking Page */}
             <Route path="booking">
-              <Route index element={<BookingPage />} />
+              <Route index element={<BookingPage onAddBooking={onHandleAdd} />} />
             </Route>
 
             {/* Contact Page */}

@@ -6,7 +6,7 @@ import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface IProps {
-  onAddUsers: (uses: IUser) => void;
+  onAddUsers: (users: IUser) => void;
 }
 
 const UserAdminAdd = (props: IProps) => {
@@ -21,15 +21,7 @@ const UserAdminAdd = (props: IProps) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  const { Option } = Select;
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="84">+84</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <div><Form
@@ -86,6 +78,7 @@ const UserAdminAdd = (props: IProps) => {
         <Input />
       </Form.Item>
 
+
       <Form.Item
         label="Mật khẩu"
         name="password"
@@ -99,13 +92,14 @@ const UserAdminAdd = (props: IProps) => {
       >
         <Input />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         label="Nhập lại mật khẩu"
         name="password2"
         rules={[{ required: true, message: "Vui lòng nhập mật khẩu" }]}
       >
         <Input />
-      </Form.Item> */}
+      </Form.Item>
+
 
 
 

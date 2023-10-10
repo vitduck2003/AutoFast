@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import aboutimg from '../../../assets/img/about.jpg'; 
 import carousel1img from '../../../assets/img/carousel-1.png'; 
 import carousel2img from '../../../assets/img/carousel-2.png'; 
@@ -21,9 +21,25 @@ import khabanhimg from '../../../assets/img/ngobakha.jpg';
 import khanhskyimg from '../../../assets/img/khanhsky.jpg';
 import huanhoahongimg from '../../../assets/img/huanhoahong.jpg';
 import traizanimeimg from '../../../assets/img/boizanime.jpg';
+import { useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Link } from "react-router-dom";
-const HomePage = () => {
+const HomePage = (props: any) => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onHandleSubmit: SubmitHandler<any> = (data) => {
+    // Check if there are errors before submitting
+    if (Object.keys(errors).length === 0) {
+      props.onAddBooking(data);
+      navigate("");
+    }
+  };
   return (
     <div>
       {/* Carousel Start */}
@@ -266,35 +282,86 @@ const HomePage = () => {
           <div className="col-lg-6">
             <div className="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
               <h1 className="text-white mb-4">Đặt lịch bảo dưỡng</h1>
-              <form>
-                <div className="row g-3">
-                  <div className="col-12 col-sm-6">
-                    <input type="text" className="form-control border-0" placeholder="Họ và tên" style={{ height: '55px' }} />
-                  </div>
-                  <div className="col-12 col-sm-6">
-                    <input type="text" className="form-control border-0" placeholder="Số điện thoại" style={{ height: '55px' }} />
-                  </div>
-                  <div className="col-12 col-sm-6">
-                    <select className="form-select border-0" style={{ height: '55px' }}>
-                      <option selected>Lựa chọn dịch vụ</option>
-                      <option value="1">Bảo dưỡng xe</option>
-                      <option value="2">Chuẩn đoán và sửa chữa</option>
-                      <option value="3">Vệ sinh và thay dầu</option>
-                    </select>
-                  </div>
-                  <div className="col-12 col-sm-6">
-                    <div className="date" id="date1" data-target-input="nearest">
-                      <input type="text" className="form-control border-0 datetimepicker-input" placeholder="Thời gian đến" data-target="#date1" data-toggle="datetimepicker" style={{ height: '55px' }} />
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <textarea className="form-control border-0" placeholder="Ghi chú "></textarea>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn btn-secondary w-100 py-3" type="submit">Đặt lịch</button>
-                  </div>
-                </div>
-              </form>
+
+
+
+              <form onSubmit={handleSubmit(onHandleSubmit)}>
+        <div className="row g-3">
+          <div className="col-12 col-sm-6">
+            <input
+              type="text"
+              name="name"
+              className={`form-control border-0 ${errors.name ? 'is-invalid' : ''}`}
+              placeholder="Họ và tên"
+              style={{ height: '55px' }}
+              {...register('name', { required: true })}
+            />
+            {errors.name && <span className="text-danger">This field is required</span>}
+          </div>
+          <div className="col-12 col-sm-6">
+            <input
+              type="text"
+              name="phone"
+              className={`form-control border-0 ${errors.phone ? 'is-invalid' : ''}`}
+              placeholder="Số điện thoại"
+              style={{ height: '55px' }}
+              {...register('phone', { required: true })}
+            />
+            {errors.phone && <span className="text-danger">This field is required</span>}
+          </div>
+          <div className="col-12 col-sm-6">
+            <select
+              name="service"
+              className={`form-select border-0 ${errors.service ? 'is-invalid' : ''}`}
+              style={{ height: '55px' }}
+              {...register('service', { required: true })}
+            >
+              <option value="">Lựa chọn dịch vụ</option>
+              <option value="Bảo dưỡng xe">Bảo dưỡng xe</option>
+              <option value="Chuẩn đoán và sửa chữa">Chuẩn đoán và sửa chữa</option>
+              <option value="Vệ sinh và thay dầu">Vệ sinh và thay dầu</option>
+            </select>
+            {errors.service && <span className="text-danger">This field is required</span>}
+          </div>
+          <div className="col-12 col-sm-6">
+            <div className="date" id="date1" data-target-input="nearest">
+              <input
+                type="date"
+                name="date"
+                className={`form-control border-0 datetimepicker-input ${errors.date ? 'is-invalid' : ''}`}
+                placeholder="Thời gian đến"
+               
+                style={{ height: '55px' }}
+                {...register('date', { required: true })}
+              />
+              <input
+                type="text"
+                name="active"
+                className={`form-control border-0 datetimepicker-input ${errors.active ? 'is-invalid' : ''}`}
+                defaultValue="Chờ xác nhận"
+                style={{ height: '55px', display: 'none', }}
+                {...register('active', { required: true })}
+              />
+            </div>
+            {errors.date && <span className="text-danger">This field is required</span>}
+          </div>
+          <div className="col-12">
+            <textarea
+              name="desc"
+              className={`form-control border-0 ${errors.desc ? 'is-invalid' : ''}`}
+              placeholder="Ghi chú"
+              {...register('desc')}
+            ></textarea>
+          </div>
+          <div className="col-12">
+            <button className="btn btn-secondary w-100 py-3" type="submit">Đặt lịch</button>
+          </div>
+        </div>
+      </form>
+
+
+
+
             </div>
           </div>
         </div>
