@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Admin\StaffApi;
 use App\Http\Controllers\Api\Admin\ReviewApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
-
+use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +30,11 @@ Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
 Route::resource('news',NewsApi::class);
+Route::prefix('news')->group(function () {
+    Route::get('/', [ClientNewsApi::class, 'index']);
+    Route::get('/{id}', [ClientNewsApi::class, 'show']);
+});
+
 Route::resource('users',UserApi::class);
 
 //api staff 
@@ -68,5 +73,18 @@ Route::prefix('review')->group(function () {
     Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
     // lấy review qua dịch vụ
     Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
+});
+
+ //api admin
+Route::prefix('admin')->group(function () {
+
+});
+ //api client
+Route::prefix('client')->group(function () {   
+    //api tin tuc 
+    Route::prefix('news')->group(function () {
+        Route::get('/', [ClientNewsApi::class, 'index']);
+        Route::get('/{id}', [ClientNewsApi::class, 'show']);
+    });
 });
 

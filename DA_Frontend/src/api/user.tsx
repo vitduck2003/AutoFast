@@ -1,11 +1,19 @@
 import instance from "./instance";
 import { IUser } from "../interface/user";
+
 const getUsers = () => {
   return instance.get("/users");
 };
 
 const addUsers = (users: IUser) => {
-  return instance.post("/register", users);
+  return instance.post("/register", users).then((response) => {
+
+    return response.data.message
+  }).catch((error) => {
+    // Handle any errors here if needed
+    console.error("Error:", error);
+    throw error; // Rethrow the error for further handling in your component
+  });
 };
 const updateUsers = (users: IUser) => {
   return instance.patch("/users/" + users.id, users);
