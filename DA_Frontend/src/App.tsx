@@ -68,6 +68,7 @@ function App() {
   const [bookingConf, setBookingConf] = useState<IBooking[]>([]);
   const [bookingHT, setBookingHT] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
+  const [mess,setMess]=useState();
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -171,8 +172,11 @@ function App() {
 
   // Users
   const onHandleAddUsers = (users: IUser) => {
-    addUsers(users).then(() =>
-      getUsers().then(({ data }) => setUsers(data))
+    addUsers(users).then((res) =>
+      getUsers().then(({ data }) => {
+      setMess(res)
+        setUsers(data);
+      })
     );
   };
 
@@ -311,20 +315,27 @@ function App() {
               <Route
                 index
                 element={
-                  <UserAdmin users={users}
-                  onRemoveUsers={onHandleRemoveUsers}  />
+                  <UserAdmin
+                    users={users}
+                    onRemoveUsers={onHandleRemoveUsers}
+                  />
                 }
               />{" "}
               <Route
                 path="add"
-                element={<UserAdminAdd onAddUsers={onHandleAddUsers}  />}
+                element={
+                  <UserAdminAdd
+                    onAddUsers={onHandleAddUsers}
+                  
+                  />
+                }
               />
               <Route
                 path=":id/edit"
                 element={
                   <UserAdminEdit
-                  users={users}
-                  onUpdateUsers={onHandleUpdateUsers}
+                    users={users}
+                    onUpdateUsers={onHandleUpdateUsers}
                   />
                 }
               />
@@ -334,12 +345,17 @@ function App() {
 
           {/* Signin Page */}
           <Route path="signin">
+
             <Route index element={<SigninPage onSignin={addUsers} />} />
+
           </Route>
 
           {/* Signup Page */}
           <Route path="signup">
-            <Route index element={<SignupPage onAddUsers={onHandleAddUsers}  />} />
+            <Route
+              index
+              element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

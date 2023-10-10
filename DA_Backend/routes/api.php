@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
+Route::post('logout', [LoginApi::class, 'logout']);
 Route::resource('news',NewsApi::class);
 Route::prefix('news')->group(function () {
     Route::get('/', [ClientNewsApi::class, 'index']);
