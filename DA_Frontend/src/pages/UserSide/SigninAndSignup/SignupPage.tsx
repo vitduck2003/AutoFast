@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../../interface/user";
-
+import { Alert, Space } from 'antd';
 const SignupPage = (props) => {
   const navigate = useNavigate();
   type FieldType = {
@@ -14,12 +14,21 @@ const SignupPage = (props) => {
     email?: string;
     remember?: string;
   };
-  console.log(props)
 
+  const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log(e, 'I was closed.');
+  };
+  console.log(props)
   const onFinish = (values: FieldType) => {
     // Call the onAddUsers function with the user data
-    props.onAddUsers(values);
+    props.onAddUsers(values).then(()=>{
+      navigate("/")
+    })
     console.log(values)
+    console.log(props.mess)
+    
+  
+
     // Redirect to the desired location after signup
     // navigate('/dashboard'); // You can change '/dashboard' to your desired route
   };
@@ -30,6 +39,15 @@ const SignupPage = (props) => {
 
   return (
     <div>
+   { props.mess!=undefined &&   <Space direction="vertical" style={{ width: '100%' }}>
+   <Alert
+      message="Error Text"
+      description={ props.mess}
+      type="error"
+      closable
+      onClose={onClose}
+    />
+  </Space>}
       <div className="container  h-100; vh-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
