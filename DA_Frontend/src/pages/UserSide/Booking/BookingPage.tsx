@@ -14,7 +14,8 @@ const BookingPage = (props: any) => {
     // Check if there are errors before submitting
     if (Object.keys(errors).length === 0) {
       props.onAddBooking(data);
-      navigate("");
+      alert("Đặt lịch thành công")
+      navigate("/");
     }
   };
   return (
@@ -152,11 +153,11 @@ const BookingPage = (props: any) => {
           <div className="col-12 col-sm-6">
             <input
               type="text"
-              name="name"
-              className={`form-control border-0 ${errors.name ? 'is-invalid' : ''}`}
+              name="full_name"
+              className={`form-control border-0 ${errors.full_name ? 'is-invalid' : ''}`}
               placeholder="Họ và tên"
               style={{ height: '55px' }}
-              {...register('name', { required: true })}
+              {...register('full_name', { required: true })}
             />
             {errors.name && <span className="text-danger">This field is required</span>}
           </div>
