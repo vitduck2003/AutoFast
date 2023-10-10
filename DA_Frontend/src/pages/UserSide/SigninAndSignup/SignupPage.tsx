@@ -6,9 +6,24 @@ import { IUser } from "../../../interface/user";
 import { useState } from "react";
 import { Alert, Space } from "antd";
 import {  notification } from "antd";
+import instance from "../../../api/instance";
+
+
+
 const SignupPage = (props) => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
+  
+const addUsers = (users: IUser) => {
+  return instance.post("/register", users).then((response) => {
+
+    return response.data.message
+  }).catch((error) => {
+    // Handle any errors here if needed
+    console.error("Error:", error);
+    throw error; // Rethrow the error for further handling in your component
+  });
+};
   type FieldType = {
     name?: string;
     password?: string;
@@ -16,10 +31,10 @@ const SignupPage = (props) => {
     email?: string;
     remember?: string;
   };
-  const openNotification = () => {
+  const openNotification = (mess) => {
     api.open({
       message: "Notification Title",
-      description: props.mess,
+      description: mess,
       duration: 3,
       style: {
         backgroundColor: "red", // Set the background color to red
@@ -28,10 +43,15 @@ const SignupPage = (props) => {
   };
   const onFinish = (values: FieldType) => {
    
-    props.onAddUsers(values);
-    console.log(props.mess);
-
-    {props.mess && openNotification}
+    addUsers(values).then((response) => {
+      openNotification(response)
+    }).catch((error) => {
+      // Handle any errors here if needed
+      console.error("Error:", error);
+      throw error; // Rethrow the error for further handling in your component
+    });
+  
+ 
 
   };
 
