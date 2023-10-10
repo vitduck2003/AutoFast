@@ -39,4 +39,8 @@ class LoginApi extends Controller
             'email' => ['Email lỗi.'],
         ]);
     }
+    public function logout(){
+        Auth::logout();
+        return response()->json(['message' => 'Đăng xuất thành công'], 200);
+    }
 }
