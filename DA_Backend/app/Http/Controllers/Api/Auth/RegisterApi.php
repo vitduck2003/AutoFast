@@ -14,7 +14,7 @@ class RegisterApi extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
+            'email' => 'required|string|email|max:255',
             'role_id' => 'required|integer|min:0',
             'password' => 'required|string|min:6',
         ]);

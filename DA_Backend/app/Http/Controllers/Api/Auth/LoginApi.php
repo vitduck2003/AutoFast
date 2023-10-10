@@ -18,12 +18,16 @@ class LoginApi extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'phone' => 'required',
+            'phone' => 'required_without:email',
+            'email' => 'required_without:phone',
             'password' => 'required',
         ]);
-        $login = $request->only('phone', 'password');
+        $login = $request->only('phone', 'email', 'password');
         if (Auth::attempt($login)) {
-            $user = User::where('phone', $request->phone)->first();
+           $user = User::where(function ($query) use ($request) {
+                $query->where('phone', $request->phone)
+                ->orWhere('email', $request->email);
+           })->first();
             // $token = $user->createToken('access_token')->plainTextToken;
             return response()->json(['message' => 'Đăng nhập thành công'], 200);
         }
@@ -32,6 +36,7 @@ class LoginApi extends Controller
         }
         throw ValidationException::withMessages([
             'phone' => ['Phone lỗi.'],
+            'email' => ['Email lỗi.'],
         ]);
     }
 }
