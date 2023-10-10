@@ -1,5 +1,14 @@
 {
-  "staff": [],
+  "staff": [
+    {
+      "name": "asdad new",
+      "phone": "asdasdasd",
+      "image": "asdsad",
+      "role": "adasdsa",
+      "desc": "dasdad",
+      "id": 1
+    }
+  ],
   "staffcategory": [
     {
       "id": 1,
@@ -43,6 +52,24 @@
       "desc": "Ghi chú",
       "service": "Bảo dưỡng",
       "id": 1
+    },
+    {
+      "name": "Phong Duc Pham",
+      "phone": "+84966287440",
+      "service": "Bảo dưỡng xe",
+      "date": "2023-10-10",
+      "active": "Chờ xác nhận",
+      "desc": "meladad",
+      "id": 2
+    },
+    {
+      "name": "Test 1111",
+      "phone": "Test 1111",
+      "service": "Vệ sinh và thay dầu",
+      "date": "2023-10-20",
+      "active": "Chờ xác nhận",
+      "desc": "Test 1111",
+      "id": 3
     }
   ],
   "bookings": [
@@ -82,12 +109,11 @@
   "reviewsconfirm": [],
   "users": [
     {
-      "name": "ten",
-      "username": "tentaikohan",
-      "email": "tentaikohan@gmail.com",
+      "name": "Phong ",
+      "username": "ad",
+      "email": "ducphong2713@gmail.com",
       "role": "admin",
-      "password": "matkhau1312313",
-      "password2": "matradasd",
+      "password": "admin",
       "id": 1
     },
     {

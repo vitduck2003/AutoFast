@@ -14,6 +14,7 @@ const NewsAddminEdit = (props: IProps) => {
   const navigate = useNavigate();
   const [news, setNews] = useState<INews>();
   const [form] = Form.useForm();
+
   useEffect(() => {
     const currentNews = props.news.find(
       (staff: INews) => staff.id == Number(id)
@@ -23,6 +24,7 @@ const NewsAddminEdit = (props: IProps) => {
   useEffect(() => {
     setFields();
   }, [news]);
+  
   const setFields = () => {
     form.setFieldsValue({
       id: news?.id,

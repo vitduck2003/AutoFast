@@ -9,15 +9,8 @@ interface IProps {
   onUpdateStaff: (staff: IStaff) => void
 }
 
-const { Option } = Select;
 
-  const prefixSelector = (
-    <Form.Item  name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="84">+84</Option>
-      </Select>
-    </Form.Item>
-  );
+  
 
 const StaffAdminEdit = (props: IProps) => {
   const { id } = useParams()
@@ -77,13 +70,13 @@ const onFinish = (values: any) => {
           <Input />
         </Form.Item>
 
-         <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}
-      >
-        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-      </Form.Item>
+        <Form.Item
+          label="Số điện thoại"
+          name="phone"
+          rules={[{ required: true, message: "Vui lòng nhập số điện thoại" }]}
+        >
+          <Input />
+        </Form.Item>
 
         <Form.Item
           label="Image"

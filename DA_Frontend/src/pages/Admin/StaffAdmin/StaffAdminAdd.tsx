@@ -46,23 +46,21 @@ const StaffAdminAdd = (props: IProps) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Name"
+          label="Họ tên"
           name="name"
           rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}
         >
           <Input />
         </Form.Item>
-
-         <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}
-      >
-        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-      </Form.Item>
-
         <Form.Item
-          label="Image"
+          label="Số điện thoại"
+          name="phone"
+          rules={[{ required: true, message: "Vui lòng nhập số điện thoại" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Ảnh"
           name="image"
           rules={[{ required: false, message: "" }]}
         >
@@ -70,7 +68,7 @@ const StaffAdminAdd = (props: IProps) => {
         </Form.Item>
 
         <Form.Item
-          label="Role"
+          label="Vị trí"
           name="role"
           rules={[{ required: true, message: "Vui lòng nhập vị trí của nhân viên!" }]}
         >
@@ -78,7 +76,7 @@ const StaffAdminAdd = (props: IProps) => {
         </Form.Item>
 
         <Form.Item
-          label="Description"
+          label="Mô tả"
           name="desc"
           rules={[{ required: true, message: "Vui lòng nhập mô tả" }]}
         >
