@@ -59,7 +59,7 @@ import UserAdmin from "./pages/Admin/UsersAdmin/UserAdmin";
 import UserAdminAdd from "./pages/Admin/UsersAdmin/UserAdminAdd";
 import UserAdminEdit from "./pages/Admin/UsersAdmin/UserAdminEdit";
 import { IUser } from "./interface/user";
-import { addUsers, deleteUsers, getUsers, updateUsers } from "./api/user";
+import { addUsers, deleteUsers, getUsers, updateUsers ,logIn} from "./api/user";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -346,7 +346,7 @@ function App() {
           {/* Signin Page */}
           <Route path="signin">
 
-            <Route index element={<SigninPage onSignin={addUsers} />} />
+            <Route index element={<SigninPage onSignin={logIn} />} />
 
           </Route>
 

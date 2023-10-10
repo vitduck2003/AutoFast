@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SigninPage = (props) => {
   type FieldType = {
-    username?: string;
+    email?: string;
     password?: string;
     role?: string;
     remember?: string;
@@ -44,7 +44,7 @@ const SigninPage = (props) => {
                       >
                         <Form.Item<FieldType>
                           label="Tài khoản"
-                          name="username"
+                          name="email"
                           rules={[
                             {
                               required: true,

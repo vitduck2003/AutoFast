@@ -15,10 +15,20 @@ const addUsers = (users: IUser) => {
     throw error; // Rethrow the error for further handling in your component
   });
 };
+const logIn = (users: IUser) => {
+  return instance.post("/login", users).then((response) => {
+
+    return response.data.message
+  }).catch((error) => {
+    // Handle any errors here if needed
+    console.error("Error:", error);
+    throw error; // Rethrow the error for further handling in your component
+  });
+};
 const updateUsers = (users: IUser) => {
   return instance.patch("/users/" + users.id, users);
 };
 const deleteUsers = (id: number) => {
   return instance.delete("/users/" + id);
 };
-export { getUsers, addUsers, updateUsers, deleteUsers };
+export { getUsers, addUsers, updateUsers, deleteUsers ,logIn};
