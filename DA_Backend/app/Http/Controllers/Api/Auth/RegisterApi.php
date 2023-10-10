@@ -15,19 +15,24 @@ class RegisterApi extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users|max:255',
-            // 'address' => 'required|string|max:255',
             'role_id' => 'required|integer|min:0',
             'password' => 'required|string|min:6',
         ]);
+        $checkemail = User::where('email', $validatedData['email'])->exists();
+        $checkphone = User::where('phone', $validatedData['phone'])->exists();
+        if($checkemail){
+            return response()->json(['message' => 'Email đã tồn tại'], 200);
+        }
+        if($checkphone){
+            return response()->json(['message' => 'Số điện thoại đã tồn tại'], 200);
+        }
         $user = User::create([
             'name' => $validatedData['name'],
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
             'role_id' => $validatedData['role_id'],
-            // 'role_id' => '2',
-            // 'address' => $validatedData['address'],
             'password' => Hash::make($validatedData['password']),
         ]);
-            return response()->json(['message' => 'Đăng kí thành công'], 201, $user);
+            return response()->json(['message' => 'Đăng kí thành công'], 201);
     }
 }

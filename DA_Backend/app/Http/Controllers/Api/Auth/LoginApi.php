@@ -18,18 +18,18 @@ class LoginApi extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'phone' => 'required|email',
+            'phone' => 'required',
             'password' => 'required',
         ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
+        $login = $request->only('phone', 'password');
+        if (Auth::attempt($login)) {
             $user = User::where('phone', $request->phone)->first();
-            $token = $user->createToken('access_token')->plainTextToken;
-            return response()->json(['access_token' => $token], 200, ['message' => 'Đăng nhập thành công']);
+            // $token = $user->createToken('access_token')->plainTextToken;
+            return response()->json(['message' => 'Đăng nhập thành công'], 200);
         }
-
+        else {
+            return response()->json(['message' => 'Thông tin tài khoản và mật khẩu không chính xấc'], 200);
+        }
         throw ValidationException::withMessages([
             'phone' => ['Phone lỗi.'],
         ]);
