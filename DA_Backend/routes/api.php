@@ -32,7 +32,14 @@ Route::post('logout', [LoginApi::class, 'logout']);
 
  //api admin
 Route::prefix('admin')->group(function () {
-
+//api review
+Route::prefix('review')->group(function () {
+    Route::get('/', [ReviewApi::class, 'index']);
+    Route::post('/', [ReviewApi::class, 'store']);
+    Route::get('/{id}', [ReviewApi::class, 'show']);
+    Route::put('/{id}', [ReviewApi::class, 'update']);
+    Route::delete('/{id}', [ReviewApi::class, 'destroy']);
+});
 });
  //api client
 Route::prefix('client')->group(function () {   
@@ -40,6 +47,13 @@ Route::prefix('client')->group(function () {
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
+    });
+    //api review
+    Route::prefix('review')->group(function () {
+        // lấy review qua người dùng
+        Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
+        // lấy review qua dịch vụ
+        Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
     });
 });
 
