@@ -1,6 +1,10 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { notification } from "antd";
+import instance from "../../../api/instance";
+import { useState } from "react";
 
 const SigninPage = (props) => {
   type FieldType = {
@@ -9,8 +13,57 @@ const SigninPage = (props) => {
     role?: string;
     remember?: string;
   };
+  const navigate = useNavigate();
+  const [showNotification, setShowNotification] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
+  const logIn = (users: IUser) => {
+    return instance.post("/login", users).then((response) => {
+  
+      return response.data.message
+    }).catch((error) => {
+      // Handle any errors here if needed
+      console.error("Error:", error);
+      throw error; // Rethrow the error for further handling in your component
+    });
+  };
+  const openNotification = (mess, text_color, bg_color, title) => {
+    setShowNotification(true);
+    api.open({
+      message: title,
+      description: mess,
+      duration: 3,
+      style: {
+        backgroundColor: bg_color,
+        color: text_color,
+      },
+      onClose: () => {
+        setShowNotification(false);
+      },
+    });
+  };
   const onFinish = (values: any) => {
-   props.onSignin(values);
+    logIn(values).then((response) => {
+      if (response == "Đăng nhập thành công") {
+        openNotification(response, "black", "green", "Success");
+     
+        // Use a nested .then block to navigate after handling the success case
+        return new Promise<void>(resolve => {
+          setTimeout(() => {
+            navigate("/"); // Navigate to the login page after a delay
+            resolve();
+          }, 3000); // Delay for 3 seconds
+        });
+      } else if (
+        response =="Thông tin tài khoản và mật khẩu không chính xấc"
+      ) {
+        return openNotification(response, "white", "red", "Failed");
+      }
+    })
+    .catch((error) => {
+      // Handle any errors here if needed
+      console.error("Error:", error);
+      throw error; // Rethrow the error for further handling in your component
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -21,6 +74,7 @@ const SigninPage = (props) => {
     <div>
       <div className="container h-100; vh-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
+        {contextHolder}
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black" style={{ borderRadius: "25px" }}>
               <div className="card-body p-md-5">
