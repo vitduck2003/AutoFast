@@ -5,25 +5,26 @@ import { useNavigate } from "react-router-dom";
 import { IUser } from "../../../interface/user";
 import { useState } from "react";
 import { Alert, Space } from "antd";
-import {  notification } from "antd";
+import { notification } from "antd";
 import instance from "../../../api/instance";
-
-
 
 const SignupPage = (props) => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
-  
-const addUsers = (users: IUser) => {
-  return instance.post("/register", users).then((response) => {
-
-    return response.data.message
-  }).catch((error) => {
-    // Handle any errors here if needed
-    console.error("Error:", error);
-    throw error; // Rethrow the error for further handling in your component
-  });
-};
+  const [showNotification, setShowNotification] = useState(false);
+  const [tt, setTt] = useState(String);
+  const addUsers = (users: IUser) => {
+    return instance
+      .post("/register", users)
+      .then((response) => {
+        return response.data.message;
+      })
+      .catch((error) => {
+        // Handle any errors here if needed
+        console.error("Error:", error);
+        throw error; // Rethrow the error for further handling in your component
+      });
+  };
   type FieldType = {
     name?: string;
     password?: string;
@@ -31,29 +32,48 @@ const addUsers = (users: IUser) => {
     email?: string;
     remember?: string;
   };
-  const openNotification = (mess) => {
+  const openNotification = (mess, text_color, bg_color, title) => {
+    setShowNotification(true);
     api.open({
-      message: "Notification Title",
+      message: title,
       description: mess,
       duration: 3,
       style: {
-        backgroundColor: "red", // Set the background color to red
+        backgroundColor: bg_color,
+        color: text_color,
+      },
+      onClose: () => {
+        setShowNotification(false);
       },
     });
   };
   const onFinish = (values: FieldType) => {
-   
-    addUsers(values).then((response) => {
-      openNotification(response)
-    }).catch((error) => {
-      // Handle any errors here if needed
-      console.error("Error:", error);
-      throw error; // Rethrow the error for further handling in your component
-    });
-  
- 
-
+    addUsers(values)
+      .then((response) => {
+        if (response == "Đăng kí thành công") {
+          openNotification(response, "black", "green", "Success");
+          setTt("Success");
+          // Use a nested .then block to navigate after handling the success case
+          return new Promise<void>(resolve => {
+            setTimeout(() => {
+              navigate("/signin"); // Navigate to the login page after a delay
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
+        } else if (
+          response == "Số điện thoại đã tồn tại" ||
+          response == "Email đã tồn tại"
+        ) {
+          return openNotification(response, "white", "red", "Failed");
+        }
+      })
+      .catch((error) => {
+        // Handle any errors here if needed
+        console.error("Error:", error);
+        throw error; // Rethrow the error for further handling in your component
+      });
   };
+  
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
@@ -186,7 +206,7 @@ const addUsers = (users: IUser) => {
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button type="primary" htmlType="submit" >
+                          <Button type="primary" htmlType="submit">
                             Đăng ký
                           </Button>
                         </Form.Item>
