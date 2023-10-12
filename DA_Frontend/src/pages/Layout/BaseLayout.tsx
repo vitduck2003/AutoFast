@@ -104,6 +104,9 @@ const BaseLayout = () => {
             <a href="contact" className="nav-item nav-link">
               Liên hệ
             </a>
+            <a href="news" className="nav-item nav-link">
+              Tin Tức
+            </a>
           </div>
           <a href="booking" className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
             Đặt lịch ngay<i className="fa fa-arrow-right ms-3"></i>
