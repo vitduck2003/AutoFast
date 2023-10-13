@@ -64,8 +64,8 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: 'Trạng thái',
-    dataIndex: 'active',
-    key: 'active',
+    dataIndex: 'status',
+    key: 'status',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -94,12 +94,14 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = props.booking.map((item: IBooking) => {
-  return {
+const data: DataType[] = props.booking
+  .filter((item: IBooking) => item.status === "Chờ xác nhận")
+  .map((item: IBooking) => {
+    return {
       key: item.id,
       ...item
-  }
-})
+    }
+  });
 
   return (
     <div>
