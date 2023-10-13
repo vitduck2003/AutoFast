@@ -76,6 +76,7 @@ class RegisterApi extends Controller
         if (!$user) {
             return response()->json(['message' => 'Người dùng không tồn tại'], 404);
         }
+
         $verificationCode = Str::random(6);
         $user->verification_code = $verificationCode;
         $user->save();

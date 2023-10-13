@@ -45,9 +45,7 @@ class UserApi extends Controller
             'name' => $validatedData['name'],
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
-            // 'role_id' => $validatedData['role_id'],
-            'role_id' => '2',
-            // 'address' => $validatedData['address'],
+            'role_id' => $validatedData['role_id'],
             'password' => Hash::make($validatedData['password']),
         ]);
             return response()->json(['message' => 'Đăng kí cồng thanh'], 201, $user);
