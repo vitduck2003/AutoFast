@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\User;
+use Twilio\Rest\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterApi extends Controller
 {
@@ -28,11 +30,81 @@ class RegisterApi extends Controller
         }
         $user = User::create([
             'name' => $validatedData['name'],
-            'phone' => $validatedData['phone'],
+            'phone' => '+84'.$validatedData['phone'],
             'email' => $validatedData['email'],
             'role_id' => $validatedData['role_id'],
             'password' => Hash::make($validatedData['password']),
         ]);
-            return response()->json(['message' => 'Đăng kí thành công'], 201);
+
+        if ($user) {
+            $verificationCode = Str::random(6);
+            $user->verification_code = $verificationCode;
+            $user->save();
+
+            $this->sendVerificationCode($user, $verificationCode, $validatedData['phone']);
+
+            return response()->json(['message' => 'Đăng ký thành công'], 201);
+        } else {
+            return response()->json(['message' => 'Đăng kí tài khoản thất bại'], 201);
+        }
+    }
+
+    private function sendVerificationCode($user, $verificationCode, $phoneNumber)
+    {
+        $sid = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
+        $token = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
+        $twilioNumber = '+12055259845';
+
+        $client = new Client($sid, $token);
+
+        $client->messages->create(
+            $phoneNumber,
+            [
+                'from' => $twilioNumber,
+                'body' => 'Mã xác minh của bạn là: ' . $verificationCode
+            ]
+        );
+    }
+
+    public function resendVerificationCode(Request $request)
+    {
+        $validatedData = $request->validate([
+            'phone' => 'required|string|max:255',
+        ]);
+
+        $user = User::where('phone', $validatedData['phone'])->first();
+        if (!$user) {
+            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
+        }
+        $verificationCode = Str::random(6);
+        $user->verification_code = $verificationCode;
+        $user->save();
+
+        $this->sendVerificationCode($user, $verificationCode, $validatedData['phone']);
+
+        return response()->json(['message' => 'Gửi lại mã xác minh thành công'], 200);
+    }
+
+    public function verifyCode(Request $request)
+    {
+        $validatedData = $request->validate([
+            'phone' => 'required|string|max:255',
+            'code' => 'required|string|max:6',
+        ]);
+
+        $user = User::where('phone', $validatedData['phone'])->first();
+        if (!$user) {
+            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
+        }
+
+        if ($user->verification_code !== $validatedData['code']) {
+            return response()->json(['message' => 'Mã xác minh không đúng'], 400);
+        }
+
+        $user->verification_code = null;
+        $user->is_verified = true;
+        $user->save();
+
+        return response()->json(['message' => 'Xác minh mã thành công'], 200);
     }
 }
