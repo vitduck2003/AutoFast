@@ -2,13 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Admin\ItemApi;
-use App\Http\Controllers\API\Admin\NewsApi;
-use App\Http\Controllers\API\Admin\UserApi;
-use App\Http\Controllers\Api\Admin\RoleApi;
+use App\Http\Controllers\Api\Admin\UserApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
-use App\Http\Controllers\Api\Admin\StaffApi;
-use App\Http\Controllers\Api\Admin\ReviewApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 
@@ -29,10 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
-
  //api admin
 Route::prefix('admin')->group(function () {
-
+    Route::resource('users',UserApi::class);
 });
  //api client
 Route::prefix('client')->group(function () {   
@@ -42,4 +36,3 @@ Route::prefix('client')->group(function () {
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
     });
 });
-
