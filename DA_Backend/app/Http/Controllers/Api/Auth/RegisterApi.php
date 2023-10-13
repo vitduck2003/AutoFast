@@ -49,14 +49,14 @@ class RegisterApi extends Controller
     }
     private function sendVerificationCode($user, $verificationCode, $phoneNumber)
 {
-    $sid = 'ACb9b58b13abf9ca8754f1530b0dbbc3a8';
-    $token = 'c28ed9bbcbf7651fe9bd0816b5b2c77a';
-    $twilioNumber = '+17605655930';
+    $sid = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
+    $token = '11dc1f6aa2c2738de00fe37fc88f1f30';
+    $twilioNumber = '+12055259845';
 
     $client = new Client($sid, $token);
 
     $send_otp = $client->messages->create(
-        '+84398845889',
+        '+84346938386',
         [
             'from' => $twilioNumber,
             'body' => 'Mã xác minh của bạn là: ' . $verificationCode
