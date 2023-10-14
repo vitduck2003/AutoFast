@@ -30,6 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
+Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
+Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
  
 //api admin
 Route::prefix('admin')->group(function () {

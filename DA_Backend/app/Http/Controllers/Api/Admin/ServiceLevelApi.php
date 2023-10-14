@@ -26,7 +26,7 @@ class ServiceLevelApi extends Controller
             Log::error('Exception', [$exception]);
 
             return response()->json(
-                ['err' => 'khong show dc tin tức'],
+                ['err' => 'khong show dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -58,7 +58,7 @@ class ServiceLevelApi extends Controller
             Log::error('Exception', [$exception]);
 
             return response()->json(
-                ['err' => 'khong them dc tin tức'],
+                ['err' => 'khong them dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -102,7 +102,7 @@ class ServiceLevelApi extends Controller
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
             return response()->json(
-                ['err' => 'khong sua dc tin tức'],
+                ['err' => 'khong sua dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -122,7 +122,7 @@ class ServiceLevelApi extends Controller
             Log::error('Exception', [$exception]);
 
             return response()->json(
-                ['err' => 'khong xoa dc tin tức'],
+                ['err' => 'khong xoa dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

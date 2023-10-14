@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Service_item;
+use App\Models\Service_level;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -19,14 +20,15 @@ class ServiceItemApi extends Controller
     public function index()
     {
         try {
-            $data = Service_item::query()->orderByDesc('id')->get();
-
+            $data['service_item'] = Service_item::query()->orderByDesc('id')->get();
+            $data['service_level'] = Service_level::all();
+            $data['service'] = Service::all();
             return response()->json($data);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
 
             return response()->json(
-                ['err' => 'khong show dc tin tức'],
+                ['err' => 'khong show dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -56,9 +58,8 @@ class ServiceItemApi extends Controller
             return response()->json($data);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
-
             return response()->json(
-                ['err' => 'khong them dc tin tức'],
+                ['err' => 'khong them dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -102,7 +103,7 @@ class ServiceItemApi extends Controller
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
             return response()->json(
-                ['err' => 'khong sua dc tin tức'],
+                ['err' => 'khong sua dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -122,7 +123,7 @@ class ServiceItemApi extends Controller
             Log::error('Exception', [$exception]);
 
             return response()->json(
-                ['err' => 'khong xoa dc tin tức'],
+                ['err' => 'khong xoa dc service'],
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
