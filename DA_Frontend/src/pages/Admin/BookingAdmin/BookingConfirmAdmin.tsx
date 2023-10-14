@@ -22,21 +22,20 @@ interface DataType {
 }
 
 interface IProps {
-  bookingConfirm: IBooking[],
-  onRemoveBookingConfirm: (id: any) => void
+  booking: IBooking[],
+  onRemoveBooking: (id: any) => void
 }
 
 const BookingConfirmAdmin = (props: IProps) => {
 
-  const removeBookingConfirm = (id: number) => {
-    props.onRemoveBookingConfirm(id)
+  const removeBooking = (id: any) => {
+    props.onRemoveBooking(id)
 }
-
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'full_name',
+    key: 'full_name',
     render: (number) => <a>{number}</a>,
   },
   {
@@ -64,8 +63,8 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: 'Trạng thái',
-    dataIndex: 'active',
-    key: 'active',
+    dataIndex: 'status',
+    key: 'status',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -77,7 +76,7 @@ const columns: ColumnsType<DataType> = [
   title="Xóa lịch"
   description="Bạn có chắc muốn xóa lịch này?"
   onConfirm={() => {
-    removeBookingConfirm(record.id)
+    removeBooking(record.id)
   }}
   okText="Có"
   okButtonProps={{
@@ -94,14 +93,19 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = props.bookingConfirm.map((item: IBooking) => {
-  return {
+const data: DataType[] = props.booking
+  .filter((item: IBooking) => item.status === "Đã xác nhận")
+  .map((item: IBooking) => {
+    return {
       key: item.id,
       ...item
-  }
-})
+    }
+  });
+
   return (
-    <div> <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} /></div>
+    <div>
+      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+    </div>
   )
 }
 

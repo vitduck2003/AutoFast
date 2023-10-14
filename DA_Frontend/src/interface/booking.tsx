@@ -3,6 +3,7 @@ export interface IBooking {
     full_name: string,
     email: string,
     service: string,
+    status: string,
     phone: number,
     time: any ,
     desc: string,
