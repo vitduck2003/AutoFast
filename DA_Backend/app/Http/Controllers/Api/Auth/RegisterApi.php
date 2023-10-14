@@ -69,7 +69,7 @@ class RegisterApi extends Controller
     public function resendVerificationCode(Request $request)
     {
         $validatedData = $request->validate([
-            'phone' => 'required|string|max:10',
+            'phone' => 'required|string|max:255',
         ]);
 
         $user = User::where('phone', $validatedData['phone'])->first();
@@ -99,7 +99,7 @@ class RegisterApi extends Controller
         }
 
         if ($user->verification_code !== $validatedData['code']) {
-            return response()->json(['message' => 'Mã xác minh không đúng'], 400);
+            return response()->json(['message' => 'Mã xác minh không đúng'], 200);
         }
 
         $user->verification_code = null;

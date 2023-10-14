@@ -14,19 +14,38 @@ const VerifyPage = () => {
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const [showNotification, setShowNotification] = useState(false);
+  const resend =(sdt)=>{
+    return instance.post('register/resend-verification-code',sdt).then((response)=>{console.log(response)})
+  }
   const verify = (values) => {
-    
     return instance
       .post("register/verify-code", values)
       .then((response) => {
-        // Handle the response as needed
-        if(response.data == 'Xác minh mã thành công') {
-          navigate("/")
+        if (response.data.message === "Vui lòng xác thực tài khoản") {
+          openNotification(response.data.message, "black", "green", "Success");
+        
+          // Use a nested .then block to navigate after handling the success case
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/verify/${response.data.phone_verified}`); // Navigate to the verification page with the phone number
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
+        }else if (response?.data?.message == "Mã xác minh không đúng") {
+          console.log(response);
+          return openNotification(
+            response?.data?.message,
+            "white",
+            "red",
+            "Failed"
+          );
         }
+        console.log(response.data.message);
       })
       .catch((error) => {
         // Handle errors
-        console.error("Error:", error);
+        console.error(":", error);
+        return openNotification(error.data?.message, "white", "red", "Failed");
         throw error;
       });
   };
@@ -48,14 +67,14 @@ const VerifyPage = () => {
   const onFinish = (values) => {
     verify(values)
       .then((response) => {
-        if (response == "Đăng kí thành công") {
-          openNotification(response, "black", "green", "Success");
-        } else if (
-          response == "Số điện thoại đã tồn tại" ||
-          response == "Email đã tồn tại"
-        ) {
-          return openNotification(response, "white", "red", "Failed");
-        }
+        // if (response?.data?.message == "Xác minh mã thành công") {
+        //   console.log(response?.data?.message)
+        //   openNotification(response?.data?.message, "black", "green", "Success");
+        // } else if(response?.data?.message == "Mã xác minh không đúng"){
+        //   console.log(response)
+        //   return openNotification(response?.data?.message, "white", "red", "Failed");
+        // }
+        console.log(response.data);
       })
       .then(() => {
         console.log(sdt, values);
@@ -112,8 +131,19 @@ const VerifyPage = () => {
                           initialValue={sdt} // Set the initial value to {sdt}
                         ></Form.Item>
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button type="primary" htmlType="submit">
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            style={{ marginRight: "10px" }}
+                          >
                             Xác thực
+                          </Button>
+                          <Button
+                            type="primary"
+                            style={{ backgroundColor: "blue", color: "white" }}
+                            onClick={()=>resend(sdt)}
+                          >
+                            Gửi lại mã
                           </Button>
                         </Form.Item>
                       </Form>

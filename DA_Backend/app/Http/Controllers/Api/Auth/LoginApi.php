@@ -32,7 +32,7 @@ class LoginApi extends Controller
             return response()->json([
                 'message' => 'Vui lòng xác thực tài khoản',
                 'phone_verified' => $request->phone
-            ], 400);
+            ], 200);
         }
         if (Auth::attempt($login)) {
             $user = User::where(function ($query) use ($request) {

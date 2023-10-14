@@ -47,19 +47,16 @@ const SignupPage = (props) => {
       },
     });
   };
-  const onFinish = (values: FieldType) => {
+  const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
-        if (response == "Đăng kí thành công") {
+        if (response == "Đăng ký thành công") {
           openNotification(response, "black", "green", "Success");
           setTt("Success");
-          // Use a nested .then block to navigate after handling the success case
-          return new Promise<void>(resolve => {
-            setTimeout(() => {
-              navigate("/signin"); // Navigate to the login page after a delay
-              resolve();
-            }, 3000); // Delay for 3 seconds
-          });
+          setTimeout(()=>{
+            navigate(`/verify/${values.phone}`); 
+          },3000)
+      
         } else if (
           response == "Số điện thoại đã tồn tại" ||
           response == "Email đã tồn tại"
