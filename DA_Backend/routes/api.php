@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Admin\ServiceItemApi;
+use App\Http\Controllers\Api\Admin\ServiceLevelApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +35,13 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::prefix('admin')->group(function () {
     //api quan ly user
     Route::resource('users',UserApi::class);
-    //api quan ly tin tuc
+    //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
     Route::resource('news',NewsApi::class);
-    //api quan ly service
+    //api quan ly service  http://127.0.0.1:8000/api/admin/services
     Route::resource('services',ServiceApi::class);
-    //api quan ly service item
+    //api quan ly service item   http://127.0.0.1:8000/api/admin/service_item
     Route::resource('service_item',ServiceItemApi::class);
-    //api quan ly service level
+    //api quan ly service level  http://127.0.0.1:8000/api/admin/service_level
     Route::resource('service_level',ServiceLevelApi::class);
 });
 
