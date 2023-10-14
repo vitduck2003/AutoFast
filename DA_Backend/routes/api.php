@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\API\Admin\NewsApi;
+use App\Http\Controllers\Api\Admin\ServiceApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\UserApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
+use App\Http\Controllers\Api\Admin\ServiceItemApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,12 @@ Route::prefix('admin')->group(function () {
     Route::resource('users',UserApi::class);
     //api quan ly tin tuc
     Route::resource('news',NewsApi::class);
+    //api quan ly service
+    Route::resource('services',ServiceApi::class);
+    //api quan ly service item
+    Route::resource('service_item',ServiceItemApi::class);
+    //api quan ly service level
+    Route::resource('service_level',ServiceLevelApi::class);
 });
 
 
