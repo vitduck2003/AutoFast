@@ -64,3 +64,6 @@ Route::prefix('client')->group(function () {
         Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
     });
 });
+
+
+Route::prefix('admin')->group(function () {});
