@@ -49,61 +49,29 @@
       "phone": "+84966287440",
       "service": "Vệ sinh và thay dầu",
       "date": "2023-10-04",
-      "active": "Chờ xác nhận",
+      "status": "Chờ xác nhận",
       "desc": "adada",
       "id": 1
     },
     {
-      "name": "Hot Boy Quốc Hiếu",
-      "phone": "+84966287440",
+      "name": "Nguyễn Thanh Ngọc",
+      "phone": "0338473334",
       "service": "Vệ sinh và thay dầu",
-      "date": "2023-10-04",
-      "active": "Chờ xác nhận",
-      "desc": "adada",
-      "full_name": "Hot Boy Quốc Hiếu",
+      "date": "2023-10-13",
+      "status": "Đã xác nhận",
+      "desc": "Cần thay thế nhiều phụ tùng",
+      "full_name": "Nguyễn Thanh Ngọc",
       "id": 2
     },
     {
-      "name": "Hot Boy Quốc Hiếu",
-      "phone": "+84966287440",
+      "name": "Trần Hà Linh",
+      "phone": "0988478242",
       "service": "Vệ sinh và thay dầu",
       "date": "2023-10-04",
-      "active": "Chờ xác nhận",
-      "desc": "adada",
-      "full_name": "Hot Boy Quốc Hiếu",
+      "status": "Đã hoàn thành",
+      "desc": "Ghi chú 83943",
+      "full_name": "Linh",
       "id": 3
-    },
-    {
-      "name": "Hot Boy Quốc Hiếu",
-      "phone": "+84966287440",
-      "service": "Vệ sinh và thay dầu",
-      "date": "2023-10-04",
-      "active": "Chờ xác nhận",
-      "desc": "adada",
-      "full_name": "Hot Boy Quốc Hiếu",
-      "id": 4
-    }
-  ],
-  "bookings": [
-    {
-      "name": "Đức Phong",
-      "phone": "0943644564",
-      "date": "23/01/2024",
-      "active": "Đã xác nhận",
-      "desc": "Ghi chú",
-      "service": "Bảo dưỡng",
-      "id": 1
-    }
-  ],
-  "bookingHT": [
-    {
-      "name": "Đức Phong",
-      "phone": "0943644564",
-      "date": "23/01/2024",
-      "active": "Đã hoàn thành",
-      "desc": "Ghi chú",
-      "service": "Bảo dưỡng",
-      "id": 1
     }
   ],
   "news": [

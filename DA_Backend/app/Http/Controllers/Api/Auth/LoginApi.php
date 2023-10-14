@@ -22,27 +22,36 @@ class LoginApi extends Controller
             'email' => 'required_without:phone',
             'password' => 'required',
         ]);
+
         $login = $request->only('phone', 'email', 'password');
+        $check_verify = User::select('is_verified')
+            ->where('phone', '=', $request->phone)
+            ->first();
+
+        if (!$check_verify || !$check_verify->is_verified) {
+            return response()->json([
+                'message' => 'Vui lòng xác thực tài khoản',
+                'phone_verified' => $request->phone
+            ], 400);
+        }
         if (Auth::attempt($login)) {
-           $user = User::where(function ($query) use ($request) {
+            $user = User::where(function ($query) use ($request) {
                 $query->where('phone', $request->phone)
-                ->orWhere('email', $request->email);
-           })->first();
+                    ->orWhere('email', $request->email);
+            })->first();
             $token = $user->createToken('access_token')->plainTextToken;
             return response()->json([
                 'message' => 'Đăng nhập thành công',
                 'user' => $user,
+                'access_token' => $token
             ], 200);
+        } else {
+            return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 400);
         }
-        else {
-            return response()->json(['message' => 'Thông tin tài khoản và mật khẩu không chính xấc'], 200);
-        }
-        throw ValidationException::withMessages([
-            'phone' => ['Phone lỗi.'],
-            'email' => ['Email lỗi.'],
-        ]);
     }
-    public function logout(){
+
+    public function logout()
+    {
         Auth::logout();
         return response()->json(['message' => 'Đăng xuất thành công'], 200);
     }

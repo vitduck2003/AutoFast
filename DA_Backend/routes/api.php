@@ -24,15 +24,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
+Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
+Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
  //api admin
 Route::prefix('admin')->group(function () {
-    Route::resource('users',UserApi::class);
+//api review
+Route::prefix('review')->group(function () {
+    Route::get('/', [ReviewApi::class, 'index']);
+    Route::post('/', [ReviewApi::class, 'store']);
+    Route::get('/{id}', [ReviewApi::class, 'show']);
+    Route::put('/{id}', [ReviewApi::class, 'update']);
+    Route::delete('/{id}', [ReviewApi::class, 'destroy']);
 });
+//api user 
+Route::resource('users', [UserApi::class]);
+});
+ //api admin
  //api client
 Route::prefix('client')->group(function () {   
     //api tin tuc 
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
+    });
+    //api review
+    Route::prefix('review')->group(function () {
+        // lấy review qua người dùng
+        Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
+        // lấy review qua dịch vụ
+        Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
     });
 });

@@ -65,8 +65,6 @@ function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
   const [booking, setBooking] = useState<IBooking[]>([]);
-  const [bookingConf, setBookingConf] = useState<IBooking[]>([]);
-  const [bookingHT, setBookingHT] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
   const [mess,setMess]=useState();
 
@@ -74,8 +72,6 @@ function App() {
     getAllStaff().then(({ data }) => setStaffs(data));
     getNews().then(({ data }) => setNews(data));
     getBooking().then(({ data }) => setBooking(data));
-    getBookingConfirm().then(({ data }) => setBookingConf(data));
-    getBookingHT().then(({ data }) => setBookingHT(data));
     getUsers().then(({ data }) => setUsers(data));
   }, []);
 
@@ -131,44 +127,7 @@ function App() {
       setBooking(booking.filter((item: IBooking) => item.id !== id))
     );
   };
-  // BookingConfirm
-
-  const onHandleBookingConfirm = (BookingItem: IBooking) => {
-    addBookingConfirm(BookingItem).then(() =>
-      getBookingConfirm().then(({ data }) => setBookingConf(data))
-    );
-  };
-
-  const onHandleUpdateBookingConfirm = (BookingItem: IBooking) => {
-    updateBookingConfirm(BookingItem).then(() =>
-      getBookingConfirm().then(({ data }) => setBookingConf(data))
-    );
-  };
-
-  const onHandleRemoveBookingConfirm = (id: any) => {
-    deleteBookingConfirm(id).then(() =>
-      setBookingConf(bookingConf.filter((item: IBooking) => item.id !== id))
-    );
-  };
-
-  // BookingHT
-  const onHandleBookingHT = (BookingItem: IBooking) => {
-    addBookingHT(BookingItem).then(() =>
-      getBookingHT().then(({ data }) => setBookingHT(data))
-    );
-  };
-
-  const onHandleUpdateBookingHT = (BookingItem: IBooking) => {
-    updateBookingHT(BookingItem).then(() =>
-      getBookingHT().then(({ data }) => setBookingHT(data))
-    );
-  };
-
-  const onHandleRemoveBookingHT = (id: any) => {
-    deleteBookingHT(id).then(() =>
-      setBookingHT(bookingHT.filter((item: IBooking) => item.id !== id))
-    );
-  };
+  
 
   // Users
   const onHandleAddUsers = (users: IUser) => {
@@ -215,8 +174,8 @@ function App() {
 
             {/* News Page */}
             <Route path="news">
-              <Route index element={<NewsPage />} />
-              <Route path=":id" element={<NewsDetailPage />} />
+              <Route index element={<NewsPage news={news} />} />
+              <Route path=":id" element={<NewsDetailPage news={news} />} />
             </Route>
             <Route path="service">
               <Route index element={<ServicePage />} />
@@ -257,15 +216,16 @@ function App() {
                 index
                 element={
                   <BookingConfirmAdmin
-                    bookingConfirm={bookingConf}
-                    onRemoveBookingConfirm={onHandleRemoveBookingConfirm}
+                  booking={booking}
+                  onRemoveBooking={onHandleRemoveBooking}
                   />
                 }
               />
             </Route>
             {/* Booking HT Admin Page */}
             <Route path="bookingHT">
-              <Route index element={<BookingHtAdmin bookingHT={bookingHT} />} />
+              <Route index element={<BookingHtAdmin booking={booking}
+                  onRemoveBooking={onHandleRemoveBooking}/>} />
             </Route>
             {/*News Admin Page */}
             <Route path="news">
