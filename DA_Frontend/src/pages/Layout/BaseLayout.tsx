@@ -23,30 +23,14 @@ const BaseLayout = () => {
               <small>+84 988 678 999</small>
             </div>
             <div className="h-100 d-inline-flex align-items-center">
-              <a
-                className="btn btn-sm-square bg-white text-primary me-1"
-                href=""
-              >
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a
-                className="btn btn-sm-square bg-white text-primary me-1"
-                href=""
-              >
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a
-                className="btn btn-sm-square bg-white text-primary me-1"
-                href=""
-              >
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-              <a
-                className="btn btn-sm-square bg-white text-primary me-0"
-                href=""
-              >
-                <i className="fab fa-instagram"></i>
-              </a>
+            <b  style={{color: "blue"}}><a style={{paddingRight: '20px'}} href="/signup" className="nav-item nav-link ">
+             Đăng Ký
+            </a>{" "}</b>
+
+           <b style={{color: "blue"}}> <a href="/signin" className="nav-item nav-link ">
+              Đăng Nhập
+            </a></b>
+              
             </div>
           </div>
         </div>
@@ -74,12 +58,7 @@ const BaseLayout = () => {
             <a href="/" className="nav-item nav-link ">
               Trang Chủ
             </a>
-            <a href="/signup" className="nav-item nav-link ">
-             Đăng Ký
-            </a>{" "}
-            <a href="/signin" className="nav-item nav-link ">
-              Đăng Nhập
-            </a>
+            
             <a href="/about" className="nav-item nav-link">
               Về chúng tôi
             </a>
