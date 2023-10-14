@@ -30,7 +30,9 @@ Route::post('logout', [LoginApi::class, 'logout']);
  
 //api admin
 Route::prefix('admin')->group(function () {
+    //api quan ly user
     Route::resource('users',UserApi::class);
+    //api quan ly tin tuc
     Route::resource('news',NewsApi::class);
 });
 
