@@ -28,8 +28,11 @@ class LoginApi extends Controller
                 $query->where('phone', $request->phone)
                 ->orWhere('email', $request->email);
            })->first();
-            // $token = $user->createToken('access_token')->plainTextToken;
-            return response()->json(['message' => 'Đăng nhập thành công'], 200);
+            $token = $user->createToken('access_token')->plainTextToken;
+            return response()->json([
+                'message' => 'Đăng nhập thành công',
+                'user' => $user,
+            ], 200);
         }
         else {
             return response()->json(['message' => 'Thông tin tài khoản và mật khẩu không chính xấc'], 200);
