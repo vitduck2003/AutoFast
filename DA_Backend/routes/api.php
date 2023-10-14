@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Admin\NewsApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\UserApi;
@@ -21,13 +22,20 @@ use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//api dang nhap dang ky
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
- //api admin
+ 
+//api admin
 Route::prefix('admin')->group(function () {
     Route::resource('users',UserApi::class);
+    Route::resource('news',NewsApi::class);
 });
+
+
+
  //api client
 Route::prefix('client')->group(function () {   
     //api tin tuc 
