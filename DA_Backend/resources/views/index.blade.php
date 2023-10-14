@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Đây là dự án</h1>
+    <h1>Test mail</h1>
 </body>
 </html>
