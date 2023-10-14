@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
+use App\Models\News;
+use App\Models\Role;
 use Illuminate\Http\Request;
-
-class StaffApi extends Controller
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+class RoleApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +19,8 @@ class StaffApi extends Controller
     public function index()
     {
         $roles = Role::all();
-        // return response()->json($staffs);
+        // return response()->json($roles);
         return RoleResource::collection($roles);
-        //
     }
 
     /**
@@ -30,9 +31,7 @@ class StaffApi extends Controller
      */
     public function store(Request $request)
     {
-        //
         $roles = Role::create($request->all());
-        // return new StaffResource($staff);
         return response()->json($roles, 201);
     }
 
@@ -44,15 +43,25 @@ class StaffApi extends Controller
      */
     public function show($id)
     {
-        //
         $roles = Role::findOrFail($id);
         if ($roles) {
             return response()->json($roles);
         } else {
             return response()->json([
-                'error' => 'tài khoản không tồn tại'
+                'error' => 'Not found'
             ]);
         }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
     }
 
     /**
@@ -64,14 +73,13 @@ class StaffApi extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $roles = Role::findOrFail($id);
         if ($roles) {
             $roles->update($request->all());
             return response()->json($roles);
         } else {
             return response()->json([
-                'error' => 'update not found',
+                'error' => 'Update not found',
             ]);
         }
     }
@@ -84,14 +92,13 @@ class StaffApi extends Controller
      */
     public function destroy($id)
     {
-        //
         $roles = Role::findOrFail($id);
         if ($roles) {
             $roles->delete();
-            return response()->json(['message' => 'successfully']);
+            return response()->json(['message' => 'Successfully']);
         } else {
             return response()->json([
-                'error' => 'not found',
+                'error' => 'Not found',
             ]);
         }
     }

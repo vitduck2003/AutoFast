@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes; 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
@@ -16,4 +16,9 @@ class Role extends Model
         'name',
         'display_name',
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id_role');
+    }
 }

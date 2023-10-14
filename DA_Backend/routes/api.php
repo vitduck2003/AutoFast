@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\ReviewApi;
+use App\Http\Controllers\Api\Admin\RoleApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\UserApi;
@@ -28,9 +30,13 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::prefix('admin')->group(function () {
     Route::resource('users',UserApi::class);
 });
+Route::prefix('admin')->group(function () {
+    Route::resource('roles',RoleApi::class);
+});
+
  //api client
-Route::prefix('client')->group(function () {   
-    //api tin tuc 
+Route::prefix('client')->group(function () {
+    //api tin tuc
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
