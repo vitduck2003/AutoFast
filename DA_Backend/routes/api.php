@@ -1,7 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\Api\Admin\ReviewApi;
 use App\Http\Controllers\Api\Admin\RoleApi;
+=======
+use App\Http\Controllers\API\Admin\NewsApi;
+>>>>>>> b31d16f912c37a4c8693aaa48cb80d13003999e3
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\UserApi;
@@ -23,16 +27,25 @@ use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//api dang nhap dang ky
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
- //api admin
+ 
+//api admin
 Route::prefix('admin')->group(function () {
     Route::resource('users',UserApi::class);
+    Route::resource('news',NewsApi::class);
 });
+<<<<<<< HEAD
 Route::prefix('admin')->group(function () {
     Route::resource('roles',RoleApi::class);
 });
+=======
+
+
+>>>>>>> b31d16f912c37a4c8693aaa48cb80d13003999e3
 
  //api client
 Route::prefix('client')->group(function () {
