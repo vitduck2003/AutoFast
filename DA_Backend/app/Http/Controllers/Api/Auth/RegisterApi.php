@@ -30,7 +30,7 @@ class RegisterApi extends Controller
         }
         $user = User::create([
             'name' => $validatedData['name'],
-            'phone' => '+84'.$validatedData['phone'],
+            'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
             'role_id' => $validatedData['role_id'],
             'password' => Hash::make($validatedData['password']),
@@ -69,7 +69,7 @@ class RegisterApi extends Controller
     public function resendVerificationCode(Request $request)
     {
         $validatedData = $request->validate([
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|string|max:10',
         ]);
 
         $user = User::where('phone', $validatedData['phone'])->first();
