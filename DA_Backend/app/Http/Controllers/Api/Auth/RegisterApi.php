@@ -52,13 +52,13 @@ class RegisterApi extends Controller
     private function sendVerificationCode($user, $verificationCode, $phoneNumber)
     {
         $sid = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
-        $token = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
+        $token = '11dc1f6aa2c2738de00fe37fc88f1f30';
         $twilioNumber = '+12055259845';
 
         $client = new Client($sid, $token);
 
         $client->messages->create(
-            $phoneNumber,
+            "+84".$phoneNumber,
             [
                 'from' => $twilioNumber,
                 'body' => 'Mã xác minh của bạn là: ' . $verificationCode
