@@ -35,4 +35,11 @@ Route::prefix('client')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
     });
+    //api review
+    Route::prefix('review')->group(function () {
+        // lấy review qua người dùng
+        Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
+        // lấy review qua dịch vụ
+        Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
+    });
 });

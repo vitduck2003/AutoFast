@@ -47,18 +47,20 @@ const SignupPage = (props) => {
       },
     });
   };
-  const onFinish = (values: FieldType) => {
+  const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
         if (response == "Đăng kí thành công") {
           openNotification(response, "black", "green", "Success");
           setTt("Success");
+          // Extract the phone number from the form values
+          const phoneNumber = values.phone;
           // Use a nested .then block to navigate after handling the success case
-          return new Promise<void>(resolve => {
+          return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate("/signin"); // Navigate to the login page after a delay
+              navigate(`/sms-verification/${phoneNumber}`);
               resolve();
-            }, 3000); // Delay for 3 seconds
+            }, 3000);
           });
         } else if (
           response == "Số điện thoại đã tồn tại" ||

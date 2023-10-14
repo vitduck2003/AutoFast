@@ -74,6 +74,12 @@ const BaseLayout = () => {
             <a href="/" className="nav-item nav-link ">
               Trang Chủ
             </a>
+            <a href="/signup" className="nav-item nav-link ">
+             Đăng Ký
+            </a>{" "}
+            <a href="/signin" className="nav-item nav-link ">
+              Đăng Nhập
+            </a>
             <a href="/about" className="nav-item nav-link">
               Về chúng tôi
             </a>
@@ -89,10 +95,10 @@ const BaseLayout = () => {
                 Pages
               </a>
               <div className="dropdown-menu fade-up m-0">
-              <a href="booking" className="dropdown-item">
+                <a href="booking" className="dropdown-item">
                   Đặt lịch
                 </a>
-                
+
                 <a href="technicians" className="dropdown-item">
                   Kỹ thuật viên
                 </a>
@@ -104,8 +110,14 @@ const BaseLayout = () => {
             <a href="contact" className="nav-item nav-link">
               Liên hệ
             </a>
+            <a href="news" className="nav-item nav-link">
+              Tin Tức
+            </a>
           </div>
-          <a href="booking" className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+          <a
+            href="booking"
+            className="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
+          >
             Đặt lịch ngay<i className="fa fa-arrow-right ms-3"></i>
           </a>
         </div>
@@ -120,7 +132,8 @@ const BaseLayout = () => {
             <div className="col-lg-3 col-md-6">
               <h4 className="text-light mb-4">Địa chỉ</h4>
               <p className="mb-2">
-                <i className="fa fa-map-marker-alt me-3"></i>Số 88 Đường Quang Trung, Hà Đông, Hà Nội
+                <i className="fa fa-map-marker-alt me-3"></i>Số 88 Đường Quang
+                Trung, Hà Đông, Hà Nội
               </p>
               <p className="mb-2">
                 <i className="fa fa-phone-alt me-3"></i>+84 988 678 999
@@ -152,19 +165,39 @@ const BaseLayout = () => {
             </div>
             <div className="col-lg-3 col-md-6">
               <h4 className="text-light mb-4">Dịch vụ</h4>
-              <a style={{ textDecoration: 'none' }} className="btn btn-link" href="">
+              <a
+                style={{ textDecoration: "none" }}
+                className="btn btn-link"
+                href=""
+              >
                 Bảo dưỡng xe
               </a>
-              <a style={{ textDecoration: 'none' }} className="btn btn-link" href="">
+              <a
+                style={{ textDecoration: "none" }}
+                className="btn btn-link"
+                href=""
+              >
                 Thay phụ tùng
               </a>
-              <a style={{ textDecoration: 'none' }} className="btn btn-link" href="">
+              <a
+                style={{ textDecoration: "none" }}
+                className="btn btn-link"
+                href=""
+              >
                 Thay dầu
               </a>
-              <a style={{ textDecoration: 'none' }} className="btn btn-link" href="">
-                Sửa chữa 
+              <a
+                style={{ textDecoration: "none" }}
+                className="btn btn-link"
+                href=""
+              >
+                Sửa chữa
               </a>
-              <a style={{ textDecoration: 'none' }} className="btn btn-link" href="">
+              <a
+                style={{ textDecoration: "none" }}
+                className="btn btn-link"
+                href=""
+              >
                 Vệ sinh
               </a>
             </div>
@@ -174,17 +207,29 @@ const BaseLayout = () => {
           <div className="copyright">
             <div className="row">
               <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                <a style={{ textDecoration: 'none' }} className="border-bottom" href="#">
+                <a
+                  style={{ textDecoration: "none" }}
+                  className="border-bottom"
+                  href="#"
+                >
                   Dịch vụ bảo dưỡng xe Auto Fast
                 </a>
                 , All Right Reserved.
               </div>
               <div className="col-md-6 text-center text-md-end">
                 <div className="footer-menu">
-                <a style={{ textDecoration: 'none' }} href="/">Trang Chủ</a>
-                  <a style={{ textDecoration: 'none' }} href="booking">Đặt lịch</a>
-                  <a style={{ textDecoration: 'none' }} href="about">Về chúng tôi</a>
-                  <a style={{ textDecoration: 'none' }} href="contact">Liên hệ</a>
+                  <a style={{ textDecoration: "none" }} href="/">
+                    Trang Chủ
+                  </a>
+                  <a style={{ textDecoration: "none" }} href="booking">
+                    Đặt lịch
+                  </a>
+                  <a style={{ textDecoration: "none" }} href="about">
+                    Về chúng tôi
+                  </a>
+                  <a style={{ textDecoration: "none" }} href="contact">
+                    Liên hệ
+                  </a>
                 </div>
               </div>
             </div>
