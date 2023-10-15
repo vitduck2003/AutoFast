@@ -40,11 +40,11 @@ Route::prefix('admin')->group(function () {
     //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
     Route::resource('news',NewsApi::class);
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
-    Route::resource('services',ServiceApi::class);
+    Route::resource('services',ServiceApi::class);    //get api
     //api quan ly service item   http://127.0.0.1:8000/api/admin/service_item
-    Route::resource('service_item',ServiceItemApi::class);
+    Route::resource('service_item',ServiceItemApi::class);   //add api
     //api quan ly service level  http://127.0.0.1:8000/api/admin/service_level
-    Route::resource('service_level',ServiceLevelApi::class);
+    Route::resource('service_level',ServiceLevelApi::class); //adpi 
 });
 
 
@@ -65,5 +65,7 @@ Route::prefix('client')->group(function () {
     });
 });
 
-
-Route::prefix('admin')->group(function () {});
+//route admin staff
+Route::prefix('adminstaff')->group(function () {
+    
+});

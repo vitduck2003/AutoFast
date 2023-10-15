@@ -20,9 +20,8 @@ class ServiceItemApi extends Controller
     public function index()
     {
         try {
-            $data['service_item'] = Service_item::query()->orderByDesc('id')->get();
-            $data['service_level'] = Service_level::all();
-            $data['service'] = Service::all();
+            $data = Service_item::query()->orderByDesc('id')->get();
+           
             return response()->json($data);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);

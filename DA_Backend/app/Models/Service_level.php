@@ -10,6 +10,6 @@ class Service_level extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name' ,'service_id'
     ];
 }
