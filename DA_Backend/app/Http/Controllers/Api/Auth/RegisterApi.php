@@ -74,7 +74,7 @@ class RegisterApi extends Controller
 
         $user = User::where('phone', $validatedData['phone'])->first();
         if (!$user) {
-            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
+            return response()->json(['message' => 'Người dùng không tồn tại'], 200);
         }
 
         $verificationCode = Str::random(6);
@@ -101,7 +101,6 @@ class RegisterApi extends Controller
         if ($user->verification_code !== $validatedData['code']) {
             return response()->json(['message' => 'Mã xác minh không đúng'], 200);
         }
-
         $user->verification_code = null;
         $user->is_verified = true;
         $user->save();
