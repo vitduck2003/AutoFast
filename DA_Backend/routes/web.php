@@ -16,6 +16,6 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('index');
-//    return \App\Models\User::all();
+//    return view('index');
+    return \App\Models\User::all();
 });
