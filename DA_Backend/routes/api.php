@@ -1,17 +1,13 @@
 <?php
 
-<<<<<<< HEAD
-use App\Http\Controllers\Api\Admin\ReviewApi;
-use App\Http\Controllers\Api\Admin\RoleApi;
-=======
-use App\Http\Controllers\API\Admin\NewsApi;
->>>>>>> b31d16f912c37a4c8693aaa48cb80d13003999e3
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\UserApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
+use App\Http\Controllers\Api\Admin\ServiceItemApi;
+use App\Http\Controllers\Api\Admin\ServiceLevelApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,18 +31,9 @@ Route::post('logout', [LoginApi::class, 'logout']);
  
 //api admin
 Route::prefix('admin')->group(function () {
+    //api quan ly user
     Route::resource('users',UserApi::class);
-    Route::resource('news',NewsApi::class);
 });
-<<<<<<< HEAD
-Route::prefix('admin')->group(function () {
-    Route::resource('roles',RoleApi::class);
-});
-=======
-
-
->>>>>>> b31d16f912c37a4c8693aaa48cb80d13003999e3
-
  //api client
 Route::prefix('client')->group(function () {
     //api tin tuc
