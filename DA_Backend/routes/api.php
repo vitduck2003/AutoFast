@@ -34,6 +34,7 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
 
+
 // Admin APIs
 Route::prefix('admin')->group(function () {
     // Review APIs
@@ -44,6 +45,16 @@ Route::prefix('admin')->group(function () {
         Route::put('/{id}', [ReviewApi::class, 'update']);
         Route::delete('/{id}', [ReviewApi::class, 'destroy']);
     });
+    Route::resource('users',UserApi::class);
+    //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
+    Route::resource('news',NewsApi::class);
+    //api quan ly service  http://127.0.0.1:8000/api/admin/services
+    Route::resource('services',ServiceApi::class);    //get api
+    //api quan ly service item   http://127.0.0.1:8000/api/admin/service_item
+    Route::resource('service_item',ServiceItemApi::class);   //add api
+    //api quan ly service level  http://127.0.0.1:8000/api/admin/service_level
+    Route::resource('service_level',ServiceLevelApi::class); //adpi 
+
 
     // User API
     Route::resource('users', UserApi::class);
@@ -77,4 +88,4 @@ Route::prefix('client')->group(function () {
         // Get reviews by service
         Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
     });
-});
+
