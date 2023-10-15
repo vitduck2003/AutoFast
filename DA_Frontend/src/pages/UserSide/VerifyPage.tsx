@@ -7,17 +7,102 @@ import { Alert, Space } from "antd";
 import { notification } from "antd";
 import instance from "../../api/instance";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 const VerifyPage = () => {
   // Use the useParams hook to get the `sdt` parameter from the URL
-  const { sdt } = useParams();
+  const { phone } = useParams();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const [showNotification, setShowNotification] = useState(false);
-  const resend = (sdt) => {
-    return instance
-      .post("register/resend-verification-code", sdt)
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+  const startCountdown = () => {
+    // Start the countdown for 3 minutes (180 seconds)
+    const initialCountdown = 180;
+
+    // Store the countdown start time and value in localStorage
+    const countdownStartTime = new Date().getTime();
+    localStorage.setItem('countdownStartTime', countdownStartTime.toString());
+    localStorage.setItem('countdownValue', countdown.toString());
+
+    setCountdown(initialCountdown);
+    setButtonDisabled(true);
+
+    // Start the countdown timer
+    const countdownInterval = setInterval(() => {
+      const elapsedTime = new Date().getTime() - countdownStartTime;
+      const remainingTime = initialCountdown - Math.floor(elapsedTime / 1000);
+
+      if (remainingTime <= 0) {
+        clearInterval(countdownInterval);
+        setButtonDisabled(false);
+        localStorage.removeItem('countdownStartTime');
+        localStorage.removeItem('countdownValue');
+      } else {
+        setCountdown(remainingTime);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    // Kiểm tra xem có dữ liệu đếm ngược trong localStorage
+    const storedCountdown = localStorage.getItem("countdown");
+    if (storedCountdown) {
+      setCountdown(parseInt(storedCountdown, 10)); // Chuyển đổi thành số nguyên
+      setButtonDisabled(true); // Và tắt nút
+    }
+  }, []);
+
+  const resumeCountdown = () => {
+    // Retrieve countdown start time and value from localStorage
+    const countdownStartTime = parseInt(localStorage.getItem('countdownStartTime'));
+    const initialCountdown = parseInt(localStorage.getItem('countdownValue'));
+
+    if (!isNaN(countdownStartTime) && !isNaN(initialCountdown)) {
+      // Calculate the remaining time
+      const elapsedTime = new Date().getTime() - countdownStartTime;
+      let remainingTime = initialCountdown - Math.floor(elapsedTime / 1000);
+
+      if (remainingTime > 0) {
+        setCountdown(remainingTime);
+        setButtonDisabled(true);
+
+        // Start the countdown timer
+        const countdownInterval = setInterval(() => {
+          if (remainingTime <= 0) {
+            clearInterval(countdownInterval);
+            setButtonDisabled(false);
+            localStorage.removeItem('countdownStartTime');
+            localStorage.removeItem('countdownValue');
+          } else {
+            setCountdown(remainingTime);
+            remainingTime--;
+          }
+        }, 1000);
+      }
+    }
+  };
+  // resumeCountdown()
+
+  const resend = (phone) => {
+    console.log(phone);
+
+  
+    startCountdown();
+
+
+    const data = {
+      phone: phone,
+    };
+
+    // Simulate sending the verification code (you can replace this with your actual API call)
+    instance
+      .post("register/resend-verification-code", data)
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
   const verify = (values) => {
@@ -77,10 +162,10 @@ const VerifyPage = () => {
         //   console.log(response)
         //   return openNotification(response?.data?.message, "white", "red", "Failed");
         // }
-        console.log(response.data);
+        return response;
       })
       .then(() => {
-        console.log(sdt, values);
+        console.log(phone, values);
       })
       .catch((error) => {
         // Handle any errors here if needed
@@ -104,7 +189,7 @@ const VerifyPage = () => {
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Nhập mã xác thực
                     </p>
-                    <p> Mã xác thực của bạn đã được gửi về số +84 {sdt}</p>
+                    <p> Mã xác thực của bạn đã được gửi về số +84 {phone}</p>
                     <div>
                       <Form
                         name="basic"
@@ -131,7 +216,7 @@ const VerifyPage = () => {
                         </Form.Item>
                         <Form.Item
                           name="phone"
-                          initialValue={sdt} // Set the initial value to {sdt}
+                          initialValue={phone} // Set the initial value to {sdt}
                         ></Form.Item>
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button
@@ -144,9 +229,13 @@ const VerifyPage = () => {
                           <Button
                             type="primary"
                             style={{ backgroundColor: "blue", color: "white" }}
-                            onClick={() => resend(sdt)}
+                            onClick={() => resend(phone)}
+                            disabled={isButtonDisabled}
                           >
-                            Gửi lại mã
+                            Gửi lại mã{" "}
+                            {countdown > 0 && (
+                              <span>(sau {countdown} giây)</span>
+                            )}
                           </Button>
                         </Form.Item>
                       </Form>
@@ -170,4 +259,3 @@ const VerifyPage = () => {
 };
 
 export default VerifyPage;
-
