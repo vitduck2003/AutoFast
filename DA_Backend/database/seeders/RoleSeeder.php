@@ -9,23 +9,17 @@ class RoleSeeder extends Seeder
     public function run()
     {
 
-        // Tạo dữ liệu giả cho các vai trò
-        $roles = [
-            [
-                'name' => 'employee',
-                'display_name' => 'Nhân viên',
-            ],
-            [
-                'name' => 'manager',
-                'display_name' => 'Quản lý',
-            ],
-            [
-                'name' => 'customer',
-                'display_name' => 'Khách hàng',
-            ],
-        ];
-
-        // Insert dữ liệu vào bảng 'role'
-        DB::table('role')->insert($roles);
+        DB::table('role')->insert([
+            'name' => 'manager',
+            'display_name' => 'Quản lý',
+        ]);
+        DB::table('role')->insert([
+            'name' => 'employee',
+            'display_name' => 'Nhân viên',
+        ]);
+        DB::table('role')->insert([
+            'name' => 'customer',
+            'display_name' => 'Khách hàng',
+        ]);
     }
 }
