@@ -59,14 +59,21 @@ import UserAdmin from "./pages/Admin/UsersAdmin/UserAdmin";
 import UserAdminAdd from "./pages/Admin/UsersAdmin/UserAdminAdd";
 import UserAdminEdit from "./pages/Admin/UsersAdmin/UserAdminEdit";
 import { IUser } from "./interface/user";
-import { addUsers, deleteUsers, getUsers, updateUsers ,logIn} from "./api/user";
+import {
+  addUsers,
+  deleteUsers,
+  getUsers,
+  updateUsers,
+  logIn,
+} from "./api/user";
+import VerifyPage from "./pages/UserSide/VerifyPage";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
-  const [mess,setMess]=useState();
+  const [mess, setMess] = useState();
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -127,13 +134,12 @@ function App() {
       setBooking(booking.filter((item: IBooking) => item.id !== id))
     );
   };
-  
 
   // Users
   const onHandleAddUsers = (users: IUser) => {
     addUsers(users).then((res) =>
       getUsers().then(({ data }) => {
-      setMess(res)
+        setMess(res);
         setUsers(data);
       })
     );
@@ -152,8 +158,10 @@ function App() {
   };
 
   const onHandleAdd = (booking: IBooking) => {
-    addBooking(booking).then(() => getBooking().then(({ data }) => setBooking(data)))
-  }
+    addBooking(booking).then(() =>
+      getBooking().then(({ data }) => setBooking(data))
+    );
+  };
 
   return (
     <div>
@@ -164,7 +172,10 @@ function App() {
             <Route index element={<HomePage onAddBooking={onHandleAdd} />} />
             {/* Booking Page */}
             <Route path="booking">
-              <Route index element={<BookingPage onAddBooking={onHandleAdd} />} />
+              <Route
+                index
+                element={<BookingPage onAddBooking={onHandleAdd} />}
+              />
             </Route>
 
             {/* Contact Page */}
@@ -216,16 +227,23 @@ function App() {
                 index
                 element={
                   <BookingConfirmAdmin
-                  booking={booking}
-                  onRemoveBooking={onHandleRemoveBooking}
+                    booking={booking}
+                    onRemoveBooking={onHandleRemoveBooking}
                   />
                 }
               />
             </Route>
             {/* Booking HT Admin Page */}
             <Route path="bookingHT">
-              <Route index element={<BookingHtAdmin booking={booking}
-                  onRemoveBooking={onHandleRemoveBooking}/>} />
+              <Route
+                index
+                element={
+                  <BookingHtAdmin
+                    booking={booking}
+                    onRemoveBooking={onHandleRemoveBooking}
+                  />
+                }
+              />
             </Route>
             {/*News Admin Page */}
             <Route path="news">
@@ -288,12 +306,7 @@ function App() {
               />{" "}
               <Route
                 path="add"
-                element={
-                  <UserAdminAdd
-                    onAddUsers={onHandleAddUsers}
-                  
-                  />
-                }
+                element={<UserAdminAdd onAddUsers={onHandleAddUsers} />}
               />
               <Route
                 path=":id/edit"
@@ -312,7 +325,10 @@ function App() {
           <Route path="signin">
 
             <Route index element={<SigninPage onSignin={logIn} />} />
-
+          </Route>
+          {/* Verify Page */}
+          <Route path="verify:sdt">
+            <Route index element={<SigninPage onSignin={logIn} />} />
           </Route>
 
           {/* Signup Page */}
