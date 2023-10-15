@@ -67,7 +67,6 @@ import {
   logIn,
 } from "./api/user";
 import VerifyPage from "./pages/UserSide/VerifyPage";
-
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -323,7 +322,6 @@ function App() {
 
           {/* Signin Page */}
           <Route path="signin">
-
             <Route index element={<SigninPage onSignin={logIn} />} />
           </Route>
           {/* Verify Page */}
