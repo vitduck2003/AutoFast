@@ -21,12 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('role_id');
+            $table->int('role_id');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
