@@ -2,19 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use RoleSeeder;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeders.
      *
      * @return void
      */
     public function run()
     {
-        User::factory(10)->create();
+        $this->call(RoleSeeder::class);
     }
 }

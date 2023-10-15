@@ -1,7 +1,26 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 const BaseLayout = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
+
+  // Kiểm tra Session Storage khi trang được tải
+  useEffect(() => {
+    const sessionData = sessionStorage.getItem("user");
+    if (sessionData) {
+      // Session Storage tồn tại, người dùng đã đăng nhập
+      setIsLoggedIn(true);
+    }
+  }, []);
+  function clearSession() {
+    // Xóa toàn bộ dữ liệu từ Session Storage
+    sessionStorage.clear();
+
+    // Hoặc nếu bạn chỉ muốn xóa một mục cụ thể, bạn có thể sử dụng:
+    // sessionStorage.removeItem('yourKey');
+  }
+
   return (
     <div>
       {/* TopBar */}
@@ -23,14 +42,27 @@ const BaseLayout = () => {
               <small>+84 988 678 999</small>
             </div>
             <div className="h-100 d-inline-flex align-items-center">
-            <b  style={{color: "blue"}}><a style={{paddingRight: '20px'}} href="/signup" className="nav-item nav-link ">
-             Đăng Ký
-            </a>{" "}</b>
+            {isLoggedIn ? (
+      <b style={{ color: "blue" }}>
+        <a href="/" className="nav-item nav-link" onClick={clearSession}>
+          Đăng Xuất
+        </a>
+      </b>
+    ) : (
+      <div className="h-100 d-inline-flex align-items-center">
+        <b style={{ color: "blue" }}>
+          <a style={{ paddingRight: '20px' }} href="/signup" className="nav-item nav-link">
+            Đăng Ký
+          </a>{" "}
+        </b>
 
-           <b style={{color: "blue"}}> <a href="/signin" className="nav-item nav-link ">
-              Đăng Nhập
-            </a></b>
-              
+        <b style={{ color: "blue" }}>
+          <a href="/signin" className="nav-item nav-link">
+            Đăng Nhập
+          </a>
+        </b>
+      </div>
+    )}
             </div>
           </div>
         </div>
@@ -58,7 +90,7 @@ const BaseLayout = () => {
             <a href="/" className="nav-item nav-link ">
               Trang Chủ
             </a>
-            
+
             <a href="/about" className="nav-item nav-link">
               Về chúng tôi
             </a>

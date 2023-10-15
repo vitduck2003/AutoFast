@@ -17,14 +17,16 @@ const SigninPage = (props) => {
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const logIn = (users: IUser) => {
-    return instance.post("/login", users).then((response) => {
-  
-      return response.data.message
-    }).catch((error) => {
-      // Handle any errors here if needed
-      console.error("Error:", error);
-      throw error; // Rethrow the error for further handling in your component
-    });
+    return instance
+      .post("/login", users)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        // Handle any errors here if needed
+        console.error("Error:", error);
+        throw error; // Rethrow the error for further handling in your component
+      });
   };
   const openNotification = (mess, text_color, bg_color, title) => {
     setShowNotification(true);
@@ -42,28 +44,31 @@ const SigninPage = (props) => {
     });
   };
   const onFinish = (values: any) => {
-    logIn(values).then((response) => {
-      if (response == "Đăng nhập thành công") {
-        openNotification(response, "black", "green", "Success");
-     
-        // Use a nested .then block to navigate after handling the success case
-        return new Promise<void>(resolve => {
-          setTimeout(() => {
-            navigate("/"); // Navigate to the login page after a delay
-            resolve();
-          }, 3000); // Delay for 3 seconds
-        });
-      } else if (
-        response =="Thông tin tài khoản và mật khẩu không chính xấc"
-      ) {
-        return openNotification(response, "white", "red", "Failed");
-      }
-    })
-    .catch((error) => {
-      // Handle any errors here if needed
-      console.error("Error:", error);
-      throw error; // Rethrow the error for further handling in your component
-    });
+    logIn(values)
+      .then((response) => {
+        if (response.message == "Đăng nhập thành công") {
+          openNotification(response.message, "black", "green", "Success");
+          console.log(response);
+
+          // Use a nested .then block to navigate after handling the success case
+          sessionStorage.setItem('user', JSON.stringify(response.user));
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/`); // Navigate to the verification page with the phone number
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
+        } else if (
+          response.message === "Thông tin tài khoản và mật khẩu không chính xác"
+        ) {
+          return openNotification(response, "white", "red", "Failed");
+        }
+      })
+      .catch((error) => {
+        // Handle any errors here if needed
+        console.error("Error:", error);
+        throw error; // Rethrow the error for further handling in your component
+      });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -74,7 +79,7 @@ const SigninPage = (props) => {
     <div>
       <div className="container h-100; vh-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
-        {contextHolder}
+          {contextHolder}
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black" style={{ borderRadius: "25px" }}>
               <div className="card-body p-md-5">
@@ -96,13 +101,13 @@ const SigninPage = (props) => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
-                        <Form.Item<FieldType>
-                          label="Tài khoản"
-                          name="email"
+                        <Form.Item
+                          label="SDT"
+                          name="phone"
                           rules={[
                             {
                               required: true,
-                              message: "Vui lòng nhập tài khoản",
+                              message: "Vui lòng nhập số điện thoại ",
                             },
                           ]}
                         >
@@ -129,15 +134,19 @@ const SigninPage = (props) => {
                         >
                           <Checkbox>Remember me</Checkbox>
                         </Form.Item>
-                        
+
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
                             Đăng nhập
                           </Button>
                         </Form.Item>
                       </Form>
-                      <span style={{ paddingLeft: '50px' }}>Bạn chưa có tài khoản? <Link style={{ textDecoration: 'none' }} to="/signup" >Đăng ký</Link></span>
-                      
+                      <span style={{ paddingLeft: "50px" }}>
+                        Bạn chưa có tài khoản?{" "}
+                        <Link style={{ textDecoration: "none" }} to="/signup">
+                          Đăng ký
+                        </Link>
+                      </span>
                     </div>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
