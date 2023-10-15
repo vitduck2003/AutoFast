@@ -3,6 +3,17 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 const BookingPage = (props: any) => {
+  const [detailContent, setDetailContent] = useState("");
+
+  const handleShowDetail = (content: string) => {
+    setDetailContent(content);
+    // Bạn sẽ cần sử dụng JavaScript của Bootstrap để hiển thị modal
+    let modal = document.getElementById("serviceDetailModal");
+    if (modal) {
+      new bootstrap.Modal(modal).show();
+    }
+  };
+  
   const navigate = useNavigate();
   const options = [
     { value: "Hà Nội", label: "Hà Nội" },
@@ -10,6 +21,8 @@ const BookingPage = (props: any) => {
     { value: "Hải Phòng", label: "Hải Phòng" },
     { value: "Đà nẵng", label: "Đà nẵng" },
   ];
+
+  const Div = 'Thay Dầu, Thay Lốp, Lau kính xe'
 
   const [selectedOption, setSelectedOption] = React.useState(null);
 
@@ -117,9 +130,18 @@ const BookingPage = (props: any) => {
                 id="service1"
                 value="Bảo dưỡng"
               />
-              <label className="form-check-label" htmlFor="service1">
-                Bảo dưỡng
-              </label>
+              <div className="row">
+                <div className="cols">
+                  <label className="form-check-label" htmlFor="service1">
+                    Bảo dưỡng
+                  </label>
+                </div>
+                <div className="cols">
+          <span style={{color: 'blue'}} onClick={() => handleShowDetail(Div)}>
+            Chi tiết
+          </span>
+        </div>
+              </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
@@ -130,9 +152,37 @@ const BookingPage = (props: any) => {
                 id="service2"
                 value="Sửa chữa chung"
               />
-              <label className="form-check-label" htmlFor="service2">
-                Sửa chữa chung
-              </label>
+              <div className="row">
+                <div className="cols">
+                  <label className="form-check-label" htmlFor="service1">
+                    Sửa chữa chung
+                  </label>
+                </div>
+                 <div className="cols">
+          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Sửa chữa ")}>
+            Chi tiết
+          </span>
+        </div>
+        {/* Modal Bootstrap */}
+      <div className="modal fade" id="serviceDetailModal" tabIndex={-1} role="dialog" aria-labelledby="serviceDetailLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="serviceDetailLabel">Chi tiết dịch vụ</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {detailContent}
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+              </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
@@ -143,9 +193,18 @@ const BookingPage = (props: any) => {
                 id="service2"
                 value="Đồng sơn"
               />
-              <label className="form-check-label" htmlFor="service3">
-                Đồng sơn
-              </label>
+              <div className="row">
+                <div className="cols">
+                  <label className="form-check-label" htmlFor="service1">
+                    Đồng sơn
+                  </label>
+                </div>
+                <div className="cols">
+          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Đồng sơn ")}>
+            Chi tiết
+          </span>
+        </div>
+              </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
@@ -156,9 +215,18 @@ const BookingPage = (props: any) => {
                 id="service2"
                 value="Dịch vụ khác"
               />
-              <label className="form-check-label" htmlFor="service4">
-                Dịch vụ khác
-              </label>
+              <div className="row">
+                <div className="cols">
+                  <label className="form-check-label" htmlFor="service1">
+                    Dịch vụ khác
+                  </label>
+                </div>
+                <div className="cols">
+          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Dịch vụ khác ")}>
+            Chi tiết
+          </span>
+        </div>
+              </div>
             </div>
             <div className="form-group">
               <b>
