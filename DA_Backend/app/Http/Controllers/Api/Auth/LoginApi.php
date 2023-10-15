@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -41,11 +42,16 @@ class LoginApi extends Controller
             })->first();
 
             $token = $user->createToken('access_token')->plainTextToken;
+            $role = DB::table('role')
+                ->select('name')
+                ->where('id', $user->role_id)
+                ->first();
 
             return response()->json([
                 'message' => 'Đăng nhập thành công',
                 'user' => $user,
                 'access_token' => $token,
+                'role' => $role
             ], 200);
         } else {
             return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 400);
@@ -54,7 +60,6 @@ class LoginApi extends Controller
 
     public function logout()
     {
-
         Auth::logout();
 
         return response()->json(['message' => 'Đăng xuất thành công'], 200);

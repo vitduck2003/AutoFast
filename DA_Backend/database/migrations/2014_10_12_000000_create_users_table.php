@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->text('description')->nullable();
-            $table->int('role_id');
+            $table->unsignedInteger('role_id');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
