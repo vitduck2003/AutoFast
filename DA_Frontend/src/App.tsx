@@ -18,6 +18,7 @@ import NewsAdminAdd from "./pages/Admin/NewsAdmin/NewsAdminAdd";
 import NewsAddminEdit from "./pages/Admin/NewsAdmin/NewsAddminEdit";
 import { useEffect, useState } from "react";
 import { INews } from "./interface/news";
+import {RequireAUth}  from "react-auth-kit"
 
 import { IStaff } from "./interface/staff";
 import { getNews, addNews, updateNews, deleteNews } from "./api/news";
@@ -205,7 +206,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Admin Side */}
-          <Route path="/admin" element={<AdminLayout />}>
+          Rout
+          <Route path="/admin" element={< AdminLayout />}>
             <Route index element={<Dashboard />} />
 
             {/* Booking Admin Page */}
@@ -325,8 +327,8 @@ function App() {
             <Route index element={<SigninPage onSignin={logIn} />} />
           </Route>
           {/* Verify Page */}
-          <Route path="verify:sdt">
-            <Route index element={<SigninPage onSignin={logIn} />} />
+          <Route  path="verify/:sdt">
+            <Route index element={<VerifyPage />} />
           </Route>
 
           {/* Signup Page */}
