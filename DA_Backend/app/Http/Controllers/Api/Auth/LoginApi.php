@@ -34,12 +34,15 @@ class LoginApi extends Controller
                 'phone_verified' => $request->phone
             ], 200);
         }
+
         if (Auth::attempt($login)) {
             $user = User::where(function ($query) use ($request) {
                 $query->where('phone', $request->phone)
                     ->orWhere('email', $request->email);
             })->first();
+
             $token = $user->createToken('access_token')->plainTextToken;
+
             return response()->json([
                 'message' => 'Đăng nhập thành công',
                 'user' => $user,
@@ -52,7 +55,9 @@ class LoginApi extends Controller
 
     public function logout()
     {
+
         Auth::logout();
+
         return response()->json(['message' => 'Đăng xuất thành công'], 200);
     }
 }
