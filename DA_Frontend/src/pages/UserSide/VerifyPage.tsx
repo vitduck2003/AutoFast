@@ -1,5 +1,3 @@
-
-import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -15,24 +13,28 @@ const VerifyPage = () => {
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const [showNotification, setShowNotification] = useState(false);
-  const resend =(sdt)=>{
-    return instance.post('register/resend-verification-code',sdt).then((response)=>{console.log(response)})
-  }
+  const resend = (sdt) => {
+    return instance
+      .post("register/resend-verification-code", sdt)
+      .then((response) => {
+        console.log(response);
+      });
+  };
   const verify = (values) => {
     return instance
       .post("register/verify-code", values)
       .then((response) => {
-        if (response.data.message === "Vui lòng xác thực tài khoản") {
+        if (response.data.message === "Xác minh mã thành công") {
           openNotification(response.data.message, "black", "green", "Success");
-        
+
           // Use a nested .then block to navigate after handling the success case
           return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate(`/verify/${response.data.phone_verified}`); // Navigate to the verification page with the phone number
+              navigate("/"); // Navigate to the verification page with the phone number
               resolve();
             }, 3000); // Delay for 3 seconds
           });
-        }else if (response?.data?.message == "Mã xác minh không đúng") {
+        } else if (response?.data?.message == "Mã xác minh không đúng") {
           console.log(response);
           return openNotification(
             response?.data?.message,
@@ -142,7 +144,7 @@ const VerifyPage = () => {
                           <Button
                             type="primary"
                             style={{ backgroundColor: "blue", color: "white" }}
-                            onClick={()=>resend(sdt)}
+                            onClick={() => resend(sdt)}
                           >
                             Gửi lại mã
                           </Button>
@@ -168,47 +170,4 @@ const VerifyPage = () => {
 };
 
 export default VerifyPage;
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import instance from "./instance";
-import { IUser } from "../interface/user";
 
-const VerifyPage = () => {
-  // Use the useParams hook to get the `sdt` parameter from the URL
-  const { sdt } = useParams();
-  const verify = ( verify_code) => {
-  
-    return instance.post("register/verify-code", verify_code)
-      .then((response) => {
-        // Handle the response as needed
-        return response.data;
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("Error:", error);
-        throw error;
-      });
-  };
-  
-const send_phone_number = (sdt)=>{
-    return instance.post("register/verify-code", sdt)
-      .then((response) => {
-        // Handle the response as needed
-        return response.data;
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("Error:", error);
-        throw error;
-      });
-}
- 
-  return (
-    <div>
-      <h1>VerifyPage</h1>
-      <p>sdt: {sdt}</p>
-    </div>
-  );
-}
-
-export default VerifyPage;

@@ -46,17 +46,21 @@ const SigninPage = (props) => {
   const onFinish = (values: any) => {
     logIn(values)
       .then((response) => {
-        if (response.message === "Vui lòng xác thực tài khoản") {
-          openNotification(response, "black", "green", "Success");
-  
+        if (response.message == "Đăng nhập thành công") {
+          openNotification(response.message, "black", "green", "Success");
+          console.log(response);
+
           // Use a nested .then block to navigate after handling the success case
+          localStorage.setItem('user', JSON.stringify(response.user));
           return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate(`/verify/${response.phone_verified}`); // Navigate to the verification page with the phone number
+              navigate(`/`); // Navigate to the verification page with the phone number
               resolve();
             }, 3000); // Delay for 3 seconds
           });
-        } else if (response.message === "Thông tin tài khoản và mật khẩu không chính xác") {
+        } else if (
+          response.message === "Thông tin tài khoản và mật khẩu không chính xác"
+        ) {
           return openNotification(response, "white", "red", "Failed");
         }
       })
@@ -98,12 +102,12 @@ const SigninPage = (props) => {
                         autoComplete="off"
                       >
                         <Form.Item
-                          label="Tài khoản"
+                          label="SDT"
                           name="phone"
                           rules={[
                             {
                               required: true,
-                              message: "Vui lòng nhập tài khoản",
+                              message: "Vui lòng nhập số điện thoại ",
                             },
                           ]}
                         >
