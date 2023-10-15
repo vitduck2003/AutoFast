@@ -27,7 +27,6 @@ class LoginApi extends Controller
         $check_verify = User::select('is_verified')
             ->where('phone', '=', $request->phone)
             ->first();
-
         if (!$check_verify || !$check_verify->is_verified) {
             return response()->json([
                 'message' => 'Vui lòng xác thực tài khoản',
@@ -46,7 +45,7 @@ class LoginApi extends Controller
             return response()->json([
                 'message' => 'Đăng nhập thành công',
                 'user' => $user,
-                'access_token' => $token
+                'access_token' => $token,
             ], 200);
         } else {
             return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 400);
