@@ -22,4 +22,5 @@ class UserSeeder extends Seeder
                 'role_id' => 3
         ]);
     }
+
 }

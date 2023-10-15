@@ -28,5 +28,6 @@ class RoleSeeder extends Seeder
             'name' => 'Customer',
             'display_name' => 'Khách hàng',
         ]);
+
     }
 }
