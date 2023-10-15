@@ -57,13 +57,19 @@ class RegisterApi extends Controller
 
         $client = new Client($sid, $token);
 
-        $client->messages->create(
+        $message = $client->messages->create(
             "+84".$phoneNumber,
             [
                 'from' => $twilioNumber,
                 'body' => 'Mã xác minh của bạn là: ' . $verificationCode
             ]
         );
+        if($message){
+            return response()->json(['message' => 'Gửi tin nhắn thành công'], 200);
+        }
+        else {
+            return response()->json(['message' => 'Gửi tin nhắn thất bại'], 201);
+        }
     }
 
     public function resendVerificationCode(Request $request)
@@ -74,7 +80,7 @@ class RegisterApi extends Controller
 
         $user = User::where('phone', $validatedData['phone'])->first();
         if (!$user) {
-            return response()->json(['message' => 'Người dùng không tồn tại'], 200);
+            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
         }
 
         $verificationCode = Str::random(6);
@@ -101,6 +107,7 @@ class RegisterApi extends Controller
         if ($user->verification_code !== $validatedData['code']) {
             return response()->json(['message' => 'Mã xác minh không đúng'], 200);
         }
+
         $user->verification_code = null;
         $user->is_verified = true;
         $user->save();
