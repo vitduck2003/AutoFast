@@ -17,16 +17,16 @@ class RoleSeeder extends Seeder
     {
         //
         DB::table('role')->insert([
-            "name" => "Admin",
+            'name' => 'Manager',
+            'display_name' => 'Quản lý',
         ]);
         DB::table('role')->insert([
-            "name" => "Nhân Viên",
+            'name' => 'Employee',
+            'display_name' => 'Nhân viên',
         ]);
         DB::table('role')->insert([
-            "name" => "Thợ",
-        ]);
-        DB::table('role')->insert([
-            "name" => "Khách Hàng",
+            'name' => 'Customer',
+            'display_name' => 'Khách hàng',
         ]);
     }
 }
