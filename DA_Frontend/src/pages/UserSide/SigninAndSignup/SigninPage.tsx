@@ -51,7 +51,7 @@ const SigninPage = (props) => {
           console.log(response);
 
           // Use a nested .then block to navigate after handling the success case
-          localStorage.setItem('user', JSON.stringify(response.user));
+          sessionStorage.setItem('user', JSON.stringify(response.user));
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/`); // Navigate to the verification page with the phone number

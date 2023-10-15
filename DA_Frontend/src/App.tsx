@@ -327,7 +327,7 @@ function App() {
             <Route index element={<SigninPage onSignin={logIn} />} />
           </Route>
           {/* Verify Page */}
-          <Route  path="verify/:sdt">
+          <Route  path="verify/:phone">
             <Route index element={<VerifyPage />} />
           </Route>
 
