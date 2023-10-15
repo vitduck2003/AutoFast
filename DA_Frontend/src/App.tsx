@@ -66,7 +66,7 @@ import {
   updateUsers,
   logIn,
 } from "./api/user";
-
+import VerifyPage from "./pages/UserSide/VerifyPage";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -133,7 +133,6 @@ function App() {
       setBooking(booking.filter((item: IBooking) => item.id !== id))
     );
   };
-  
 
   // Users
   const onHandleAddUsers = (users: IUser) => {
@@ -227,16 +226,23 @@ function App() {
                 index
                 element={
                   <BookingConfirmAdmin
-                  booking={booking}
-                  onRemoveBooking={onHandleRemoveBooking}
+                    booking={booking}
+                    onRemoveBooking={onHandleRemoveBooking}
                   />
                 }
               />
             </Route>
             {/* Booking HT Admin Page */}
             <Route path="bookingHT">
-              <Route index element={<BookingHtAdmin booking={booking}
-                  onRemoveBooking={onHandleRemoveBooking}/>} />
+              <Route
+                index
+                element={
+                  <BookingHtAdmin
+                    booking={booking}
+                    onRemoveBooking={onHandleRemoveBooking}
+                  />
+                }
+              />
             </Route>
             {/*News Admin Page */}
             <Route path="news">

@@ -50,23 +50,25 @@ const SignupPage = (props) => {
   const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
-        if (response == "Đăng kí thành công") {
-          openNotification(response, "black", "green", "Success");
-          setTt("Success");
-          // Extract the phone number from the form values
-          const phoneNumber = values.phone;
-          // Use a nested .then block to navigate after handling the success case
-          return new Promise<void>((resolve) => {
-            setTimeout(() => {
-              navigate(`/sms-verification/${phoneNumber}`);
-              resolve();
-            }, 3000);
-          });
-        } else if (
-          response == "Số điện thoại đã tồn tại" ||
-          response == "Email đã tồn tại"
-        ) {
-          return openNotification(response, "white", "red", "Failed");
+        if (response == "Đăng ký thành công") {
+          if (response == "Đăng ký thành công") {
+            openNotification(response, "black", "green", "Success");
+            setTt("Success");
+            // Extract the phone number from the form values
+            const phoneNumber = values.phone;
+            // Use a nested .then block to navigate after handling the success case
+            return new Promise<void>((resolve) => {
+              setTimeout(() => {
+                navigate(`/verify/${phoneNumber}`);
+                resolve();
+              }, 3000);
+            });
+          } else if (
+            response == "Số điện thoại đã tồn tại" ||
+            response == "Email đã tồn tại"
+          ) {
+            return openNotification(response, "white", "red", "Failed");
+          }
         }
       })
       .catch((error) => {
@@ -75,7 +77,6 @@ const SignupPage = (props) => {
         throw error; // Rethrow the error for further handling in your component
       });
   };
-  
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);

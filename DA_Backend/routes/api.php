@@ -30,10 +30,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
- 
-//api admin
+Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
+Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
+ //api admin
 Route::prefix('admin')->group(function () {
-    //api quan ly user
+//api review
+Route::prefix('review')->group(function () {
+    Route::get('/', [ReviewApi::class, 'index']);
+    Route::post('/', [ReviewApi::class, 'store']);
+    Route::get('/{id}', [ReviewApi::class, 'show']);
+    Route::put('/{id}', [ReviewApi::class, 'update']);
+    Route::delete('/{id}', [ReviewApi::class, 'destroy']);
+});
+//api user 
+Route::resource('users', [UserApi::class]);
     Route::resource('users',UserApi::class);
     //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
     Route::resource('news',NewsApi::class);
@@ -44,8 +54,7 @@ Route::prefix('admin')->group(function () {
     //api quan ly service level  http://127.0.0.1:8000/api/admin/service_level
     Route::resource('service_level',ServiceLevelApi::class);
 });
-
-
+ 
 
  //api client
 Route::prefix('client')->group(function () {   
