@@ -23,7 +23,6 @@ const BookingPage = (props: any) => {
     service4: false,
     desc: "",
     name_car: "",
-    km: "",
     car_id: "",
     location: "",
     date: "",
@@ -185,19 +184,6 @@ const BookingPage = (props: any) => {
               className="form-control"
               placeholder="Tên loại xe của quý khách"
             />
-
-            <label style={{ marginTop: "20px" }} htmlFor="">
-              Số Km{" "}
-            </label>
-            <input
-              onChange={handleInputChange}
-              name="km"
-              required
-              type="string"
-              className="form-control"
-              placeholder="Số km trên phương tiện của quý khách"
-            />
-
             <h2 style={{ marginBottom: "30px", marginTop: "50px" }}>
               Thời gian
             </h2>
