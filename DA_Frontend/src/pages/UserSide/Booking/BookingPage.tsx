@@ -4,28 +4,10 @@ import Select from "react-select";
 
 const BookingPage = (props: any) => {
   const [detailContent, setDetailContent] = useState("");
+  const [showDetail, setShowDetail] = useState(false);
 
-  const handleShowDetail = (content: string) => {
-    setDetailContent(content);
-    // Bạn sẽ cần sử dụng JavaScript của Bootstrap để hiển thị modal
-    let modal = document.getElementById("serviceDetailModal");
-    if (modal) {
-      new bootstrap.Modal(modal).show();
-    }
-  };
-  
   const navigate = useNavigate();
-  const options = [
-    { value: "Hà Nội", label: "Hà Nội" },
-    { value: "TP.Hồ Chí Minh", label: "TP.Hồ Chí Minh" },
-    { value: "Hải Phòng", label: "Hải Phòng" },
-    { value: "Đà nẵng", label: "Đà nẵng" },
-  ];
-
-  const Div = 'Thay Dầu, Thay Lốp, Lau kính xe'
-
-  const [selectedOption, setSelectedOption] = React.useState(null);
-
+  const Div = ["Thay Dầu", "Thay Lốp", " Lau kính xe"];
   const [formData, setFormData] = useState({
     full_name: "",
     phone: "",
@@ -41,6 +23,12 @@ const BookingPage = (props: any) => {
     date: "",
     time: "",
   });
+  const [formCheckBox, setFormCheckBox] = useState({
+    service1: false,
+    service2: false,
+    service3: false,
+    service4: false,
+  });
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -50,20 +38,16 @@ const BookingPage = (props: any) => {
     }));
   };
 
-  const handleCheckboxChange = (e: any) => {
+  const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
-    setFormData((prevData) => ({
+    setFormCheckBox((prevData) => ({
       ...prevData,
       [name]: checked,
     }));
   };
 
-  const handleChange = (option: any) => {
-    setSelectedOption(option);
-    setFormData((prevData) => ({
-      ...prevData,
-      location: option ? option.value : "",
-    }));
+  const handleShowDetail = () => {
+    setShowDetail(!showDetail);
   };
 
   const handleSubmit = (e: any) => {
@@ -123,7 +107,7 @@ const BookingPage = (props: any) => {
             </b>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
-                onChange={handleInputChange}
+                onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
                 name="service1"
@@ -137,20 +121,43 @@ const BookingPage = (props: any) => {
                   </label>
                 </div>
                 <div className="cols">
-          <span style={{color: 'blue'}} onClick={() => handleShowDetail(Div)}>
-            Chi tiết
-          </span>
-        </div>
+                  <span
+                    style={{ color: "blue" }}
+                    onClick={() => handleShowDetail(Div)}
+                  >
+                    Chi tiết
+                  </span>
+                  {formCheckBox.service1 && (
+              <div>
+                {Div.map((item, index) => (
+                  <div key={index} className="form-check">
+                    <input
+                      onChange={handleCheckboxChange}
+                      className="form-check-input"
+                      type="checkbox"
+                      name={item}
+                      id={item}
+                    />
+                    <label className="form-check-label" htmlFor={item}>
+                      {item}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            )}
+                  
+                </div>
               </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
-                onChange={handleInputChange}
+                onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
                 name="service2"
                 id="service2"
                 value="Sửa chữa chung"
+                onClick={() => handleShowDetail()}
               />
               <div className="row">
                 <div className="cols">
@@ -158,35 +165,57 @@ const BookingPage = (props: any) => {
                     Sửa chữa chung
                   </label>
                 </div>
-                 <div className="cols">
-          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Sửa chữa ")}>
-            Chi tiết
-          </span>
-        </div>
-        {/* Modal Bootstrap */}
-      <div className="modal fade" id="serviceDetailModal" tabIndex={-1} role="dialog" aria-labelledby="serviceDetailLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="serviceDetailLabel">Chi tiết dịch vụ</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {detailContent}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div className="cols">
+                  <span
+                    style={{ color: "blue" }}
+                    onClick={() => handleShowDetail()}
+                  >
+                    Chi tiết
+                  </span>
+                  {formCheckBox.service2 && <div>this is text for service2</div>}
+                </div>
+                {/* Modal Bootstrap */}
+                <div
+                  className="modal fade"
+                  id="serviceDetailModal"
+                  tabIndex={-1}
+                  role="dialog"
+                  aria-labelledby="serviceDetailLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="serviceDetailLabel">
+                          Chi tiết dịch vụ
+                        </h5>
+                        <button
+                          type="button"
+                          className="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">{detailContent}</div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
-                onChange={handleInputChange}
+                onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
                 name="service3"
@@ -200,15 +229,18 @@ const BookingPage = (props: any) => {
                   </label>
                 </div>
                 <div className="cols">
-          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Đồng sơn ")}>
-            Chi tiết
-          </span>
-        </div>
+                  <span
+                    style={{ color: "blue" }}
+                    onClick={() => handleShowDetail("Đồng sơn ")}
+                  >
+                    Chi tiết
+                  </span>
+                </div>
               </div>
             </div>
             <div style={{ marginBottom: "10px" }} className="form-check">
               <input
-                onChange={handleInputChange}
+                onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
                 name="service4"
@@ -222,10 +254,13 @@ const BookingPage = (props: any) => {
                   </label>
                 </div>
                 <div className="cols">
-          <span style={{color: 'blue'}} onClick={() => handleShowDetail("Dịch vụ khác ")}>
-            Chi tiết
-          </span>
-        </div>
+                  <span
+                    style={{ color: "blue" }}
+                    onClick={() => handleShowDetail("Dịch vụ khác ")}
+                  >
+                    Chi tiết
+                  </span>
+                </div>
               </div>
             </div>
             <div className="form-group">
