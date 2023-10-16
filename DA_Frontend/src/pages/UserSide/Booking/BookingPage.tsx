@@ -29,9 +29,7 @@ const BookingPage = (props: any) => {
     desc: "",
     name_car: "",
     status: "Chờ xác nhận",
-    
-   
-  });
+    });
   const [formCheckBox, setFormCheckBox] = useState({
     baoduong: false,
     suachua: false,
@@ -159,7 +157,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name="baoduong"
                 id="baoduong"
-                value="Bảo dưỡng"
+                value="service[1]"
               />
               <div className="row">
                 <div className="cols">
@@ -178,6 +176,7 @@ const BookingPage = (props: any) => {
                             type="checkbox"
                             name={item}
                             id={item}
+                            value={`service[1][${index + 1}]`}
                           />
                           <label className="form-check-label" htmlFor={item}>
                             {item}
@@ -196,7 +195,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name="suachua"
                 id="suachua"
-                value="Sửa chữa chung"
+                value="service[2]"
                 onClick={() => handleShowDetail()}
               />
               <div className="row">
@@ -234,7 +233,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name="dongson"
                 id="dongson"
-                value="Đồng sơn"
+                value="service[3]"
               />
               <div className="row">
                 <div className="cols">
@@ -252,7 +251,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name="dichvukhac"
                 id="dichvukhac"
-                value="Dịch vụ khác"
+                value="service[4]"
               />
               <div className="row">
                 <div className="cols">
