@@ -10,19 +10,17 @@ const BookingPage = (props: any) => {
 
   const dataService = props.service;
 
-  console.log(dataService);
-  
+ 
   const navigate = useNavigate();
-  const BaoDuong = ["Bảo dưỡng cơ bản", "Bảo dưỡng trung cấp", " Bảo dưỡng cao cấp"];
-  const SuaChua = [
-    "Hệ thống phanh",
-    "Hệ thống lái",
-    " Hệ thống điện, điều hòa",
-  ];
+  
+  const BaoDuong = dataService
+  
+  const SuaChua = dataService
+  
   const Dongson = [
-    "Sơn cơ bản",
-    "Sơn Trung Cấp",
-    "Sơn cao cấp",
+    { id: 1, name: "Sơn cơ bản" },
+    { id: 2, name: "Sơn Trung Cấp" },
+    { id: 3, name: "Sơn cao cấp" }
   ];
 
   
@@ -62,9 +60,7 @@ const BookingPage = (props: any) => {
 
   
   
-  const handleShowDetail = () => {
-    setShowDetail(!showDetail);
-  };
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -160,99 +156,117 @@ const BookingPage = (props: any) => {
               </label>
             </b>
             <div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="baoduong"
+    id="baoduong"
+    value="service[1]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="baoduong">
+        Bảo dưỡng
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.baoduong && (
+        <div>
+          {BaoDuong.map((item) => (
+            <div key={item.id} className="form-check">
+            <input
+              onChange={handleCheckboxChange}
+              className="form-check-input"
+              type="checkbox"
+              name={item.name}
+              id={item.name}
+              value={item.id}
+            />
+            <label className="form-check-label" htmlFor={item.name}>
+              {item.name}
+            </label>
+          </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+<div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="suachua"
+    id="suachua"
+    value="service[2]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="suachua">
+        Sửa chữa chung
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.suachua && (
+        <div>
+          {SuaChua.map((item) => (
+            <div key={item.id} className="form-check">
               <input
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="baoduong"
-                id="baoduong"
-                value="service[1]"
+                name={item.name}
+                id={item.name}
               />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="baoduong">
-                    Bảo dưỡng
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.baoduong && (
-                    <div>
-                      {BaoDuong.map((item, index) => (
-                        <div key={index} className="form-check">
-                          <input
-                            onChange={handleCheckboxChange}
-                            className="form-check-input"
-                            type="checkbox"
-                            name={item}
-                            id={item}
-                            value={`service[1][${index + 1}]`}
-                          />
-                          <label className="form-check-label" htmlFor={item}>
-                            {item}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <label className="form-check-label" htmlFor={item.name}>
+                {item.name}
+              </label>
             </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+<div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="dongson"
+    id="dongson"
+    value="service[3]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="dongson">
+        Đồng sơn
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.dongson && (
+        <div>
+          {Dongson.map((item) => (
+            <div key={item.id} className="form-check">
               <input
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="suachua"
-                id="suachua"
-                value="service[2]"
-                onClick={() => handleShowDetail()}
+                name={item.name}
+                id={item.name}
               />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="suachua">
-                    Sửa chữa chung
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.suachua && (
-                    <div>
-                      {SuaChua.map((item, index) => (
-                        <div key={index} className="form-check">
-                          <input
-                            onChange={handleCheckboxChange}
-                            className="form-check-input"
-                            type="checkbox"
-                            name={item}
-                            id={item}
-                          />
-                          <label className="form-check-label" htmlFor={item}>
-                            {item}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <label className="form-check-label" htmlFor={item.name}>
+                {item.name}
+              </label>
             </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name="dongson"
-                id="dongson"
-                value="service[3]"
-              />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="dongson">
-                    Đồng sơn
-                  </label>
-                </div>
-          
-              </div>
-            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
             <div className="form-group">
               <b>
                 <label style={{ marginTop: "20px" }} htmlFor="">
