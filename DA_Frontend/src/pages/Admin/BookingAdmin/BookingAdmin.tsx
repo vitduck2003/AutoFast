@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Space, Table, Tag, Popconfirm, message,   } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { Button } from 'antd';
+import { Button, Modal  } from 'antd';
 import { Link } from 'react-router-dom'
 
 import { IBooking } from "../../../interface/booking";
@@ -27,7 +27,22 @@ interface IProps {
 }
 
 
+
 const BookingAdmin = (props: IProps) => {
+// State để theo dõi trạng thái của Modal và dữ liệu hiển thị
+const [isModalVisible, setIsModalVisible] = useState(false);
+const [selectedService, setSelectedService] = useState<IBooing | null>(null);
+
+
+const showModal = (serviceData: IBooking) => {
+  setSelectedService(serviceData);
+  setIsModalVisible(true);
+};
+
+const closeModal = () => {
+  setIsModalVisible(false);
+  setSelectedService(null);
+};
 
   const removeBooking = (id: any) => {
     props.onRemoveBooking(id)
@@ -48,12 +63,17 @@ const columns: ColumnsType<DataType> = [
     title: 'Dịch vụ',
     dataIndex: 'service',
     key: 'service',
-    render: (text) => <a>{text}</a>,
+    render: (_, record) => (
+      <Button type="dashed" onClick={() => showModal(record)}>
+        Chi tiết
+      </Button>
+    ),
   },
+  
   {
     title: 'Ngày đến',
-    dataIndex: 'date',
-    key: 'date',
+    dataIndex: 'datetime',
+    key: 'datetime',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -106,6 +126,34 @@ const data: DataType[] = props.booking
   return (
     <div>
       <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+       {/* Modal hiển thị thông tin chi tiết dịch vụ */}
+       <Modal
+  title="Thông tin dịch vụ"
+  visible={isModalVisible}
+  onOk={closeModal}
+  onCancel={closeModal}
+>
+  {selectedService && (
+    <div>
+      <p>Họ và tên: {selectedService.full_name}</p>
+      <p>Số điện thoại: {selectedService.phone}</p>
+      <p>Email: {selectedService.email}</p>
+      <p>Dịch vụ 1: {selectedService.service1 ? "Có" : "Không"}</p>
+      <p>Dịch vụ 2: {selectedService.service2 ? "Có" : "Không"}</p>
+      <p>Dịch vụ 3: {selectedService.service3 ? "Có" : "Không"}</p>
+      <p>Dịch vụ 4: {selectedService.service4 ? "Có" : "Không"}</p>
+      <p>Bảo dưỡng cơ bản: {selectedService[" Bảo dưỡng cơ bản"] ? "Có" : "Không"}</p>
+      <p>Bảo dưỡng cao cấp: {selectedService[" Bảo dưỡng trung cấp"] ? "Có" : "Không"}</p>
+      <p>Bảo dưỡng trung cấp: {selectedService[" Bảo dưỡng cao cấp"] ? "Có" : "Không"}</p>
+      <p>Hệ thống điện, điều hòa: {selectedService[" Hệ thống điện, điều hòa"] ? "Có" : "Không"}</p>
+      <p>Ghi chú: {selectedService.desc}</p>
+      <p>Tên xe: {selectedService.name_car}</p>
+      <p>Trạng thái: {selectedService.status}</p>
+      <p>Ngày giờ: {selectedService.datetime}</p>
+      
+    </div>
+  )}
+</Modal>
     </div>
   )
 }
