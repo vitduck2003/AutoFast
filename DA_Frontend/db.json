@@ -44,50 +44,22 @@
     }
   ],
   "booking": [
+
     {
-      "name": "Hot Boy Quốc Hiếu",
+      "full_name": "Phong Duc Pham",
       "phone": "+84966287440",
-      "service": "Vệ sinh và thay dầu",
-      "date": "2023-10-04",
-      "status": "Chờ xác nhận",
-      "desc": "adada",
-      "id": 1
-    },
-    {
-      "name": "Nguyễn Thanh Ngọc",
-      "phone": "0338473334",
-      "service": "Vệ sinh và thay dầu",
-      "date": "2023-10-13",
-      "status": "Đã xác nhận",
-      "desc": "Cần thay thế nhiều phụ tùng",
-      "full_name": "Nguyễn Thanh Ngọc",
-      "id": 2
-    },
-    {
-      "name": "Trần Hà Linh",
-      "phone": "0988478242",
-      "service": "Vệ sinh và thay dầu",
-      "date": "2023-10-04",
-      "status": "Đã hoàn thành",
-      "desc": "Ghi chú 83943",
-      "full_name": "Linh",
-      "id": 3
-    },
-    {
-      "full_name": "Phong",
-      "phone": "0992222222",
       "email": "ducphong2713@gmail.com",
-      "service1": "Bảo dưỡng",
-      "service2": "Sửa chữa chung",
+      "service1": true,
+      "service2": true,
       "service3": false,
-      "service4": false,
-      "desc": "Ghi chú",
-      "car_model": "Sedan",
-      "km": "99999",
-      "car_id": "Bien so xe",
-      "location": "Hà Nội",
-      "datetime": "2023-10-20T00:09",
-      "id": 4
+      "service4": true,
+      "desc": "",
+      "name_car": "Xe mới mua",
+      "status": "Chờ xác nhận",
+      "datetime": "2023-10-28T06:46",
+      " Bảo dưỡng cao cấp": true,
+      " Hệ thống điện, điều hòa": true,
+      "id": 6
     }
   ],
   "news": [
