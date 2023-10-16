@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Admin\ServiceLevelApi;
 use App\Http\Controllers\API\Admin\ReviewApi;
+use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
+use App\Http\Controllers\Api\Client\ServiceItemApi as ClientServiceItemApi;
+use App\Http\Controllers\Api\Client\ServiceLevelApi as ClientServiceLevelApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -89,4 +92,19 @@ Route::prefix('client')->group(function () {
         Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
     });
 
+    //Service Api
+    Route::prefix('service')->group(function () {
+        // lay du lieu service http://127.0.0.1:8000/api/client/service
+        Route::get('/', [ClientServiceApi::class, 'index']);
+    });
+    //Service level Api
+    Route::prefix('service-level')->group(function () {                                        
+         // lay du lieu service level http://127.0.0.1:8000/api/client/service-level
+        Route::get('/', [ClientServiceLevelApi::class, 'index']);
+    });
+ //Service item Api
+    Route::prefix('service-item')->group(function () {                                        
+        // lay du item service  http://127.0.0.1:8000/api/client/service-item
+       Route::get('/', [ClientServiceItemApi::class, 'index']);
+   });   
 });
