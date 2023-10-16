@@ -4,15 +4,21 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 const BaseLayout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
+  const [userName,setUserName] =useState(); //
 
   // Kiểm tra Session Storage khi trang được tải
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
+    console.log({sessionData});
     if (sessionData) {
       // Session Storage tồn tại, người dùng đã đăng nhập
+      const userData = JSON.parse(sessionData); // Parse the JSON string into an object
+     setUserName( userData.name)
       setIsLoggedIn(true);
     }
   }, []);
+ 
+  console.log(userName)
   function clearSession() {
     // Xóa toàn bộ dữ liệu từ Session Storage
     sessionStorage.clear();
@@ -39,9 +45,11 @@ const BaseLayout = () => {
           <div className="col-lg-5 px-5 text-end">
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
               <small className="fa fa-phone-alt text-primary me-2"></small>
-              <small>+84 988 678 999</small>
+              <small>+84 988 678 999 </small>
+              {isLoggedIn && <small className="px-5">Xin chào,{userName}</small>}
             </div>
             <div className="h-100 d-inline-flex align-items-center">
+           
             {isLoggedIn ? (
       <b style={{ color: "blue" }}>
         <a href="/" className="nav-item nav-link" onClick={clearSession}>
