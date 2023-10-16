@@ -6,6 +6,12 @@ const BookingPage = (props: any) => {
   const [detailContent, setDetailContent] = useState("");
   const [showDetail, setShowDetail] = useState(false);
 
+  
+
+  const dataService = props.service;
+
+  console.log(dataService);
+  
   const navigate = useNavigate();
   const BaoDuong = ["Bảo dưỡng cơ bản", "Bảo dưỡng trung cấp", " Bảo dưỡng cao cấp"];
   const SuaChua = [
@@ -18,6 +24,9 @@ const BookingPage = (props: any) => {
     "Sơn Trung Cấp",
     "Sơn cao cấp",
   ];
+
+  
+  
   const [formData, setFormData] = useState({
     full_name: "",
     phone: "",
@@ -43,7 +52,7 @@ const BookingPage = (props: any) => {
     }));
   };
 
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: any) => {
     const { name, checked } = e.target;
     setFormCheckBox((prevData) => ({
       ...prevData,
@@ -51,6 +60,8 @@ const BookingPage = (props: any) => {
     }));
   };
 
+  
+  
   const handleShowDetail = () => {
     setShowDetail(!showDetail);
   };
@@ -266,6 +277,7 @@ const BookingPage = (props: any) => {
           >
             Đặt lịch
           </button>
+          
         </div>
       </form>
     </div>
