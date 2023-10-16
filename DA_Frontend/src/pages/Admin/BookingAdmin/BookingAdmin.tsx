@@ -138,18 +138,22 @@ const data: DataType[] = props.booking
       <p>Họ và tên: {selectedService.full_name}</p>
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
-      <p>Dịch vụ 1: {selectedService.service1 ? "Có" : "Không"}</p>
-      <p>Dịch vụ 2: {selectedService.service2 ? "Có" : "Không"}</p>
-      <p>Dịch vụ 3: {selectedService.service3 ? "Có" : "Không"}</p>
-      <p>Dịch vụ 4: {selectedService.service4 ? "Có" : "Không"}</p>
-      <p>Bảo dưỡng cơ bản: {selectedService[" Bảo dưỡng cơ bản"] ? "Có" : "Không"}</p>
-      <p>Bảo dưỡng cao cấp: {selectedService[" Bảo dưỡng trung cấp"] ? "Có" : "Không"}</p>
-      <p>Bảo dưỡng trung cấp: {selectedService[" Bảo dưỡng cao cấp"] ? "Có" : "Không"}</p>
-      <p>Hệ thống điện, điều hòa: {selectedService[" Hệ thống điện, điều hòa"] ? "Có" : "Không"}</p>
-      <p>Ghi chú: {selectedService.desc}</p>
       <p>Tên xe: {selectedService.name_car}</p>
       <p>Trạng thái: {selectedService.status}</p>
       <p>Ngày giờ: {selectedService.datetime}</p>
+      <b><p>Bảo dưỡng: {selectedService.baoduong ? "Có" : "Không"}</p></b>
+      <p>Bảo dưỡng cơ bản: {selectedService["Bảo dưỡng cơ bản"] ? "Có" : "Không"}</p>
+      <p>Bảo dưỡng cao cấp: {selectedService["Bảo dưỡng trung cấp"] ? "Có" : "Không"}</p>
+      <p>Bảo dưỡng trung cấp: {selectedService["Bảo dưỡng cao cấp"] ? "Có" : "Không"}</p>
+      <b><p>Sửa chữa: {selectedService.suachua ? "Có" : "Không"}</p></b>
+      <p>Hệ thống phanh: {selectedService["Hệ thống phanh"] ? "Có" : "Không"}</p>
+      <p>Hệ thống lái: {selectedService["Hệ thống lái"] ? "Có" : "Không"}</p>
+      <p>Hệ thống điện điều hòa: {selectedService["Hệ thống điện điều hòa"] ? "Có" : "Không"}</p>
+      <b><p>Đồng sơn: {selectedService.dongson ? "Có" : "Không"}</p></b>
+      <b><p>Dịch vụ khác: {selectedService.dichvukhac ? "Có" : "Không"}</p></b>
+      <p>Ghi chú: {selectedService.desc}</p>
+      
+      
       
     </div>
   )}

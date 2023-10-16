@@ -22,10 +22,10 @@ const BookingPage = (props: any) => {
     full_name: "",
     phone: "",
     email: "",
-    service1: false,
-    service2: false,
-    service3: false,
-    service4: false,
+    baoduong: false,
+    suachua: false,
+    dongson: false,
+    dichvukhac: false,
     desc: "",
     name_car: "",
     status: "Chờ xác nhận",
@@ -33,10 +33,10 @@ const BookingPage = (props: any) => {
    
   });
   const [formCheckBox, setFormCheckBox] = useState({
-    service1: false,
-    service2: false,
-    service3: false,
-    service4: false,
+    baoduong: false,
+    suachua: false,
+    dongson: false,
+    dichvukhac: false,
   });
 
   const handleInputChange = (e: any) => {
@@ -157,18 +157,18 @@ const BookingPage = (props: any) => {
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="service1"
-                id="service1"
+                name="baoduong"
+                id="baoduong"
                 value="Bảo dưỡng"
               />
               <div className="row">
                 <div className="cols">
-                  <label className="form-check-label" htmlFor="service1">
+                  <label className="form-check-label" htmlFor="baoduong">
                     Bảo dưỡng
                   </label>
                 </div>
                 <div className="cols">
-                  {formCheckBox.service1 && (
+                  {formCheckBox.baoduong && (
                     <div>
                       {BaoDuong.map((item, index) => (
                         <div key={index} className="form-check">
@@ -194,19 +194,19 @@ const BookingPage = (props: any) => {
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="service2"
-                id="service2"
+                name="suachua"
+                id="suachua"
                 value="Sửa chữa chung"
                 onClick={() => handleShowDetail()}
               />
               <div className="row">
                 <div className="cols">
-                  <label className="form-check-label" htmlFor="service1">
+                  <label className="form-check-label" htmlFor="suachua">
                     Sửa chữa chung
                   </label>
                 </div>
                 <div className="cols">
-                  {formCheckBox.service2 && (
+                  {formCheckBox.suachua && (
                     <div>
                       {SuaChua.map((item, index) => (
                         <div key={index} className="form-check">
@@ -232,13 +232,13 @@ const BookingPage = (props: any) => {
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="service3"
-                id="service3"
+                name="dongson"
+                id="dongson"
                 value="Đồng sơn"
               />
               <div className="row">
                 <div className="cols">
-                  <label className="form-check-label" htmlFor="service1">
+                  <label className="form-check-label" htmlFor="dongson">
                     Đồng sơn
                   </label>
                 </div>
@@ -250,18 +250,18 @@ const BookingPage = (props: any) => {
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="service4"
-                id="service4"
+                name="dichvukhac"
+                id="dichvukhac"
                 value="Dịch vụ khác"
               />
               <div className="row">
                 <div className="cols">
-                  <label className="form-check-label" htmlFor="service1">
+                  <label className="form-check-label" htmlFor="dichvukhac">
                     Dịch vụ khác
                   </label>
                 </div>
                 <div className="cols">
-                  {formCheckBox.service4 && (
+                  {formCheckBox.dichvukhac && (
                     <div>
                       {
                         <div className="form-check">
