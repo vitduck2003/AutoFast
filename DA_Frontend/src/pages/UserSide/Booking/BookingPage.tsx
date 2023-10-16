@@ -25,7 +25,6 @@ const BookingPage = (props: any) => {
     baoduong: false,
     suachua: false,
     dongson: false,
-    dichvukhac: false,
     desc: "",
     name_car: "",
     status: "Chờ xác nhận",
@@ -34,7 +33,6 @@ const BookingPage = (props: any) => {
     baoduong: false,
     suachua: false,
     dongson: false,
-    dichvukhac: false,
   });
 
   const handleInputChange = (e: any) => {
@@ -242,36 +240,6 @@ const BookingPage = (props: any) => {
                   </label>
                 </div>
           
-              </div>
-            </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name="dichvukhac"
-                id="dichvukhac"
-                value="service[4]"
-              />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="dichvukhac">
-                    Dịch vụ khác
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.dichvukhac && (
-                    <div>
-                      {
-                        <div className="form-check">
-                          <span>
-                            Vui lòng nêu chi tiết dịch vụ khác mà bạn muốn sử dụng phía dưới
-                          </span>
-                        </div>
-                      }
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
             <div className="form-group">
