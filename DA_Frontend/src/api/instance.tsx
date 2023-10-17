@@ -6,4 +6,5 @@ const instance = axios.create({
     // http://localhost:3000
     // http://localhost:8000/api
 })
+
 export default instance;
