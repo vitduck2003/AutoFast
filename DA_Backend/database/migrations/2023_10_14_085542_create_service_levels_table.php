@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('service_levels', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_service')->nullable();
             $table->string('name');
             $table->timestamps();
         });
