@@ -12,7 +12,7 @@ const BookingPage = (props: any) => {
   
   const dataService = props.service;
 
-
+console.log(dataService)
  
   const navigate = useNavigate();
   
@@ -91,8 +91,8 @@ const BookingPage = (props: any) => {
   
     console.log(updatedFormData);
   
-    // props.onAddBooking(updatedFormData);
-    // alert("Success");
+    props.onAddBooking(updatedFormData);
+    alert("Success");
   };
 
   return (
