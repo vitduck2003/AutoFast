@@ -1,7 +1,7 @@
 import instance from "./instance";
 import { IService } from "../interface/service";
 const getService = () => {
-  return instance.get("/service-item");
+  return instance.get("/client/service-item");
 };
 const addService = (service: IService) => {
   return instance.post("/service-item", service);
