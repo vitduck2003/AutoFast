@@ -1,16 +1,16 @@
 import instance from "./instance";
 import { IService } from "../interface/service";
 const getService = () => {
-  return instance.get("/service");
+  return instance.get("/service-item");
 };
 const addService = (service: IService) => {
-  return instance.post("/service", service);
+  return instance.post("/service-item", service);
 };
 const updateService = (service: IService) => {
-  return instance.patch("/service/" + service.id, service);
+  return instance.patch("/service-item/" + service.id, service);
 };
 const deleteService= (id: IService) => {
-  return instance.delete("/service/" + id);
+  return instance.delete("/service-item/" + id);
 };
 
 export { getService, addService, updateService, deleteService,};

@@ -112,21 +112,21 @@ function App() {
   };
 
   // Booking
-  const onHandleBooking = (BookingItem: IBooking) => {
+  const onHandleBooking = (BookingItem: any) => {
     addBooking(BookingItem).then(() =>
       getBooking().then(({ data }) => setBooking(data))
     );
   };
 
-  const onHandleUpdateBooking = (BookingItem: IBooking) => {
+  const onHandleUpdateBooking = (BookingItem: any) => {
     updateBooking(BookingItem).then(() =>
       getBooking().then(({ data }) => setBooking(data))
     );
   };
 
-  const onHandleRemoveBooking = (id: any) => {
+  const onHandleRemoveBooking = (id: number) => {
     deleteBooking(id).then(() =>
-      setBooking(booking.filter((item: IBooking) => item.id !== id))
+      setBooking(booking.filter((item: any) => item.id !== id))
     );
   };
 
