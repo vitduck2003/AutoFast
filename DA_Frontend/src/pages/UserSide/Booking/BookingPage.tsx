@@ -8,28 +8,23 @@ const BookingPage = (props: any) => {
 
   
 
+  
   const dataService = props.service;
+
+
+
+
+ 
+  
 
  
   const navigate = useNavigate();
   
-  const BaoDuong =  [
-    { id: 1, name: "BaoDuong cơ bản" },
-    { id: 2, name: "BaoDuong Trung Cấp" },
-    { id: 3, name: "BaoDuong cao cấp" }
-  ];
+  const BaoDuong = dataService;
   
-  const SuaChua =  [
-    { id: 1, name: "SuaChua cơ bản" },
-    { id: 2, name: "SuaChua Trung Cấp" },
-    { id: 3, name: "SuaChua cao cấp" }
-  ];
+  const SuaChua =  dataService;
   
-  const Dongson = [
-    { id: 1, name: "Sơn cơ bản" },
-    { id: 2, name: "Sơn Trung Cấp" },
-    { id: 3, name: "Sơn cao cấp" }
-  ];
+  const Dongson = dataService;
 
   
   
@@ -37,7 +32,7 @@ const BookingPage = (props: any) => {
     full_name: string;
     phone: string;
     email: string;
-    desc: string;
+    note: string;
     name_car: string;
     status: string;
   };
@@ -46,7 +41,7 @@ const BookingPage = (props: any) => {
     full_name: "",
     phone: "",
     email: "",
-    desc: "",
+    note: "",
     name_car: "",
     status: "Chờ xác nhận",
   });
@@ -100,8 +95,8 @@ const BookingPage = (props: any) => {
   
     console.log(updatedFormData);
   
-    props.onAddBooking(updatedFormData);
-    alert("Success");
+    // props.onAddBooking(updatedFormData);
+    // alert("Success");
   };
 
   return (
@@ -303,7 +298,7 @@ const BookingPage = (props: any) => {
               </b>
               <textarea
                 onChange={handleInputChange}
-                name="desc"
+                name="note"
                 className="form-control"
                 id="exampleTextarea"
               ></textarea>

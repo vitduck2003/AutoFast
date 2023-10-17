@@ -4,13 +4,13 @@ const getBooking = () => {
   return instance.get("/booking");
 };
 
-const addBooking = (booking: IBooking) => {
+const addBooking = (booking: any) => {
   return instance.post("/booking", booking);
 };
-const updateBooking = (booking: IBooking) => {
+const updateBooking = (booking: any) => {
   return instance.patch("/booking/" + booking.id, booking);
 };
-const deleteBooking= (id: IBooking) => {
+const deleteBooking= (id: any) => {
   return instance.delete("/booking/" + id);
 };
 
