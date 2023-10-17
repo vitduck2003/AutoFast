@@ -91,8 +91,8 @@ const BookingPage = (props: any) => {
   
     console.log(updatedFormData);
   
-    // props.onAddBooking(updatedFormData);
-    // alert("Success");
+    props.onAddBooking(updatedFormData);
+    alert("Success");
   };
 
   return (
@@ -156,7 +156,7 @@ const BookingPage = (props: any) => {
               <div className="col">
                 <input
                   onChange={handleInputChange}
-                  name="datetime"
+                  name="target_datetime"
                   type="datetime-local"
                   lang="vi"
                   className="form-control"
