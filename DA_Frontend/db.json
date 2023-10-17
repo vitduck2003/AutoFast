@@ -77,6 +77,25 @@
       "Hệ thống phanh": true,
       "Hệ thống lái": true,
       "id": 7
+    },
+    {
+      "full_name": "Dinh Viet Duc",
+      "phone": "045689463432",
+      "email": "hiinenodz@gmail.com",
+      "baoduong": true,
+      "suachua": true,
+      "dongson": false,
+      "dichvukhac": false,
+      "desc": "Bảo dưỡng xe",
+      "name_car": "Mescedes Mayback",
+      "status": "Chờ xác nhận",
+      "datetime": "2023-10-16T08:30",
+      "Bảo dưỡng cơ bản": true,
+      "Bảo dưỡng trung cấp": true,
+      " Bảo dưỡng cao cấp": true,
+      "Hệ thống phanh": true,
+      "Hệ thống lái": true,
+      "id": 8
     }
   ],
   "news": [
