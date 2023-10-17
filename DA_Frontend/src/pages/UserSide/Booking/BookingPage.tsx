@@ -12,7 +12,6 @@ const BookingPage = (props: any) => {
   
   const dataService = props.service;
 
-console.log(dataService);
 
  
   const navigate = useNavigate();
