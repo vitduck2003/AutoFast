@@ -16,11 +16,16 @@ const BookingPage = (props: any) => {
  
   const navigate = useNavigate();
   
-  const BaoDuong = dataService;
-  
-  const SuaChua =  dataService;
-  
-  const Dongson = dataService;
+  const BaoDuong = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 1) 
+    : [];
+
+const SuaChua = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 2) 
+    : [];
+const Dongson = Array.isArray(dataService) 
+? dataService.filter(item => item.service_id === 3) 
+: [];
 
   
   
