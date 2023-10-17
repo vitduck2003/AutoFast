@@ -16,11 +16,16 @@ console.log(dataService)
  
   const navigate = useNavigate();
   
-  const BaoDuong = dataService;
-  
-  const SuaChua =  dataService;
-  
-  const Dongson = dataService;
+  const BaoDuong = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 1) 
+    : [];
+
+const SuaChua = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 2) 
+    : [];
+const Dongson = Array.isArray(dataService) 
+? dataService.filter(item => item.service_id === 3) 
+: [];
 
   
   
@@ -156,7 +161,7 @@ console.log(dataService)
               <div className="col">
                 <input
                   onChange={handleInputChange}
-                  name="datetime"
+                  name="target_datetime"
                   type="datetime-local"
                   lang="vi"
                   className="form-control"
