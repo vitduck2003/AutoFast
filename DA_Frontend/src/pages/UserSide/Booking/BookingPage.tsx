@@ -100,8 +100,8 @@ const BookingPage = (props: any) => {
   
     console.log(updatedFormData);
   
-    // props.onAddBooking(updatedFormData);
-    // alert("Success");
+    props.onAddBooking(updatedFormData);
+    alert("Success");
   };
 
   return (
