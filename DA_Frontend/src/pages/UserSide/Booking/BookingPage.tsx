@@ -7,15 +7,11 @@ const BookingPage = (props: any) => {
   const [showDetail, setShowDetail] = useState(false);
 
   
+ 
 
   
   const dataService = props.service;
 
-
-
-
- 
-  
 
  
   const navigate = useNavigate();
