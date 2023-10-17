@@ -11,10 +11,9 @@ export interface IBooking {
     datetime: any,
     created_at: any,
     updated_at: any
-    baoduong?: string
-    suachua?: string
-    dongson?: string
-    dichvukhac?: string
+    baoduong?: any
+    suachua?: any
+    dongson?: any
     name_car: string
     
 }
