@@ -13,9 +13,17 @@ const BookingPage = (props: any) => {
  
   const navigate = useNavigate();
   
-  const BaoDuong = dataService
+  const BaoDuong =  [
+    { id: 1, name: "BaoDuong cơ bản" },
+    { id: 2, name: "BaoDuong Trung Cấp" },
+    { id: 3, name: "BaoDuong cao cấp" }
+  ];
   
-  const SuaChua = dataService
+  const SuaChua =  [
+    { id: 1, name: "SuaChua cơ bản" },
+    { id: 2, name: "SuaChua Trung Cấp" },
+    { id: 3, name: "SuaChua cao cấp" }
+  ];
   
   const Dongson = [
     { id: 1, name: "Sơn cơ bản" },
@@ -25,17 +33,23 @@ const BookingPage = (props: any) => {
 
   
   
-  const [formData, setFormData] = useState({
+  type FormData = {
+    full_name: string;
+    phone: string;
+    email: string;
+    desc: string;
+    name_car: string;
+    status: string;
+  };
+  
+  const [formData, setFormData] = useState<FormData>({
     full_name: "",
     phone: "",
     email: "",
-    baoduong: false,
-    suachua: false,
-    dongson: false,
     desc: "",
     name_car: "",
     status: "Chờ xác nhận",
-    });
+  });
   const [formCheckBox, setFormCheckBox] = useState({
     baoduong: false,
     suachua: false,
@@ -64,18 +78,30 @@ const BookingPage = (props: any) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    
-    // Hợp nhất dữ liệu từ formCheckBox vào formData
+  
+    const Dichvu: { [key: string]: number[] } = {};
+  
+    if (formCheckBox.baoduong) {
+      Dichvu.baoduong = BaoDuong.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
+    if (formCheckBox.suachua) {
+      Dichvu.suachua = SuaChua.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
+    if (formCheckBox.dongson) {
+      Dichvu.dongson = Dongson.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
     const updatedFormData = {
       ...formData,
-      ...formCheckBox
+      Dichvu,
     };
-    
+  
     console.log(updatedFormData);
   
-    props.onAddBooking(updatedFormData);
-    alert("Success");
-    
+    // props.onAddBooking(updatedFormData);
+    // alert("Success");
   };
 
   return (
@@ -219,6 +245,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name={item.name}
                 id={item.name}
+                value={item.id}
               />
               <label className="form-check-label" htmlFor={item.name}>
                 {item.name}
@@ -256,6 +283,7 @@ const BookingPage = (props: any) => {
                 type="checkbox"
                 name={item.name}
                 id={item.name}
+                value={item.id}
               />
               <label className="form-check-label" htmlFor={item.name}>
                 {item.name}
