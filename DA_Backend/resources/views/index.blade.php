@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Test mail</h1>
+    <form method="post">
+        
+    </form>
 </body>
 </html>

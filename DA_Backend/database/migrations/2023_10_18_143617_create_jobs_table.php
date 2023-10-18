@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('current_repair', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->integer('booking_id');
+            $table->integer('service_id');
             $table->integer('staff_id');
-            $table->text('note');
+            $table->string('name');
+            $table->string('price');
+            $table->string('time');
+            $table->string('images')->nullable();
             $table->string('status');
-            $table->string('image_done');
-            $table->date('target_time_done');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('current_repair');
+        Schema::dropIfExists('jobs');
     }
 };

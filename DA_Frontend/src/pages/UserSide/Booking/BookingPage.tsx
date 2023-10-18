@@ -6,37 +6,50 @@ const BookingPage = (props: any) => {
   const [detailContent, setDetailContent] = useState("");
   const [showDetail, setShowDetail] = useState(false);
 
+  
+ 
+
+  
+  const dataService = props.service;
+
+console.log(dataService)
+ 
   const navigate = useNavigate();
-  const BaoDuong = ["Bảo dưỡng cơ bản", "Bảo dưỡng trung cấp", " Bảo dưỡng cao cấp"];
-  const SuaChua = [
-    "Hệ thống phanh",
-    "Hệ thống lái",
-    " Hệ thống điện, điều hòa",
-  ];
-  const Dongson = [
-    "Sơn cơ bản",
-    "Sơn Trung Cấp",
-    "Sơn cao cấp",
-  ];
-  const [formData, setFormData] = useState({
+  
+  const BaoDuong = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 1) 
+    : [];
+
+const SuaChua = Array.isArray(dataService) 
+    ? dataService.filter(item => item.service_id === 2) 
+    : [];
+const Dongson = Array.isArray(dataService) 
+? dataService.filter(item => item.service_id === 3) 
+: [];
+
+  
+  
+  type FormData = {
+    full_name: string;
+    phone: string;
+    email: string;
+    note: string;
+    name_car: string;
+    status: string;
+  };
+  
+  const [formData, setFormData] = useState<FormData>({
     full_name: "",
     phone: "",
     email: "",
-    baoduong: false,
-    suachua: false,
-    dongson: false,
-    dichvukhac: false,
-    desc: "",
+    note: "",
     name_car: "",
     status: "Chờ xác nhận",
-    
-   
   });
   const [formCheckBox, setFormCheckBox] = useState({
     baoduong: false,
     suachua: false,
     dongson: false,
-    dichvukhac: false,
   });
 
   const handleInputChange = (e: any) => {
@@ -47,7 +60,7 @@ const BookingPage = (props: any) => {
     }));
   };
 
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: any) => {
     const { name, checked } = e.target;
     setFormCheckBox((prevData) => ({
       ...prevData,
@@ -55,24 +68,36 @@ const BookingPage = (props: any) => {
     }));
   };
 
-  const handleShowDetail = () => {
-    setShowDetail(!showDetail);
-  };
+  
+  
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    
-    // Hợp nhất dữ liệu từ formCheckBox vào formData
+  
+    const Dichvu: { [key: string]: number[] } = {};
+  
+    if (formCheckBox.baoduong) {
+      Dichvu.baoduong = BaoDuong.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
+    if (formCheckBox.suachua) {
+      Dichvu.suachua = SuaChua.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
+    if (formCheckBox.dongson) {
+      Dichvu.dongson = Dongson.filter(item => formCheckBox[item.name]).map(item => item.id);
+    }
+  
     const updatedFormData = {
       ...formData,
-      ...formCheckBox
+      Dichvu,
     };
-    
+  
     console.log(updatedFormData);
   
     props.onAddBooking(updatedFormData);
     alert("Success");
-    
   };
 
   return (
@@ -136,7 +161,7 @@ const BookingPage = (props: any) => {
               <div className="col">
                 <input
                   onChange={handleInputChange}
-                  name="datetime"
+                  name="target_datetime"
                   type="datetime-local"
                   lang="vi"
                   className="form-control"
@@ -153,128 +178,119 @@ const BookingPage = (props: any) => {
               </label>
             </b>
             <div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="baoduong"
+    id="baoduong"
+    value="service[1]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="baoduong">
+        Bảo dưỡng
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.baoduong && (
+        <div>
+          {BaoDuong.map((item) => (
+            <div key={item.id} className="form-check">
+            <input
+              onChange={handleCheckboxChange}
+              className="form-check-input"
+              type="checkbox"
+              name={item.name}
+              id={item.name}
+              value={item.id}
+            />
+            <label className="form-check-label" htmlFor={item.name}>
+              {item.name}
+            </label>
+          </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+<div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="suachua"
+    id="suachua"
+    value="service[2]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="suachua">
+        Sửa chữa chung
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.suachua && (
+        <div>
+          {SuaChua.map((item) => (
+            <div key={item.id} className="form-check">
               <input
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="baoduong"
-                id="baoduong"
-                value="Bảo dưỡng"
+                name={item.name}
+                id={item.name}
+                value={item.id}
               />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="baoduong">
-                    Bảo dưỡng
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.baoduong && (
-                    <div>
-                      {BaoDuong.map((item, index) => (
-                        <div key={index} className="form-check">
-                          <input
-                            onChange={handleCheckboxChange}
-                            className="form-check-input"
-                            type="checkbox"
-                            name={item}
-                            id={item}
-                          />
-                          <label className="form-check-label" htmlFor={item}>
-                            {item}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <label className="form-check-label" htmlFor={item.name}>
+                {item.name}
+              </label>
             </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+<div style={{ marginBottom: "10px" }} className="form-check">
+  <input
+    onChange={handleCheckboxChange}
+    className="form-check-input"
+    type="checkbox"
+    name="dongson"
+    id="dongson"
+    value="service[3]"
+  />
+  <div className="row">
+    <div className="cols">
+      <label className="form-check-label" htmlFor="dongson">
+        Đồng sơn
+      </label>
+    </div>
+    <div className="cols">
+      {formCheckBox.dongson && (
+        <div>
+          {Dongson.map((item) => (
+            <div key={item.id} className="form-check">
               <input
                 onChange={handleCheckboxChange}
                 className="form-check-input"
                 type="checkbox"
-                name="suachua"
-                id="suachua"
-                value="Sửa chữa chung"
-                onClick={() => handleShowDetail()}
+                name={item.name}
+                id={item.name}
+                value={item.id}
               />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="suachua">
-                    Sửa chữa chung
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.suachua && (
-                    <div>
-                      {SuaChua.map((item, index) => (
-                        <div key={index} className="form-check">
-                          <input
-                            onChange={handleCheckboxChange}
-                            className="form-check-input"
-                            type="checkbox"
-                            name={item}
-                            id={item}
-                          />
-                          <label className="form-check-label" htmlFor={item}>
-                            {item}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <label className="form-check-label" htmlFor={item.name}>
+                {item.name}
+              </label>
             </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name="dongson"
-                id="dongson"
-                value="Đồng sơn"
-              />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="dongson">
-                    Đồng sơn
-                  </label>
-                </div>
-          
-              </div>
-            </div>
-            <div style={{ marginBottom: "10px" }} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name="dichvukhac"
-                id="dichvukhac"
-                value="Dịch vụ khác"
-              />
-              <div className="row">
-                <div className="cols">
-                  <label className="form-check-label" htmlFor="dichvukhac">
-                    Dịch vụ khác
-                  </label>
-                </div>
-                <div className="cols">
-                  {formCheckBox.dichvukhac && (
-                    <div>
-                      {
-                        <div className="form-check">
-                          <span>
-                            Vui lòng nêu chi tiết dịch vụ khác mà bạn muốn sử dụng phía dưới
-                          </span>
-                        </div>
-                      }
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
             <div className="form-group">
               <b>
                 <label style={{ marginTop: "20px" }} htmlFor="">
@@ -283,7 +299,7 @@ const BookingPage = (props: any) => {
               </b>
               <textarea
                 onChange={handleInputChange}
-                name="desc"
+                name="note"
                 className="form-control"
                 id="exampleTextarea"
               ></textarea>
@@ -299,6 +315,7 @@ const BookingPage = (props: any) => {
           >
             Đặt lịch
           </button>
+          
         </div>
       </form>
     </div>

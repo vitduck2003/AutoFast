@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Admin\ServiceLevelApi;
 use App\Http\Controllers\API\Admin\ReviewApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
+use App\Http\Controllers\Api\Client\ServiceItem;
 use App\Http\Controllers\Api\Client\ServiceItemApi as ClientServiceItemApi;
 use App\Http\Controllers\Api\Client\ServiceLevelApi as ClientServiceLevelApi;
 use Illuminate\Http\Request;
@@ -99,6 +100,6 @@ Route::prefix('client')->group(function () {
  //Service item Api
     Route::prefix('service-item')->group(function () {                                        
         // lay du item service  http://127.0.0.1:8000/api/client/service-item
-       Route::get('/', [ClientServiceItemApi::class, 'index']);
+       Route::get('/', [ServiceItem::class, 'index']);
    });   
 });

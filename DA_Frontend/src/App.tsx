@@ -42,17 +42,9 @@ import TeamPage from "./pages/UserSide/Team/TeamPage";
 import BookingConfirmAdmin from "./pages/Admin/BookingAdmin/BookingConfirmAdmin";
 import {
   addBooking,
-  addBookingConfirm,
-  addBookingHT,
   deleteBooking,
-  deleteBookingConfirm,
-  deleteBookingHT,
   getBooking,
-  getBookingConfirm,
-  getBookingHT,
   updateBooking,
-  updateBookingConfirm,
-  updateBookingHT,
 } from "./api/booking";
 import { IBooking } from "./interface/booking";
 import BookingHtAdmin from "./pages/Admin/BookingAdmin/BookingHtAdmin";
@@ -68,18 +60,21 @@ import {
   logIn,
 } from "./api/user";
 import VerifyPage from "./pages/UserSide/VerifyPage";
+import { getService } from "./api/service";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
   const [mess, setMess] = useState();
+  const [service, setService] = useState();
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
     getNews().then(({ data }) => setNews(data));
     getBooking().then(({ data }) => setBooking(data));
     getUsers().then(({ data }) => setUsers(data));
+    getService().then(({ data }) => setService(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -117,21 +112,21 @@ function App() {
   };
 
   // Booking
-  const onHandleBooking = (BookingItem: IBooking) => {
+  const onHandleBooking = (BookingItem: any) => {
     addBooking(BookingItem).then(() =>
       getBooking().then(({ data }) => setBooking(data))
     );
   };
 
-  const onHandleUpdateBooking = (BookingItem: IBooking) => {
+  const onHandleUpdateBooking = (BookingItem: any) => {
     updateBooking(BookingItem).then(() =>
       getBooking().then(({ data }) => setBooking(data))
     );
   };
 
-  const onHandleRemoveBooking = (id: any) => {
+  const onHandleRemoveBooking = (id: number) => {
     deleteBooking(id).then(() =>
-      setBooking(booking.filter((item: IBooking) => item.id !== id))
+      setBooking(booking.filter((item: any) => item.id !== id))
     );
   };
 
@@ -174,7 +169,7 @@ function App() {
             <Route path="booking">
               <Route
                 index
-                element={<BookingPage onAddBooking={onHandleAdd} />}
+                element={<BookingPage service={service} onAddBooking={onHandleAdd} />}
               />
             </Route>
 
