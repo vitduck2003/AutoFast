@@ -72,14 +72,14 @@ const columns: ColumnsType<DataType> = [
   
   {
     title: 'Ngày đến',
-    dataIndex: 'datetime',
-    key: 'datetime',
+    dataIndex: 'target_date',
+    key: 'target_date',
     render: (text) => <a>{text}</a>,
   },
   {
     title: 'Ghi chú',
-    dataIndex: 'desc',
-    key: 'desc',
+    dataIndex: 'note',
+    key: 'note',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -140,18 +140,8 @@ const data: DataType[] = props.booking
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.name_car}</p>
       <p>Trạng thái: {selectedService.status}</p>
-      <p>Ngày giờ: {selectedService.datetime}</p>
-      <b><p>Bảo dưỡng: {selectedService.baoduong ? "Có" : "Không"}</p></b>
-      <p>Bảo dưỡng cơ bản: {selectedService["Bảo dưỡng cơ bản"] ? "Có" : "Không"}</p>
-      <p>Bảo dưỡng cao cấp: {selectedService["Bảo dưỡng trung cấp"] ? "Có" : "Không"}</p>
-      <p>Bảo dưỡng trung cấp: {selectedService["Bảo dưỡng cao cấp"] ? "Có" : "Không"}</p>
-      <b><p>Sửa chữa: {selectedService.suachua ? "Có" : "Không"}</p></b>
-      <p>Hệ thống phanh: {selectedService["Hệ thống phanh"] ? "Có" : "Không"}</p>
-      <p>Hệ thống lái: {selectedService["Hệ thống lái"] ? "Có" : "Không"}</p>
-      <p>Hệ thống điện điều hòa: {selectedService["Hệ thống điện điều hòa"] ? "Có" : "Không"}</p>
-      <b><p>Đồng sơn: {selectedService.dongson ? "Có" : "Không"}</p></b>
-      <b><p>Dịch vụ khác: {selectedService.dichvukhac ? "Có" : "Không"}</p></b>
-      <p>Ghi chú: {selectedService.desc}</p>
+      <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
+      <p>Ghi chú: {selectedService.note}</p>
       
       
       
