@@ -71,8 +71,6 @@ Route::prefix('admin')->group(function () {
     // Service Item API
     Route::resource('service_item', ServiceItemApi::class);
 
-    // Service Level API
-    Route::resource('service_level', ServiceLevelApi::class);
 });
 
 // Client APIs
@@ -97,11 +95,7 @@ Route::prefix('client')->group(function () {
         // lay du lieu service http://127.0.0.1:8000/api/client/service
         Route::get('/', [ClientServiceApi::class, 'index']);
     });
-    //Service level Api
-    Route::prefix('service-level')->group(function () {                                        
-         // lay du lieu service level http://127.0.0.1:8000/api/client/service-level
-        Route::get('/', [ClientServiceLevelApi::class, 'index']);
-    });
+  
  //Service item Api
     Route::prefix('service-item')->group(function () {                                        
         // lay du item service  http://127.0.0.1:8000/api/client/service-item
