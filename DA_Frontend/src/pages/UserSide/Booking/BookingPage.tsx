@@ -16,18 +16,7 @@ console.log(dataService)
  
   const navigate = useNavigate();
   
-  const BaoDuong = Array.isArray(dataService) 
-    ? dataService.filter(item => item.service_id === 1) 
-    : [];
 
-const SuaChua = Array.isArray(dataService) 
-    ? dataService.filter(item => item.service_id === 2) 
-    : [];
-const Dongson = Array.isArray(dataService) 
-? dataService.filter(item => item.service_id === 3) 
-: [];
-
-  
   
   type FormData = {
     full_name: string;
@@ -46,11 +35,7 @@ const Dongson = Array.isArray(dataService)
     name_car: "",
     status: "Chờ xác nhận",
   });
-  const [formCheckBox, setFormCheckBox] = useState({
-    baoduong: false,
-    suachua: false,
-    dongson: false,
-  });
+
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -60,15 +45,6 @@ const Dongson = Array.isArray(dataService)
     }));
   };
 
-  const handleCheckboxChange = (e: any) => {
-    const { name, checked } = e.target;
-    setFormCheckBox((prevData) => ({
-      ...prevData,
-      [name]: checked,
-    }));
-  };
-
-  
   
   
 
@@ -77,17 +53,6 @@ const Dongson = Array.isArray(dataService)
   
     const Dichvu: { [key: string]: number[] } = {};
   
-    if (formCheckBox.baoduong) {
-      Dichvu.baoduong = BaoDuong.filter(item => formCheckBox[item.name]).map(item => item.id);
-    }
-  
-    if (formCheckBox.suachua) {
-      Dichvu.suachua = SuaChua.filter(item => formCheckBox[item.name]).map(item => item.id);
-    }
-  
-    if (formCheckBox.dongson) {
-      Dichvu.dongson = Dongson.filter(item => formCheckBox[item.name]).map(item => item.id);
-    }
   
     const updatedFormData = {
       ...formData,
@@ -171,126 +136,23 @@ const Dongson = Array.isArray(dataService)
             </div>
             <h2 style={{ marginBottom: "30px", marginTop: "50px" }}>Dịch vụ</h2>
             {/* Checkbox service */}
-            <b>
-              
-              <label style={{ marginTop: "20px" }} htmlFor="">
-                Dịch vụ *
-              </label>
-            </b>
-            <div style={{ marginBottom: "10px" }} className="form-check">
-  <input
-    onChange={handleCheckboxChange}
-    className="form-check-input"
-    type="checkbox"
-    name="baoduong"
-    id="baoduong"
-    value="service[1]"
-  />
-  <div className="row">
-    <div className="cols">
-      <label className="form-check-label" htmlFor="baoduong">
-        Bảo dưỡng
-      </label>
-    </div>
-    <div className="cols">
-      {formCheckBox.baoduong && (
-        <div>
-          {BaoDuong.map((item) => (
-            <div key={item.id} className="form-check">
-            <input
-              onChange={handleCheckboxChange}
-              className="form-check-input"
-              type="checkbox"
-              name={item.name}
-              id={item.name}
-              value={item.id}
-            />
-            <label className="form-check-label" htmlFor={item.name}>
-              {item.name}
-            </label>
-          </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
+       
+            <div className="form-group">
+ 
+  <select
+    onChange={handleInputChange}
+    name="service"
+    className="form-control"
+    id="service"
+  >
+    <option disabled="" value="0">Chọn Cấp bảo dưỡng</option>
+    <option value="151">Cấp 1 (Bảo dưỡng tại 1K, 5K, 25K, 35K,...) 1K=1000Km</option>
+    <option value="152">Cấp 2 (Bảo dưỡng tại 10K, 30K, 50K, 70K,...) 1K=1000Km</option>
+    <option value="153">Cấp 3 (Bảo dưỡng tại 20K, 60K, 100K,...) 1K=1000Km</option>
+    <option value="154">Cấp 4 (Bảo dưỡng tại 40K, 80K, 120K,...) 1K=1000Km</option>
+  </select>
 </div>
-<div style={{ marginBottom: "10px" }} className="form-check">
-  <input
-    onChange={handleCheckboxChange}
-    className="form-check-input"
-    type="checkbox"
-    name="suachua"
-    id="suachua"
-    value="service[2]"
-  />
-  <div className="row">
-    <div className="cols">
-      <label className="form-check-label" htmlFor="suachua">
-        Sửa chữa chung
-      </label>
-    </div>
-    <div className="cols">
-      {formCheckBox.suachua && (
-        <div>
-          {SuaChua.map((item) => (
-            <div key={item.id} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name={item.name}
-                id={item.name}
-                value={item.id}
-              />
-              <label className="form-check-label" htmlFor={item.name}>
-                {item.name}
-              </label>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
-</div>
-<div style={{ marginBottom: "10px" }} className="form-check">
-  <input
-    onChange={handleCheckboxChange}
-    className="form-check-input"
-    type="checkbox"
-    name="dongson"
-    id="dongson"
-    value="service[3]"
-  />
-  <div className="row">
-    <div className="cols">
-      <label className="form-check-label" htmlFor="dongson">
-        Đồng sơn
-      </label>
-    </div>
-    <div className="cols">
-      {formCheckBox.dongson && (
-        <div>
-          {Dongson.map((item) => (
-            <div key={item.id} className="form-check">
-              <input
-                onChange={handleCheckboxChange}
-                className="form-check-input"
-                type="checkbox"
-                name={item.name}
-                id={item.name}
-                value={item.id}
-              />
-              <label className="form-check-label" htmlFor={item.name}>
-                {item.name}
-              </label>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
-</div>
+          
             <div className="form-group">
               <b>
                 <label style={{ marginTop: "20px" }} htmlFor="">
