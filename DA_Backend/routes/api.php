@@ -37,7 +37,6 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
 Route::post('booking', [BookingApi::class, 'booking']);
-
 // Admin APIs
 Route::prefix('admin')->group(function () {
     // Review APIs
