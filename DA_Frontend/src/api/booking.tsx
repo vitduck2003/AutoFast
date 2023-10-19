@@ -5,7 +5,7 @@ const getBooking = () => {
 };
 
 const addBooking = (booking: any) => {
-  return instance.post("/client/booking", booking);
+  return instance.post("/booking", booking);
 };
 const updateBooking = (booking: any) => {
   return instance.patch("/booking/" + booking.id, booking);
