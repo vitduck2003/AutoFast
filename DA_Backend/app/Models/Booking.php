@@ -9,4 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Booking extends Model
 {
     use HasFactory, SoftDeletes;
-}
+    protected $fillable = [
+        'name',
+        'phone',
+        'email',
+        'target_date',
+        'target_time',
+        'name_car',
+        'note',
+        'status'
+    ];
+};

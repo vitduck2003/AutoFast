@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id');
+            $table->integer('id_service');
+            $table->integer('id_booking_detail');
             $table->integer('staff_id');
-            $table->string('name');
-            $table->string('price');
-            $table->string('time');
-            $table->string('images')->nullable();
+            $table->string('item_name');
+            $table->float('item_price');
+            $table->string('target_time_done');
+            $table->string('images_done')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

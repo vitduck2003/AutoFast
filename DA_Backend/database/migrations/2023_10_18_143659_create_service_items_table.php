@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->float('price');
             $table->string('status');
+            $table->string('time_done');
             $table->timestamps();
             $table->softDeletes();
         });

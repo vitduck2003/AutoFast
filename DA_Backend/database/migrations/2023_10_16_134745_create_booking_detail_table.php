@@ -16,13 +16,9 @@ return new class extends Migration
         Schema::create('booking_detail', function (Blueprint $table) {
             $table->id();
             $table->integer('id_booking');
-            $table->integer('id_staff');
             $table->integer('id_service');
             $table->integer('id_role');
-            $table->text('note');
             $table->string('status');
-            $table->string('image_done');            
-            $table->dateTime('target_date_done');
             $table->timestamps();
         });
     }

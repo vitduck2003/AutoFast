@@ -1,20 +1,19 @@
 <?php
 
-use App\Http\Controllers\API\Admin\NewsApi;
-use App\Http\Controllers\Api\Admin\ServiceApi;
-use App\Http\Controllers\Api\Admin\UserApi;
-use App\Http\Controllers\Api\Auth\LoginApi;
-use App\Http\Controllers\Api\Auth\RegisterApi;
-use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
-use App\Http\Controllers\Api\Admin\ServiceItemApi;
-use App\Http\Controllers\Api\Admin\ServiceLevelApi;
-use App\Http\Controllers\API\Admin\ReviewApi;
-use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
-use App\Http\Controllers\Api\Client\ServiceItem;
-use App\Http\Controllers\Api\Client\ServiceItemApi as ClientServiceItemApi;
-use App\Http\Controllers\Api\Client\ServiceLevelApi as ClientServiceLevelApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Admin\NewsApi;
+use App\Http\Controllers\Api\Admin\UserApi;
+use App\Http\Controllers\Api\Auth\LoginApi;
+use App\Http\Controllers\API\Admin\ReviewApi;
+use App\Http\Controllers\Api\Admin\ServiceApi;
+use App\Http\Controllers\Api\Auth\RegisterApi;
+use App\Http\Controllers\Api\Client\BookingApi;
+use App\Http\Controllers\Api\Client\ServiceItem;
+use App\Http\Controllers\Api\Admin\ServiceItemApi;
+use App\Http\Controllers\Api\Admin\ServiceLevelApi;
+use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
+use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +36,7 @@ Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
-
+Route::post('booking', [BookingApi::class, 'booking']);
 
 // Admin APIs
 Route::prefix('admin')->group(function () {

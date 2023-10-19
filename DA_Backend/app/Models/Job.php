@@ -11,6 +11,6 @@ class Job extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id','staff_id','time','name','images','price','status'
+        'service_id', 'id_booking_detail', 'staff_id','time','name','images','price','status'
     ];
 }

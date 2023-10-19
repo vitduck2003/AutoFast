@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; 
 
-class Current_Repair extends Model
+
+class BookingDetail extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'id_booking',
+        'id_service',
+        'status',
+    ];
 }
