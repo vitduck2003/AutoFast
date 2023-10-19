@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('id_booking');
             $table->integer('id_service');
-            $table->integer('id_role');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
