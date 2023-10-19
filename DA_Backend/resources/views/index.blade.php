@@ -6,8 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
-        
-    </form>
+    <h1>Đây là dự án</h1>
 </body>
 </html>

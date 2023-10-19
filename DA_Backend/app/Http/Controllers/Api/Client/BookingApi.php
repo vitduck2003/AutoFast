@@ -12,7 +12,7 @@ class BookingApi extends Controller
     {
         $data = $request->all();
         $bookingId = DB::table('booking')->insertGetId([
-            'name' => $data['name'],
+            'name' => $data['full_name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'target_date' => $data['target_date'],
@@ -23,7 +23,7 @@ class BookingApi extends Controller
         ]);
 
         if ($bookingId) {
-            $bookingDetailId = DB::table('booking_details')->insertGetId([
+            $bookingDetailId = DB::table('booking_detail')->insertGetId([
                 'id_booking' => $bookingId,
                 'id_service' => $data['service'],
                 'status' => 'Đang chờ xác nhận',
