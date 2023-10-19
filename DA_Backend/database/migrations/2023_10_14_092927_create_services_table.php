@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->string('status')->nullable();
+            $table->string('service_name');
+            $table->string('image_service')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

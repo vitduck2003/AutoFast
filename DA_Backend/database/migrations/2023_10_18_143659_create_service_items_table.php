@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('service_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id');
-            $table->string('name');
-            $table->float('price');
-            $table->string('status');
+            $table->integer('id_service');
+            $table->string('item_name');
             $table->string('time_done');
+            $table->float('price');
             $table->timestamps();
             $table->softDeletes();
         });

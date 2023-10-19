@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('id_service');
             $table->integer('id_booking_detail');
-            $table->integer('staff_id');
+            $table->integer('id_staff');
             $table->string('item_name');
             $table->float('item_price');
             $table->string('target_time_done');
             $table->string('images_done')->nullable();
+            $table->float('price');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

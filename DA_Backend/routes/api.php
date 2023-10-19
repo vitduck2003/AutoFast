@@ -53,10 +53,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('news',NewsApi::class);
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
     Route::resource('services',ServiceApi::class);    //get api
-    //api quan ly service item   http://127.0.0.1:8000/api/admin/service_item
-    Route::resource('service_item',ServiceItemApi::class);   //add api
-    //api quan ly service level  http://127.0.0.1:8000/api/admin/service_level
-    Route::resource('service_level',ServiceLevelApi::class); //adpi 
+   
 
 
     // User API
@@ -68,8 +65,7 @@ Route::prefix('admin')->group(function () {
     // Service API
     Route::resource('services', ServiceApi::class);
 
-    // Service Item API
-    Route::resource('service_item', ServiceItemApi::class);
+
 
 });
 
