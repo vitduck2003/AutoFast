@@ -30,11 +30,11 @@ class BookingApi extends Controller
             ]);
 
             if ($bookingDetailId) {
-                $itemServices = DB::table('item_service')->where('id_service', $data['service'])->get();
+                $itemServices = DB::table('service_items')->where('id_service', $data['service'])->get();
 
                 foreach ($itemServices as $itemService) {
                     // Thực hiện insert vào bảng job
-                    $jobId = DB::table('job')->insertGetId([
+                    $jobId = DB::table('jobs')->insertGetId([
                         'id_booking_detail' => $bookingDetailId,
                         'id_service' => $itemService->id_service,
                         'item_name' => $itemService->item_name,
