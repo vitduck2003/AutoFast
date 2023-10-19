@@ -152,11 +152,6 @@ function App() {
     );
   };
 
-  const onHandleAdd = (booking: IBooking) => {
-    addBooking(booking).then(() =>
-      getBooking().then(({ data }) => setBooking(data))
-    );
-  };
 
   return (
     <div>
@@ -164,12 +159,12 @@ function App() {
         <Routes>
           {/* User Side */}
           <Route path="/" element={<BaseLayout />}>
-            <Route index element={<HomePage onAddBooking={onHandleAdd} />} />
+            <Route index element={<HomePage onAddBooking={onHandleBooking} />} />
             {/* Booking Page */}
             <Route path="booking">
               <Route
                 index
-                element={<BookingPage service={service} onAddBooking={onHandleAdd} />}
+                element={<BookingPage service={service} onAddBooking={onHandleBooking} />}
               />
             </Route>
 
