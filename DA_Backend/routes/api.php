@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
         Route::put('/{id}', [ReviewApi::class, 'update']);
         Route::delete('/{id}', [ReviewApi::class, 'destroy']);
     });
+
+      //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/user
     Route::resource('users',UserApi::class);
     //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
     Route::resource('news',NewsApi::class);
