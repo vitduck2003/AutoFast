@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const BookingPage = (props: any) => {
+
   const dataService = props.service;
 
   console.log(dataService);
@@ -11,6 +12,7 @@ const BookingPage = (props: any) => {
   const [selectedService, setSelectedService] = useState<{
     name: string;
     price: number;
+    detail: string;
   } | null>(null);
 
   const laborCost = 10000; // Chi phí nhân công bảo dưỡng (200k VND)
@@ -48,11 +50,15 @@ const BookingPage = (props: any) => {
     }));
 
     if (name === "service") {
-      const chosenService = dataService.find((item) => item.name === value);
+      const chosenService = dataService.find((item) => item.id === parseInt(value));
+
+      console.log(chosenService);
+      
       if (chosenService) {
         setSelectedService({
           name: chosenService.name,
           price: chosenService.price,
+          detail: chosenService.detail,
         });
       }
     }
@@ -136,6 +142,35 @@ const BookingPage = (props: any) => {
                 <option value="Pickup"> Pickup</option>
                 <option value="Limousine">Limousine</option>
               </select>
+              <b>
+            <p style={{ marginTop: "20px" }}>
+              Dịch vụ đang chọn
+            </p>
+          </b>
+          <p>
+            {selectedService ? `${selectedService.name}` : "Chưa chọn dịch vụ"}
+          </p>
+      
+          <p style={{ color: "blue" }}>
+            Đơn giá: {selectedService ? `${selectedService.price} VND` : ""}{" "}
+          </p>
+          {selectedService && (
+            <>
+              <p>Chi phí nhân công bảo dưỡng: <span style={{color: 'blue'}}>{laborCost} VND</span></p>
+              <p>Phụ phí: <span style={{color: 'blue'}}>{extraFee} VND</span></p>
+            </>
+          )}
+
+          <b>
+            <label style={{ marginTop: "10px" }} htmlFor="">
+              Tổng giá tiền:
+            </label>{" "}
+          </b>
+          <span style={{ color: "red" }}>
+            {selectedService
+              ? `${selectedService.price + laborCost + extraFee} VND`
+              : ""}
+          </span>
             </div>
             <div className="col-md-6">
               <h2 style={{}}>Thời gian</h2>
@@ -180,7 +215,7 @@ const BookingPage = (props: any) => {
                   </option>
                   {dataService &&
                     dataService.map((item: any) => (
-                      <option key={item.id} value={item.name}>
+                      <option key={item.id} value={item.id}>
                         {item.name}
                       </option>
                     ))}
@@ -197,36 +232,17 @@ const BookingPage = (props: any) => {
                 className="form-control"
                 id="exampleTextarea"
               ></textarea>
-            </div>
-          </div>
-          <b>
-            <label style={{ marginTop: "20px" }} htmlFor="">
-              Dịch vụ đang chọn
-            </label>
+              <b>
+            <p style={{ marginTop: "20px" }}>
+              Chi tiết gói dịch vụ 
+            </p>
           </b>
           <p>
-            {selectedService ? `${selectedService.name}` : "Chưa chọn dịch vụ"}
+            {selectedService ? `${selectedService.detail}` : "Chưa chọn dịch vụ"}
           </p>
-          <p style={{ color: "blue" }}>
-            Đơn giá: {selectedService ? `${selectedService.price} VND` : ""}{" "}
-          </p>
-          {selectedService && (
-            <>
-              <p>Chi phí nhân công bảo dưỡng: <span style={{color: 'blue'}}>{laborCost} VND</span></p>
-              <p>Phụ phí: <span style={{color: 'blue'}}>{extraFee} VND</span></p>
-            </>
-          )}
-
-          <b>
-            <label style={{ marginTop: "10px" }} htmlFor="">
-              Tổng giá tiền:
-            </label>{" "}
-          </b>
-          <span style={{ color: "red" }}>
-            {selectedService
-              ? `${selectedService.price + laborCost + extraFee} VND`
-              : ""}
-          </span>
+            </div>
+          </div>
+          
           <div className="d-flex justify-content-center mt-4">
             <button
               style={{ width: "500px" }}
