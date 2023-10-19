@@ -214,7 +214,7 @@ const BookingPage = (props: any) => {
                   </option>
                   {dataService &&
                     dataService.map((item: any) => (
-                      <option key={item.id} value={item.id}>
+                      <option key={item.id} value={item.service_id}>
                         {item.service_name}
                       </option>
                     ))}
