@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_service');
             $table->integer('id_booking_detail');
-            $table->integer('id_staff');
+            $table->integer('id_staff')->nullable();
             $table->string('item_name');
             $table->float('item_price');
             $table->string('target_time_done');

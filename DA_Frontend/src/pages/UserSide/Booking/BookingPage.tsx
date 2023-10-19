@@ -4,7 +4,6 @@ import React, { useState } from "react";
 const BookingPage = (props: any) => {
 
   const dataService = props.service;
-
   console.log(dataService);
 
   // const navigate = useNavigate();
@@ -216,7 +215,7 @@ const BookingPage = (props: any) => {
                   {dataService &&
                     dataService.map((item: any) => (
                       <option key={item.id} value={item.id}>
-                        {item.name}
+                        {item.service_name}
                       </option>
                     ))}
                 </select>
