@@ -147,6 +147,9 @@ const BookingPage = (props: any) => {
     props.onAddBooking(updatedFormData);
     alert("Success");
   };
+  const totalCost = selectedServiceItem
+    ? selectedServiceItem.price + NhanCong
+    : 0;
 
   return (
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
@@ -223,7 +226,9 @@ const BookingPage = (props: any) => {
               </p>
 
               <p style={{ color: "blue" }}>
-              {selectedServiceItem ? `${selectedServiceItem.item_name} : ${selectedServiceItem.price} VND` : "Chưa có thông tin chi tiết cho gói dịch vụ này."}
+                {selectedServiceItem
+                  ? `${selectedServiceItem.item_name} : ${selectedServiceItem.price} VND`
+                  : "Chưa có thông tin chi tiết cho gói dịch vụ này."}
               </p>
               {selectedService && (
                 <>
@@ -239,11 +244,7 @@ const BookingPage = (props: any) => {
                   Tổng giá tiền:
                 </label>{" "}
               </b>
-              <span style={{ color: "red" }}>
-                {selectedService
-                  ? `${selectedService.price + NhanCong} VND`
-                  : ""}
-              </span>
+              <span style={{ color: "red" }}>{totalCost} VND</span>
             </div>
             <div className="col-md-6">
               <h2 style={{}}>Thời gian</h2>
@@ -320,7 +321,6 @@ const BookingPage = (props: any) => {
                 className="form-control"
                 id="exampleTextarea"
               ></textarea>
-              
             </div>
           </div>
 
