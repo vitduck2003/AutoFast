@@ -2,16 +2,18 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const BookingPage = (props: any) => {
-
   const dataService = props.service;
   const dataServiceItem = props.serviceItem;
-  const [selectedServiceItem, setSelectedServiceItem] = useState<string>("");
+  const [selectedServiceItem, setSelectedServiceItem] = useState<{
+    item_name: string;
+    price: number;
+  } | null>(null);
 
   // console.log(dataService);
   console.log(dataServiceItem);
-  
+
   const [kmMessage, setKmMessage] = useState<string>("");
-  // const navigate = useNavigate();  
+  // const navigate = useNavigate();
 
   const [selectedService, setSelectedService] = useState<{
     service_name: string;
@@ -19,8 +21,7 @@ const BookingPage = (props: any) => {
     detail: string;
   } | null>(null);
 
-  const NhanCong = 10000; 
-
+  const NhanCong = 10000;
 
   type FormData = {
     full_name: string;
@@ -61,22 +62,18 @@ const BookingPage = (props: any) => {
         setKmMessage("Xe của bạn chưa cần bảo dưỡng");
       } else if (kmValue >= 1000 && kmValue < 5000) {
         setKmMessage("Khuyến nghị bảo dưỡng cấp độ 1");
-        recommendedServiceId = 1; 
+        recommendedServiceId = 1;
       } else if (kmValue > 5000 && kmValue < 10000) {
         setKmMessage("Khuyến nghị bảo dưỡng cấp độ 2");
         recommendedServiceId = 2;
-      }
-      else if (kmValue >= 10000 && kmValue <= 15000) {
+      } else if (kmValue >= 10000 && kmValue <= 15000) {
         setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
         recommendedServiceId = 3;
+      } else if (kmValue > 15000) {
+        setKmMessage(
+          "Xe của quý khách đã rất lâu không được bảo dưỡng, vui lòng mang xe đến để kiểm định"
+        );
       }
-      else if (kmValue > 15000) {
-        setKmMessage("Xe của quý khách đã rất lâu không được bảo dưỡng, vui lòng mang xe đến để kiểm định");
-  
-      }
-      
-      
-      
 
       if (recommendedServiceId !== null) {
         const chosenService = dataService.find(
@@ -88,40 +85,54 @@ const BookingPage = (props: any) => {
             price: chosenService.price,
             detail: chosenService.detail,
           });
-          const correspondingServiceItem = dataServiceItem.find(item => item.id_service === chosenService.id);
+
+          const correspondingServiceItem = dataServiceItem.find(
+            (item) => item.id_service === chosenService.id
+          );
+
           if (correspondingServiceItem) {
-              setSelectedServiceItem(correspondingServiceItem.item_name);
+            setSelectedServiceItem({
+              item_name: correspondingServiceItem.item_name,
+              price: correspondingServiceItem.price,
+            });
           } else {
-              setSelectedServiceItem(""); // reset nếu không tìm thấy
+            setSelectedServiceItem(null);
           }
+
           setFormData((prevData) => ({
             ...prevData,
-            service: recommendedServiceId.toString(), 
+            service: recommendedServiceId.toString(),
           }));
         }
-        
       }
     }
 
     if (name === "service") {
-      const chosenService = dataService.find((item) => item.id === parseInt(value));
-      
+      const chosenService = dataService.find(
+        (item) => item.id === parseInt(value)
+      );
+
       if (chosenService) {
-          setSelectedService({
-              service_name: chosenService.service_name,
-              price: chosenService.price,
-              detail: chosenService.detail,
+        setSelectedService({
+          service_name: chosenService.service_name,
+          price: chosenService.price,
+          detail: chosenService.detail,
+        });
+
+        // Tìm serviceItem dựa vào id_service
+        const correspondingServiceItem = dataServiceItem.find(
+          (item) => item.id_service === chosenService.id
+        );
+        if (correspondingServiceItem) {
+          setSelectedServiceItem({
+            item_name: correspondingServiceItem.item_name,
+            price: correspondingServiceItem.price,
           });
-  
-          // Tìm serviceItem dựa vào id_service
-          const correspondingServiceItem = dataServiceItem.find(item => item.id_service === chosenService.id);
-          if (correspondingServiceItem) {
-              setSelectedServiceItem(correspondingServiceItem.item_name);
-          } else {
-              setSelectedServiceItem(""); // reset nếu không tìm thấy
-          }
+        } else {
+          setSelectedServiceItem(null);
+        }
       }
-  }
+    }
   };
 
   const handleSubmit = (e: any) => {
@@ -203,33 +214,36 @@ const BookingPage = (props: any) => {
                 <option value="Limousine">Limousine</option>
               </select>
               <b>
-            <p style={{ marginTop: "20px" }}>
-              Dịch vụ đang chọn
-            </p>
-          </b>
-          <p>
-            {selectedService ? `${selectedService.service_name}` : "Chưa chọn dịch vụ"}
-          </p>
-      
-          <p style={{ color: "blue" }}>
-            Đơn giá: {selectedService ? `${selectedService.price} VND` : ""}{" "}
-          </p>
-          {selectedService && (
-            <>
-              <p>Chi phí nhân công bảo dưỡng: <span style={{color: 'blue'}}>{NhanCong} VND</span></p>
-            </>
-          )}
+                <p style={{ marginTop: "20px" }}>Dịch vụ đang chọn</p>
+              </b>
+              <p>
+                {selectedService
+                  ? `${selectedService.service_name}`
+                  : "Chưa chọn dịch vụ"}
+              </p>
 
-          <b>
-            <label style={{ marginTop: "10px" }} htmlFor="">
-              Tổng giá tiền:
-            </label>{" "}
-          </b>
-          <span style={{ color: "red" }}>
-            {selectedService
-              ? `${selectedService.price + NhanCong} VND`
-              : ""}
-          </span>
+              <p style={{ color: "blue" }}>
+              {selectedServiceItem ? `${selectedServiceItem.item_name} : ${selectedServiceItem.price} VND` : "Chưa có thông tin chi tiết cho gói dịch vụ này."}
+              </p>
+              {selectedService && (
+                <>
+                  <p>
+                    Chi phí nhân công bảo dưỡng:{" "}
+                    <span style={{ color: "blue" }}>{NhanCong} VND</span>
+                  </p>
+                </>
+              )}
+
+              <b>
+                <label style={{ marginTop: "10px" }} htmlFor="">
+                  Tổng giá tiền:
+                </label>{" "}
+              </b>
+              <span style={{ color: "red" }}>
+                {selectedService
+                  ? `${selectedService.price + NhanCong} VND`
+                  : ""}
+              </span>
             </div>
             <div className="col-md-6">
               <h2 style={{}}>Thời gian</h2>
@@ -263,25 +277,6 @@ const BookingPage = (props: any) => {
                 Dịch vụ
               </h2>
               <div className="form-group">
-                <select
-                  onChange={handleInputChange}
-                  name="service"
-                  className="form-control"
-                  id="service"
-                  value={formData.service}
-                >
-                  <option  value="0">
-                    Chọn Cấp bảo dưỡng
-                  </option>
-                  {dataService &&
-                    dataService.map((item: any) => (
-                      <option key={item.id} value={item.id}>
-                        {item.service_name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div className="form-group">
                 <label htmlFor="">Số Km</label>
                 <input
                   onChange={handleInputChange}
@@ -296,6 +291,24 @@ const BookingPage = (props: any) => {
                   {kmMessage}
                 </p>
               </div>
+              <div className="form-group">
+                <select
+                  onChange={handleInputChange}
+                  name="service"
+                  className="form-control"
+                  id="service"
+                  value={formData.service}
+                >
+                  <option value="0">Chọn Cấp bảo dưỡng</option>
+                  {dataService &&
+                    dataService.map((item: any) => (
+                      <option key={item.id} value={item.id}>
+                        {item.service_name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
               <b>
                 <label style={{ marginTop: "50px" }} htmlFor="">
                   Ghi chú
@@ -307,17 +320,10 @@ const BookingPage = (props: any) => {
                 className="form-control"
                 id="exampleTextarea"
               ></textarea>
-              <b>
-            <p style={{ marginTop: "20px" }}>
-              Chi tiết gói dịch vụ 
-            </p>
-          </b>
-          <p>
-          {selectedServiceItem || "Chưa có thông tin chi tiết cho gói dịch vụ này."}
-          </p>
+              
             </div>
           </div>
-          
+
           <div className="d-flex justify-content-center mt-4">
             <button
               style={{ width: "500px" }}
