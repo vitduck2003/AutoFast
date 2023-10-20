@@ -13,4 +13,8 @@ const deleteService= (id: IService) => {
   return instance.delete("/service-item/" + id);
 };
 
-export { getService, addService, updateService, deleteService,};
+const getServiceItem = () => {
+  return instance.get("/client/service-item");
+};
+
+export { getService, addService, updateService, deleteService, getServiceItem};

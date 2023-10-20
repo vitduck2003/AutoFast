@@ -60,7 +60,7 @@ import {
   logIn,
 } from "./api/user";
 import VerifyPage from "./pages/UserSide/VerifyPage";
-import { getService } from "./api/service";
+import { getService, getServiceItem } from "./api/service";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -68,6 +68,7 @@ function App() {
   const [users, setUsers] = useState<IUser[]>([]);
   const [mess, setMess] = useState();
   const [service, setService] = useState();
+  const [serviceItem, setServiceItem] = useState();
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -75,6 +76,7 @@ function App() {
     getBooking().then(({ data }) => setBooking(data));
     getUsers().then(({ data }) => setUsers(data));
     getService().then(({ data }) => setService(data));
+    getServiceItem().then(({ data }) => setServiceItem(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -164,7 +166,7 @@ function App() {
             <Route path="booking">
               <Route
                 index
-                element={<BookingPage service={service} onAddBooking={onHandleBooking} />}
+                element={<BookingPage serviceItem={serviceItem} service={service} onAddBooking={onHandleBooking} />}
               />
             </Route>
 

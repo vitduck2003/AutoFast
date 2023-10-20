@@ -4,18 +4,23 @@ import React, { useState } from "react";
 const BookingPage = (props: any) => {
 
   const dataService = props.service;
-  // console.log(dataService);
+  const dataServiceItem = props.serviceItem;
+  const [selectedServiceItem, setSelectedServiceItem] = useState<string>("");
 
-  // const navigate = useNavigate();
+  // console.log(dataService);
+  console.log(dataServiceItem);
+  
+  const [kmMessage, setKmMessage] = useState<string>("");
+  // const navigate = useNavigate();  
 
   const [selectedService, setSelectedService] = useState<{
-    name: string;
+    service_name: string;
     price: number;
     detail: string;
   } | null>(null);
 
-  const laborCost = 10000; // Chi phí nhân công bảo dưỡng (200k VND)
-  const extraFee = 20000; // Phụ phí (100k VND)
+  const NhanCong = 10000; 
+
 
   type FormData = {
     full_name: string;
@@ -48,19 +53,75 @@ const BookingPage = (props: any) => {
       [name]: value,
     }));
 
-    if (name === "service") {
-      const chosenService = dataService.find((item) => item.id === parseInt(value));
+    if (name === "km") {
+      const kmValue = parseInt(value, 10);
+      let recommendedServiceId = null;
 
-      console.log(chosenService);
+      if (kmValue < 1000) {
+        setKmMessage("Xe của bạn chưa cần bảo dưỡng");
+      } else if (kmValue >= 1000 && kmValue < 5000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 1");
+        recommendedServiceId = 1; 
+      } else if (kmValue > 5000 && kmValue < 10000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 2");
+        recommendedServiceId = 2;
+      }
+      else if (kmValue >= 10000 && kmValue <= 15000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
+        recommendedServiceId = 3;
+      }
+      else if (kmValue > 15000) {
+        setKmMessage("Xe của quý khách đã rất lâu không được bảo dưỡng, vui lòng mang xe đến để kiểm định");
+  
+      }
       
-      if (chosenService) {
-        setSelectedService({
-          name: chosenService.service_name,
-          price: chosenService.price,
-          detail: chosenService.detail,
-        });
+      
+      
+
+      if (recommendedServiceId !== null) {
+        const chosenService = dataService.find(
+          (item) => item.id === recommendedServiceId
+        );
+        if (chosenService) {
+          setSelectedService({
+            service_name: chosenService.service_name,
+            price: chosenService.price,
+            detail: chosenService.detail,
+          });
+          const correspondingServiceItem = dataServiceItem.find(item => item.id_service === chosenService.id);
+          if (correspondingServiceItem) {
+              setSelectedServiceItem(correspondingServiceItem.item_name);
+          } else {
+              setSelectedServiceItem(""); // reset nếu không tìm thấy
+          }
+          setFormData((prevData) => ({
+            ...prevData,
+            service: recommendedServiceId.toString(), 
+          }));
+        }
+        
       }
     }
+
+    if (name === "service") {
+      const chosenService = dataService.find((item) => item.id === parseInt(value));
+      
+      if (chosenService) {
+          setSelectedService({
+              service_name: chosenService.service_name,
+              price: chosenService.price,
+              detail: chosenService.detail,
+          });
+  
+          // Tìm serviceItem dựa vào id_service
+          const correspondingServiceItem = dataServiceItem.find(item => item.id_service === chosenService.id);
+          if (correspondingServiceItem) {
+              setSelectedServiceItem(correspondingServiceItem.item_name);
+          } else {
+              setSelectedServiceItem(""); // reset nếu không tìm thấy
+          }
+      }
+  }
   };
 
   const handleSubmit = (e: any) => {
@@ -147,7 +208,7 @@ const BookingPage = (props: any) => {
             </p>
           </b>
           <p>
-            {selectedService ? `${selectedService.name}` : "Chưa chọn dịch vụ"}
+            {selectedService ? `${selectedService.service_name}` : "Chưa chọn dịch vụ"}
           </p>
       
           <p style={{ color: "blue" }}>
@@ -155,8 +216,7 @@ const BookingPage = (props: any) => {
           </p>
           {selectedService && (
             <>
-              <p>Chi phí nhân công bảo dưỡng: <span style={{color: 'blue'}}>{laborCost} VND</span></p>
-              <p>Phụ phí: <span style={{color: 'blue'}}>{extraFee} VND</span></p>
+              <p>Chi phí nhân công bảo dưỡng: <span style={{color: 'blue'}}>{NhanCong} VND</span></p>
             </>
           )}
 
@@ -167,7 +227,7 @@ const BookingPage = (props: any) => {
           </b>
           <span style={{ color: "red" }}>
             {selectedService
-              ? `${selectedService.price + laborCost + extraFee} VND`
+              ? `${selectedService.price + NhanCong} VND`
               : ""}
           </span>
             </div>
@@ -208,8 +268,9 @@ const BookingPage = (props: any) => {
                   name="service"
                   className="form-control"
                   id="service"
+                  value={formData.service}
                 >
-                  <option disabled="" value="0">
+                  <option  value="0">
                     Chọn Cấp bảo dưỡng
                   </option>
                   {dataService &&
@@ -219,6 +280,21 @@ const BookingPage = (props: any) => {
                       </option>
                     ))}
                 </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="">Số Km</label>
+                <input
+                  onChange={handleInputChange}
+                  name="km"
+                  required
+                  type="number"
+                  className="form-control"
+                  placeholder="Nhập số Km của bạn"
+                  min={0}
+                />
+                <p style={{ paddingLeft: "10px", paddingTop: "20px" }}>
+                  {kmMessage}
+                </p>
               </div>
               <b>
                 <label style={{ marginTop: "50px" }} htmlFor="">
@@ -237,7 +313,7 @@ const BookingPage = (props: any) => {
             </p>
           </b>
           <p>
-            {selectedService ? `${selectedService.detail}` : "Chưa chọn dịch vụ"}
+          {selectedServiceItem || "Chưa có thông tin chi tiết cho gói dịch vụ này."}
           </p>
             </div>
           </div>
@@ -247,6 +323,7 @@ const BookingPage = (props: any) => {
               style={{ width: "500px" }}
               type="submit"
               className="btn btn-primary btn-lg"
+              disabled={!selectedService}
             >
               Đặt lịch
             </button>
