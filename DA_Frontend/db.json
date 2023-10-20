@@ -45,7 +45,7 @@
   ],
   "booking": [
     {
-      "full_name": "Name 1",
+      "name": "Name 1",
       "phone": "098495345",
       "email": "email1@gmail.com",
       "target_date": "2023-10-04",

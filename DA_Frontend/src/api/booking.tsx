@@ -1,7 +1,7 @@
 import instance from "./instance";
 import { IBooking } from "../interface/booking";
 const getBooking = () => {
-  return instance.get("/booking");
+  return instance.get("/bookings");
 };
 
 const addBooking = (booking: any) => {
@@ -11,7 +11,7 @@ const updateBooking = (booking: any) => {
   return instance.patch("/booking/" + booking.id, booking);
 };
 const deleteBooking= (id: any) => {
-  return instance.delete("/booking/" + id);
+  return instance.delete("/bookings/" + id);
 };
 
 export { getBooking, addBooking, updateBooking, deleteBooking,};

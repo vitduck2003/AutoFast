@@ -9,21 +9,21 @@ import { IBooking } from "../../../interface/booking";
 
 interface DataType {
   id: number,
-    full_name: string,
+    name: string,
     email: string,
-    service: string,
+    service?: string,
     phone: number,
-    desc: string,
-    time: any ,
-    active: any,
-    date: any,
-    created_at: any,
-    updated_at: any
+    note: string,
+    target_date: string ,
+    target_time: string ,
+    name_car: string ,
+    created_at?: string,
+    updated_at?: string
 }
 
 interface IProps {
   booking: IBooking[],
-  onRemoveBooking: (id: any) => void
+  onRemoveBooking: (id: DataType) => void
 }
 
 
@@ -31,7 +31,7 @@ interface IProps {
 const BookingAdmin = (props: IProps) => {
 // State để theo dõi trạng thái của Modal và dữ liệu hiển thị
 const [isModalVisible, setIsModalVisible] = useState(false);
-const [selectedService, setSelectedService] = useState<IBooing | null>(null);
+const [selectedService, setSelectedService] = useState<IBooking | null>(null);
 
 
 const showModal = (serviceData: IBooking) => {
@@ -50,8 +50,8 @@ const closeModal = () => {
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
-    dataIndex: 'full_name',
-    key: 'full_name',
+    dataIndex: 'name',
+    key: 'name',
     render: (number) => <a>{number}</a>,
   },
   {
@@ -74,6 +74,12 @@ const columns: ColumnsType<DataType> = [
     title: 'Ngày đến',
     dataIndex: 'target_date',
     key: 'target_date',
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: 'Thời gian',
+    dataIndex: 'target_time',
+    key: 'target_time',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -135,16 +141,14 @@ const data: DataType[] = props.booking
 >
   {selectedService && (
     <div>
-      <p>Họ và tên: {selectedService.full_name}</p>
+      <p>Họ và tên: {selectedService.name}</p>
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.name_car}</p>
       <p>Trạng thái: {selectedService.status}</p>
       <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
       <p>Ghi chú: {selectedService.note}</p>
-      
-      
-      
+
     </div>
   )}
 </Modal>
