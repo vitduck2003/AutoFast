@@ -25,7 +25,8 @@ class LoginApi extends Controller
         ]);
 
         $login = $request->only('phone', 'email', 'password');
-        $check_verify = User::select('is_verified')
+        if (Auth::attempt($login)) {
+            $check_verify = User::select('is_verified')
             ->where('phone', '=', $request->phone)
             ->first();
         if (!$check_verify || !$check_verify->is_verified) {
@@ -34,8 +35,6 @@ class LoginApi extends Controller
                 'phone_verified' => $request->phone
             ], 200);
         }
-
-        if (Auth::attempt($login)) {
             $user = User::where(function ($query) use ($request) {
                 $query->where('phone', $request->phone)
                     ->orWhere('email', $request->email);
