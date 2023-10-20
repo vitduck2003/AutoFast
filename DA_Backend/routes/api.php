@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -10,8 +11,6 @@ use App\Http\Controllers\Api\Admin\ServiceApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\BookingApi;
 use App\Http\Controllers\Api\Client\ServiceItem;
-use App\Http\Controllers\Api\Admin\ServiceItemApi;
-use App\Http\Controllers\Api\Admin\ServiceLevelApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 
@@ -37,6 +36,12 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
 Route::post('booking', [BookingApi::class, 'booking']);
+// Route::resource('admin/booking', [ManagerBookingApi::class]);
+Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
+Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
+Route::get('/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
+Route::get('/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
+Route::get('/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
 // Admin APIs
 Route::prefix('admin')->group(function () {
     // Review APIs
