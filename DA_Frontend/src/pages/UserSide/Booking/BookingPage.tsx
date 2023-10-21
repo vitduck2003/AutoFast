@@ -4,10 +4,12 @@ import React, { useState } from "react";
 const BookingPage = (props: any) => {
   const dataService = props.service;
   const dataServiceItem = props.serviceItem;
-  const [selectedServiceItem, setSelectedServiceItem] = useState<{
-    item_name: string;
-    price: number;
-  } | null>(null);
+  const [selectedServiceItems, setSelectedServiceItems] = useState<
+    Array<{
+      item_name: string;
+      price: number;
+    }>
+  >([]);
 
   // console.log(dataService);
   console.log(dataServiceItem);
@@ -88,17 +90,14 @@ const BookingPage = (props: any) => {
             detail: chosenService.detail,
           });
 
-          const correspondingServiceItem = dataServiceItem.find(
+          const correspondingServiceItems = dataServiceItem.filter(
             (item) => item.id_service === chosenService.id
           );
 
-          if (correspondingServiceItem) {
-            setSelectedServiceItem({
-              item_name: correspondingServiceItem.item_name,
-              price: correspondingServiceItem.price,
-            });
+          if (correspondingServiceItems) {
+            setSelectedServiceItems(correspondingServiceItems);
           } else {
-            setSelectedServiceItem(null);
+            setSelectedServiceItems(null);
           }
 
           setFormData((prevData) => ({
@@ -122,16 +121,14 @@ const BookingPage = (props: any) => {
         });
 
         // Tìm serviceItem dựa vào id_service
-        const correspondingServiceItem = dataServiceItem.find(
+        const correspondingServiceItems = dataServiceItem.filter(
           (item) => item.id_service === chosenService.id
         );
-        if (correspondingServiceItem) {
-          setSelectedServiceItem({
-            item_name: correspondingServiceItem.item_name,
-            price: correspondingServiceItem.price,
-          });
+
+        if (correspondingServiceItems) {
+          setSelectedServiceItems(correspondingServiceItems);
         } else {
-          setSelectedServiceItem(null);
+          setSelectedServiceItems(null);
         }
       }
     }
@@ -149,9 +146,9 @@ const BookingPage = (props: any) => {
     props.onAddBooking(updatedFormData);
     alert("Success");
   };
-  const totalCost = selectedServiceItem
-    ? selectedServiceItem.price + NhanCong
-    : 0;
+  const totalCost =
+    selectedServiceItems.reduce((total, item) => total + item.price, 0) +
+    NhanCong;
 
   return (
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
@@ -227,11 +224,15 @@ const BookingPage = (props: any) => {
                   : "Chưa chọn dịch vụ"}
               </p>
 
-              <p style={{ color: "blue" }}>
-                {selectedServiceItem
-                  ? `${selectedServiceItem.item_name} : ${selectedServiceItem.price} VND`
-                  : "Chưa có thông tin chi tiết cho gói dịch vụ này."}
-              </p>
+              {selectedServiceItems.length > 0 ? (
+                selectedServiceItems.map((item, index) => (
+                  <p style={{ color: "blue" }} key={index}>
+                    {item.item_name} : {item.price} VND
+                  </p>
+                ))
+              ) : (
+                <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+              )}
               {selectedService && (
                 <>
                   <p>
