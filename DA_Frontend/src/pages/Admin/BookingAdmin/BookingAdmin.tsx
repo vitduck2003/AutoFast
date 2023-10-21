@@ -17,9 +17,10 @@ interface DataType {
   note: string;
   target_date: string;
   target_time: string;
-  name_car: string;
+  model_car: string;
   created_at?: string;
   updated_at?: string;
+  mileage? : string;
 }
 
 interface IProps {
@@ -188,7 +189,8 @@ const BookingAdmin = (props: IProps) => {
             <p>Họ và tên: {selectedService.name}</p>
             <p>Số điện thoại: {selectedService.phone}</p>
             <p>Email: {selectedService.email}</p>
-            <p>Tên xe: {selectedService.name_car}</p>
+            <p>Tên xe: {selectedService.model_car}</p>
+            <p>Số Km: {selectedService.mileage}</p>
             <p>
               Trạng thái:{" "}
               <span style={{ color: "red" }}>{selectedService.status}</span>
