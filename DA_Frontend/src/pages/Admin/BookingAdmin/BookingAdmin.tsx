@@ -24,6 +24,7 @@ interface DataType {
 interface IProps {
   booking: IBooking[],
   onRemoveBooking: (id: DataType) => void
+  onUpdateBooking: (booking: IBooking) => void
 }
 
 
@@ -44,8 +45,16 @@ const closeModal = () => {
   setSelectedService(null);
 };
 
-  const removeBooking = (id: any) => {
+  const removeBooking = (id: IBooking) => {
     props.onRemoveBooking(id)
+}
+const confirmBooking = (record: DataType) => {
+  // Tạo một bản sao của record để không thay đổi trực tiếp state
+  const updatedRecord = { ...record, status: "Đã xác nhận" };
+console.log(updatedRecord);
+
+  // Gửi dữ liệu đã cập nhật lên API
+  props.onUpdateBooking(updatedRecord);
 }
 const columns: ColumnsType<DataType> = [
   {
@@ -74,12 +83,6 @@ const columns: ColumnsType<DataType> = [
     title: 'Ngày đến',
     dataIndex: 'target_date',
     key: 'target_date',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Thời gian',
-    dataIndex: 'target_time',
-    key: 'target_time',
     render: (text) => <a>{text}</a>,
   },
   {
@@ -113,7 +116,20 @@ const columns: ColumnsType<DataType> = [
 >
   <Button danger>Delete</Button>
 </Popconfirm>
-        <Link to={``}><Button type="primary">Xác nhận</Button></Link>
+<Popconfirm
+  title="Xác nhận"
+  description="Xác nhận lịch này"
+  onConfirm={() => {
+    confirmBooking(record)
+  }}
+  okText="Có"
+  okButtonProps={{
+    style: {background: "orange", color: "white"},
+  }}
+  cancelText="Không"
+>
+  <Button>Xác nhận</Button>
+</Popconfirm>
         
       </Space>
     ),

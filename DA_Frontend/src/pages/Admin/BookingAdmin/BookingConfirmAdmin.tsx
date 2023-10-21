@@ -9,26 +9,27 @@ import { IBooking } from "../../../interface/booking";
 
 interface DataType {
   id: number,
-    full_name: string,
-    email: string,
-    service: string,
-    phone: number,
-    desc: string,
-    time: any ,
-    active: any,
-    date: any,
-    created_at: any,
-    updated_at: any
+  name: string,
+  email: string,
+  service?: string,
+  phone: number,
+  note: string,
+  target_date: string ,
+  target_time: string ,
+  name_car: string ,
+  created_at?: string,
+  updated_at?: string
 }
 
 interface IProps {
   booking: IBooking[],
-  onRemoveBooking: (id: any) => void
+  onRemoveBooking: (id: DataType) => void
+  onUpdateBooking: (booking: IBooking) => void
 }
 
 const BookingConfirmAdmin = (props: IProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedService, setSelectedService] = useState<IBooing | null>(null);
+  const [selectedService, setSelectedService] = useState<IBooking | null>(null);
   
   
   const showModal = (serviceData: IBooking) => {
@@ -41,14 +42,22 @@ const BookingConfirmAdmin = (props: IProps) => {
     setSelectedService(null);
   };
   
-  const removeBooking = (id: any) => {
+  const removeBooking = (id: DataType) => {
     props.onRemoveBooking(id)
+}
+const confirmBooking = (record: DataType) => {
+  // Tạo một bản sao của record để không thay đổi trực tiếp state
+  const updatedRecord = { ...record, status: "Đã hoàn thành" };
+console.log(updatedRecord);
+
+  // Gửi dữ liệu đã cập nhật lên API
+  props.onUpdateBooking(updatedRecord);
 }
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
-    dataIndex: 'full_name',
-    key: 'full_name',
+    dataIndex: 'name',
+    key: 'name',
     render: (number) => <a>{number}</a>,
   },
   {
@@ -104,7 +113,20 @@ const columns: ColumnsType<DataType> = [
 >
   <Button danger>Delete</Button>
 </Popconfirm>
-        <Link to={``}><Button type="primary">Xác nhận</Button></Link>
+<Popconfirm
+  title="Xác nhận hoàn thành"
+  description="Xác nhận lịch này đã hoàn thành"
+  onConfirm={() => {
+    confirmBooking(record)
+  }}
+  okText="Có"
+  okButtonProps={{
+    style: {background: "orange", color: "white"},
+  }}
+  cancelText="Không"
+>
+  <Button>Xác nhận hoàn thành</Button>
+</Popconfirm>
         
       </Space>
     ),
@@ -131,7 +153,7 @@ const data: DataType[] = props.booking
 >
   {selectedService && (
     <div>
-      <p>Họ và tên: {selectedService.full_name}</p>
+      <p>Họ và tên: {selectedService.name}</p>
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.name_car}</p>
