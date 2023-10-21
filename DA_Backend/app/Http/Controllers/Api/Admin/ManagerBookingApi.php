@@ -53,7 +53,7 @@ class ManagerBookingApi extends Controller
         $bookings = DB::table('booking')->get();
 
         // Trả về danh sách booking
-        return response()->json(['bookings' => $bookings], 200);
+        return response()->json( $bookings, 200);
     }
 
     public function getBooking($id)
@@ -63,7 +63,7 @@ class ManagerBookingApi extends Controller
 
         if ($booking) {
             // Trả về thông tin booking
-            return response()->json(['booking' => $booking], 200);
+            return response()->json( $booking, 200);
         } else {
             return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
         }
@@ -75,7 +75,7 @@ class ManagerBookingApi extends Controller
         $bookingDetails = DB::table('booking_detail')->get();
 
         // Trả về danh sách booking details
-        return response()->json(['booking_details' => $bookingDetails], 200);
+        return response()->json($bookingDetails, 200);
     }
 
     public function getJobs()
@@ -84,7 +84,7 @@ class ManagerBookingApi extends Controller
         $jobs = DB::table('jobs')->get();
 
         // Trả về danh sách jobs
-        return response()->json(['jobs' => $jobs], 200);
+        return response()->json( $jobs, 200);
     }
 }
 
