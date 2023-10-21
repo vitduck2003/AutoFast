@@ -58,7 +58,7 @@ const BookingPage = (props: any) => {
       [name]: value,
     }));
 
-    if (name === "km") {
+    if (name === "mileage") {
       const kmValue = parseInt(value, 10);
       let recommendedServiceId = null;
 
@@ -74,9 +74,8 @@ const BookingPage = (props: any) => {
         setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
         recommendedServiceId = 3;
       } else if (kmValue > 15000) {
-        setKmMessage(
-          "Xe của quý khách đã rất lâu không được bảo dưỡng, vui lòng mang xe đến để kiểm định"
-        );
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
+        recommendedServiceId = 3;
       }
 
       if (recommendedServiceId !== null) {
