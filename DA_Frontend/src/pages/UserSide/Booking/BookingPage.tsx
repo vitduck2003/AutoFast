@@ -193,9 +193,11 @@ const BookingPage = (props: any) => {
                 placeholder="vidu@gmail.com"
               />
 
-              <h2 style={{ marginBottom: "30px", marginTop: "30px" }}>
-                Loại xe
-              </h2>
+              <b>
+                <label style={{ marginTop: "50px" }} htmlFor="">
+                  Loại xe
+                </label>
+              </b>
               <select
                 required
                 name="model_car"
@@ -215,43 +217,21 @@ const BookingPage = (props: any) => {
                 <option value="Limousine">Limousine</option>
               </select>
               <b>
-                <p style={{ marginTop: "20px" }}>Dịch vụ đang chọn</p>
+                <label style={{ marginTop: "50px" }} htmlFor="">
+                  Ghi chú
+                </label>
               </b>
-              <p>
-                {selectedService
-                  ? `${selectedService.service_name}`
-                  : "Chưa chọn dịch vụ"}
-              </p>
-
-              {selectedServiceItems.length > 0 ? (
-                selectedServiceItems.map((item, index) => (
-                  <p style={{ color: "blue" }} key={index}>
-                    {item.item_name} : {item.price} VND
-                  </p>
-                ))
-              ) : (
-                <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-              )}
-              {selectedService && (
-                <>
-                  <p>
-                    Chi phí nhân công bảo dưỡng:{" "}
-                    <span style={{ color: "blue" }}>{NhanCong} VND</span>
-                  </p>
-                </>
-              )}
-
-              <b>
-                <label style={{ marginTop: "10px" }} htmlFor="">
-                  Tổng giá tiền:
-                </label>{" "}
-              </b>
-              <span style={{ color: "red" }}>{totalCost} VND</span>
+              <textarea
+                onChange={handleInputChange}
+                name="note"
+                className="form-control"
+                id="exampleTextarea"
+              ></textarea>
             </div>
             <div className="col-md-6">
-              <h2 style={{}}>Thời gian</h2>
+              <h2 style={{}}>Dịch vụ và thời gian</h2>
               <label style={{ marginTop: "42px" }} htmlFor="">
-                Thời gian *
+                Thời gian đến *
               </label>
               <div className="form-row">
                 <div className="col">
@@ -276,11 +256,8 @@ const BookingPage = (props: any) => {
                 </div>
               </div>
 
-              <h2 style={{ marginBottom: "30px", marginTop: "50px" }}>
-                Dịch vụ
-              </h2>
-              <div className="form-group">
-                <label htmlFor="">Số Km</label>
+              <div style={{ marginTop: "20px" }} className="form-group">
+                <label htmlFor="">Số KM của xe</label>
                 <input
                   onChange={handleInputChange}
                   name="mileage"
@@ -290,11 +267,9 @@ const BookingPage = (props: any) => {
                   placeholder="Nhập số Km của bạn"
                   min={0}
                 />
-                <p style={{ paddingLeft: "10px", paddingTop: "20px" }}>
-                  {kmMessage}
-                </p>
               </div>
               <div className="form-group">
+                <label htmlFor="">Gói Bảo dưỡng</label>
                 <select
                   onChange={handleInputChange}
                   name="service"
@@ -310,19 +285,46 @@ const BookingPage = (props: any) => {
                       </option>
                     ))}
                 </select>
-              </div>
+                <p
+                  style={{
+                    paddingLeft: "10px",
+                    paddingTop: "20px",
+                    color: "blue",
+                  }}
+                >
+                  {kmMessage}
+                </p>
+                <b>
+                  <p style={{ marginTop: "20px" }}>
+                    Gói bảo dưỡng hiện tại gồm:
+                  </p>
+                </b>
 
-              <b>
-                <label style={{ marginTop: "50px" }} htmlFor="">
-                  Ghi chú
-                </label>
-              </b>
-              <textarea
-                onChange={handleInputChange}
-                name="note"
-                className="form-control"
-                id="exampleTextarea"
-              ></textarea>
+                {selectedServiceItems.length > 0 ? (
+                  selectedServiceItems.map((item, index) => (
+                    <p style={{ color: "blue" }} key={index}>
+                      {item.item_name} : {item.price} VND
+                    </p>
+                  ))
+                ) : (
+                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+                )}
+                {selectedService && (
+                  <>
+                    <p>
+                      Chi phí nhân công bảo dưỡng:{" "}
+                      <span style={{ color: "blue" }}>{NhanCong} VND</span>
+                    </p>
+                  </>
+                )}
+
+                <b>
+                  <label style={{ marginTop: "10px" }} htmlFor="">
+                    Tổng giá tiền:
+                  </label>{" "}
+                </b>
+                <span style={{ color: "red" }}>{totalCost} VND</span>
+              </div>
             </div>
           </div>
 
