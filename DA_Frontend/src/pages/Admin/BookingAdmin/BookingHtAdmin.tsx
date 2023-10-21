@@ -13,6 +13,7 @@ interface DataType {
   email: string,
   service?: string,
   phone: number,
+  status: number,
   note: string,
   target_date: string ,
   target_time: string ,
@@ -121,10 +122,40 @@ const data: DataType[] = props.booking
       ...item
     }
   });
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredData = data.filter(item => 
+    item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.phone.toString().includes(searchValue) ||
+    item.status.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.target_date.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.target_time.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.note.toLowerCase().includes(searchValue.toLowerCase()) 
+    
+
+  );
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control bg-light border-0 small"
+            placeholder="Tìm kiếm"
+            aria-label="Search"
+            aria-describedby="basic-addon2"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-primary" type="button">
+              <i className="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <Table columns={columns} dataSource={filteredData} pagination={{ pageSize: 5 }} />
        {/* Modal hiển thị thông tin chi tiết dịch vụ */}
        <Modal
   title="Thông tin dịch vụ"
