@@ -1,155 +1,208 @@
 import React, { useEffect, useState } from "react";
 
-import { Space, Table, Tag, Popconfirm, message,   } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import { Button, Modal  } from 'antd';
-import { Link } from 'react-router-dom'
+import { Space, Table, Tag, Popconfirm, message } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import { Button, Modal } from "antd";
+import { Link } from "react-router-dom";
 
 import { IBooking } from "../../../interface/booking";
 
 interface DataType {
-  id: number,
-    full_name: string,
-    email: string,
-    service: string,
-    phone: number,
-    desc: string,
-    time: any ,
-    active: any,
-    date: any,
-    created_at: any,
-    updated_at: any
+  id: number;
+  name: string;
+  email: string;
+  service?: string;
+  phone: number;
+  status: string;
+  note: string;
+  target_date: string;
+  target_time: string;
+  name_car: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 interface IProps {
-  booking: IBooking[],
-  onRemoveBooking: (id: any) => void
+  booking: IBooking[];
+  onRemoveBooking: (id: DataType) => void;
+  onUpdateBooking: (booking: IBooking) => void;
 }
-
-
 
 const BookingAdmin = (props: IProps) => {
-// State để theo dõi trạng thái của Modal và dữ liệu hiển thị
-const [isModalVisible, setIsModalVisible] = useState(false);
-const [selectedService, setSelectedService] = useState<IBooing | null>(null);
+  // State để theo dõi trạng thái của Modal và dữ liệu hiển thị
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedService, setSelectedService] = useState<IBooking | null>(null);
 
+  const showModal = (serviceData: IBooking) => {
+    setSelectedService(serviceData);
+    setIsModalVisible(true);
+  };
 
-const showModal = (serviceData: IBooking) => {
-  setSelectedService(serviceData);
-  setIsModalVisible(true);
-};
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setSelectedService(null);
+  };
 
-const closeModal = () => {
-  setIsModalVisible(false);
-  setSelectedService(null);
-};
+  const removeBooking = (id: IBooking) => {
+    props.onRemoveBooking(id);
+  };
+  const confirmBooking = (record: DataType) => {
+    // Tạo một bản sao của record để không thay đổi trực tiếp state
+    const updatedRecord = { ...record, status: "Đã xác nhận" };
+    console.log(updatedRecord);
 
-  const removeBooking = (id: any) => {
-    props.onRemoveBooking(id)
-}
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Họ và tên',
-    dataIndex: 'full_name',
-    key: 'full_name',
-    render: (number) => <a>{number}</a>,
-  },
-  {
-    title: 'Số điện thoại',
-    dataIndex: 'phone',
-    key: 'phone',
-  },
-  {
-    title: 'Dịch vụ',
-    dataIndex: 'service',
-    key: 'service',
-    render: (_, record) => (
-      <Button type="dashed" onClick={() => showModal(record)}>
-        Chi tiết
-      </Button>
-    ),
-  },
-  
-  {
-    title: 'Ngày đến',
-    dataIndex: 'target_date',
-    key: 'target_date',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Ghi chú',
-    dataIndex: 'note',
-    key: 'note',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Trạng thái',
-    dataIndex: 'status',
-    key: 'status',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: ( record) => (
-      <Space size="middle">
-        <Popconfirm
-  title="Xóa lịch"
-  description="Bạn có chắc muốn xóa lịch này?"
-  onConfirm={() => {
-    removeBooking(record.id)
-  }}
-  okText="Có"
-  okButtonProps={{
-    style: {background: "orange", color: "white"},
-  }}
-  cancelText="Không"
->
-  <Button danger>Delete</Button>
-</Popconfirm>
-        <Link to={``}><Button type="primary">Xác nhận</Button></Link>
-        
-      </Space>
-    ),
-  },
-];
+    // Gửi dữ liệu đã cập nhật lên API
+    props.onUpdateBooking(updatedRecord);
+  };
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "Họ và tên",
+      dataIndex: "name",
+      key: "name",
+      render: (number) => <a>{number}</a>,
+    },
+    {
+      title: "Số điện thoại",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Dịch vụ",
+      dataIndex: "service",
+      key: "service",
+      render: (_, record) => (
+        <Button type="dashed" onClick={() => showModal(record)}>
+          Chi tiết
+        </Button>
+      ),
+    },
 
-const data: DataType[] = props.booking
-  .filter((item: IBooking) => item.status === "Chờ xác nhận")
-  .map((item: IBooking) => {
-    return {
-      key: item.id,
-      ...item
-    }
-  });
+    {
+      title: "Ngày đến",
+      dataIndex: "target_date",
+      key: "target_date",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Ghi chú",
+      dataIndex: "note",
+      key: "note",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => <a style={{ color: "red" }}>{text}</a>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (record) => (
+        <Space size="middle">
+          <Popconfirm
+            title="Xóa lịch"
+            description="Bạn có chắc muốn xóa lịch này?"
+            onConfirm={() => {
+              removeBooking(record.id);
+            }}
+            okText="Có"
+            okButtonProps={{
+              style: { background: "orange", color: "white" },
+            }}
+            cancelText="Không"
+          >
+            <Button danger>Delete</Button>
+          </Popconfirm>
+          <Popconfirm
+            title="Xác nhận"
+            description="Xác nhận lịch này"
+            onConfirm={() => {
+              confirmBooking(record);
+            }}
+            okText="Có"
+            okButtonProps={{
+              style: { background: "orange", color: "white" },
+            }}
+            cancelText="Không"
+          >
+            <Button>Xác nhận</Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  const data: DataType[] = props.booking
+    .filter((item: IBooking) => item.status === "Chờ xác nhận")
+    .map((item: IBooking) => {
+      return {
+        key: item.id,
+        ...item,
+      };
+    });
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const filteredData = data.filter(item => 
+      item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.phone.toString().includes(searchValue) ||
+      item.status.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.target_date.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.target_time.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.note.toLowerCase().includes(searchValue.toLowerCase()) 
+      
+
+    );
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
-       {/* Modal hiển thị thông tin chi tiết dịch vụ */}
-       <Modal
-  title="Thông tin dịch vụ"
-  visible={isModalVisible}
-  onOk={closeModal}
-  onCancel={closeModal}
->
-  {selectedService && (
-    <div>
-      <p>Họ và tên: {selectedService.full_name}</p>
-      <p>Số điện thoại: {selectedService.phone}</p>
-      <p>Email: {selectedService.email}</p>
-      <p>Tên xe: {selectedService.name_car}</p>
-      <p>Trạng thái: {selectedService.status}</p>
-      <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
-      <p>Ghi chú: {selectedService.note}</p>
-      
-      
-      
+      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control bg-light border-0 small"
+            placeholder="Tìm kiếm"
+            aria-label="Search"
+            aria-describedby="basic-addon2"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-primary" type="button">
+              <i className="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <Table columns={columns} dataSource={filteredData} pagination={{ pageSize: 5 }} />
+      {/* Modal hiển thị thông tin chi tiết dịch vụ */}
+      <Modal
+        title="Thông tin dịch vụ"
+        visible={isModalVisible}
+        onOk={closeModal}
+        onCancel={closeModal}
+      >
+        {selectedService && (
+          <div>
+            <p>Họ và tên: {selectedService.name}</p>
+            <p>Số điện thoại: {selectedService.phone}</p>
+            <p>Email: {selectedService.email}</p>
+            <p>Tên xe: {selectedService.name_car}</p>
+            <p>
+              Trạng thái:{" "}
+              <span style={{ color: "red" }}>{selectedService.status}</span>
+            </p>
+            <p>
+              Thời gian đến dự kiến: {selectedService.target_time} Ngày{" "}
+              {selectedService.target_date}
+            </p>
+            <p>Ghi chú: {selectedService.note}</p>
+          </div>
+        )}
+      </Modal>
     </div>
-  )}
-</Modal>
-    </div>
-  )
-}
+  );
+};
 
-export default BookingAdmin
+export default BookingAdmin;

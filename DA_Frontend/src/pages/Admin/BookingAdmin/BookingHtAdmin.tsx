@@ -9,28 +9,29 @@ import { IBooking } from "../../../interface/booking";
 
 interface DataType {
   id: number,
-    full_name: string,
-    email: string,
-    service: string,
-    phone: number,
-    desc: string,
-    time: any ,
-    active: any,
-    date: any,
-    created_at: any,
-    updated_at: any
+  name: string,
+  email: string,
+  service?: string,
+  phone: number,
+  status: number,
+  note: string,
+  target_date: string ,
+  target_time: string ,
+  name_car: string ,
+  created_at?: string,
+  updated_at?: string
 }
 
 interface IProps {
   booking: IBooking[],
-  onRemoveBooking: (id: any) => void
+  onRemoveBooking: (id: DataType) => void
 }
 
 
 const BookingHtAdmin = (props: IProps) => {
   // State để theo dõi trạng thái của Modal và dữ liệu hiển thị
 const [isModalVisible, setIsModalVisible] = useState(false);
-const [selectedService, setSelectedService] = useState<IBooing | null>(null);
+const [selectedService, setSelectedService] = useState<IBooking | null>(null);
 
 
 const showModal = (serviceData: IBooking) => {
@@ -43,14 +44,14 @@ const closeModal = () => {
   setSelectedService(null);
 };
 
-  const removeBooking = (id: any) => {
+  const removeBooking = (id: DataType) => {
     props.onRemoveBooking(id)
 }
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
-    dataIndex: 'full_name',
-    key: 'full_name',
+    dataIndex: 'name',
+    key: 'name',
     render: (number) => <a>{number}</a>,
   },
   {
@@ -85,7 +86,7 @@ const columns: ColumnsType<DataType> = [
     title: 'Trạng thái',
     dataIndex: 'status',
     key: 'status',
-    render: (text) => <a>{text}</a>,
+    render: (text) => <a style={{color: 'green'}}>{text}</a>,
   },
   {
     title: 'Action',
@@ -106,7 +107,7 @@ const columns: ColumnsType<DataType> = [
 >
   <Button danger>Delete</Button>
 </Popconfirm>
-        <Link to={``}><Button type="primary">Xác nhận</Button></Link>
+        {/* <Link to={``}><Button type="primary">Xác nhận</Button></Link> */}
         
       </Space>
     ),
@@ -121,10 +122,40 @@ const data: DataType[] = props.booking
       ...item
     }
   });
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredData = data.filter(item => 
+    item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.phone.toString().includes(searchValue) ||
+    item.status.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.target_date.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.target_time.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.note.toLowerCase().includes(searchValue.toLowerCase()) 
+    
+
+  );
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control bg-light border-0 small"
+            placeholder="Tìm kiếm"
+            aria-label="Search"
+            aria-describedby="basic-addon2"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-primary" type="button">
+              <i className="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <Table columns={columns} dataSource={filteredData} pagination={{ pageSize: 5 }} />
        {/* Modal hiển thị thông tin chi tiết dịch vụ */}
        <Modal
   title="Thông tin dịch vụ"
@@ -134,11 +165,11 @@ const data: DataType[] = props.booking
 >
   {selectedService && (
     <div>
-      <p>Họ và tên: {selectedService.full_name}</p>
+      <p>Họ và tên: {selectedService.name}</p>
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.name_car}</p>
-      <p>Trạng thái: {selectedService.status}</p>
+      <p>Trạng thái: <span style={{color: 'green'}}>{selectedService.status}</span></p>
       <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
       <p>Ghi chú: {selectedService.note}</p>
       

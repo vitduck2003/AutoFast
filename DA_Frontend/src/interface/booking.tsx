@@ -1,19 +1,15 @@
 export interface IBooking {
     id: number,
-    full_name: string,
+    name: string,
     email: string,
-    service: string,
-    status: string,
+    service?: string,
     phone: number,
-    time: any ,
-    desc: string,
-    active: any,
-    datetime: any,
-    created_at: any,
-    updated_at: any
-    baoduong?: any
-    suachua?: any
-    dongson?: any
-    name_car: string
+    note: string,
+    target_date: string ,
+    target_time: string ,
+    name_car: string ,
+    created_at?: string,
+    updated_at?: string
+    status: string
     
 }

@@ -210,6 +210,7 @@ function App() {
                   <BookingAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
+                    onUpdateBooking={onHandleUpdateBooking}
                   />
                 }
               />
@@ -222,6 +223,7 @@ function App() {
                   <BookingConfirmAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
+                    onUpdateBooking={onHandleUpdateBooking}
                   />
                 }
               />
@@ -234,6 +236,7 @@ function App() {
                   <BookingHtAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
+                    onUpdateBooking={onHandleUpdateBooking}
                   />
                 }
               />
