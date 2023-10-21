@@ -15,7 +15,8 @@ class Booking extends Model
         'email',
         'target_date',
         'target_time',
-        'name_car',
+        'model_car',
+        'mileage',
         'note',
         'status'
     ];
