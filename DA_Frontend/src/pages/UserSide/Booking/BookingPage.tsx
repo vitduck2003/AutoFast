@@ -28,11 +28,12 @@ const BookingPage = (props: any) => {
     phone: string;
     email: string;
     note: string;
-    name_car: string;
+    model_car: string;
     status: string;
     target_date: string;
     target_time: string;
     service: string;
+    mileage: string;
   };
 
   const [formData, setFormData] = useState<FormData>({
@@ -40,11 +41,12 @@ const BookingPage = (props: any) => {
     phone: "",
     email: "",
     note: "",
-    name_car: "",
+    model_car: "",
     status: "Chờ xác nhận",
     target_date: "",
     target_time: "",
     service: "",
+    mileage: "",
   });
 
   const handleInputChange = (e: any) => {
@@ -200,7 +202,7 @@ const BookingPage = (props: any) => {
               </h2>
               <select
                 required
-                name="name_car"
+                name="model_car"
                 onChange={handleInputChange}
                 className="form-select"
                 aria-label="Default select example"
@@ -281,9 +283,9 @@ const BookingPage = (props: any) => {
                 <label htmlFor="">Số Km</label>
                 <input
                   onChange={handleInputChange}
-                  name="km"
+                  name="mileage"
                   required
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Nhập số Km của bạn"
                   min={0}
