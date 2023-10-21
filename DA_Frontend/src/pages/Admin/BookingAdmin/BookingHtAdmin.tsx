@@ -13,7 +13,7 @@ interface DataType {
   email: string,
   service?: string,
   phone: number,
-  status: number,
+  status: string,
   note: string,
   target_date: string ,
   target_time: string ,
@@ -61,26 +61,27 @@ const columns: ColumnsType<DataType> = [
     key: 'phone',
   },
   {
-    title: 'Dịch vụ',
-    dataIndex: 'service',
-    key: 'service',
-    render: (_, record) => (
-      <Button type="dashed" onClick={() => showModal(record)}>
-        Chi tiết
-      </Button>
-    ),
-  },
-  
-  {
-    title: 'Ngày đến',
-    dataIndex: 'target_date',
-    key: 'target_date',
+    title: "Loại xe",
+    dataIndex: "model_car",
+    key: "model_car",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Ghi chú',
-    dataIndex: 'note',
-    key: 'note',
+    title: "Số KM",
+    dataIndex: "mileage",
+    key: "mileage",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Ngày đến",
+    dataIndex: "target_date",
+    key: "target_date",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Giờ đến",
+    dataIndex: "target_time",
+    key: "target_time",
     render: (text) => <a>{text}</a>,
   },
   {
@@ -109,7 +110,9 @@ const columns: ColumnsType<DataType> = [
   <Button danger>Delete</Button>
 </Popconfirm>
         {/* <Link to={``}><Button type="primary">Xác nhận</Button></Link> */}
-        
+        <Button type="dashed" onClick={() => showModal(record)}>
+          Chi tiết
+        </Button>
       </Space>
     ),
   },

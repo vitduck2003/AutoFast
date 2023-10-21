@@ -68,28 +68,30 @@ const columns: ColumnsType<DataType> = [
     key: 'phone',
   },
   {
-    title: 'Dịch vụ',
-    dataIndex: 'service',
-    key: 'service',
-    render: (_, record) => (
-      <Button type="dashed" onClick={() => showModal(record)}>
-        Chi tiết
-      </Button>
-    ),
+    title: "Loại xe",
+    dataIndex: "model_car",
+    key: "model_car",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Số KM",
+    dataIndex: "mileage",
+    key: "mileage",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Ngày đến",
+    dataIndex: "target_date",
+    key: "target_date",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Giờ đến",
+    dataIndex: "target_time",
+    key: "target_time",
+    render: (text) => <a>{text}</a>,
   },
   
-  {
-    title: 'Ngày đến',
-    dataIndex: 'target_date',
-    key: 'target_date',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Ghi chú',
-    dataIndex: 'note',
-    key: 'note',
-    render: (text) => <a>{text}</a>,
-  },
   {
     title: 'Trạng thái',
     dataIndex: 'status',
@@ -127,9 +129,11 @@ const columns: ColumnsType<DataType> = [
   }}
   cancelText="Không"
 >
-  <Button>Xác nhận hoàn thành</Button>
+  <Button>Đã hoàn thành</Button>
 </Popconfirm>
-        
+<Button type="dashed" onClick={() => showModal(record)}>
+        Chi tiết
+      </Button>
       </Space>
     ),
   },

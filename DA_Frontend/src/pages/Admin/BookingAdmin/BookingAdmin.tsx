@@ -68,16 +68,17 @@ const BookingAdmin = (props: IProps) => {
       key: "phone",
     },
     {
-      title: "Dịch vụ",
-      dataIndex: "service",
-      key: "service",
-      render: (_, record) => (
-        <Button type="dashed" onClick={() => showModal(record)}>
-          Chi tiết
-        </Button>
-      ),
+      title: "Loại xe",
+      dataIndex: "model_car",
+      key: "model_car",
+      render: (text) => <a>{text}</a>,
     },
-
+    {
+      title: "Số KM",
+      dataIndex: "mileage",
+      key: "mileage",
+      render: (text) => <a>{text}</a>,
+    },
     {
       title: "Ngày đến",
       dataIndex: "target_date",
@@ -85,9 +86,9 @@ const BookingAdmin = (props: IProps) => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Ghi chú",
-      dataIndex: "note",
-      key: "note",
+      title: "Giờ đến",
+      dataIndex: "target_time",
+      key: "target_time",
       render: (text) => <a>{text}</a>,
     },
     {
@@ -129,6 +130,9 @@ const BookingAdmin = (props: IProps) => {
           >
             <Button>Xác nhận</Button>
           </Popconfirm>
+          <Button type="dashed" onClick={() => showModal(record)}>
+          Chi tiết
+        </Button>
         </Space>
       ),
     },
