@@ -92,7 +92,7 @@ const columns: ColumnsType<DataType> = [
     title: 'Trạng thái',
     dataIndex: 'status',
     key: 'status',
-    render: (text) => <a>{text}</a>,
+    render: (text) => <a style={{color: 'orange'}}>{text}</a>,
   },
   {
     title: 'Action',
@@ -157,7 +157,7 @@ const data: DataType[] = props.booking
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.name_car}</p>
-      <p>Trạng thái: {selectedService.status}</p>
+      <p>Trạng thái: <span style={{color: 'orange'}}>{selectedService.status}</span></p>
       <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
       <p>Ghi chú: {selectedService.note}</p>
       

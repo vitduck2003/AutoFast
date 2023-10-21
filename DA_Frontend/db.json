@@ -52,7 +52,7 @@
       "target_time": "19:40",
       "note": "Note 1",
       "name_car": "SUV",
-      "status": "Đã hoàn thành",
+      "status": "Chờ xác nhận",
       "service": "Cấp 1",
       "id": 1,
       "key": 1
@@ -65,7 +65,7 @@
       "target_time": "19:40",
       "note": "Note 1",
       "name_car": "SUV",
-      "status": "Đã hoàn thành",
+      "status": "Đã xác nhận",
       "service": "Cấp 2",
       "id": 2,
       "key": 2
