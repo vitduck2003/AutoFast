@@ -60,6 +60,30 @@ const AdminLayout = () => {
           </div>
         </li>
         <li className="nav-item">
+          <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoooo" aria-expanded="true" aria-controls="collapseTwoooo">
+            {/* <i className="fas fa-fw fa-cog"></i> */}
+            <i className="fas fa-fw fa-table"></i>
+            <span>Service</span>
+          </a>
+
+          <div id="collapseTwoooo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div className="bg-white py-2 collapse-inner rounded">
+              <h6 className="collapse-header">Quản Lý Dịch Vụ</h6>
+              <Link style={{ textDecoration: 'none' }} to="service" ><a  className="collapse-item" href="service">Danh Sách Dịch Vụ</a></Link>
+              <Link style={{ textDecoration: 'none' }} to="service/add" ><a  className="collapse-item" href="service/add">Thêm dịch vụ</a></Link>
+
+            </div>
+            <div className="bg-white py-2 collapse-inner rounded">
+              <h6 className="collapse-header">Quản Lý Dịch Vụ Item</h6>
+              <Link style={{ textDecoration: 'none' }} to="serviceitem" ><a  className="collapse-item" href="serviceitem">Danh Sách Dịch Vụ Item</a></Link>
+              <Link style={{ textDecoration: 'none' }} to="serviceitem/add"><a  className="collapse-item" href="serviceitem/add">Thêm Dịch Vụ Chi Tiết</a></Link>
+
+            </div>
+           
+            
+          </div>
+        </li>
+        <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwooo" aria-expanded="true" aria-controls="collapseTwooo">
             {/* <i className="fas fa-fw fa-cog"></i> */}
             <i className="fas fa-fw fa-table"></i>

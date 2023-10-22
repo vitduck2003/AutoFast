@@ -1,5 +1,5 @@
 import instance from "./instance";
-import {IStaff} from "../interface/staff"
+import {IStaff} from "../interface/staff";
 
 const getAllStaff = () => 
 {
