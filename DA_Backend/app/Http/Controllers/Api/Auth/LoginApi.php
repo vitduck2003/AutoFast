@@ -53,7 +53,7 @@ class LoginApi extends Controller
                 'role' => $role
             ], 200);
         } else {
-            return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 400);
+            return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 200);
         }
     }
 
