@@ -59,20 +59,20 @@ const SigninPage = (props) => {
             }, 3000); // Delay for 3 seconds
           });
         } else if (
-          response.message === "Thông tin tài khoản hoặc mật khẩu không chính xác"
+          response.message === 'Thông tin tài khoản hoặc mật khẩu không chính xác'
         ) {
-          // return openNotification(response.message, "white", "red", "Failed");
-          console.log(response.message);
+          return openNotification(response.message, "white", "red", "Failed");
         }
-        // else if (
-        //   response.message === "Vui lòng xác thực tài khoản"
-        // ) {
-        //   return openNotification(response.message, "white", "red", "Failed");
-        // }
+        else if (
+          response.message === "Vui lòng xác thực tài khoản"
+        ) {
+          return openNotification(response.message, "white", "red", "Failed");
+        }
       })
       .catch((error) => {
         // Handle any errors here if needed
         console.error("Error:", error);
+
         throw error; // Rethrow the error for further handling in your component
       });
   };
