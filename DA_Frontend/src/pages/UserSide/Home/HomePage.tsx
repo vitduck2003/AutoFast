@@ -33,14 +33,14 @@ const HomePage = (props: any) => {
     formState: { errors },
   } = useForm();
 
-  const onHandleSubmit: SubmitHandler<any> = (data) => {
-    // Check if there are errors before submitting
-    if (Object.keys(errors).length === 0) {
-      props.onAddBooking(data);
-      alert("Đặt lịch thành công")
-      navigate("/");
-    }
-  };
+  // const onHandleSubmit: SubmitHandler<any> = (data) => {
+  //   // Check if there are errors before submitting
+  //   if (Object.keys(errors).length === 0) {
+  //     props.onAddBooking(data);
+  //     alert("Đặt lịch thành công")
+  //     navigate("/");
+  //   }
+  // };
   return (
     <div>
       {/* Carousel Start */}
@@ -224,19 +224,19 @@ const HomePage = (props: any) => {
         <div className="row g-4 wow fadeInUp" data-wow-delay="0.3s">
           <div className="col-lg-4">
             <div className="nav w-100 nav-pills me-4">
-              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
+              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" >
                 <i className="fa fa-car-side fa-2x me-3"></i>
                 <h4 className="m-0">Bảo Dưỡng và sửa chữa</h4>
               </button>
-              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
+              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" >
                 <i className="fa fa-car fa-2x me-3"></i>
                 <h4 className="m-0">Chuẩn đoán và vệ sinh</h4>
               </button>
-              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
+              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" >
                 <i className="fa fa-cog fa-2x me-3"></i>
                 <h4 className="m-0">Thay thế phụ tùng chính hãng </h4>
               </button>
-              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-0" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
+              <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-0" >
                 <i className="fa fa-oil-can fa-2x me-3"></i>
                 <h4 className="m-0">Thay dầu và vệ sinh</h4>
               </button>
@@ -271,98 +271,13 @@ const HomePage = (props: any) => {
 
 <div className="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
       <div className="container">
-        <div className="row gx-5">
-          <div className="col-lg-6 py-5">
+        <div className=" gx-5">
+          <div className=" py-5">
             <div className="py-5">
               <h1 className="text-white mb-4">Một trong những Gara ô tô từng được đề cử và đạt giải thưởng Nobel Hòa Bình </h1>
               <p className="text-white mb-0">Sóng bắt đầu từ gió, gió bắt đầu từ đâu, em cũng không biết nữa, khi nào ta yêu nhau!</p>
               <br />
               <p className="text-white mb-0">Nhà thơ Xuân Quỳnh</p>
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-              <h1 className="text-white mb-4">Đặt lịch bảo dưỡng</h1>
-
-
-
-              <form onSubmit={handleSubmit(onHandleSubmit)}>
-        <div className="row g-3">
-          <div className="col-12 col-sm-6">
-            <input
-              type="text"
-              name="full_name"
-              className={`form-control border-0 ${errors.full_name ? 'is-invalid' : ''}`}
-              placeholder="Họ và tên"
-              style={{ height: '55px' }}
-              {...register('full_name', { required: true })}
-            />
-            {errors.name && <span className="text-danger">This field is required</span>}
-          </div>
-          <div className="col-12 col-sm-6">
-            <input
-              type="text"
-              name="phone"
-              className={`form-control border-0 ${errors.phone ? 'is-invalid' : ''}`}
-              placeholder="Số điện thoại"
-              style={{ height: '55px' }}
-              {...register('phone', { required: true })}
-            />
-            {errors.phone && <span className="text-danger">This field is required</span>}
-          </div>
-          <div className="col-12 col-sm-6">
-            <select
-              name="service"
-              className={`form-select border-0 ${errors.service ? 'is-invalid' : ''}`}
-              style={{ height: '55px' }}
-              {...register('service', { required: true })}
-            >
-              <option value="">Lựa chọn dịch vụ</option>
-              <option value="Bảo dưỡng xe">Bảo dưỡng xe</option>
-              <option value="Chuẩn đoán và sửa chữa">Chuẩn đoán và sửa chữa</option>
-              <option value="Vệ sinh và thay dầu">Vệ sinh và thay dầu</option>
-            </select>
-            {errors.service && <span className="text-danger">This field is required</span>}
-          </div>
-          <div className="col-12 col-sm-6">
-            <div className="date" id="date1" data-target-input="nearest">
-              <input
-                type="date"
-                name="date"
-                className={`form-control border-0 datetimepicker-input ${errors.date ? 'is-invalid' : ''}`}
-                placeholder="Thời gian đến"
-               
-                style={{ height: '55px' }}
-                {...register('date', { required: true })}
-              />
-              <input
-                type="text"
-                name="active"
-                className={`form-control border-0 datetimepicker-input ${errors.active ? 'is-invalid' : ''}`}
-                defaultValue="Chờ xác nhận"
-                style={{ height: '55px', display: 'none', }}
-                {...register('active', { required: true })}
-              />
-            </div>
-            {errors.date && <span className="text-danger">This field is required</span>}
-          </div>
-          <div className="col-12">
-            <textarea
-              name="desc"
-              className={`form-control border-0 ${errors.desc ? 'is-invalid' : ''}`}
-              placeholder="Ghi chú"
-              {...register('desc')}
-            ></textarea>
-          </div>
-          <div className="col-12">
-            <button className="btn btn-secondary w-100 py-3" type="submit">Đặt lịch</button>
-          </div>
-        </div>
-      </form>
-
-
-
-
             </div>
           </div>
         </div>
