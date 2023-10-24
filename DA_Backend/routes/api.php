@@ -37,6 +37,7 @@ Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
 Route::post('booking', [BookingApi::class, 'booking']);
+Route::post('auth/forget-password', [ForgetPasswordApi::class, 'forgetPassword']);
 // Route::resource('admin/booking', [ManagerBookingApi::class]);
 Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
 Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
