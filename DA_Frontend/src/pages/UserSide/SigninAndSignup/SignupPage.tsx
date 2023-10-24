@@ -17,7 +17,8 @@ const SignupPage = (props) => {
     return instance
       .post("/register", users)
       .then((response) => {
-        return response.data.message;
+        console.log(response.data.message);
+        // return response.data.message;
       })
       .catch((error) => {
         // Handle any errors here if needed

@@ -19,7 +19,7 @@ import NewsAddminEdit from "./pages/Admin/NewsAdmin/NewsAddminEdit";
 import { useEffect, useState } from "react";
 import { INews } from "./interface/news";
 import {RequireAUth}  from "react-auth-kit"
-
+import ForgotPassword from "./pages/UserSide/SigninAndSignup/ForgotPassword";
 import { IStaff } from "./interface/staff";
 import { getNews, addNews, updateNews, deleteNews } from "./api/news";
 import {
@@ -392,6 +392,10 @@ const onHandleRemoveServiceItem = (id: number) => {
           {/* Verify Page */}
           <Route  path="verify/:phone">
             <Route index element={<VerifyPage />} />
+          </Route>
+          <Route path="forgotpw">
+            <Route index element={<ForgotPassword />} />
+            
           </Route>
 
           {/* Signup Page */}

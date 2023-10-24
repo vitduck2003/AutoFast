@@ -6,19 +6,16 @@ import { notification } from "antd";
 import instance from "../../../api/instance";
 import { useState } from "react";
 
-const SigninPage = (props) => {
-  type FieldType = {
-    email?: string;
-    password?: string;
-    role?: string;
-    remember?: string;
-  };
+
+
+const ForgotPassword = ( ) => {
+ 
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const logIn = (users: IUser) => {
     return instance
-      .post("/login", users)
+      .post("/auth/forget-password", users)
       .then((response) => {
         return response.data;
       })
@@ -51,7 +48,7 @@ const SigninPage = (props) => {
           console.log(response);
 
           // Use a nested .then block to navigate after handling the success case
-          sessionStorage.setItem('user', JSON.stringify(response.user));
+          sessionStorage.setItem("user", JSON.stringify(response.user));
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/`); // Navigate to the verification page with the phone number
@@ -59,13 +56,11 @@ const SigninPage = (props) => {
             }, 3000); // Delay for 3 seconds
           });
         } else if (
-          response.message === 'Thông tin tài khoản hoặc mật khẩu không chính xác'
+          response.message ===
+          "Thông tin tài khoản hoặc mật khẩu không chính xác"
         ) {
           return openNotification(response.message, "white", "red", "Failed");
-        }
-        else if (
-          response.message === "Vui lòng xác thực tài khoản"
-        ) {
+        } else if (response.message === "Vui lòng xác thực tài khoản") {
           return openNotification(response.message, "white", "red", "Failed");
         }
       })
@@ -91,23 +86,23 @@ const SigninPage = (props) => {
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <p className="text-center h1 fw-bold mb-3 mx-1 mx-md-2 mt-4">
                       {" "}
-                      Đăng nhập
+                      Điền số điện thoại
                     </p>
 
                     <div>
                       <Form
                         name="basic"
                         labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
+                        wrapperCol={{ span: 20 }}
                         style={{ maxWidth: 600 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
-                         <Form.Item
+                       <Form.Item
                           label="Phone"
                           name="phone"
                           rules={[
@@ -123,42 +118,17 @@ const SigninPage = (props) => {
                         >
                           <Input />
                         </Form.Item>
-
-                        <Form.Item<FieldType>
-                          label="Mật khẩu"
-                          name="password"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Vui lòng nhập mật khẩu",
-                            },
-                          ]}
-                        >
-                          <Input.Password />
-                          <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link>
-                        </Form.Item>
-
-               
-
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
-                            Đăng nhập
+                           Gửi mã
                           </Button>
-                          
                         </Form.Item>
                       </Form>
-                      
-                      <span style={{ paddingLeft: "50px" }}>
-                        Bạn chưa có tài khoản?{" "}
-                        <Link style={{ textDecoration: "none" }} to="/signup">
-                          Đăng ký
-                        </Link>
-                      </span>
                     </div>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                      src="../../../../public/_9b9f39f1-b8b2-402d-8657-9614d8f7044a.jpg"
                       className="img-fluid"
                       alt="Sample image"
                     />
@@ -173,4 +143,4 @@ const SigninPage = (props) => {
   );
 };
 
-export default SigninPage;
+export default ForgotPassword;
