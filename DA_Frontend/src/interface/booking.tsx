@@ -7,9 +7,10 @@ export interface IBooking {
     note: string,
     target_date: string ,
     target_time: string ,
-    name_car: string ,
+    model_car: string ,
     created_at?: string,
-    updated_at?: string
-    status: string
+    updated_at?: string,
+    status: string,
+    mileage: string
     
 }

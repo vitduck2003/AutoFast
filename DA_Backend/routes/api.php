@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\UserApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\API\Admin\ReviewApi;
 use App\Http\Controllers\Api\Admin\ServiceApi;
+use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\BookingApi;
 use App\Http\Controllers\Api\Client\ServiceItem;
@@ -58,7 +59,9 @@ Route::prefix('admin')->group(function () {
     //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
     Route::resource('news',NewsApi::class);
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
-    Route::resource('services',ServiceApi::class);    //get api
+    Route::resource('services',ServiceApi::class);  
+     //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
+     Route::resource('service-item',ServiceItemApi::class);   
     // User API
     Route::resource('users', UserApi::class);
 

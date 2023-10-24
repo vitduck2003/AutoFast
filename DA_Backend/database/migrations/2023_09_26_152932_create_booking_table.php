@@ -21,7 +21,8 @@ return new class extends Migration
             $table->date('target_date');
             $table->time('target_time');
             $table->text('note');
-            $table->string('name_car');
+            $table->string('model_car');
+            $table->integer('mileage');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

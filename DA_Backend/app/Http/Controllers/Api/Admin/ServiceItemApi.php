@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
-class ServiceApi extends Controller
+class ServiceItemApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class ServiceApi extends Controller
     public function index()
     {
         try {
-            $data = Service::query()->orderByDesc('id')->get();
+            $data = ServiceItem::query()->orderByDesc('id')->get();
             return response()->json($data);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
@@ -48,7 +49,7 @@ class ServiceApi extends Controller
     public function store(Request $request)
     {
         try {
-            $data =  new Service();
+            $data =  new ServiceItem();
             $data->fill($request->all());
             $data->save();
             return response()->json($data);
@@ -67,9 +68,9 @@ class ServiceApi extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(ServiceItem $serviceItem)
     {
-        return response()->json($service);
+        return response()->json($serviceItem);
     }
 
     /**
@@ -93,7 +94,7 @@ class ServiceApi extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $data =  Service::findOrFail($id);
+            $data =  ServiceItem::findOrFail($id);
             $data->fill($request->all());
             $data->save();
             return response()->json($data);

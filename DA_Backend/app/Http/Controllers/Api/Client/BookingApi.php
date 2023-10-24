@@ -17,7 +17,8 @@ class BookingApi extends Controller
             'phone' => $data['phone'],
             'target_date' => $data['target_date'],
             'target_time' => $data['target_time'],
-            'name_car' => $data['name_car'],
+            'model_car' => $data['model_car'],
+            'mileage' => $data['mileage'],
             'note' => $data['note'],
             'status' => $data['status'],
         ]);

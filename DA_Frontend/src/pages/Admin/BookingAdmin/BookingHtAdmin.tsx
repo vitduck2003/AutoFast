@@ -13,13 +13,14 @@ interface DataType {
   email: string,
   service?: string,
   phone: number,
-  status: number,
+  status: string,
   note: string,
   target_date: string ,
   target_time: string ,
-  name_car: string ,
+  model_car: string ,
   created_at?: string,
   updated_at?: string
+  mileage? : string;
 }
 
 interface IProps {
@@ -60,26 +61,27 @@ const columns: ColumnsType<DataType> = [
     key: 'phone',
   },
   {
-    title: 'Dịch vụ',
-    dataIndex: 'service',
-    key: 'service',
-    render: (_, record) => (
-      <Button type="dashed" onClick={() => showModal(record)}>
-        Chi tiết
-      </Button>
-    ),
-  },
-  
-  {
-    title: 'Ngày đến',
-    dataIndex: 'target_date',
-    key: 'target_date',
+    title: "Loại xe",
+    dataIndex: "model_car",
+    key: "model_car",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Ghi chú',
-    dataIndex: 'note',
-    key: 'note',
+    title: "Số KM",
+    dataIndex: "mileage",
+    key: "mileage",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Ngày đến",
+    dataIndex: "target_date",
+    key: "target_date",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Giờ đến",
+    dataIndex: "target_time",
+    key: "target_time",
     render: (text) => <a>{text}</a>,
   },
   {
@@ -108,7 +110,9 @@ const columns: ColumnsType<DataType> = [
   <Button danger>Delete</Button>
 </Popconfirm>
         {/* <Link to={``}><Button type="primary">Xác nhận</Button></Link> */}
-        
+        <Button type="dashed" onClick={() => showModal(record)}>
+          Chi tiết
+        </Button>
       </Space>
     ),
   },
@@ -168,7 +172,8 @@ const data: DataType[] = props.booking
       <p>Họ và tên: {selectedService.name}</p>
       <p>Số điện thoại: {selectedService.phone}</p>
       <p>Email: {selectedService.email}</p>
-      <p>Tên xe: {selectedService.name_car}</p>
+      <p>Tên xe: {selectedService.model_car}</p>
+      <p>Số Km: {selectedService.mileage}</p>
       <p>Trạng thái: <span style={{color: 'green'}}>{selectedService.status}</span></p>
       <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
       <p>Ghi chú: {selectedService.note}</p>
