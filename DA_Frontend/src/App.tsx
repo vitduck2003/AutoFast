@@ -60,15 +60,22 @@ import {
   logIn,
 } from "./api/user";
 import VerifyPage from "./pages/UserSide/VerifyPage";
-import { getService, getServiceItem } from "./api/service";
+import { addService, addServiceItem, deleteService, deleteServiceItem, getService, getServiceItem, updateService, updateServiceItem } from "./api/service";
+import ServicesAdmin from "./pages/Admin/Service/ServicesAdmin";
+import ServicesAdminAdd from "./pages/Admin/Service/ServicesAddAdmin";
+import ServicesAdminEdit from "./pages/Admin/Service/ServicesAdminEdit";
+import { IService, ISeviceItem } from "./interface/service";
+import ServiceItemAdmin from "./pages/Admin/Service/ServiceItem/ServiceItemAdmin";
+import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
+import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
   const [mess, setMess] = useState();
-  const [service, setService] = useState();
-  const [serviceItem, setServiceItem] = useState();
+  const [services, setService] = useState<IService[]>([]);
+  const [serviceItem, setServiceItem] = useState<ISeviceItem[]>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -153,7 +160,42 @@ function App() {
       setUsers(users.filter((item: IUser) => item.id !== id))
     );
   };
+// Services Admin
+const onHandleAddService = (service: IService) => {
+  addService(service).then(() =>
+    getService().then(({ data }) => setService(data))
+  );
+};
 
+const onHandleUpdateService = (service: IService) => {
+  updateService(service).then(() =>
+    getService().then(({ data }) => setService(data))
+  );
+};
+
+const onHandleRemoveService = (id: number) => {
+  deleteService(id).then(() =>
+    setService(services.filter((item: IService) => item.id !== id))
+  );
+};
+// ServiceItem
+const onHandleAddServiceItem = (data: ISeviceItem) => {
+  addServiceItem(data).then(() =>
+    getServiceItem().then(({ data }) => {
+      setServiceItem(data);
+    })
+  );
+};
+const onHandleUpdateServiceItem = (data: ISeviceItem) => {
+  updateServiceItem(data).then(() =>
+    getServiceItem().then(({ data }) => setServiceItem(data))
+  );
+};
+const onHandleRemoveServiceItem = (id: number) => {
+  deleteServiceItem(id).then(() =>
+    setServiceItem(serviceItem.filter((item: any) => item.id !== id))
+  );
+};
 
   return (
     <div>
@@ -166,7 +208,7 @@ function App() {
             <Route path="booking">
               <Route
                 index
-                element={<BookingPage serviceItem={serviceItem} service={service} onAddBooking={onHandleBooking} />}
+                element={<BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />}
               />
             </Route>
 
@@ -198,7 +240,6 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Admin Side */}
-          Rout
           <Route path="/admin" element={< AdminLayout />}>
             <Route index element={<Dashboard />} />
 
@@ -263,7 +304,34 @@ function App() {
                 }
               />
             </Route>
-
+            {/*Services Admin Page */}
+            <Route path="service">
+              <Route
+                index
+                element={
+                  <ServicesAdmin service={services} onRemoveService={onHandleRemoveService} />
+                }
+              />{" "}
+              <Route
+                path="add"
+                element={<ServicesAdminAdd onAddService={onHandleAddService}  />}
+              />
+              <Route
+                path=":id/edit"
+                element={
+                  <ServicesAdminEdit
+                  service={services}
+                  onHandleUpdateService={onHandleUpdateService}
+                  />
+                }
+              />
+            </Route>
+                {/* ADMIN SERVICEItem*/}
+            <Route path="serviceitem">
+              <Route index element={<ServiceItemAdmin servicesItem={serviceItem} onRemoveServiceItem={onHandleRemoveServiceItem}/>}/>
+              <Route path="add" element= {<ServiceItemAdd  onAddServiceItem={onHandleAddServiceItem} service={services} />  }/>
+              <Route path=":id/edit" element= {<ServiceItemEdit service={services}  serviceItem={serviceItem} onUpdateServiceItem={onHandleUpdateServiceItem}/>}/>
+            </Route>
             {/* Staff Admin Page */}
             <Route path="staffs">
               <Route

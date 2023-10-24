@@ -1,12 +1,17 @@
 {
   "staff": [
     {
-      "name": "asdad new",
-      "phone": "asdasdasd",
-      "image": "asdsad",
-      "role": "adasdsa",
-      "desc": "dasdad",
-      "id": 1
+      "id": 3,
+      "user_id": 3,
+      "salary": 1000,
+      "review": "1234",
+      "status": "12345",
+      "name": "hell",
+      "password": "12345",
+      "avatar": "12345",
+      "email": "hell@gmail.com",
+      "phone": "0987612345",
+      "description": "12345"
     }
   ],
   "staffcategory": [
@@ -162,6 +167,44 @@
       "password": "24324",
       "password2": "34324",
       "id": 3
+    }
+  ],
+  "service": [
+    {
+      "id": 1,
+      "service_name": "ádsdsds",
+      "image_service": "sadasd",
+      "content": "sadkjhasdhkusa"
+    }
+  ],
+  "serviceitem": [
+    {
+      "id": 1,
+      "service_name": "ádsdsds",
+      "item_name": "sonnnn",
+      "time_done": "skjadas",
+      "price": 432423
+    },
+    {
+      "item_name": "sadasd",
+      "time_done": "9h ngày 11",
+      "service_name": "ádsdsds",
+      "price": "322332",
+      "id": 2
+    },
+    {
+      "item_name": "ádasdsa",
+      "time_done": "sadas",
+      "service_name": "ádsdsds",
+      "price": "2323",
+      "id": 3
+    },
+    {
+      "item_name": "aaaa",
+      "time_done": "ádsad",
+      "service_name": "ádsdsds",
+      "price": "ádsad",
+      "id": 4
     }
   ]
 }
