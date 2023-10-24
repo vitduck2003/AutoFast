@@ -1,7 +1,7 @@
 import instance from "./instance";
 import { IService, ISeviceItem } from "../interface/service";
 const getService = () => {
-  return instance.get("/service");
+  return instance.get("/admin/services");
 };
 const addService = (service: IService) => {
   return instance.post("/service", service);
@@ -14,7 +14,7 @@ const deleteService= (id: any) => {
 };
 
 const getServiceItem = () => {
-  return instance.get("/serviceitem");
+  return instance.get("/client/service-item");
 };
 const addServiceItem = (service: ISeviceItem) => {
   return instance.post("/serviceitem", service);
