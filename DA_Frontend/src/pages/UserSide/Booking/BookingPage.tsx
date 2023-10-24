@@ -277,7 +277,12 @@ const BookingPage = (props: any) => {
                   id="service"
                   value={formData.service}
                 >
-                  <option value="0">Chọn Cấp bảo dưỡng</option>
+                  <option
+                    disabled={formData.service && formData.service !== "0"}
+                    value="0"
+                  >
+                    Chọn Cấp bảo dưỡng
+                  </option>
                   {dataService &&
                     dataService.map((item: any) => (
                       <option key={item.id} value={item.id}>

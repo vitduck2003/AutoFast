@@ -5,13 +5,13 @@ const getBooking = () => {
 };
 
 const addBooking = (booking: any) => {
-  return instance.post("/bookings", booking);
+  return instance.post("/booking", booking);
 };
 const updateBooking = (booking: any) => {
   return instance.patch("/booking/" + booking.id, booking);
 };
-const deleteBooking= (id: any) => {
+const deleteBooking = (id: any) => {
   return instance.delete("/booking/" + id);
 };
 
-export { getBooking, addBooking, updateBooking, deleteBooking,};
+export { getBooking, addBooking, updateBooking, deleteBooking };
