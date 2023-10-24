@@ -22,8 +22,8 @@ const VerifyPage = () => {
 
     // Store the countdown start time and value in localStorage
     const countdownStartTime = new Date().getTime();
-    localStorage.setItem('countdownStartTime', countdownStartTime.toString());
-    localStorage.setItem('countdownValue', countdown.toString());
+    localStorage.setItem("countdownStartTime", countdownStartTime.toString());
+    localStorage.setItem("countdownValue", countdown.toString());
 
     setCountdown(initialCountdown);
     setButtonDisabled(true);
@@ -36,8 +36,8 @@ const VerifyPage = () => {
       if (remainingTime <= 0) {
         clearInterval(countdownInterval);
         setButtonDisabled(false);
-        localStorage.removeItem('countdownStartTime');
-        localStorage.removeItem('countdownValue');
+        localStorage.removeItem("countdownStartTime");
+        localStorage.removeItem("countdownValue");
       } else {
         setCountdown(remainingTime);
       }
@@ -55,8 +55,10 @@ const VerifyPage = () => {
 
   const resumeCountdown = () => {
     // Retrieve countdown start time and value from localStorage
-    const countdownStartTime = parseInt(localStorage.getItem('countdownStartTime'));
-    const initialCountdown = parseInt(localStorage.getItem('countdownValue'));
+    const countdownStartTime = parseInt(
+      localStorage.getItem("countdownStartTime")
+    );
+    const initialCountdown = parseInt(localStorage.getItem("countdownValue"));
 
     if (!isNaN(countdownStartTime) && !isNaN(initialCountdown)) {
       // Calculate the remaining time
@@ -72,8 +74,8 @@ const VerifyPage = () => {
           if (remainingTime <= 0) {
             clearInterval(countdownInterval);
             setButtonDisabled(false);
-            localStorage.removeItem('countdownStartTime');
-            localStorage.removeItem('countdownValue');
+            localStorage.removeItem("countdownStartTime");
+            localStorage.removeItem("countdownValue");
           } else {
             setCountdown(remainingTime);
             remainingTime--;
@@ -87,9 +89,7 @@ const VerifyPage = () => {
   const resend = (phone) => {
     console.log(phone);
 
-  
     startCountdown();
-
 
     const data = {
       phone: phone,
