@@ -15,13 +15,14 @@ class ManagerBookingApi extends Controller
 
         // Thực hiện insert vào bảng 'booking'
         $bookingId = DB::table('booking')->insertGetId([
-            'name' => $data['name'],
+            'name' => $data['full_name'],
             'phone' => $data['phone'],
             'email' => $data['email'],
             'target_date' => $data['target_date'],
             'target_time' => $data['target_time'],
             'note' => $data['note'],
-            'name_car' => $data['name_car'],
+            'model_car' => $data['model_car'],
+            'mileage' => $data['mileage'],
             'status' => $data['status'],
         ]);
 

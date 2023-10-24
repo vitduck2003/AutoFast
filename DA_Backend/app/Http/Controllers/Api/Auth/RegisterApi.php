@@ -29,10 +29,10 @@ class RegisterApi extends Controller
         $checkemail = User::where('email', $validatedData['email'])->exists();
         $checkphone = User::where('phone', $validatedData['phone'])->exists();
         if($checkemail){
-            return response()->json(['message' => 'Email đã tồn tại'], 200);
+            return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 400);
         }
         if($checkphone){
-            return response()->json(['message' => 'Số điện thoại đã tồn tại'], 200);
+            return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
         }
         $user = User::create([
             'name' => $validatedData['name'],
@@ -49,9 +49,9 @@ class RegisterApi extends Controller
 
             $this->sendVerificationCode($user, $verificationCode, $validatedData['phone']);
 
-            return response()->json(['message' => 'Đăng ký thành công'], 201);
+            return response()->json(['message' => 'Đăng ký thành công', 'success' => true], 200);
         } else {
-            return response()->json(['message' => 'Đăng kí tài khoản thất bại'], 201);
+            return response()->json(['message' => 'Đăng kí tài khoản thất bại', 'success' => false], 201);
         }
     }
 
@@ -71,10 +71,10 @@ class RegisterApi extends Controller
             ]
         );
         if($message){
-            return response()->json(['message' => 'Gửi tin nhắn thành công'], 200);
+            return response()->json(['message' => 'Gửi tin nhắn thành công', 'success' => true], 200);
         }
         else {
-            return response()->json(['message' => 'Gửi tin nhắn thất bại'], 201);
+            return response()->json(['message' => 'Gửi tin nhắn thất bại', 'success' => false], 201);
         }
     }
 
@@ -86,7 +86,7 @@ class RegisterApi extends Controller
 
         $user = User::where('phone', $validatedData['phone'])->first();
         if (!$user) {
-            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
+            return response()->json(['message' => 'Người dùng không tồn tại', 'success' => false], 404);
         }
 
         $verificationCode = Str::random(6);
@@ -95,7 +95,7 @@ class RegisterApi extends Controller
 
         $this->sendVerificationCode($user, $verificationCode, $validatedData['phone']);
 
-        return response()->json(['message' => 'Gửi lại mã xác minh thành công'], 200);
+        return response()->json(['message' => 'Gửi lại mã xác minh thành công', 'success' => true], 200);
     }
 
     public function verifyCode(Request $request)
@@ -107,17 +107,17 @@ class RegisterApi extends Controller
 
         $user = User::where('phone', $validatedData['phone'])->first();
         if (!$user) {
-            return response()->json(['message' => 'Người dùng không tồn tại'], 404);
+            return response()->json(['message' => 'Người dùng không tồn tại', 'success' => false], 404);
         }
 
         if ($user->verification_code !== $validatedData['code']) {
-            return response()->json(['message' => 'Mã xác minh không đúng'], 200);
+            return response()->json(['message' => 'Mã xác minh không đúng', 'success' => false], 200);
         }
 
         $user->verification_code = null;
         $user->is_verified = true;
         $user->save();
 
-        return response()->json(['message' => 'Xác minh mã thành công'], 200);
+        return response()->json(['message' => 'Xác minh mã thành công', 'success' => true], 200);
     }
 }

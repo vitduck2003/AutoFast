@@ -47,13 +47,14 @@ class LoginApi extends Controller
                 ->first();
 
             return response()->json([
+                'success' => true,
                 'message' => 'Đăng nhập thành công',
                 'user' => $user,
                 'access_token' => $token,
                 'role' => $role
             ], 200);
         } else {
-            return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác'], 200);
+            return response()->json(['message' => 'Thông tin tài khoản hoặc mật khẩu không chính xác', 'success' => false], 200);
         }
     }
 
@@ -61,6 +62,6 @@ class LoginApi extends Controller
     {
         Auth::logout();
 
-        return response()->json(['message' => 'Đăng xuất thành công'], 200);
+        return response()->json(['message' => 'Đăng xuất thành công', 'success' => true], 200);
     }
 }

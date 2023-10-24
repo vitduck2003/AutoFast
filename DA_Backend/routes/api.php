@@ -36,14 +36,18 @@ Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
+// api booking bên client
 Route::post('booking', [BookingApi::class, 'booking']);
-Route::post('auth/forget-password', [ForgetPasswordApi::class, 'forgetPassword']);
+Route::post('send-verification-code', [ForgetPasswordApiController::class, 'sendVerificationCode']);
+Route::post('verify-code', [ForgetPasswordApiController::class, 'verifyCode']);
+Route::post('reset-password', [ForgetPasswordApiController::class, 'resetPassword']);
 // Route::resource('admin/booking', [ManagerBookingApi::class]);
-Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
-Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
-Route::get('/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
-Route::get('/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
-Route::get('/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
+// Api booking bên admin
+Route::post('admin/bookings', [ManagerBookingApi::class,'createBooking']);
+Route::get('admin/bookings', [ManagerBookingApi::class,'getAllBookings']);
+Route::get('admin/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
+Route::get('admin/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
+Route::get('admin/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
 // Admin APIs
 Route::prefix('admin')->group(function () {
     // Review APIs
