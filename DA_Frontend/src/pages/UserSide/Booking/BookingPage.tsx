@@ -229,7 +229,6 @@ const BookingPage = (props: any) => {
               <input
                 onChange={handleInputChange}
                 name="phone"
-                required
                 type="string"
                 className="form-control"
                 placeholder="Tối thiểu 10 số"
@@ -243,12 +242,11 @@ const BookingPage = (props: any) => {
               <input
                 onChange={handleInputChange}
                 name="email"
-                required
                 type="string"
                 className="form-control"
                 placeholder="vidu@gmail.com"
               />
- {formErrors.email && (
+              {formErrors.email && (
                 <p style={{ color: "red" }}>{formErrors.email}</p>
               )}
               <b>
@@ -257,7 +255,6 @@ const BookingPage = (props: any) => {
                 </label>
               </b>
               <select
-                required
                 name="model_car"
                 onChange={handleInputChange}
                 className="form-select"
@@ -274,8 +271,8 @@ const BookingPage = (props: any) => {
                 <option value="Pickup"> Pickup</option>
                 <option value="Limousine">Limousine</option>
               </select>
-              {formErrors.model_car  && (
-                <p style={{ color: "red" }}>{formErrors.model_car }</p>
+              {formErrors.model_car && (
+                <p style={{ color: "red" }}>{formErrors.model_car}</p>
               )}
               <b>
                 <label style={{ marginTop: "50px" }} htmlFor="">
@@ -315,9 +312,9 @@ const BookingPage = (props: any) => {
                     placeholder="Ngày và Thời gian Đến"
                   />
                 </div>
-                {formErrors.target_date  && (
-                <p style={{ color: "red" }}>{formErrors.target_date }</p>
-              )}
+                {formErrors.target_date && (
+                  <p style={{ color: "red" }}>{formErrors.target_date}</p>
+                )}
               </div>
 
               <div style={{ marginTop: "20px" }} className="form-group">
@@ -325,15 +322,14 @@ const BookingPage = (props: any) => {
                 <input
                   onChange={handleInputChange}
                   name="mileage"
-                  required
                   type="text"
                   className="form-control"
                   placeholder="Nhập số Km của bạn"
                   min={0}
                 />
               </div>
-              {formErrors.mileage  && (
-                <p style={{ color: "red" }}>{formErrors.mileage }</p>
+              {formErrors.mileage && (
+                <p style={{ color: "red" }}>{formErrors.mileage}</p>
               )}
               <div className="form-group">
                 <label htmlFor="">Gói Bảo dưỡng</label>
