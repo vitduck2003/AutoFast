@@ -70,6 +70,8 @@ import { IService, ISeviceItem } from "./interface/service";
 import ServiceItemAdmin from "./pages/Admin/Service/ServiceItem/ServiceItemAdmin";
 import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
 import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
+import AccountSetting from "./pages/UserSide/Account/AccountSetting";
+import BillDetail from "./pages/UserSide/Bill/BillDetail";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -236,6 +238,21 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="technicians">
               <Route index element={<TeamPage />} />
             </Route>
+            {/* Bill Page */}
+          <Route path="bill">
+            <Route
+              index
+              element={<BillDetail  />}
+            />
+          </Route>
+          {/* Account Setting */}
+          <Route path="account">
+            <Route
+              index
+              element={<AccountSetting />}
+            />
+          </Route>
+
           </Route>
           {/* End User Side */}
           {/* Not Found Page */}
@@ -411,6 +428,8 @@ const onHandleRemoveServiceItem = (id: number) => {
               element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
             />
           </Route>
+          
+          
         </Routes>
       </BrowserRouter>
     </div>
