@@ -17,12 +17,12 @@ const SignupPage = (props) => {
     return instance
       .post("/register", users)
       .then((response) => {
-        console.log(response.data.message);
-        // return response.data.message;
+        console.log(response.data);
+        return response.data
       })
       .catch((error) => {
         // Handle any errors here if needed
-        console.error("Error:", error);
+        console.error(error);
         throw error; // Rethrow the error for further handling in your component
       });
   };
@@ -51,8 +51,8 @@ const SignupPage = (props) => {
   const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
-        if (response == "Đăng ký thành công") {
-          openNotification(response, "black", "green", "Success");
+        if (response.success == true) {
+          openNotification(response.message ,"black", "green", "Đăng Ký Thành Công");
           setTt("Success");
           // Extract the phone number from the form values
           const phoneNumber = values.phone;
@@ -61,18 +61,15 @@ const SignupPage = (props) => {
             setTimeout(() => {
               navigate(`/verify/${phoneNumber}`);
               resolve();
-            }, 3000);
+            }, 3000); 
           });
-        } else if (
-          response == "Số điện thoại đã tồn tại" ||
-          response == "Email đã tồn tại"
-        ) {
-          return openNotification(response, "white", "red", "Failed");
+        } else if (response?.success == false) {
+          return openNotification(response.message, "white", "red", "Đăng Ký Thất Bại");
         }
       })
       .catch((error) => {
         // Handle any errors here if needed
-        console.error("Error:", error);
+        console.error(error);
         throw error; // Rethrow the error for further handling in your component
       });
   };

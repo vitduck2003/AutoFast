@@ -6,22 +6,19 @@ import { notification } from "antd";
 import instance from "../../../api/instance";
 import { useState } from "react";
 
-
-
-const ForgotPassword = ( ) => {
- 
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const logIn = (users: IUser) => {
     return instance
-      .post("/auth/forget-password", users)
+      .post("/send-verification-code", users)
       .then((response) => {
         return response.data;
       })
       .catch((error) => {
         // Handle any errors here if needed
-        console.error("Error:", error);
+        console.error( error);
         throw error; // Rethrow the error for further handling in your component
       });
   };
@@ -43,25 +40,25 @@ const ForgotPassword = ( ) => {
   const onFinish = (values: any) => {
     logIn(values)
       .then((response) => {
-        if (response.message == "Đăng nhập thành công") {
-          openNotification(response.message, "black", "green", "Success");
+        if (response.success == true) {
+          openNotification(
+            response.message,
+            "black",
+            "green",
+            "Gửi mã thành công"
+          );
           console.log(response);
 
           // Use a nested .then block to navigate after handling the success case
-          sessionStorage.setItem("user", JSON.stringify(response.user));
+
           return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate(`/`); // Navigate to the verification page with the phone number
+              navigate(`/verifyforget/${values.phone}`); // Navigate to the verification page with the phone number
               resolve();
-            }, 3000); // Delay for 3 seconds
+            }, 1000); // Delay for 3 seconds
           });
-        } else if (
-          response.message ===
-          "Thông tin tài khoản hoặc mật khẩu không chính xác"
-        ) {
-          return openNotification(response.message, "white", "red", "Failed");
-        } else if (response.message === "Vui lòng xác thực tài khoản") {
-          return openNotification(response.message, "white", "red", "Failed");
+        } else if (response.success === false) {
+          return openNotification(response.message, "white", "red", "Gửi mã thất bại");
         }
       })
       .catch((error) => {
@@ -102,7 +99,7 @@ const ForgotPassword = ( ) => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
-                       <Form.Item
+                        <Form.Item
                           label="Phone"
                           name="phone"
                           rules={[
@@ -120,7 +117,7 @@ const ForgotPassword = ( ) => {
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
-                           Gửi mã
+                            Gửi mã
                           </Button>
                         </Form.Item>
                       </Form>

@@ -33,6 +33,7 @@ import {
   updateStaffCategory,
   deleteStaffCategory,
 } from "./api/staffs";
+import VerifyForget from "./pages/UserSide/SigninAndSignup/VerifyForget";
 import NotFound from "./pages/UserSide/NotFoundPage";
 import NotFoundPage from "./pages/UserSide/NotFoundPage";
 import ServicePage from "./pages/UserSide/Service/ServicePage";
@@ -396,6 +397,9 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="forgotpw">
             <Route index element={<ForgotPassword />} />
             
+          </Route>
+          <Route path="verifyforget/:phone">
+            <Route index element={<VerifyForget />} />
           </Route>
 
           {/* Signup Page */}

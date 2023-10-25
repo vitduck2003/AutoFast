@@ -29,7 +29,7 @@ class RegisterApi extends Controller
         $checkemail = User::where('email', $validatedData['email'])->exists();
         $checkphone = User::where('phone', $validatedData['phone'])->exists();
         if($checkemail){
-            return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 400);
+            return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 200);
         }
         if($checkphone){
             return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
