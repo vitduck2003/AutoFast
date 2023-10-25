@@ -135,7 +135,7 @@ const SigninPage = (props) => {
                           ]}
                         >
                           <Input.Password />
-                          <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link>
+                          {/* <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link> */}
                         </Form.Item>
 
                
