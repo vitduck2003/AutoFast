@@ -44,10 +44,12 @@ const SigninPage = (props) => {
     });
   };
   const onFinish = (values: any) => {
+    console.log(values)
     logIn(values)
       .then((response) => {
-        if (response.message == "Đăng nhập thành công") {
-          openNotification(response.message, "black", "green", "Success");
+        console.log(values);
+        if (response.success == true) {
+          openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
           console.log(response);
 
           // Use a nested .then block to navigate after handling the success case
@@ -59,15 +61,15 @@ const SigninPage = (props) => {
             }, 3000); // Delay for 3 seconds
           });
         } else if (
-          response.message === 'Thông tin tài khoản hoặc mật khẩu không chính xác'
+          response.success === false && response
         ) {
-          return openNotification(response.message, "white", "red", "Failed");
+          return openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
         }
-        else if (
-          response.message === "Vui lòng xác thực tài khoản"
-        ) {
-          return openNotification(response.message, "white", "red", "Failed");
-        }
+        // else if (
+        //   response.message === "Vui lòng xác thực tài khoản"
+        // ) {
+        //   return openNotification(response.message, "white", "red", "Failed");
+        // }
       })
       .catch((error) => {
         // Handle any errors here if needed
@@ -135,8 +137,9 @@ const SigninPage = (props) => {
                           ]}
                         >
                           <Input.Password />
-                          <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link>
+                     
                         </Form.Item>
+                        <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link>
 
                
 
