@@ -22,6 +22,7 @@ import {RequireAUth}  from "react-auth-kit"
 import ForgotPassword from "./pages/UserSide/SigninAndSignup/ForgotPassword";
 import { IStaff } from "./interface/staff";
 import { getNews, addNews, updateNews, deleteNews } from "./api/news";
+import LoginAdmin from "./pages/UserSide/SigninAndSignup/LoginAdmin";
 import {
   getAllStaff,
   addStaff,
@@ -33,6 +34,7 @@ import {
   updateStaffCategory,
   deleteStaffCategory,
 } from "./api/staffs";
+import VerifyForget from "./pages/UserSide/SigninAndSignup/VerifyForget";
 import NotFound from "./pages/UserSide/NotFoundPage";
 import NotFoundPage from "./pages/UserSide/NotFoundPage";
 import ServicePage from "./pages/UserSide/Service/ServicePage";
@@ -383,6 +385,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               />
             </Route>
           </Route>
+          <Route path="/loginadmin" element={<LoginAdmin />} />
           {/* End Admin Side */}
 
           {/* Signin Page */}
@@ -396,6 +399,9 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="forgotpw">
             <Route index element={<ForgotPassword />} />
             
+          </Route>
+          <Route path="verifyforget/:phone">
+            <Route index element={<VerifyForget />} />
           </Route>
 
           {/* Signup Page */}

@@ -110,12 +110,12 @@ const VerifyPage = () => {
       .post("register/verify-code", values)
       .then((response) => {
         if (response.data.message === "Xác minh mã thành công") {
-          openNotification(response.data.message, "black", "green", "Success");
+          openNotification(response.data.message, "black", "green", "Xác Minh Thành Công");
 
           // Use a nested .then block to navigate after handling the success case
           return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate("/"); // Navigate to the verification page with the phone number
+              navigate("/signin"); // Navigate to the verification page with the phone number
               resolve();
             }, 3000); // Delay for 3 seconds
           });
@@ -125,7 +125,7 @@ const VerifyPage = () => {
             response?.data?.message,
             "white",
             "red",
-            "Failed"
+            "Xác Minh Thất Bại"
           );
         }
         console.log(response.data.message);

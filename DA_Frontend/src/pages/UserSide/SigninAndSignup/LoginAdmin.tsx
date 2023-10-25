@@ -5,20 +5,27 @@ import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import instance from "../../../api/instance";
 import { useState } from "react";
+import { IUser } from "../../../interface/user";
 
-const ForgotPassword = () => {
+const LoginAdmin = () => {
+  type FieldType = {
+    email?: string;
+    password?: string;
+    role?: string;
+    remember?: string;
+  };
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const logIn = (users: IUser) => {
     return instance
-      .post("/send-verification-code", users)
+      .post("/login", users)
       .then((response) => {
         return response.data;
       })
       .catch((error) => {
         // Handle any errors here if needed
-        console.error( error);
+        console.error("Error:", error);
         throw error; // Rethrow the error for further handling in your component
       });
   };
@@ -38,34 +45,47 @@ const ForgotPassword = () => {
     });
   };
   const onFinish = (values: any) => {
+    console.log(values);
     logIn(values)
       .then((response) => {
-        if (response.success == true) {
+        console.log(values);
+        if (response.success === true && response.user.role_id != 3) {
           openNotification(
             response.message,
             "black",
             "green",
-            "Gửi mã thành công"
+            "Đăng Nhập Thành Công"
           );
           console.log(response);
 
-          // Use a nested .then block to navigate after handling the success case
-
+          sessionStorage.setItem("user", JSON.stringify(response.user));
           return new Promise<void>((resolve) => {
             setTimeout(() => {
-              navigate(`/verifyforget/${values.phone}`); // Navigate to the verification page with the phone number
+              navigate(`/admin`); // Navigate to the verification page with the phone number
               resolve();
-            }, 1000); // Delay for 3 seconds
+            }, 3000); // Delay for 3 seconds
           });
-        } else if (response.success === false) {
-          return openNotification(response.message, "white", "red", "Gửi mã thất bại");
+        } else if (response.success === true && response.user.role_id === 3) {
+          return openNotification(
+            "Tài Khoản Không Tồn Tại",
+            "white",
+            "red",
+            "Đăng Nhập Thất Bại"
+          );
+        }else if (response.success === false){
+            return openNotification(
+                response.message,
+                "white",
+                "red",
+                "Đăng Nhập Thất Bại"
+              );
         }
       })
       .catch((error) => {
         // Handle any errors here if needed
         console.error("Error:", error);
 
-        throw error; // Rethrow the error for further handling in your component
+        throw error;
       });
   };
 
@@ -80,19 +100,19 @@ const ForgotPassword = () => {
           {contextHolder}
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black" style={{ borderRadius: "25px" }}>
-              <div className="card-body p-md-5">
+              <div className="card-body p-md-5"> 
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <p className="text-center h1 fw-bold mb-3 mx-1 mx-md-2 mt-4">
+                    <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       {" "}
-                      Điền số điện thoại
+                      Đăng nhập quản trị viên
                     </p>
 
                     <div>
                       <Form
                         name="basic"
                         labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 20 }}
+                        wrapperCol={{ span: 16 }}
                         style={{ maxWidth: 600 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
@@ -115,9 +135,23 @@ const ForgotPassword = () => {
                         >
                           <Input />
                         </Form.Item>
+
+                        <Form.Item<FieldType>
+                          label="Mật khẩu"
+                          name="password"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Vui lòng nhập mật khẩu",
+                            },
+                          ]}
+                        >
+                          <Input.Password />
+                        </Form.Item>
+
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
-                            Gửi mã
+                            Đăng nhập
                           </Button>
                         </Form.Item>
                       </Form>
@@ -125,7 +159,7 @@ const ForgotPassword = () => {
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <img
-                      src="../../../../public/_9b9f39f1-b8b2-402d-8657-9614d8f7044a.jpg"
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                       className="img-fluid"
                       alt="Sample image"
                     />
@@ -140,4 +174,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default LoginAdmin;
