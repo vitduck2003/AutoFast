@@ -61,8 +61,7 @@ Route::prefix('admin')->group(function () {
 
       //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/user
     Route::resource('users',UserApi::class);
-    //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/news
-    Route::resource('news',NewsApi::class);
+   
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
     Route::resource('services',ServiceApi::class);  
      //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
@@ -106,7 +105,7 @@ Route::prefix('client')->group(function () {
     Route::get('/demo', function(){
         return response()->json('da vao dc');
     
-    })->middleware('checkrole');
+    })->middleware('checkauth');
  
 
 
