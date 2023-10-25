@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -8,10 +7,12 @@ use App\Http\Controllers\Api\Admin\UserApi;
 use App\Http\Controllers\Api\Auth\LoginApi;
 use App\Http\Controllers\API\Admin\ReviewApi;
 use App\Http\Controllers\Api\Admin\ServiceApi;
-use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\BookingApi;
 use App\Http\Controllers\Api\Client\ServiceItem;
+use App\Http\Controllers\Api\Admin\ServiceItemApi;
+use App\Http\Controllers\Api\Auth\ForgetPasswordApi;
+use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 
@@ -38,9 +39,9 @@ Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVer
 Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
 // api booking bên client
 Route::post('booking', [BookingApi::class, 'booking']);
-Route::post('send-verification-code', [ForgetPasswordApiController::class, 'sendVerificationCode']);
-Route::post('verify-code', [ForgetPasswordApiController::class, 'verifyCode']);
-Route::post('reset-password', [ForgetPasswordApiController::class, 'resetPassword']);
+Route::post('send-verification-code', [ForgetPasswordApi::class, 'sendVerificationCode']);
+Route::post('verify-code', [ForgetPasswordApi::class, 'verifyCode']);
+Route::post('reset-password', [ForgetPasswordApi::class, 'resetPassword']);
 // Route::resource('admin/booking', [ManagerBookingApi::class]);
 // Api booking bên admin
 Route::post('admin/bookings', [ManagerBookingApi::class,'createBooking']);
