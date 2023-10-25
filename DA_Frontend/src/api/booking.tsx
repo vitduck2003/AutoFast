@@ -1,7 +1,7 @@
 import instance from "./instance";
 import { IBooking } from "../interface/booking";
 const getBooking = () => {
-  return instance.get("/booking");
+  return instance.get("/admin/bookings");
 };
 
 const addBooking = (booking: any) => {

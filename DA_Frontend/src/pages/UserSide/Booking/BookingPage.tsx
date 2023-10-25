@@ -2,6 +2,54 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const BookingPage = (props: any) => {
+  const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
+
+  const validateForm = () => {
+    const errors: Partial<FormData> = {};
+
+    // Kiểm tra họ và tên
+    if (!formData.full_name.trim()) {
+      errors.full_name = "Họ và tên không được để trống";
+    }
+
+    // Kiểm tra số điện thoại
+    const phonePattern = /^(03|07|09)\d{8}$/; // Regular expression
+    if (!formData.phone.trim() || !phonePattern.test(formData.phone)) {
+      errors.phone = "Số điện thoại không hợp lệ";
+    }
+
+    // Kiểm tra email
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!formData.email.trim() || !emailPattern.test(formData.email)) {
+      errors.email = "Email không hợp lệ";
+    }
+
+    // Kiểm tra loại xe
+    if (formData.model_car === "Lựa chọn loại xe của bạn") {
+      errors.model_car = "Vui lòng chọn loại xe";
+    }
+
+    // Kiểm tra thời gian đến
+    if (!formData.target_date || !formData.target_time) {
+      errors.target_date = "Vui lòng chọn thời gian đến";
+    }
+
+    // Kiểm tra số KM của xe
+    const mileageValue = parseInt(formData.mileage, 10);
+    if (isNaN(mileageValue) || mileageValue < 0) {
+      errors.mileage = "Số KM không hợp lệ";
+    }
+
+    // Kiểm tra gói bảo dưỡng
+    if (formData.service === "0") {
+      errors.service = "Vui lòng chọn gói bảo dưỡng";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0; // Trả về true nếu không có lỗi
+  };
+
   const dataService = props.service;
   const dataServiceItem = props.serviceItem;
   const [selectedServiceItems, setSelectedServiceItems] = useState<
@@ -136,14 +184,18 @@ const BookingPage = (props: any) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const updatedFormData = {
-      ...formData,
-    };
+    const isFormValid = validateForm();
 
-    console.log(updatedFormData);
+    if (isFormValid) {
+      const updatedFormData = {
+        ...formData,
+      };
 
-    props.onAddBooking(updatedFormData);
-    alert("Success");
+      console.log(updatedFormData);
+
+      props.onAddBooking(updatedFormData);
+      alert("Success");
+    }
   };
   const totalCost =
     selectedServiceItems.reduce((total, item) => total + item.price, 0) +
@@ -163,11 +215,13 @@ const BookingPage = (props: any) => {
               <input
                 onChange={handleInputChange}
                 name="full_name"
-                required
                 type="text"
                 className="form-control"
                 placeholder="Nhập họ và tên"
               />
+              {formErrors.full_name && (
+                <p style={{ color: "red" }}>{formErrors.full_name}</p>
+              )}
 
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Số điện thoại *
@@ -180,7 +234,9 @@ const BookingPage = (props: any) => {
                 className="form-control"
                 placeholder="Tối thiểu 10 số"
               />
-
+              {formErrors.phone && (
+                <p style={{ color: "red" }}>{formErrors.phone}</p>
+              )}
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Email *
               </label>
@@ -192,7 +248,9 @@ const BookingPage = (props: any) => {
                 className="form-control"
                 placeholder="vidu@gmail.com"
               />
-
+ {formErrors.email && (
+                <p style={{ color: "red" }}>{formErrors.email}</p>
+              )}
               <b>
                 <label style={{ marginTop: "50px" }} htmlFor="">
                   Loại xe
@@ -216,6 +274,9 @@ const BookingPage = (props: any) => {
                 <option value="Pickup"> Pickup</option>
                 <option value="Limousine">Limousine</option>
               </select>
+              {formErrors.model_car  && (
+                <p style={{ color: "red" }}>{formErrors.model_car }</p>
+              )}
               <b>
                 <label style={{ marginTop: "50px" }} htmlFor="">
                   Ghi chú
@@ -254,6 +315,9 @@ const BookingPage = (props: any) => {
                     placeholder="Ngày và Thời gian Đến"
                   />
                 </div>
+                {formErrors.target_date  && (
+                <p style={{ color: "red" }}>{formErrors.target_date }</p>
+              )}
               </div>
 
               <div style={{ marginTop: "20px" }} className="form-group">
@@ -268,6 +332,9 @@ const BookingPage = (props: any) => {
                   min={0}
                 />
               </div>
+              {formErrors.mileage  && (
+                <p style={{ color: "red" }}>{formErrors.mileage }</p>
+              )}
               <div className="form-group">
                 <label htmlFor="">Gói Bảo dưỡng</label>
                 <select
