@@ -22,6 +22,7 @@ import {RequireAUth}  from "react-auth-kit"
 import ForgotPassword from "./pages/UserSide/SigninAndSignup/ForgotPassword";
 import { IStaff } from "./interface/staff";
 import { getNews, addNews, updateNews, deleteNews } from "./api/news";
+import LoginAdmin from "./pages/UserSide/SigninAndSignup/LoginAdmin";
 import {
   getAllStaff,
   addStaff,
@@ -383,6 +384,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               />
             </Route>
           </Route>
+          <Route path="/loginadmin" element={<LoginAdmin />} />
           {/* End Admin Side */}
 
           {/* Signin Page */}
