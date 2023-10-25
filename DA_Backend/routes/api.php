@@ -101,5 +101,13 @@ Route::prefix('client')->group(function () {
     Route::prefix('service-item')->group(function () {                                        
         // lay du item service  http://127.0.0.1:8000/api/client/service-item
        Route::get('/', [ServiceItem::class, 'index']);
-   });   
+   });  
 });
+    Route::get('/demo', function(){
+        return response()->json('da vao dc');
+    
+    })->middleware('checkrole');
+ 
+
+
+    
