@@ -364,19 +364,27 @@ const BookingPage = (props: any) => {
                 </p>
                 <b>
                   <p style={{ marginTop: "20px" }}>
+                    Gói bảo dưỡng hiện tại khác gồm:
+                  </p>
+                </b>
+                <b>
+                  <p style={{ marginTop: "20px" }}>
                     Gói bảo dưỡng hiện tại gồm:
                   </p>
                 </b>
-
                 {selectedServiceItems.length > 0 ? (
-                  selectedServiceItems.map((item, index) => (
-                    <p style={{ color: "blue" }} key={index}>
-                      {item.item_name} : {item.price} VND
-                    </p>
-                  ))
-                ) : (
-                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-                )}
+  selectedServiceItems.map((item, index) => (
+    <div key={index}>
+    <label style={{ color: "blue" }}>
+      <input type="checkbox" value={item.item_name} defaultChecked disabled />
+      {item.item_name}
+    </label>
+  </div>
+  
+  ))
+) : (
+  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+)}
                 {selectedService && (
                   <>
                     <p>

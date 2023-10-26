@@ -69,6 +69,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('services',ServiceApi::class);  
      //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
      Route::resource('service-item',ServiceItemApi::class);   
+     Route::get('service-item-other',[ServiceItemApi::class, 'serviceItemOther']);   
     // User API
     Route::resource('users', UserApi::class);
 
