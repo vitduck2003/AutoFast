@@ -74,6 +74,7 @@ import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
 import AccountSetting from "./pages/UserSide/Account/AccountSetting";
 import BillDetail from "./pages/UserSide/Bill/BillDetail";
 import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
+import PayPage from "./pages/UserSide/Pay/PayPage";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -245,6 +246,13 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route
               index
               element={<BillDetail  />}
+            />
+          </Route>
+          {/* Pay Page */}
+          <Route path="checkout">
+            <Route
+              index
+              element={<PayPage  />}
             />
           </Route>
           {/* Account Setting */}
