@@ -17,7 +17,7 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! Auth::check()){
+        if(Auth::check()){
             return response()->json('bạn chưa hehe đăng nhập');  
         }
         return $next($request);

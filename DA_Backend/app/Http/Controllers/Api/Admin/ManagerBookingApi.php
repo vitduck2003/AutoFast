@@ -87,5 +87,35 @@ class ManagerBookingApi extends Controller
         // Trả về danh sách jobs
         return response()->json( $jobs, 200);
     }
-}
 
+public function confirmBooking($id)
+{
+    // Kiểm tra xem booking có tồn tại trong bảng 'booking' hay không
+    $booking = DB::table('booking')->where('id', $id)->first();
+
+    if ($booking) {
+        // Cập nhật trạng thái của booking thành 'Đã xác nhận'
+        DB::table('booking')->where('id', $id)->update(['status' => 'Đã xác nhận']);
+
+        // Trả về thông báo xác nhận thành công
+        return response()->json(['message' => 'Xác nhận đặt lịch thành công'], 200);
+    } else {
+        return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
+    }
+}
+public function cancelBooking($id)
+{
+    // Kiểm tra xem booking có tồn tại trong bảng 'booking' hay không
+    $booking = DB::table('booking')->where('id', $id)->first();
+
+    if ($booking) {
+        // Cập nhật trạng thái của booking thành 'Đã xác nhận'
+        DB::table('booking')->where('id', $id)->update(['status' => 'Đã hủy']);
+
+        // Trả về thông báo xác nhận thành công
+        return response()->json(['message' => 'Hủy đặt lịch thành công'], 200);
+    } else {
+        return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
+    }
+}
+}

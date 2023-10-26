@@ -42,15 +42,17 @@ Route::post('booking', [BookingApi::class, 'booking']);
 Route::post('send-verification-code', [ForgetPasswordApi::class, 'sendVerificationCode']);
 Route::post('verify-code', [ForgetPasswordApi::class, 'verifyCode']);
 Route::post('reset-password', [ForgetPasswordApi::class, 'resetPassword']);
-// Route::resource('admin/booking', [ManagerBookingApi::class]);
-// Api booking bên admin
-Route::post('admin/bookings', [ManagerBookingApi::class,'createBooking']);
-Route::get('admin/bookings', [ManagerBookingApi::class,'getAllBookings']);
-Route::get('admin/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
-Route::get('admin/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
-Route::get('admin/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
+
+
 // Admin APIs
 Route::prefix('admin')->group(function () {
+    Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
+    Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
+    Route::get('/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
+    Route::get('/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
+    Route::get('/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
+    Route::patch('/confirm-booking/{id}', [ManagerBookingApi::class,'confirmBooking']);
+    Route::patch('/cancel-booking/{id}', [ManagerBookingApi::class,'cancelBooking']);
     // Review APIs
     Route::prefix('review')->group(function () {
         Route::get('/', [ReviewApi::class, 'index']);
@@ -105,7 +107,6 @@ Route::prefix('client')->group(function () {
 });
     Route::get('/demo', function(){
         return response()->json('da vao dc');
-    
     })->middleware('checkauth');
  
 
