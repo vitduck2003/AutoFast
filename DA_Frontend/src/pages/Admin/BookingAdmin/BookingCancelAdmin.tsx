@@ -8,29 +8,29 @@ import { Link } from 'react-router-dom'
 import { IBooking } from "../../../interface/booking";
 
 interface DataType {
-  id: number,
-  name: string,
-  email: string,
-  service?: string,
-  phone: number,
-  status: string,
-  note: string,
-  target_date: string ,
-  target_time: string ,
-  model_car: string ,
-  created_at?: string,
-  updated_at?: string
-  mileage? : string;
-}
+    id: number,
+    name: string,
+    email: string,
+    service?: string,
+    phone: number,
+    status: string,
+    note: string,
+    target_date: string ,
+    target_time: string ,
+    model_car: string ,
+    created_at?: string,
+    updated_at?: string
+    mileage? : string;
+  }
+  
+  interface IProps {
+    booking: IBooking[],
+   
+  }
 
-interface IProps {
-  booking: IBooking[],
-  onCancelBooking: (booking: IBooking) => void;
-}
+const BookingCancelAdmin = (props: IProps) => {
 
-
-const BookingHtAdmin = (props: IProps) => {
-  // State để theo dõi trạng thái của Modal và dữ liệu hiển thị
+   // State để theo dõi trạng thái của Modal và dữ liệu hiển thị
 const [isModalVisible, setIsModalVisible] = useState(false);
 const [selectedService, setSelectedService] = useState<IBooking | null>(null);
 
@@ -95,7 +95,7 @@ const columns: ColumnsType<DataType> = [
     title: 'Trạng thái',
     dataIndex: 'status',
     key: 'status',
-    render: (text) => <a style={{color: 'green'}}>{text}</a>,
+    render: (text) => <a style={{color: 'red'}}>{text}</a>,
   },
   {
     title: 'Action',
@@ -126,7 +126,7 @@ const columns: ColumnsType<DataType> = [
 ];
 
 const data: DataType[] = props.booking
-  .filter((item: IBooking) => item.status === "Đã hoàn thành")
+  .filter((item: IBooking) => item.status === "Đã hủy")
   .map((item: IBooking) => {
     return {
       key: item.id,
@@ -181,7 +181,7 @@ const data: DataType[] = props.booking
       <p>Email: {selectedService.email}</p>
       <p>Tên xe: {selectedService.model_car}</p>
       <p>Số Km: {selectedService.mileage}</p>
-      <p>Trạng thái: <span style={{color: 'green'}}>{selectedService.status}</span></p>
+      <p>Trạng thái: <span style={{color: 'red'}}>{selectedService.status}</span></p>
       <p>Thời gian đến dự kiến: {selectedService.target_time} Ngày {selectedService.target_date}</p>
       <p>Ghi chú: {selectedService.note}</p>
       
@@ -194,4 +194,4 @@ const data: DataType[] = props.booking
   )
 }
 
-export default BookingHtAdmin
+export default BookingCancelAdmin
