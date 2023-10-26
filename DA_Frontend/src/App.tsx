@@ -44,6 +44,7 @@ import TeamPage from "./pages/UserSide/Team/TeamPage";
 import BookingConfirmAdmin from "./pages/Admin/BookingAdmin/BookingConfirmAdmin";
 import {
   addBooking,
+  cancelBooking,
   deleteBooking,
   getBooking,
   updateBooking,
@@ -72,6 +73,7 @@ import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
 import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
 import AccountSetting from "./pages/UserSide/Account/AccountSetting";
 import BillDetail from "./pages/UserSide/Bill/BillDetail";
+import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -137,9 +139,9 @@ function App() {
     );
   };
 
-  const onHandleRemoveBooking = (id: number) => {
-    deleteBooking(id).then(() =>
-      setBooking(booking.filter((item: any) => item.id !== id))
+  const onHandleCancelBooking = (BookingItem: any) => {
+    cancelBooking(BookingItem).then(() =>
+      getBooking().then(({ data }) => setBooking(data))
     );
   };
 
@@ -269,7 +271,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                 element={
                   <BookingAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
+                    onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
                 }
@@ -282,7 +284,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                 element={
                   <BookingConfirmAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
+                    onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
                 }
@@ -295,12 +297,24 @@ const onHandleRemoveServiceItem = (id: number) => {
                 element={
                   <BookingHtAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
-                    onUpdateBooking={onHandleUpdateBooking}
+                    onCancelBooking={onHandleCancelBooking}
                   />
                 }
               />
             </Route>
+            {/* Booking Cancel Admin Page */}
+            <Route path="bookingCC">
+              <Route
+                index
+                element={
+                  <BookingCancelAdmin
+                    booking={booking}
+                   
+                  />
+                }
+              />
+            </Route>
+            
             {/*News Admin Page */}
             <Route path="news">
               <Route

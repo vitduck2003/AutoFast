@@ -39,7 +39,7 @@ const AdminLayout = () => {
               <Link style={{ textDecoration: 'none' }} to="booking" ><a  className="collapse-item" href="staffs/add">Lịch đang chờ xác nhận</a></Link>
               <Link style={{ textDecoration: 'none' }} to="bookings" ><a  className="collapse-item" href="staffs/add">Lịch đã xác nhận</a></Link>
               <Link style={{ textDecoration: 'none' }} to="bookingHT" ><a  className="collapse-item" href="staffs/add">Lịch đã hoàn thành</a></Link>
-
+              <Link style={{ textDecoration: 'none' }} to="bookingCC" ><a  className="collapse-item" href="staffs/add">Lịch đã hủy</a></Link>
             </div>
           </div>
         </li>
