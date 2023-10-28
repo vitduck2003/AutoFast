@@ -373,18 +373,18 @@ const BookingPage = (props: any) => {
                   </p>
                 </b>
                 {selectedServiceItems.length > 0 ? (
-  selectedServiceItems.map((item, index) => (
-    <div key={index}>
-    <label style={{ color: "blue" }}>
-      <input type="checkbox" value={item.item_name} defaultChecked disabled />
-      {item.item_name}
-    </label>
-  </div>
-  
-  ))
-) : (
-  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-)}
+                  selectedServiceItems.map((item, index) => (
+                    <div key={index}>
+                      <label style={{ color: "blue" }}>
+                        <input type="checkbox" value={item.item_name} defaultChecked disabled />
+                        {item.item_name}
+                      </label>
+                    </div>
+
+                  ))
+                ) : (
+                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+                )}
                 {selectedService && (
                   <>
                     <p>
