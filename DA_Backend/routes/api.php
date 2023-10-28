@@ -68,8 +68,7 @@ Route::prefix('admin')->group(function () {
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
     Route::resource('services',ServiceApi::class);  
      //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
-     Route::resource('service-item',ServiceItemApi::class);   
-     Route::get('service-item-other',[ServiceItemApi::class, 'serviceItemOther']);   
+     Route::resource('service-item',ServiceItemApi::class);    
     // User API
     Route::resource('users', UserApi::class);
 
@@ -105,6 +104,7 @@ Route::prefix('client')->group(function () {
         // lay du item service  http://127.0.0.1:8000/api/client/service-item
        Route::get('/', [ServiceItem::class, 'index']);
    });  
+   Route::get('service-item-other',[ServiceItemApi::class, 'serviceItemOther']);  
 });
     Route::get('/demo', function(){
         return response()->json('da vao dc');

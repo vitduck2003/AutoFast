@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-       return view('index');
+       return view('admin/pages/index');
+    });
+    Route::get('bookings', function () {
+      return view('admin/pages/bookings/bookings');
     });
 
 
