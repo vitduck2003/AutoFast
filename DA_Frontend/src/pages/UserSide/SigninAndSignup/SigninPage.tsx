@@ -46,8 +46,14 @@ const SigninPage = (props) => {
   const onFinish = (values: any) => {
     logIn(values)
       .then((response) => {
+<<<<<<< Updated upstream
         if (response.message == "Đăng nhập thành công") {
           openNotification(response.message, "black", "green", "Success");
+=======
+        console.log(values);
+        if (response.success == true && response.user.role_id === 3) {
+          openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
+>>>>>>> Stashed changes
           console.log(response);
 
           // Use a nested .then block to navigate after handling the success case

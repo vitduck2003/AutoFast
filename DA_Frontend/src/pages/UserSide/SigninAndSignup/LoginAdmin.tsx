@@ -21,6 +21,7 @@ const LoginAdmin = () => {
     return instance
       .post("/login", users)
       .then((response) => {
+     
         return response.data;
       })
       .catch((error) => {
@@ -56,15 +57,11 @@ const LoginAdmin = () => {
             "green",
             "Đăng Nhập Thành Công"
           );
+          localStorage.setItem('admin', '1');
           console.log(response);
 
           sessionStorage.setItem("user", JSON.stringify(response.user));
-          return new Promise<void>((resolve) => {
-            setTimeout(() => {
-              navigate(`/admin`); // Navigate to the verification page with the phone number
-              resolve();
-            }, 3000); // Delay for 3 seconds
-          });
+         navigate('/admin');
         } else if (response.success === true && response.user.role_id === 3) {
           return openNotification(
             "Tài Khoản Không Tồn Tại",

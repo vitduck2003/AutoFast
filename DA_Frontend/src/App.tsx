@@ -69,6 +69,12 @@ import { IService, ISeviceItem } from "./interface/service";
 import ServiceItemAdmin from "./pages/Admin/Service/ServiceItem/ServiceItemAdmin";
 import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
 import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
+<<<<<<< Updated upstream
+=======
+import { ProtectedRoute } from "./components/ProtectedRoute";
+
+
+>>>>>>> Stashed changes
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -209,7 +215,11 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="booking">
               <Route
                 index
-                element={<BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />}
+                element={
+                  
+                    <BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />
+                  
+                }
               />
             </Route>
 
@@ -241,7 +251,11 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Admin Side */}
-          <Route path="/admin" element={< AdminLayout />}>
+          <Route path="/admin" element={
+           <ProtectedRoute isAdmin={true}>
+            < AdminLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Dashboard />} />
 
             {/* Booking Admin Page */}
@@ -249,11 +263,13 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
+                  <ProtectedRoute isAdmin={true}>
                   <BookingAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
+                    </ProtectedRoute>
                 }
               />
             </Route>
@@ -261,12 +277,13 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="bookings">
               <Route
                 index
-                element={
+                element={    <ProtectedRoute isAdmin={true}>
                   <BookingConfirmAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
+                   </ProtectedRoute>
                 }
               />
             </Route>
@@ -275,11 +292,13 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
+                  <ProtectedRoute isAdmin={true}>
                   <BookingHtAdmin
                     booking={booking}
                     onRemoveBooking={onHandleRemoveBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
+                  </ProtectedRoute>
                 }
               />
             </Route>
@@ -288,7 +307,9 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
+                  <ProtectedRoute isAdmin={true}>
                   <NewsAdmin news={news} onRemoveNews={onHandleRemoveNews} />
+                  </ProtectedRoute>
                 }
               />{" "}
               <Route
@@ -338,10 +359,12 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
+                  <ProtectedRoute isAdmin={true}>
                   <StaffAdmin
                     staffs={staffs}
                     onRemoveStaff={onHandleRemoveStaff}
                   />
+                  </ProtectedRoute>
                 }
               />
               <Route
