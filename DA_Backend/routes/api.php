@@ -43,12 +43,10 @@ Route::post('send-verification-code', [ForgetPasswordApi::class, 'sendVerificati
 Route::post('verify-code', [ForgetPasswordApi::class, 'verifyCode']);
 Route::post('reset-password', [ForgetPasswordApi::class, 'resetPassword']);
 
-
 // Admin APIs
 Route::prefix('admin')->group(function () {
     Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
     Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
-    Route::get('/bookings/{id}', [ManagerBookingApi::class,'getBooking']);
     Route::get('/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
     Route::get('/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
     Route::patch('/confirm-booking/{id}', [ManagerBookingApi::class,'confirmBooking']);

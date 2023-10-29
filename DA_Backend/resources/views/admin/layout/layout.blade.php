@@ -3,13 +3,14 @@
 
     <head>
         
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta charset="utf-8">
         <title>Saas Dashboard | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
         <meta content="Themesbrand" name="author">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets\images\favicon.ico">
+        <link rel="shortcut icon" href={{ asset('assets\images\favicon.ico') }}>
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
         <!-- DataTables -->
@@ -37,19 +38,19 @@
                 <div class="navbar-brand-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="assets\images\logo.svg" alt="" height="22">
+                            <img {{ asset('assets\images\logo.svg') }} alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets\images\logo-dark.png" alt="" height="17">
+                            <img src={{ asset('assets\images\logo-dark.png') }} alt="" height="17">
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="assets\images\logo-light.svg" alt="" height="22">
+                            <img src={{ asset('assets\images\logo-light.svg') }} alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets\images\logo-light.png" alt="" height="19">
+                            <img src={{ asset('assets\images\logo-light.png') }} alt="" height="19">
                         </span>
                     </a>
                 </div>
@@ -92,28 +93,28 @@
 
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="" src="assets\images\flags\us.jpg" alt="Header Language" height="16">
+                        <img class="" src={{ asset('assets\images\flags\us.jpg') }} alt="Header Language" height="16">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
             
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="assets\images\flags\spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
+                            <img src={{ asset('assets\images\flags\spain.jpg') }} alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="assets\images\flags\germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
+                            <img src={{ asset('assets\images\flags\germany.jpg') }} alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="assets\images\flags\italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
+                            <img src={{ asset('assets\images\flags\italy.jpg') }} alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="assets\images\flags\russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
+                            <img src={{ asset('assets\images\flags\russia.jpg') }} alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
                         </a>
                     </div>
                 </div>
@@ -127,19 +128,19 @@
                             <div class="row no-gutters">
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\github.png" alt="Github">
+                                        <img src={{ asset('assets\images\brands\github.png') }} alt="Github">
                                         <span>GitHub</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\bitbucket.png" alt="bitbucket">
+                                        <img src={{ asset('assets\images\brands\bitbucket.png') }} alt="bitbucket">
                                         <span>Bitbucket</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\dribbble.png" alt="dribbble">
+                                        <img src={{ asset('assets\images\brands\dribbble.png') }} alt="dribbble">
                                         <span>Dribbble</span>
                                     </a>
                                 </div>
@@ -148,19 +149,19 @@
                             <div class="row no-gutters">
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\dropbox.png" alt="dropbox">
+                                        <img src={{ asset('assets\images\brands\dropbox.png') }} alt="dropbox">
                                         <span>Dropbox</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\mail_chimp.png" alt="mail_chimp">
+                                        <img src={{ asset('assets\images\brands\mail_chimp.png') }} alt="mail_chimp">
                                         <span>Mail Chimp</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="#">
-                                        <img src="assets\images\brands\slack.png" alt="slack">
+                                        <img src={{ asset('assets\images\brands\slack.png') }} alt="slack">
                                         <span>Slack</span>
                                     </a>
                                 </div>
@@ -210,7 +211,7 @@
                             </a>
                             <a href="" class="text-reset notification-item">
                                 <div class="media">
-                                    <img src="assets\images\users\avatar-3.jpg" class="mr-3 rounded-circle avatar-xs" alt="user-pic">
+                                    <img src={{ asset('assets\images\users\avatar-3.jpg') }} class="mr-3 rounded-circle avatar-xs" alt="user-pic">
                                     <div class="media-body">
                                         <h6 class="mt-0 mb-1">James Lemire</h6>
                                         <div class="font-size-12 text-muted">
@@ -260,7 +261,7 @@
 
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="assets\images\users\avatar-1.jpg" alt="Header Avatar">
+                        <img class="rounded-circle header-profile-user" src={{ asset('assets\images\users\avatar-1.jpg') }} alt="Header Avatar">
                         <span class="d-none d-xl-inline-block ml-1">Henry</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
@@ -314,13 +315,33 @@
                             <span>Quản lí đặt lịch</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ url('bookings') }}">Lịch đang chờ xác nhận</a></li>
-                            <li><a href="pages-maintenance.html">Lịch đã đang làm</a></li>
-                            <li><a href="pages-comingsoon.html">Lịch đã hoàn thành</a></li>
-                            <li><a href="pages-timeline.html">Lịch đã hủy</a></li>
+                            <li><a href="{{ url('admin/bookings') }}">Lịch đang chờ xác nhận</a></li>
+                            <li><a href="{{ url('admin/bookings-wait') }}">Lịch đang chờ khách đến</a></li>
+                            <li><a href="{{ url('admin/bookings-complete') }}">Lịch đã hoàn thành</a></li>
+                            <li><a href="{{ url('admin/bookings-cancel') }}">Lịch đã hủy</a></li>
                         </ul>
                     </li>
-
+                    <li class="menu-title">Công việc</li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-file"></i>
+                            <span>Quản lí công việc</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ url('admin/jobs') }}">Công việc đang làm</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">Hóa đơn</li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-file"></i>
+                            <span>Quản lí hóa đơn</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ url('bookings') }}">Tất cả hóa đơn</a></li>
+                        </ul>
+                    </li>
+                    
                     <li class="menu-title">Dịch vụ</li>
 
                     <li>
@@ -427,6 +448,7 @@
 </div>
 <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
 <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
 <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
@@ -459,5 +481,5 @@
 <script src="{{ asset('assets/js/pages/saas-dashboard.init.js') }}"></script>
 
 <script src="{{ asset('assets/js/app.js') }}"></script>
-@yield('script')
+@yield('script');
 </body>

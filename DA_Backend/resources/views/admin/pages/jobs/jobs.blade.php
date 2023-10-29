@@ -11,6 +11,7 @@
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Họ tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Loại xe</th>
@@ -21,28 +22,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($bookings as $booking):
+                            @foreach($jobs as $job):
                             <tr>
-                                <td>{{ $booking->name }}</td>
-                                <td>{{ $booking->phone }}</td>
-                                <td>{{ $booking->model_car }}</td>
-                                <td>{{ $booking->mileage }}Km</td>
-                                <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
-                                <td class="text-danger">{{ $booking->status }}</td>
+                                <td>{{ $job->id }}</td>
+                                <td>{{ $job->name }}</td>
+                                <td>{{ $job->phone }}</td>
+                                <td>{{ $job->model_car }}</td>
+                                <td>{{ $job->mileage }}Km</td>
+                                <td>{{ $job->target_date }}: {{ $job->target_time }}</td>
+                                <td class="text-success">{{ $job->status }}</td>
                                 <td>
-                                    <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                                    </form>
-                                    <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-danger">Hủy</button>
-                                    </form>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
-                                        Chi tiết
-                                    </button>
+                                    <a href="{{ url('admin/job-detail', ['id'=>$job->id]) }}">
+                                        <button type="button" class="btn btn-success">
+                                            Xem công việc
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -112,6 +106,43 @@
                 .fail(function (error) {
                     console.log('Lỗi khi gửi yêu cầu API:', error);
                 });
+        });
+
+        // Handle Confirm button click
+        $('#btn-confirm').on('click', function () {
+            var bookingId = $(this).data('booking-id');
+            // Tạo yêu cầu PUT tới API để cập nhật trạng thái booking
+            $.ajax({
+                url: '/api/bookings/' + bookingId + '/update-status',
+                type: 'PUT',
+                data: { status: 'Đã xác nhận' },
+                success: function (response) {
+                    console.log('Xác nhận thành công:', response);
+                    // Close the modal or update UI as needed
+                },
+                error: function (error) {
+                    console.log('Lỗi khi xác nhận:', error);
+                }
+            });
+        });
+
+        // Handle Cancel button click
+        $('#btn-cancel').on('click', function () {
+            var bookingId = $(this).data('booking-id');
+
+            // Tạo yêu cầu PUT tới API để cập nhật trạng thái booking
+            $.ajax({
+                url: '/api/bookings/' + bookingId + '/update-status',
+                type: 'PUT',
+                data: { status: 'Đã được hủy' },
+                success: function (response) {
+                    console.log('Hủy thành công:', response);
+                    // Close the modal or update UI as needed
+                },
+                error: function (error) {
+                    console.log('Lỗi khi hủy:', error);
+                }
+            });
         });
     });
 </script>

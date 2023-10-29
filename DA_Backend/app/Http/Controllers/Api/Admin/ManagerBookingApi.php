@@ -60,11 +60,17 @@ class ManagerBookingApi extends Controller
     public function getBooking($id)
     {
         // Lấy thông tin booking từ bảng 'booking' dựa trên ID
-        $booking = DB::table('booking')->where('id', $id)->first();
+        $booking = DB::table('booking')
+            ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
+            ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
+            ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
+            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->where('id_booking', '=', $id)
+            ->get();
 
         if ($booking) {
             // Trả về thông tin booking
-            return response()->json( $booking, 200);
+            return response()->json($booking);
         } else {
             return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
         }

@@ -33,12 +33,7 @@
                                     <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                                    </form>
-                                    <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-danger">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Bắt đầu làm</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết
@@ -90,7 +85,7 @@
             var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
 
             // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
-            $.get('/api/bookings/' + bookingId, function (data) {
+            $.get('/api/bookings-wait/' + bookingId, function (data) {
                 // Thiết lập dữ liệu booking vào modal
                 var modal = $('#exampleModal');
                 modal.find('.modal-title').text('Chi tiết đặt lịch');

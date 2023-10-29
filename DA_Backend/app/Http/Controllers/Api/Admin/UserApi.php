@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -50,7 +51,7 @@ class UserApi extends Controller
         ]);
             return response()->json(['message' => 'Đăng kí cồng thanh'], 201, $user);
     }
-   
+    
     /**
      * Display the specified resource.
      *
