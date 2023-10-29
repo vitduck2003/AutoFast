@@ -18,9 +18,6 @@ use App\Http\Controllers\Admin\Bookings\BookingController;
 Route::get('/', function () {
        return view('admin/pages/index');
     });
-    Route::prefix('admin', function(){
-
-    });
     // api này để ngoài cho đức
     Route::get('/api/bookings/{id}', [BookingController::class, 'getBooking']);
     Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait']);
@@ -36,9 +33,8 @@ Route::get('/', function () {
         Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
         Route::get('jobs', [JobController::class, 'index']);
         Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
-        
 
     });
-
-// api ajax bookings
-
+    Route::get('services', function () {
+      return view('admin//services/bookings');
+    });

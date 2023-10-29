@@ -43,39 +43,44 @@ const SigninPage = (props) => {
       },
     });
   };
-  const onFinish = (values: any) => {
-    console.log(values)
+  const onFinish = (values) => {
+    console.log(values);
+  
     logIn(values)
       .then((response) => {
-        console.log(values);
-        if (response.success == true) {
+        console.log(response);
+  
+        if (response.message === "Đăng nhập thành công") {
           openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
-          console.log(response);
-
-          // Use a nested .then block to navigate after handling the success case
-          sessionStorage.setItem('user', JSON.stringify(response.user));
-          return new Promise<void>((resolve) => {
-            setTimeout(() => {
-              navigate(`/`); // Navigate to the verification page with the phone number
-              resolve();
-            }, 3000); // Delay for 3 seconds
-          });
-        } else if (
-          response.success === false && response
-        ) {
-          return openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
+  
+          if (response.success === true && response.user.role_id === 3) {
+            openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
+  
+            if (response.success === true) {
+              openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
+  
+              // Use a nested .then block to navigate after handling the success case
+              sessionStorage.setItem('user', JSON.stringify(response.user));
+              return new Promise<void>((resolve) => {
+                setTimeout(() => {
+                  navigate(`/`); // Navigate to the verification page with the phone number
+                  resolve();
+                }, 3000); // Delay for 3 seconds
+              });
+            } else if (response.success === false) {
+              openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
+            }
+          } else {
+            // Handle other cases or conditions here
+          }
         }
-        // else if (
-        //   response.message === "Vui lòng xác thực tài khoản"
-        // ) {
-        //   return openNotification(response.message, "white", "red", "Failed");
-        // }
       })
       .catch((error) => {
         // Handle any errors here if needed
         console.error("Error:", error);
-
-        throw error; // Rethrow the error for further handling in your component
+  
+        // Rethrow the error for further handling in your component
+        throw error;
       });
   };
 
