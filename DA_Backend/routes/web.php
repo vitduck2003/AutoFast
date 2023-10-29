@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-       return view('admin/pages/index');
+       return view('index');
     });
     Route::get('bookings', function () {
-      return view('admin/pages/bookings/bookings');
+      return view('admin//bookings/index');
+    });
+
+    Route::get('services', function () {
+      return view('admin//services/bookings');
     });
 
 
