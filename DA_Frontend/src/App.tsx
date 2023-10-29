@@ -34,6 +34,7 @@ import {
   updateStaffCategory,
   deleteStaffCategory,
 } from "./api/staffs";
+import VerifyForget from "./pages/UserSide/SigninAndSignup/VerifyForget";
 import NotFound from "./pages/UserSide/NotFoundPage";
 import NotFoundPage from "./pages/UserSide/NotFoundPage";
 import ServicePage from "./pages/UserSide/Service/ServicePage";
@@ -43,6 +44,7 @@ import TeamPage from "./pages/UserSide/Team/TeamPage";
 import BookingConfirmAdmin from "./pages/Admin/BookingAdmin/BookingConfirmAdmin";
 import {
   addBooking,
+  cancelBooking,
   deleteBooking,
   getBooking,
   updateBooking,
@@ -69,12 +71,15 @@ import { IService, ISeviceItem } from "./interface/service";
 import ServiceItemAdmin from "./pages/Admin/Service/ServiceItem/ServiceItemAdmin";
 import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
 import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
-<<<<<<< Updated upstream
-=======
+
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 
->>>>>>> Stashed changes
+import AccountSetting from "./pages/UserSide/Account/AccountSetting";
+import BillDetail from "./pages/UserSide/Bill/BillDetail";
+import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
+import PayPage from "./pages/UserSide/Pay/PayPage";
+
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
@@ -140,9 +145,9 @@ function App() {
     );
   };
 
-  const onHandleRemoveBooking = (id: number) => {
-    deleteBooking(id).then(() =>
-      setBooking(booking.filter((item: any) => item.id !== id))
+  const onHandleCancelBooking = (BookingItem: any) => {
+    cancelBooking(BookingItem).then(() =>
+      getBooking().then(({ data }) => setBooking(data))
     );
   };
 
@@ -245,6 +250,28 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="technicians">
               <Route index element={<TeamPage />} />
             </Route>
+            {/* Bill Page */}
+          <Route path="bill">
+            <Route
+              index
+              element={<BillDetail  />}
+            />
+          </Route>
+          {/* Pay Page */}
+          <Route path="checkout">
+            <Route
+              index
+              element={<PayPage  />}
+            />
+          </Route>
+          {/* Account Setting */}
+          <Route path="account">
+            <Route
+              index
+              element={<AccountSetting />}
+            />
+          </Route>
+
           </Route>
           {/* End User Side */}
           {/* Not Found Page */}
@@ -266,7 +293,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                   <ProtectedRoute isAdmin={true}>
                   <BookingAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
+                    onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
                     </ProtectedRoute>
@@ -280,7 +307,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                 element={    <ProtectedRoute isAdmin={true}>
                   <BookingConfirmAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
+                    onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
                    </ProtectedRoute>
@@ -295,13 +322,25 @@ const onHandleRemoveServiceItem = (id: number) => {
                   <ProtectedRoute isAdmin={true}>
                   <BookingHtAdmin
                     booking={booking}
-                    onRemoveBooking={onHandleRemoveBooking}
-                    onUpdateBooking={onHandleUpdateBooking}
+                    onCancelBooking={onHandleCancelBooking}
+                  />
+                }
+              />
+            </Route>
+            {/* Booking Cancel Admin Page */}
+            <Route path="bookingCC">
+              <Route
+                index
+                element={
+                  <BookingCancelAdmin
+                    booking={booking}
+                   
                   />
                   </ProtectedRoute>
                 }
               />
             </Route>
+            
             {/*News Admin Page */}
             <Route path="news">
               <Route
@@ -422,6 +461,9 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route index element={<ForgotPassword />} />
             
           </Route>
+          <Route path="verifyforget/:phone">
+            <Route index element={<VerifyForget />} />
+          </Route>
 
           {/* Signup Page */}
           <Route path="signup">
@@ -430,6 +472,8 @@ const onHandleRemoveServiceItem = (id: number) => {
               element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
             />
           </Route>
+          
+          
         </Routes>
       </BrowserRouter>
     </div>

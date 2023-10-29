@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
-class ForgetPasswordApiController extends Controller
+class ForgetPasswordApi extends Controller
 {
     public function sendVerificationCode(Request $request)
     {

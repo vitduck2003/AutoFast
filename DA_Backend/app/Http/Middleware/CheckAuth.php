@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAuth
 {
@@ -16,9 +17,9 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check()){
-        return $next($request);
+        if(Auth::check()){
+            return response()->json('bạn chưa hehe đăng nhập');  
         }
-        return response()->json('bạn chưa đăng nhập');
+        return $next($request);
     }
 }

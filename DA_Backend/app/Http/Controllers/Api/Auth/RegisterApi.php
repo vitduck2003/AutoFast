@@ -20,16 +20,16 @@ class RegisterApi extends Controller
             'role_id' => 'required|integer|min:0',
             'password' => 'required|string|min:6',
         ]);
-        if($request->phone !== "0346938386"){
-            return response()->json([
-                'message' => 'Số điện thoại này không thể gửi mã',
-                'phone' => $request->phone
-            ], 200);
-        }
+        // if($request->phone !== "0346938386"){
+        //     return response()->json([
+        //         'message' => 'Số điện thoại này không thể gửi mã',
+        //         'phone' => $request->phone
+        //     ], 200);
+        // }
         $checkemail = User::where('email', $validatedData['email'])->exists();
         $checkphone = User::where('phone', $validatedData['phone'])->exists();
         if($checkemail){
-            return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 400);
+            return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 200);
         }
         if($checkphone){
             return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);

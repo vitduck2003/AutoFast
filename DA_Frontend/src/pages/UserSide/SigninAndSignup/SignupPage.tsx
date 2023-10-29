@@ -14,17 +14,10 @@ const SignupPage = (props) => {
   const [showNotification, setShowNotification] = useState(false);
   const [tt, setTt] = useState(String);
   const addUsers = (users: IUser) => {
-    return instance
-      .post("/register", users)
-      .then((response) => {
-        console.log(response.data.message);
-        // return response.data.message;
-      })
-      .catch((error) => {
-        // Handle any errors here if needed
-        console.error("Error:", error);
-        throw error; // Rethrow the error for further handling in your component
-      });
+    return instance.post("/register", users).then((response) => {
+      console.log(response.data);
+      return response.data;
+    });
   };
   type FieldType = {
     name?: string;
@@ -51,8 +44,13 @@ const SignupPage = (props) => {
   const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
-        if (response == "Đăng ký thành công") {
-          openNotification(response, "black", "green", "Success");
+        if (response.success == true) {
+          openNotification(
+            response.message,
+            "black",
+            "green",
+            "Đăng Ký Thành Công"
+          );
           setTt("Success");
           // Extract the phone number from the form values
           const phoneNumber = values.phone;
@@ -63,16 +61,36 @@ const SignupPage = (props) => {
               resolve();
             }, 3000);
           });
-        } else if (
-          response == "Số điện thoại đã tồn tại" ||
-          response == "Email đã tồn tại"
-        ) {
-          return openNotification(response, "white", "red", "Failed");
+        } else if (response?.success == false) {
+          return openNotification(
+            response.message,
+            "white",
+            "red",
+            "Đăng Ký Thất Bại"
+          );
         }
       })
       .catch((error) => {
         // Handle any errors here if needed
-        console.error("Error:", error);
+        console.error(error.response.data.message);
+        if (
+          error.response.data.message ===
+          "[HTTP 400] Unable to create record: The number +84036615XXXX is unverified. Trial accounts cannot send messages to unverified numbers; verify +84036615XXXX at twilio.com/user/account/phone-numbers/verified, or purchase a Twilio number to send messages to unverified numbers"
+        ) {
+          openNotification(
+            "Đăng Ký Thành Công",
+            "black",
+            "green",
+            "Đăng Ký Thành Công"
+          );
+          const phoneNumber = values.phone;
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/verify/${phoneNumber}`);
+              resolve();
+            }, 3000);
+          });
+        }
         throw error; // Rethrow the error for further handling in your component
       });
   };

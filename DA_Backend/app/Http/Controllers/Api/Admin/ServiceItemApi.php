@@ -125,4 +125,11 @@ class ServiceItemApi extends Controller
                  Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+    public function serviceItemOther()
+{
+   $service_item_other = ServiceItem::whereNull('id_service')->get();
+   return response()->json([
+     $service_item_other
+   ]);
+}
 }

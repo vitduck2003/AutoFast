@@ -25,7 +25,7 @@ interface DataType {
 
 interface IProps {
   booking: IBooking[],
-  onRemoveBooking: (id: DataType) => void
+  onCancelBooking: (booking: IBooking) => void;
 }
 
 
@@ -45,9 +45,16 @@ const closeModal = () => {
   setSelectedService(null);
 };
 
-  const removeBooking = (id: DataType) => {
-    props.onRemoveBooking(id)
-}
+  
+const cancelBooking = (record: DataType) => {
+  // Tạo một bản sao của record để không thay đổi trực tiếp state
+  const updatedRecord = { ...record, status: "Đã hủy" };
+  console.log(updatedRecord);
+
+  // Gửi dữ liệu đã cập nhật lên API
+  props.onCancelBooking(updatedRecord);
+};
+
 const columns: ColumnsType<DataType> = [
   {
     title: 'Họ và tên',
@@ -95,11 +102,11 @@ const columns: ColumnsType<DataType> = [
     key: 'action',
     render: ( record) => (
       <Space size="middle">
-        <Popconfirm
+        {/* <Popconfirm
   title="Xóa lịch"
   description="Bạn có chắc muốn xóa lịch này?"
   onConfirm={() => {
-    removeBooking(record.id)
+    cancelBooking(record);
   }}
   okText="Có"
   okButtonProps={{
@@ -107,8 +114,8 @@ const columns: ColumnsType<DataType> = [
   }}
   cancelText="Không"
 >
-  <Button danger>Delete</Button>
-</Popconfirm>
+  <Button danger>Hủy lịch</Button>
+</Popconfirm> */}
         {/* <Link to={``}><Button type="primary">Xác nhận</Button></Link> */}
         <Button type="dashed" onClick={() => showModal(record)}>
           Chi tiết

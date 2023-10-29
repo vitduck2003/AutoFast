@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
        return view('index');
-        // return \App\Models\User::all();
-    })->middleware('checkauth');
+    });
+    Route::get('bookings', function () {
+      return view('admin//bookings/index');
+    });
+
+    Route::get('services', function () {
+      return view('admin//services/bookings');
+    });
 
 
