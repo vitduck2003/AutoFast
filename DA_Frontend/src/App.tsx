@@ -279,9 +279,9 @@ const onHandleRemoveServiceItem = (id: number) => {
 
           {/* Admin Side */}
           <Route path="/admin" element={
-           <ProtectedRoute isAdmin={true}>
+          //  <ProtectedRoute isAdmin={true}>
             < AdminLayout />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }>
             <Route index element={<Dashboard />} />
 
@@ -290,13 +290,13 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
-                  <ProtectedRoute isAdmin={true}>
+                  // <ProtectedRoute isAdmin={true}>
                   <BookingAdmin
                     booking={booking}
                     onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
-                    </ProtectedRoute>
+                    // </ProtectedRoute>
                 }
               />
             </Route>
@@ -304,13 +304,14 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="bookings">
               <Route
                 index
-                element={    <ProtectedRoute isAdmin={true}>
+                element={   
+                  //  <ProtectedRoute isAdmin={true}>
                   <BookingConfirmAdmin
                     booking={booking}
                     onCancelBooking={onHandleCancelBooking}
                     onUpdateBooking={onHandleUpdateBooking}
                   />
-                   </ProtectedRoute>
+                  //  </ProtectedRoute>
                 }
               />
             </Route>
@@ -319,7 +320,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
-                  <ProtectedRoute isAdmin={true}>
+                  // <ProtectedRoute isAdmin={true}>
                   <BookingHtAdmin
                     booking={booking}
                     onCancelBooking={onHandleCancelBooking}
@@ -336,7 +337,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                     booking={booking}
                    
                   />
-                  </ProtectedRoute>
+                  // </ProtectedRoute>
                 }
               />
             </Route>
@@ -346,9 +347,9 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
-                  <ProtectedRoute isAdmin={true}>
+                  // <ProtectedRoute isAdmin={true}>
                   <NewsAdmin news={news} onRemoveNews={onHandleRemoveNews} />
-                  </ProtectedRoute>
+                  // </ProtectedRoute>
                 }
               />{" "}
               <Route
@@ -398,12 +399,12 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route
                 index
                 element={
-                  <ProtectedRoute isAdmin={true}>
+                  // <ProtectedRoute isAdmin={true}>
                   <StaffAdmin
                     staffs={staffs}
                     onRemoveStaff={onHandleRemoveStaff}
                   />
-                  </ProtectedRoute>
+                  // </ProtectedRoute>
                 }
               />
               <Route
