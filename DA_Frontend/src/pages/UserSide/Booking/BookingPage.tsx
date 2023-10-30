@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
+import instance from "../../../api/instance";
 
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
@@ -84,6 +85,7 @@ const BookingPage = (props: any) => {
     target_time: string;
     service: string;
     mileage: string;
+    service_item_other: [];
   };
 
   const [formData, setFormData] = useState<FormData>({
@@ -97,7 +99,29 @@ const BookingPage = (props: any) => {
     target_time: "",
     service: "",
     mileage: "",
+    service_item_other: [],
   });
+  const handleCheckboxChange = (e, item) => {
+    const { checked, value } = e.target;
+
+    setFormData((prevData: any) => {
+      if (checked) {
+        // If the checkbox is checked, add the item.id to the service_item_other array
+        return {
+          ...prevData,
+          service_item_other: [...prevData.service_item_other, item.id],
+        };
+      } else {
+        // If the checkbox is unchecked, remove the item.id from the service_item_other array
+        return {
+          ...prevData,
+          service_item_other: prevData.service_item_other.filter(
+            (id) => id !== item.id
+          ),
+        };
+      }
+    });
+  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -183,7 +207,7 @@ const BookingPage = (props: any) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
+    // console.log(formData)
     const isFormValid = validateForm();
 
     if (isFormValid) {
@@ -346,12 +370,18 @@ const BookingPage = (props: any) => {
                   >
                     Chọn Cấp bảo dưỡng
                   </option>
-                  {dataService &&
-                    dataService.map((item: any) => (
-                      <option key={item.id} value={item.id}>
-                        {item.service_name}
-                      </option>
-                    ))}
+                  {dataServiceItem.map((item, index) => (
+                    <div key={item.id}>
+                      <label style={{ color: "blue" }}>
+                        <input
+                          type="checkbox"
+                          value={item.price}
+                          onChange={(e) => handleCheckboxChange(e, item)}
+                        />
+                        {item.item_name}
+                      </label>
+                    </div>
+                  ))}
                 </select>
                 <p
                   style={{
@@ -373,18 +403,37 @@ const BookingPage = (props: any) => {
                   </p>
                 </b>
                 {selectedServiceItems.length > 0 ? (
-                  selectedServiceItems.map((item, index) => (
-                    <div key={index}>
-                      <label style={{ color: "blue" }}>
-                        <input type="checkbox" value={item.item_name} defaultChecked disabled />
-                        {item.item_name}
-                      </label>
-                    </div>
-
-                  ))
+                  <>
+                    {selectedServiceItems.map((item, index) => (
+                      <div key={item.item_name}>
+                        <label style={{ color: "blue" }}>
+                          <input
+                            type="checkbox"
+                            value={item.item_name}
+                            defaultChecked
+                            disabled
+                          />
+                          {item.item_name}
+                        </label>
+                      </div>
+                    ))}
+                    {dataServiceItem.map((item, index) => (
+                      <div key={item.id}>
+                        <label style={{ color: "blue" }}>
+                          <input
+                            type="checkbox"
+                            value={item.price}
+                            onChange={(e) => handleCheckboxChange(e, item)}
+                          />
+                          {item.item_name}
+                        </label>
+                      </div>
+                    ))}
+                  </>
                 ) : (
                   <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
                 )}
+
                 {selectedService && (
                   <>
                     <p>
