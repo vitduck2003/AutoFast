@@ -62,6 +62,7 @@ const BookingPage = (props: any) => {
 
   // console.log(dataService);
   console.log(dataServiceItem);
+  console.log(dataService);
 
   const [kmMessage, setKmMessage] = useState<string>("");
   // const navigate = useNavigate();
@@ -358,31 +359,19 @@ const BookingPage = (props: any) => {
               <div className="form-group">
                 <label htmlFor="">Gói Bảo dưỡng</label>
                 <select
-                  onChange={handleInputChange}
-                  name="service"
-                  className="form-control"
-                  id="service"
-                  value={formData.service}
-                >
-                  <option
-                    disabled={formData.service && formData.service !== "0"}
-                    value="0"
-                  >
-                    Chọn Cấp bảo dưỡng
-                  </option>
-                  {dataServiceItem.map((item, index) => (
-                    <div key={item.id}>
-                      <label style={{ color: "blue" }}>
-                        <input
-                          type="checkbox"
-                          value={item.price}
-                          onChange={(e) => handleCheckboxChange(e, item)}
-                        />
-                        {item.item_name}
-                      </label>
-                    </div>
-                  ))}
-                </select>
+
+  onChange={handleInputChange}
+  name="service"
+  className="form-control"
+  id="service"
+  value={formData.service}
+>
+  {dataService.map((item) => (
+    <option key={item.id} value={item.id}>
+    <label > {item.service_name}</label> 
+    </option>
+  ))}
+</select>
                 <p
                   style={{
                     paddingLeft: "10px",
@@ -392,14 +381,11 @@ const BookingPage = (props: any) => {
                 >
                   {kmMessage}
                 </p>
-                <b>
-                  <p style={{ marginTop: "20px" }}>
-                    Gói bảo dưỡng hiện tại khác gồm:
-                  </p>
-                </b>
+            
                 <b>
                   <p style={{ marginTop: "20px" }}>
                     Gói bảo dưỡng hiện tại gồm:
+                    
                   </p>
                 </b>
                 {selectedServiceItems.length > 0 ? (
@@ -417,6 +403,14 @@ const BookingPage = (props: any) => {
                         </label>
                       </div>
                     ))}
+                  
+                  </>
+                ) : (
+                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+                )}
+                  <b>
+                  <p style={{ marginTop: "20px" }}>
+                    Gói bảo dưỡng hiện tại khác gồm:
                     {dataServiceItem.map((item, index) => (
                       <div key={item.id}>
                         <label style={{ color: "blue" }}>
@@ -429,10 +423,8 @@ const BookingPage = (props: any) => {
                         </label>
                       </div>
                     ))}
-                  </>
-                ) : (
-                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-                )}
+                  </p>
+                </b>
 
                 {selectedService && (
                   <>
