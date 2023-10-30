@@ -392,42 +392,43 @@ const BookingPage = (props: any) => {
                   </p>
                 </b>
                 {selectedServiceItems.length > 0 ? (
-                  <>
-                    {selectedServiceItems.map((item, index) => (
-                      <div key={item.item_name}>
-                        <label style={{ color: "blue" }}>
-                          <input
-                            type="checkbox"
-                            value={item.item_name}
-                            defaultChecked
-                            disabled
-                          />
-                          {item.item_name}
-                        </label>
-                      </div>
-                    ))}
-                  
-                  </>
-                ) : (
-                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-                )}
-                  <b>
-                  <p style={{ marginTop: "20px" }}>
-                    Gói bảo dưỡng hiện tại khác gồm:
-                    {dataServiceItem.map((item, index) => (
-                      <div key={item.id}>
-                        <label style={{ color: "blue" }}>
-                          <input
-                            type="checkbox"
-                            value={item.price}
-                            onChange={(e) => handleCheckboxChange(e, item)}
-                          />
-                          {item.item_name}
-                        </label>
-                      </div>
-                    ))}
-                  </p>
-                </b>
+  <>
+    {selectedServiceItems.map((item, index) => (
+      <div key={item.item_name}>
+        <label style={{ color: "blue" }}>
+          <input
+            type="checkbox"
+            value={item.item_name}
+            defaultChecked
+            disabled
+          />
+          {item.item_name}
+        </label>
+      </div>
+    ))}
+    <b>
+      <p style={{ marginTop: "20px" }}>
+        Gói bảo dưỡng hiện tại khác gồm:
+        {dataServiceItem
+          .filter((item) => !selectedServiceItems.some((selectedItem) => selectedItem.item_name === item.item_name))
+          .map((item, index) => (
+            <div key={item.id}>
+              <label style={{ color: "blue" }}>
+                <input
+                  type="checkbox"
+                  value={item.price}
+                  onChange={(e) => handleCheckboxChange(e, item)}
+                />
+                {item.item_name}
+              </label>
+            </div>
+          ))}
+      </p>
+    </b>
+  </>
+) : (
+  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+)}
 
                 {selectedService && (
                   <>
