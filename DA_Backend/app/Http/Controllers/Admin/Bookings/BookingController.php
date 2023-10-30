@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Bookings;
 
-use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -15,9 +14,10 @@ class BookingController extends Controller
             ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
             ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
             ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
-            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')      
             ->where('booking.status', 'LIKE', 'Chờ xác nhận')
             ->get();
+            // return response()->json($bookings);
         return view('admin/pages/bookings/bookings', compact('bookings'));
        
     }
@@ -47,9 +47,15 @@ class BookingController extends Controller
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
         return redirect()->back();
     }
-    public function cancel($id)
+    public function restore($id)
     {
-        $status = 'Đã đươc hủy';
+        $status = 'Chờ xác nhận';
+        DB::table('booking')->where('id', $id)->update(['status' => $status]);
+        return redirect()->back();
+    }
+    public function revoke($id)
+    {
+        $status = 'Đã được hủy';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
         return redirect()->back();
     }
@@ -60,29 +66,23 @@ class BookingController extends Controller
             ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
             ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
             ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
-            ->where('booking.status', 'LIKE', 'Đang chờ khách đến')
+            ->where('booking.status', 'LIKE', 'Đang đợi khách đến')
             ->get();
-      
+    //   dd($bookings);
         return view('admin/pages/bookings/bookingWait', compact('bookings'));
     }
-    public function getbookingWait($id)
+    public function getBookingWait($id)
     {
         $bookings = DB::table('booking')
             ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
             ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
             ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
             ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
-            ->where('booking.status', 'LIKE', 'Đang chờ khách đến')
+            ->where('booking.status', 'LIKE', 'Đang đợi khách đến')
             ->where('id_booking', '=', $id)
             ->get();
-      
-            if ($bookings) {
-                // Trả về thông tin booking
                 return response()->json($bookings);
-            } else {
-                return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
             }
-    }
     public function bookingCancel()
     {
         $bookings = DB::table('booking')
@@ -94,7 +94,7 @@ class BookingController extends Controller
             ->get();
             return view('admin/pages/bookings/bookingCancel', compact('bookings'));
     }
-    public function getbookingCancel($id)
+    public function getBookingCancel($id)
     {
         $bookings = DB::table('booking')
             ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
@@ -112,5 +112,29 @@ class BookingController extends Controller
                 return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
             }
     }
+    public function bookingComplete()
+    {
+        $bookings = DB::table('booking')
+            ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
+            ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
+            ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
+            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->where('booking.status', 'LIKE', 'Đã hoàn thành')
+            ->get();
+    //   dd($bookings);
+        return view('admin/pages/bookings/bookingWait', compact('bookings'));
+    }
+    public function getBookingComplete($id)
+    {
+        $bookings = DB::table('booking')
+            ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
+            ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
+            ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'))
+            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->where('booking.status', 'LIKE', 'Đã hoàn thành')
+            ->where('id_booking', '=', $id)
+            ->get();
+                return response()->json($bookings);
+            }
 }
 
