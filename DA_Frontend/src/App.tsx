@@ -79,6 +79,7 @@ import AccountSetting from "./pages/UserSide/Account/AccountSetting";
 import BillDetail from "./pages/UserSide/Bill/BillDetail";
 import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
 import PayPage from "./pages/UserSide/Pay/PayPage";
+import SearchBooking from "./pages/UserSide/SearchBooking/SearchBooking";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -269,6 +270,13 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route
               index
               element={<AccountSetting />}
+            />
+          </Route>
+          Search Booking
+          <Route path="search-booking">
+            <Route
+              index
+              element={<SearchBooking />}
             />
           </Route>
 
