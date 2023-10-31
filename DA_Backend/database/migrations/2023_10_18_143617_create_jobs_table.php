@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_service');
+            $table->integer('id_service')->nullable();
             $table->integer('id_booking_detail');
+            $table->integer('id_booking');
             $table->integer('id_staff')->nullable();
             $table->string('item_name');
             $table->float('item_price');

@@ -32,8 +32,15 @@
                                 <td>{{ $job->target_date }}: {{ $job->target_time }}</td>
                                 <td class="text-success">{{ $job->status }}</td>
                                 <td>
+                                    @if( $job-> status == "Đã xong")
+                                        <a href="{{ route('job.confirm.complete', ['id'=>$job->id]) }}">
+                                            <button type="button" class="btn btn-success">
+                                               Hoàn thành
+                                            </button>
+                                        </a>
+                                    @endif
                                     <a href="{{ url('admin/job-detail', ['id'=>$job->id]) }}">
-                                        <button type="button" class="btn btn-success">
+                                        <button type="button" class="btn btn-primary">
                                             Xem công việc
                                         </button>
                                     </a>
@@ -76,76 +83,4 @@
     </div>
 </div>
     </div>
-@section('script')
-<script>
-    $(document).ready(function () {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
-            var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
-
-            // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
-            $.get('/api/bookings/' + bookingId, function (data) {
-                // Thiết lập dữ liệu booking vào modal
-                var modal = $('#exampleModal');
-                modal.find('.modal-title').text('Chi tiết đặt lịch');
-                // Đổ dữ liệu booking vào các phần tử trong modal
-                modal.find('#name').text(data[0].name);
-                modal.find('#phone').text(data[0].phone);
-                modal.find('#email').text(data[0].email);
-                modal.find('#model_car').text(data[0].model_car);
-                modal.find('#mileage').text(data[0].mileage + ' Km');
-                modal.find('#tasks').text(data[0].item_names);
-                modal.find('#prices').text(data[0].item_prices + ' VNĐ');
-                modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
-                modal.find('#note').text(data[0].note);
-
-                // Update the data-booking-id attribute for Confirm and Cancel buttons
-                modal.find('.btn-confirm').attr('data-booking-id', bookingId);
-                modal.find('.btn-cancel').attr('data-booking-id', bookingId);
-            })
-                .fail(function (error) {
-                    console.log('Lỗi khi gửi yêu cầu API:', error);
-                });
-        });
-
-        // Handle Confirm button click
-        $('#btn-confirm').on('click', function () {
-            var bookingId = $(this).data('booking-id');
-            // Tạo yêu cầu PUT tới API để cập nhật trạng thái booking
-            $.ajax({
-                url: '/api/bookings/' + bookingId + '/update-status',
-                type: 'PUT',
-                data: { status: 'Đã xác nhận' },
-                success: function (response) {
-                    console.log('Xác nhận thành công:', response);
-                    // Close the modal or update UI as needed
-                },
-                error: function (error) {
-                    console.log('Lỗi khi xác nhận:', error);
-                }
-            });
-        });
-
-        // Handle Cancel button click
-        $('#btn-cancel').on('click', function () {
-            var bookingId = $(this).data('booking-id');
-
-            // Tạo yêu cầu PUT tới API để cập nhật trạng thái booking
-            $.ajax({
-                url: '/api/bookings/' + bookingId + '/update-status',
-                type: 'PUT',
-                data: { status: 'Đã được hủy' },
-                success: function (response) {
-                    console.log('Hủy thành công:', response);
-                    // Close the modal or update UI as needed
-                },
-                error: function (error) {
-                    console.log('Lỗi khi hủy:', error);
-                }
-            });
-        });
-    });
-</script>
-
-@endsection
 @endsection

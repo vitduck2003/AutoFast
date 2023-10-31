@@ -35,6 +35,9 @@ Route::get('/', function () {
         Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
         Route::get('jobs', [JobController::class, 'index']);
         Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
+        Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');
+        Route::get('confirm-complete/{id}', [JobController::class, 'confirmComplete'])->name('job.confirm.complete');
+        
 
     });
     Route::get('services', function () {
