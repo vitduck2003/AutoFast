@@ -80,11 +80,13 @@ import BillDetail from "./pages/UserSide/Bill/BillDetail";
 import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
 import PayPage from "./pages/UserSide/Pay/PayPage";
 import SearchBooking from "./pages/UserSide/SearchBooking/SearchBooking";
+import { searchBooking } from "./api/searchBooking";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
   const [news, setNews] = useState<INews[]>([]);
   const [booking, setBooking] = useState<IBooking[]>([]);
+  const [searchBK, setSearchBK] = useState<IBooking[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
   const [mess, setMess] = useState();
   const [services, setService] = useState<IService[]>([]);
@@ -97,6 +99,7 @@ function App() {
     getUsers().then(({ data }) => setUsers(data));
     getService().then(({ data }) => setService(data));
     getServiceItem().then(({ data }) => setServiceItem(data));
+    searchBooking().then(({ data }) => setSearchBK(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -276,7 +279,7 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="search-booking">
             <Route
               index
-              element={<SearchBooking />}
+              element={<SearchBooking searchBK={searchBK} />}
             />
           </Route>
 
