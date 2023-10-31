@@ -32,7 +32,7 @@
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                 <td class="text-success">{{ $booking->status }}</td>
                                 <td>
-                                    <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
+                                    <form action="#" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
                                         <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
