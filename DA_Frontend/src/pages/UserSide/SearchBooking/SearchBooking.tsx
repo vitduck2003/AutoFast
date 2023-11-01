@@ -1,10 +1,55 @@
 import React, { useState } from "react";
 import searchBooking from "../../../assets/img/searchBooking.png";
+import { IBooking } from "../../../interface/booking";
 
-
-
-const SearchBooking = () => {
+interface IProps {
+  searchBK: IBooking[];
   
+}
+
+
+const SearchBooking = (props: IProps) => {
+  const data = props.searchBK;
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+  const [notFoundMessage, setNotFoundMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const validatePhoneNumber = (phone) => {
+    // Kiểm tra số điện thoại có 10 chữ số và bắt đầu bằng 0
+    return phone.match(/^0\d{9}$/);
+  };
+  
+  const handleSearch = () => {
+    if (!phoneNumber) {
+      setErrorMessage("Vui lòng nhập số điện thoại.");
+      return;
+    }
+
+    if (!validatePhoneNumber(phoneNumber)) {
+      setErrorMessage("Số điện thoại không hợp lệ.");
+      return;
+    }
+
+    setErrorMessage("");
+
+    const result = data.find((item) => item.phone === phoneNumber);
+    if (result) {
+      setSearchResult(result);
+    } else {
+      setSearchResult(null);
+      setErrorMessage("Không tìm thấy lịch bảo dưỡng phù hợp.");
+    }
+  };
+
+  const handleReset = () => {
+    setPhoneNumber("");
+    setSearchResult(null);
+    setNotFoundMessage("");
+    setErrorMessage("");
+  };
+
   return (
     <div>
       <div className="container-fluid page-header mb-5 p-0">
@@ -30,8 +75,10 @@ const SearchBooking = () => {
             type="text" 
             placeholder="VD: 0989898989"
             aria-label="Search"
-           
+            value={phoneNumber}
+           onChange={(e) => setPhoneNumber(e.target.value)}
           />
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
          
          
           </form>
@@ -39,11 +86,11 @@ const SearchBooking = () => {
             style={{ marginTop: "25px" }}
             className="btn btn-primary"
             type="submit"
-          
+            onClick={handleSearch}
           >
             Tra cứu
           </button>
-          
+          {searchResult && (
           <button
             style={{ marginTop: "25px", marginLeft: "20px" }}
             className="btn btn-info"
@@ -52,6 +99,7 @@ const SearchBooking = () => {
           >
             Thông tin lịch
           </button>
+        )}
         
             {/* <!-- Modal --> */}
             <div
@@ -77,14 +125,23 @@ const SearchBooking = () => {
                     </button>
                   </div>
                   <div className="modal-body">
-                   
+                    {searchResult && (
+                      <div className="search-result">
+                        <p>Tên: {searchResult.name}</p>
+                        <p>Số điện thoại: {searchResult.phone}</p>
+                        <p>Loại xe: {searchResult.model_car}</p>
+                        <p>Ngày đến: {searchResult.target_date}</p>
+                        <p>Trạng thái lịch: {searchResult.status}</p>
+                        
+                      </div>
+                    )}
                   </div>
                   <div className="modal-footer">
                     <button
                       type="button"
                       className="btn btn-secondary"
                       data-dismiss="modal"
-                  
+                      onClick={handleReset}
                     >
                       Close
                     </button>

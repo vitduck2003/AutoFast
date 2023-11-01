@@ -23,19 +23,19 @@
                         </thead>
                         <tbody>
                             @foreach($bookings as $booking):
-                            <tr>
+                            <tr>      
                                 <td>{{ $booking->id }}</td>
                                 <td>{{ $booking->name }}</td>
                                 <td>{{ $booking->phone }}</td>
                                 <td>{{ $booking->model_car }}</td>
                                 <td>{{ $booking->mileage }}Km</td>
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
-                                <td class="text-danger">{{ $booking->status }}</td>
+                                <td class="text-success">{{ $booking->status }}</td>
                                 <td>
-                                    <form action="{{ route('booking.startJob', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
+                                    <form action="#" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-primary">Bắt đầu làm</button>
+                                        <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết
@@ -69,6 +69,7 @@
                 <p><strong>Số KM:</strong> <span id="mileage"></span></p>
                 <p><strong>Công việc:</strong> <span id="tasks"></span></p>
                 <p><strong>Giá tiền:</strong> <span id="prices"></span></p>
+                <p><strong>Tổng tiền:</strong> <span id="total_prices"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
                 <p><strong>Ghi chú:</strong> <span id="note"></span></p>
             </div>
@@ -79,42 +80,44 @@
     </div>
 </div>
     </div>
-    @section('script')
-    <!-- Thư viện jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-Ds0X1ls0BU+X+gX3sVY7qclY4mBeO8z9qL6ahxRc0QY2yYJ5TQI1vzN0LYW8X0Hh" crossorigin="anonymous"></script>
-    <!-- Thư viện Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-k9o4f/+cB8C0QV6eAlM7i0V0jKj+3tB4XqDyq5djBv8w/3eWt0YJ/6WfqK0IeFVy" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
-                var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
-                console.log(bookingId);
-                // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
-                $.get('/api/bookings-wait/' + bookingId, function (data) {
-                    // Thiết lập dữ liệu booking vào modal
-                    var modal = $('#exampleModal');
-                    modal.find('.modal-title').text('Chi tiết đặt lịch');
-                    // Đổ dữ liệu booking vào các phần tử trong modal
-                    modal.find('#name').text(data[0].name);
-                    modal.find('#phone').text(data[0].phone);
-                    modal.find('#email').text(data[0].email);
-                    modal.find('#model_car').text(data[0].model_car);
-                    modal.find('#mileage').text(data[0].mileage + ' Km');
-                    modal.find('#tasks').text(data[0].item_names);
-                    modal.find('#prices').text(data[0].item_prices + ' VNĐ');
-                    modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
-                    modal.find('#note').text(data[0].note);
-    
-                    // Update the data-booking-id attribute for Confirm and Cancel buttons
-                    modal.find('.btn-confirm').attr('data-booking-id', bookingId);
-                    modal.find('.btn-cancel').attr('data-booking-id', bookingId);
-                })
-                    .fail(function (error) {
-                        console.log('Lỗi khi gửi yêu cầu API:', error);
-                    });
-            });
+@section('script')
+<!-- Thư viện jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-Ds0X1ls0BU+X+gX3sVY7qclY4mBeO8z9qL6ahxRc0QY2yYJ5TQI1vzN0LYW8X0Hh" crossorigin="anonymous"></script>
+<!-- Thư viện Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-k9o4f/+cB8C0QV6eAlM7i0V0jKj+3tB4XqDyq5djBv8w/3eWt0YJ/6WfqK0IeFVy" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
+            var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
+            console.log(bookingId);
+            // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
+            $.get('/api/bookings-complete/' + bookingId, function (data) {
+                // Thiết lập dữ liệu booking vào modal
+                var modal = $('#exampleModal');
+                modal.find('.modal-title').text('Chi tiết đặt lịch');
+                // Đổ dữ liệu booking vào các phần tử trong modal
+                modal.find('#name').text(data[0].name);
+                modal.find('#phone').text(data[0].phone);
+                modal.find('#email').text(data[0].email);
+                modal.find('#model_car').text(data[0].model_car);
+                modal.find('#mileage').text(data[0].mileage + ' Km');
+                modal.find('#tasks').text(data[0].item_names);
+                modal.find('#prices').text(data[0].item_prices + ' VNĐ');
+                modal.find('#total_prices').text(data[0].total_prices + ' VNĐ');
+                modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
+                modal.find('#note').text(data[0].note);
+
+                // Update the data-booking-id attribute for Confirm and Cancel buttons
+                modal.find('.btn-confirm').attr('data-booking-id', bookingId);
+                modal.find('.btn-cancel').attr('data-booking-id', bookingId);
+            })
+                .fail(function (error) {
+                    console.log('Lỗi khi gửi yêu cầu API:', error);
+                });
         });
-    </script>
+    });
+</script>
+
 @endsection
 @endsection

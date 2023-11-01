@@ -25,17 +25,17 @@ Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait
 Route::get('/api/bookings-cancel/{id}', [BookingController::class, 'getBookingCancel']);
 Route::get('/api/bookings-complete/{id}', [BookingController::class, 'getBookingComplete']);
 
-Route::prefix('admin')->group(function () {
-
-  Route::get('bookings', [BookingController::class, 'index']);
-  Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
-  Route::post('/bookings/{id}/revoke', [BookingController::class, 'revoke'])->name('booking.revoke');
-  Route::post('/bookings/{id}/restore', [BookingController::class, 'restore'])->name('booking.restore');
-  Route::get('bookings-wait', [BookingController::class, 'bookingWait'])->name('booking.wait');
-  Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
-  Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
-  Route::get('jobs', [JobController::class, 'index']);
-  Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
+    Route::prefix('admin')->group(function () {
+        
+        Route::get('bookings', [BookingController::class, 'index']);
+        Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
+        Route::post('/bookings/{id}/revoke', [BookingController::class, 'revoke'])->name('booking.revoke');
+        Route::post('/bookings/{id}/restore', [BookingController::class, 'restore'])->name('booking.restore');
+        Route::get('bookings-wait', [BookingController::class, 'bookingWait'])->name('booking.wait');
+        Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
+        Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
+        Route::get('jobs', [JobController::class, 'index']);
+        Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
 
 
 

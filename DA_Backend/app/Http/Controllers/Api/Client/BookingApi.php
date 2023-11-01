@@ -31,11 +31,14 @@ class BookingApi extends Controller
             ]);
 
             if ($bookingDetailId) {
-                $itemServices = DB::table('service_items')->where('id_service', $data['service'])->get();
+                $itemServices = DB::table('service_items')
+                    ->where('id_service', $data['service'])
+                    ->get();
 
                 foreach ($itemServices as $itemService) {
                     // Thực hiện insert vào bảng job
                     $jobId = DB::table('jobs')->insertGetId([
+                        'id_booking' => $bookingId,
                         'id_booking_detail' => $bookingDetailId,
                         'id_service' => $itemService->id_service,
                         'item_name' => $itemService->item_name,
@@ -46,6 +49,27 @@ class BookingApi extends Controller
                         'price' => $itemService->price,
                         'status' => 'Chờ xác nhận',
                     ]);
+                }
+
+                foreach ($data['service_item_other'] as $id_other) {
+                    $itemServiceOther = DB::table('service_items')
+                        ->where('id', '=', $id_other)
+                        ->first();
+
+                    if ($itemServiceOther) {
+                        $jobId = DB::table('jobs')->insertGetId([
+                            'id_booking' => $bookingId,
+                            'id_booking_detail' => $bookingDetailId,
+                            'id_service' => null,
+                            'item_name' => $itemServiceOther->item_name,
+                            'item_price' => $itemServiceOther->price,
+                            'id_staff' => null,
+                            'target_time_done' => $itemServiceOther->time_done,
+                            'images_done' => null,
+                            'price' => $itemServiceOther->price,
+                            'status' => 'Chờ xác nhận',
+                        ]);
+                    }
                 }
 
                 return response()->json(['message' => 'Đặt lịch thành công'], 200);
