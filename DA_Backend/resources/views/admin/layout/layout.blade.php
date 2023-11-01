@@ -12,7 +12,15 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href={{ asset('assets\images\favicon.ico') }}>
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+        alpha/css/bootstrap.css" rel="stylesheet">
+	
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	    <link rel="stylesheet" type="text/css" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <!-- DataTables -->
         <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
@@ -379,7 +387,10 @@
                             <span>Quản lí nhân viên</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="tables-basic.html">Thêm nhân viên</a></li>
+                            <li><a href="{{url('admin/staff')}}">Tất cả nhân viên</a></li>
+                        </ul>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{url('admin/staff/form/add')}}">Thêm nhân viên</a></li>
                         </ul>
                     </li>
                     <li class="menu-title">Tin tức</li>

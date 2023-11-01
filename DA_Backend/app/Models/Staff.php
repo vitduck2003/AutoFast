@@ -11,13 +11,9 @@ class Staff extends Model
     use HasFactory, SoftDeletes;
 
     protected $table='staff';
+    protected $dates = ['deleted_at'];
     protected $fillable=[
-        'name',
-        'email',
-        'phone',
-        'address',
-        'description',
-        'avatar',
+        'id_user',
         'salary',
         'review',
         'status',
