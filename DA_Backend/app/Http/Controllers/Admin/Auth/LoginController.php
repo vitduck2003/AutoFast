@@ -24,10 +24,11 @@ class LoginController extends Controller
             if ($user->role_id == 1) {
                 return redirect()->route('admin.home');
             } elseif ($user->role_id == 2) {
+                session(['user_name' => $user->name, 'phone' => $user->phone]);
                 return redirect()->to('staff/home');
             }
         }
-
+    
         // Đăng nhập thất bại
         return redirect()->back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác']);
     }

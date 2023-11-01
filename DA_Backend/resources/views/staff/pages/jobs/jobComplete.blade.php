@@ -33,7 +33,7 @@
                                     <form method="post" action="{{ route('updateJobStatus') }}">
                                         @csrf
                                         <input type="hidden" name="job_id" value="{{ $job->id }}">
-                                        <button type="submit" class="btn btn-success">Hoàn thành</button>
+                                        <button type="submit" class="btn btn-danger">Làm lại</button>
                                     </form>
                                 </td>
                             </tr>

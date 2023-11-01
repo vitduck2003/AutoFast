@@ -21,22 +21,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jobDetail as $job):
-                            <tr>
-                                <td>{{ $job->id }}</td>
-                                <td>{{ $job->item_name }}</td>
-                                <td>{{ $job->target_time_done }}</td>
-                                <td>{{ number_format($job->price, 0, ',', '.') }} VND</td>
-                                <td>
-                                    <select name="" id="">
-                                        <option value="">Chọn nhân viên</option>
-                                        <option value="1">Nhân viên 1</option>
-                                        <option value="2">Nhân viên 2</option>
-                                    </select>
-                                </td>
-                                <td>{{ $job->status }}</td>
-                                <td class="text-success">{{ $job->status }}</td> 
-                            </tr>
+                            @foreach ($jobDetail as $job)
+                                :
+                                <tr>
+                                <tr>
+                                    <td>{{ $job->id }}</td>
+                                    <td>{{ $job->item_name }}</td>
+                                    <td>{{ $job->target_time_done }}</td>
+                                    <td>{{ number_format($job->price, 0, ',', '.') }} VND</td>
+                                    <td>
+                                        <form action="{{ route('save.staff') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="job_id" value="{{ $job->id }}">
+                                            <select name="staff_id">
+                                                <option value="">Chọn nhân viên</option>
+                                                @foreach ($staffs_free_time as $staff)
+                                                    <option value="{{ $staff->id }}"
+                                                        {{ $staff->id == $job->id_staff ? 'selected' : '' }}>{{ $staff->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                    </td>
+                                    <td>{{ $job->status }}</td>
+                                    <td><button type="submit" class="btn btn-primary">Lưu</button></td>
+                                    </form>
+                                </tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

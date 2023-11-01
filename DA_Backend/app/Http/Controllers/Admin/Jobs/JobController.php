@@ -36,6 +36,8 @@ class JobController extends Controller
     public function jobDetail($id)
     {
         $staffs_free_time = DB::table('staff')
+        ->join('users', 'users.id', '=', 'staff.id_user')
+        ->select('staff.id', 'staff.status', 'users.name')
         ->where('status', 'LIKE', 'Đang đợi việc')
         ->get();
         $jobDetail = DB::table('jobs')
@@ -53,5 +55,15 @@ class JobController extends Controller
         $status = 'Đã hoàn thành';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
         return redirect()->back();
+    }
+    public function saveStaff(Request $request)
+    {
+        $jobId = $request->input('job_id');
+        $staffId = $request->input('staff_id');
+        
+        DB::table('jobs')
+            ->where('id', '=', $jobId)
+            ->update(['id_staff' => $staffId]);
+            return redirect()->back();
     }
 }
