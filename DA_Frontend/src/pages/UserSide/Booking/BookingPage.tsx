@@ -397,6 +397,7 @@ const BookingPage = (props: any) => {
                           <input
                             type="checkbox"
                             value={item.item_name}
+                            defaultChecked
                             disabled
                           />
                           {item.item_name}
