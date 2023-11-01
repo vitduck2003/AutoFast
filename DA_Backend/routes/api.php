@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Client\ServiceItem;
 use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Auth\ForgetPasswordApi;
 use App\Http\Controllers\Api\Admin\ManagerBookingApi;
+use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 
@@ -108,6 +109,7 @@ Route::prefix('client')->group(function () {
         return response()->json('da vao dc');
     })->middleware('checkauth');
  
+//Staff Api
 
 
     

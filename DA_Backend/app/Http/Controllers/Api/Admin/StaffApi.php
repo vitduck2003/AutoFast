@@ -6,6 +6,7 @@ use App\Models\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StaffResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StaffApi extends Controller
 {
@@ -16,10 +17,14 @@ class StaffApi extends Controller
      */
     public function index()
     {
-        $staffs = Staff::all();
-        // return response()->json($staffs);
-        return StaffResource::collection($staffs);
-        //
+
+        $staffs = DB::table('users')
+            ->join('staff', 'users.id', '=', 'staff.id_user')
+            ->where('users.role_id', '=',2)
+            ->select('staff.*','users.name','users.password','users.avatar',
+                    'users.email','users.phone','users.description','users.address' )
+            ->get();
+            return response()->json($staffs);
     }
 
     /**
@@ -31,9 +36,7 @@ class StaffApi extends Controller
     public function store(Request $request)
     {
         //
-        $staff = Staff::create($request->all());
-        // return new StaffResource($staff);
-        return response()->json($staff, 201);
+        return response()->json(['messages' => 123]);
     }
 
     /**
@@ -46,13 +49,12 @@ class StaffApi extends Controller
     {
         //
         $staff = Staff::find($id);
-        if ($staff) {
-            return response()->json($staff);
-        } else {
-            return response()->json([
-                'error' => 'tài khoản không tồn tại'
-            ]);
+
+        if (!$staff) {
+            return response()->json(['message' => 'Nhân viên không tồn tại'], 404);
         }
+
+        return response()->json($staff, 200);
     }
 
     /**
@@ -65,15 +67,7 @@ class StaffApi extends Controller
     public function update(Request $request, $id)
     {
         //
-        $staff = Staff::find($id);
-        if ($staff) {
-            $staff->update($request->all());
-            return response()->json($staff);
-        } else {
-            return response()->json([
-                'error' => 'update not found',
-            ]);
-        }
+        return response()->json(['messages' => 123]);
     }
 
     /**
@@ -85,14 +79,6 @@ class StaffApi extends Controller
     public function destroy($id)
     {
         //
-        $staff = Staff::find($id);
-        if ($staff) {
-            $staff->delete();
-            return response()->json(['message' => 'successfully']);
-        } else {
-            return response()->json([
-                'error' => 'not found',
-            ]);
-        }
+        return response()->json(['messages' => 123]);
     }
 }
