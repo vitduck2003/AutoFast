@@ -359,22 +359,21 @@ const BookingPage = (props: any) => {
               <div className="form-group">
                 <label htmlFor="">Gói Bảo dưỡng</label>
                 <select
-
-  onChange={handleInputChange}
-  name="service"
-  className="form-control"
-  id="service"
-  value={formData.service}
->
-<option value="" disabled>
-    Vui lòng chọn gói bảo dưỡng
-  </option>
-  {dataService.map((item) => (
-    <option key={item.id} value={item.id}>
-    <label > {item.service_name}</label> 
-    </option>
-  ))}
-</select>
+                  onChange={handleInputChange}
+                  name="service"
+                  className="form-control"
+                  id="service"
+                  value={formData.service}
+                >
+                  <option value="" disabled>
+                    Vui lòng chọn gói bảo dưỡng
+                  </option>
+                  {dataService.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      <label> {item.service_name}</label>
+                    </option>
+                  ))}
+                </select>
                 <p
                   style={{
                     paddingLeft: "10px",
@@ -384,51 +383,111 @@ const BookingPage = (props: any) => {
                 >
                   {kmMessage}
                 </p>
-            
+
                 <b>
                   <p style={{ marginTop: "20px" }}>
                     Gói bảo dưỡng hiện tại gồm:
-                    
                   </p>
                 </b>
                 {selectedServiceItems.length > 0 ? (
-  <>
-    {selectedServiceItems.map((item, index) => (
-      <div key={item.item_name}>
-        <label style={{ color: "blue" }}>
-          <input
-            type="checkbox"
-            value={item.item_name}
-            defaultChecked
-            disabled
-          />
-          {item.item_name}
-        </label>
-      </div>
-    ))}
-   <b>
-  <p style={{ marginTop: "20px" }}>
-    Gói bảo dưỡng hiện tại khác gồm:
-    {dataServiceItem
-      .filter((item) => item.id_service === null)
-      .map((item, index) => (
-        <div key={item.id}>
-          <label style={{ color: "blue" }}>
-            <input
-              type="checkbox"
-              value={item.price}
-              onChange={(e) => handleCheckboxChange(e, item)}
-            />
-            {item.item_name}
-          </label>
-        </div>
-      ))}
-  </p>
-</b>
-  </>
-) : (
-  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-)}
+                  <>
+                    {selectedServiceItems.map((item, index) => (
+                      <div key={item.item_name}>
+                        <label style={{ color: "blue" }}>
+                          <input
+                            type="checkbox"
+                            value={item.item_name}
+                            defaultChecked
+                            disabled
+                          />
+                          {item.item_name}
+                        </label>
+                      </div>
+                    ))}
+                    <b>
+                      <p style={{ marginTop: "20px" }}>
+                        Gói bảo dưỡng hiện tại khác gồm:
+                        <table
+                          style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            border: "1px solid #ddd",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Action
+                              </th>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Service
+                              </th>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Price
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {dataServiceItem
+                              .filter((item) => item.id_service === null)
+                              .map((item, index) => (
+                                <tr key={item.id}>
+                                  <td style={{ borderRight: "1px solid #ddd" }}>
+                                    <input
+                                      type="checkbox"
+                                      value={item.price}
+                                      onChange={(e) =>
+                                        handleCheckboxChange(e, item)
+                                      }
+                                      style={{
+
+                                        width: "20px",
+                                        height: "20px",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "3px",
+                                        cursor: "pointer",
+                                        verticalAlign: "middle",
+                                        // margin: '0 10px 0 0',
+                                        marginLeft:'10px',
+                                        paddingLeft: "10px",
+                                      }}
+                                    />
+                                  </td>
+                                  <td style={{ borderRight: "1px solid #ddd" }}>
+                                    {item.item_name}
+                                  </td>
+                                  <td style={{ padding: "8px" }}>
+                                    {item.price}
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </p>
+                    </b>
+                  </>
+                ) : (
+                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+                )}
 
                 {selectedService && (
                   <>
