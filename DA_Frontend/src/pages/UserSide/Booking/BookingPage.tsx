@@ -103,6 +103,12 @@ const BookingPage = (props: any) => {
     service_item_other: [],
   });
   const handleCheckboxChange = (e, item) => {
+    // Phần select action để cộng vào cả tổng giá tiền
+    if (e.target.checked) {
+      setSelectedTotal(selectedTotal + item.price);
+    } else {
+      setSelectedTotal(selectedTotal - item.price);
+    }
     const { checked, value } = e.target;
 
     setFormData((prevData: any) => {
@@ -225,6 +231,8 @@ const BookingPage = (props: any) => {
   const totalCost =
     selectedServiceItems.reduce((total, item) => total + item.price, 0) +
     NhanCong;
+
+    const [selectedTotal, setSelectedTotal] = useState(0);
 
   return (
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
@@ -503,7 +511,7 @@ const BookingPage = (props: any) => {
                     Tổng giá tiền:
                   </label>{" "}
                 </b>
-                <span style={{ color: "red" }}>{totalCost} VND</span>
+                <span style={{ color: "red" }}>{totalCost + selectedTotal} VND</span>
               </div>
             </div>
           </div>
