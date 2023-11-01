@@ -50,14 +50,14 @@ const SigninPage = (props) => {
       .then((response) => {
         console.log(response);
   
-        if (response.message === "Đăng nhập thành công") {
+        if (response.success === true) {
           openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
   
-          if (response.success === true && response.user.role_id === 3) {
-            openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
+         
+      
   
             if (response.success === true) {
-              openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
+        
   
               // Use a nested .then block to navigate after handling the success case
               sessionStorage.setItem('user', JSON.stringify(response.user));
@@ -70,9 +70,9 @@ const SigninPage = (props) => {
             } else if (response.success === false) {
               openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
             }
-          } else {
-            // Handle other cases or conditions here
-          }
+          
+        }else if (response.success === false) {
+          openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
         }
       })
       .catch((error) => {
