@@ -35,10 +35,13 @@ class JobController extends Controller
     }
     public function jobDetail($id)
     {
+        $staffs_free_time = DB::table('staff')
+        ->where('status', 'LIKE', 'Đang đợi việc')
+        ->get();
         $jobDetail = DB::table('jobs')
             ->where('id_booking', '=', $id)
             ->get();
-        return view('admin/pages/jobs/jobDetail', compact('jobDetail'));
+        return view('admin/pages/jobs/jobDetail', compact('jobDetail', 'staffs_free_time'));
     }
     public function startJob($id)
     {

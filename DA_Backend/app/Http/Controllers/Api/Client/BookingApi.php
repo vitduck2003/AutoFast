@@ -47,7 +47,7 @@ class BookingApi extends Controller
                         'target_time_done' => $itemService->time_done,
                         'images_done' => null,
                         'price' => $itemService->price,
-                        'status' => 'Chờ xác nhận',
+                        'status' => 'Đang làm',
                     ]);
                 }
 
@@ -67,7 +67,7 @@ class BookingApi extends Controller
                             'target_time_done' => $itemServiceOther->time_done,
                             'images_done' => null,
                             'price' => $itemServiceOther->price,
-                            'status' => 'Chờ xác nhận',
+                            'status' => 'Đang làm',
                         ]);
                     }
                 }
