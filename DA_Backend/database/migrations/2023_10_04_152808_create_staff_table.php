@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_user');
             $table->float('salary');
             $table->string('review');
             $table->string('status');
-            $table->integer('id_user');
             $table->timestamps();
             $table->softDeletes();
         });
