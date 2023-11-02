@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\ServiceItems;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
+use App\Models\ServiceItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class Services extends Controller
+class ServiceItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class Services extends Controller
      */
     public function index()
     {
-        
+        $data = ServiceItem::all();
+        return view('admin\pages\ServiceItems\index');
     }
 
     /**
@@ -24,7 +28,7 @@ class Services extends Controller
      */
     public function create()
     {
-        //
+        return view('admin\pages\ServiceItems\create');
     }
 
     /**
@@ -35,7 +39,12 @@ class Services extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Service();
+        $model->fillable($request->except('image'));
+        if($request->has('image')){
+            $model->image = Storage::disk('public')->put('images',$request->file('image'));
+        }
+        $model->save();
     }
 
     /**
@@ -55,9 +64,9 @@ class Services extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ServiceItem $service)
     {
-        //
+        return   view('admin\pages\ServiceItems\edit',compact('service'));
     }
 
     /**
@@ -69,7 +78,12 @@ class Services extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = ServiceItem::findOrFail($id);
+        $model->fillable($request->except('image'));
+        if($request->has('image')){
+           $model->image = Storage::disk('public')->put('images',$request->file('image'));  
+        }
+        $model->save();
     }
 
     /**
@@ -78,8 +92,9 @@ class Services extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ServiceItem $service)
     {
-        //
+        ServiceItem::destroy($service);
+        return back();
     }
 }
