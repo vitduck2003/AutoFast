@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('model_car');
             $table->integer('mileage');
             $table->string('status');
+            $table->integer('total_price');
             $table->timestamps();
             $table->softDeletes();
         });

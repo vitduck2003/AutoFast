@@ -1,5 +1,10 @@
 @extends('admin/layout/layout')
 @section('content')
+@if (Session::has('success'))
+    <div class="alert alert-success">
+        <strong>{{ Session::get('success') }}</strong>
+    </div>
+@endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -32,9 +37,10 @@
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                 <td class="text-success">{{ $booking->status }}</td>
                                 <td>
-                                    <form action="#" method="POST" style="display: inline;">
+                                    <form action="{{ route('create.invoice') }}" method="POST" style="display: inline;">
                                         @csrf
-                                        @method('POST')
+                                        <input type="text" name="total_amount" hidden value="{{ $booking->total_prices }}">
+                                        <input type="text" name="id_booking" hidden value="{{ $booking->id }}">
                                         <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">

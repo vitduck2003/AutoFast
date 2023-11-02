@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Jobs\JobController;
+use App\Http\Controllers\Admin\News\NewController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
-use App\Http\Controllers\Admin\News\NewController;
-use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
+use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
-use App\Http\Controllers\Admin\staff\StaffController;
+use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,15 @@ Route::get('/staff/home', function () {
 
         Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');
         Route::get('confirm-complete/{id}', [JobController::class, 'confirmComplete'])->name('job.confirm.complete');
+
+        Route::get('invoice', function (){
+          return view('admin/pages/invoices/invoice');
+        });
+          route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
+          route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
+          route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
+        
+
         Route::post('login', [LoginController::class, 'login'])->name('login');
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
