@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
+use App\Http\Controllers\Admin\News\NewController;
+use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
+use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\staff\StaffController;
 
 /*
@@ -59,13 +62,16 @@ Route::get('/staff/home', function () {
         Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
+
+        Route::resource('service', ServiceController::class);
+        Route::resource('serviceitem', ServiceItemController::class);
+        Route::resource('new',NewController::class);
+
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
       Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
       Route::post('/update-job-status', [StaffJobController::class, 'updateJobStatus'])->name('updateJobStatus');
     });
-    Route::get('services', function () {
-      return view('admin//services/bookings');
-    });
+   
 

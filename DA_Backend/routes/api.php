@@ -74,7 +74,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('users', UserApi::class);
 
     // News API
-    Route::resource('news', NewsApi::class);
+    // Route::resource('news', NewsApi::class);
 });
 
 // Client APIs
