@@ -389,22 +389,18 @@
                                 <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
                             </ul>
                         </li>
-
                         <li class="menu-title">Dịch vụ</li>
-
                         <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <a class="has-arrow waves-effect">
                                 <i class="bx bx-tone"></i>
-                                <span>Quản lí dịch vụ</span>
+                                <span>Quản lí phụ tùng</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="ui-alerts.html">Dịch vụ</a></li>
+                                <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
                                 <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Tài khoản</li>
-
-
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="bx bx-list-ul"></i>
@@ -418,8 +414,6 @@
                             </ul>
                         </li>
                         <li class="menu-title">Nhân viên</li>
-
-
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="bx bx-list-ul"></i>
@@ -433,36 +427,30 @@
                             </ul>
                         </li>
                         <li class="menu-title">Tin tức</li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-list-ul"></i>
-                                <span>Quản lí tin tức</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="tables-basic.html">Thêm tin tức</a></li>
-                            </ul>
-                        </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-list-ul"></i>
+                            <span>Quản lí tin tức</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="tables-basic.html">Thêm tin tức</a></li>
+                        </ul>
+                    </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
             </div>
-        </div>
-        <!-- Left Sidebar End -->
-
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
+        </div>   
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
+    
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <h4 class="mb-0 font-size-18">Saas</h4>
-
+    
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
@@ -471,14 +459,11 @@
                                 </div>
                             </div>
                         </div>
-
+                     
                     </div>
                     @yield('content')
                 </div> <!-- container-fluid -->
             </div>
-            <!-- End Page-content -->
-
-
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
