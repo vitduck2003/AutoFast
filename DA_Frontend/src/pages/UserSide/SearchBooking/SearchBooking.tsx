@@ -4,9 +4,7 @@ import { IBooking } from "../../../interface/booking";
 
 interface IProps {
   searchBK: IBooking[];
-  
 }
-
 
 const SearchBooking = (props: IProps) => {
   const data = props.searchBK;
@@ -20,7 +18,7 @@ const SearchBooking = (props: IProps) => {
     // Kiểm tra số điện thoại có 10 chữ số và bắt đầu bằng 0
     return phone.match(/^0\d{9}$/);
   };
-  
+
   const handleSearch = () => {
     if (!phoneNumber) {
       setErrorMessage("Vui lòng nhập số điện thoại.");
@@ -69,38 +67,36 @@ const SearchBooking = (props: IProps) => {
             </b>
             <p>Số điện thoại:</p>
             <form className="form-inline" onSubmit={(e) => e.preventDefault()}>
-          <input
-            style={{ width: "100%" }}
-            className="form-control mr-sm-2"
-            type="text" 
-            placeholder="VD: 0989898989"
-            aria-label="Search"
-            value={phoneNumber}
-           onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-         
-         
-          </form>
-          <button
-            style={{ marginTop: "25px" }}
-            className="btn btn-primary"
-            type="submit"
-            onClick={handleSearch}
-          >
-            Tra cứu
-          </button>
-          {searchResult && (
-          <button
-            style={{ marginTop: "25px", marginLeft: "20px" }}
-            className="btn btn-info"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Thông tin lịch
-          </button>
-        )}
-        
+              <input
+                style={{ width: "100%" }}
+                className="form-control mr-sm-2"
+                type="text"
+                placeholder="VD: 0989898989"
+                aria-label="Search"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+              {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            </form>
+            <button
+              style={{ marginTop: "25px" }}
+              className="btn btn-primary"
+              type="submit"
+              onClick={handleSearch}
+            >
+              Tra cứu
+            </button>
+            {searchResult && (
+              <button
+                style={{ marginTop: "25px", marginLeft: "20px" }}
+                className="btn btn-info"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Thông tin lịch
+              </button>
+            )}
+
             {/* <!-- Modal --> */}
             <div
               className="modal fade"
@@ -113,7 +109,7 @@ const SearchBooking = (props: IProps) => {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                    Kết quả tìm kiếm:
+                      Kết quả tìm kiếm:
                     </h5>
                     <button
                       type="button"
@@ -132,7 +128,6 @@ const SearchBooking = (props: IProps) => {
                         <p>Loại xe: {searchResult.model_car}</p>
                         <p>Ngày đến: {searchResult.target_date}</p>
                         <p>Trạng thái lịch: {searchResult.status}</p>
-                        
                       </div>
                     )}
                   </div>
