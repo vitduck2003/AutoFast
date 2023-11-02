@@ -354,12 +354,24 @@
                     <li class="menu-title">Dịch vụ</li>
 
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <a  class="has-arrow waves-effect">
                             <i class="bx bx-tone"></i>
                             <span>Quản lí dịch vụ</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ui-alerts.html">Dịch vụ</a></li>
+                            <li><a href="{{route('service.index')}}">Tất cả dịch vụ</a></li>
+                            <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">Dịch vụ</li>
+
+                    <li>
+                        <a  class="has-arrow waves-effect">
+                            <i class="bx bx-tone"></i>
+                            <span>Quản lí phụ tùng</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('service.index')}}">Tất cả phụ tùng</a></li>
                             <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
                         </ul>
                     </li>

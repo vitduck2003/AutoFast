@@ -6,42 +6,39 @@
                 <div class="card-body">
                     <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
                     <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
-
+                    <a href="{{route('service.create')}}" class="btn btn-success">thêm mới</a>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Họ tên</th>
-                                <th>Số điện thoại</th>
-                                <th>Loại xe</th>
-                                <th>Số KM</th>
-                                <th>Ngày giờ đến</th>
-                                <th>Trạng thái</th>
+                                <th>tên service</th>
+                                <th>image_service</th>
+                                <th>content</th>
+                                <th>chỉnh sửa gần nhất</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jobs as $job):
+                            @foreach($data as $row):
                             <tr>
-                                <td>{{ $job->id }}</td>
-                                <td>{{ $job->name }}</td>
-                                <td>{{ $job->phone }}</td>
-                                <td>{{ $job->model_car }}</td>
-                                <td>{{ $job->mileage }}Km</td>
-                                <td>{{ $job->target_date }}: {{ $job->target_time }}</td>
-                                <td class="text-success">{{ $job->status }}</td>
+                                <td>{{ $row->id }}</td>
+                                <td>{{ $row->service_name }}</td>
+                                <td>{{ $row->image_service }}</td>
+                                <td>{{ $row->content }}</td>
+                                <td>{{ $row->updated_at }}</td>
+                          
                                 <td>
-                                    @if( $job-> status == "Đã xong")
-                                        <a href="{{ route('job.confirm.complete', ['id'=>$job->id]) }}">
-                                            <button type="button" class="btn btn-success">
-                                               Hoàn thành
-                                            </button>
+                                  
+                                        <a href="{{route('service.edit',$row)}}" class="btn btn-success">
+                                            
+                                                Sửa
+                                          
                                         </a>
-                                    @endif
-                                    <a href="{{ url('admin/job-detail', ['id'=>$job->id]) }}">
+                               
+                                    <a href="">
                                         <button type="button" class="btn btn-primary">
-                                            Xem công việc
+                                              Xóa
                                         </button>
                                     </a>
                                 </td>

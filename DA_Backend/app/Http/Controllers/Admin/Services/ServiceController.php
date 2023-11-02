@@ -17,7 +17,7 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::all();
-        return view('admin\pages\services\index');
+        return view('admin\pages\services\index',compact('data'));
     }
 
     /**
@@ -39,11 +39,13 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $model = new Service();
-        $model->fillable($request->except('image'));
-        if($request->has('image')){
-            $model->image = Storage::disk('public')->put('images',$request->file('image'));
+    
+        $model->fill($request->except('image_service'));
+        if($request->has('image_service')){
+           $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
         }
         $model->save();
+        return redirect()->route('service.index');
     }
 
     /**
@@ -77,12 +79,16 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+      
         $model =  Service::findOrFail($id);
-        $model->fillable($request->except('image'));
-        if($request->has('image')){
-           $model->image = Storage::disk('public')->put('images',$request->file('image'));  
+
+        $model->fill($request->except('image_service'));
+        if($request->has('image_service')){
+           $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
         }
         $model->save();
+
+        return back();
     }
 
     /**
