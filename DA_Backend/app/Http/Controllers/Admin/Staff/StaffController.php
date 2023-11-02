@@ -115,16 +115,13 @@ class StaffController extends Controller
             $validatedData = $request->validate($rules, $messages);
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
-            // dd($request->file('avatar'));
             if ($request->hasFile('avatar')) {
                 Storage::delete('/public/'.$request->file('avatar'));
                 $path = $request->file('avatar')->store('public/avatar');
                 $user->avatar = $path;
             }
-            
             $staff->update( $validatedData);
-            $user->update(
-                $validatedData);
+            $user->update($validatedData);
             return redirect()->route('showDetail', ['id'=> $staff->id])->with('message','Sửa thành công');
 
     }

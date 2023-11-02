@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
+use App\Http\Controllers\Api\Client\ProfileApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +39,7 @@ Route::post('register', [RegisterApi::class, 'register']);
 Route::post('login', [LoginApi::class, 'login']);
 Route::post('logout', [LoginApi::class, 'logout']);
 Route::post('register/resend-verification-code', [RegisterApi::class, 'resendVerificationCode']);
-Route::post('register/verify-code', [RegisterApi::class,'verifyCode']);
+Route::post('register/verify-code', [RegisterApi::class, 'verifyCode']);
 // api booking bên client
 Route::post('booking', [BookingApi::class, 'booking']);
 Route::post('send-verification-code', [ForgetPasswordApi::class, 'sendVerificationCode']);
@@ -46,12 +48,12 @@ Route::post('reset-password', [ForgetPasswordApi::class, 'resetPassword']);
 
 // Admin APIs
 Route::prefix('admin')->group(function () {
-    Route::post('/bookings', [ManagerBookingApi::class,'createBooking']);
-    Route::get('/bookings', [ManagerBookingApi::class,'getAllBookings']);
-    Route::get('/bookings-details', [ManagerBookingApi::class,'getBookingDetails']);
-    Route::get('/booking-details/jobs', [ManagerBookingApi::class,'getJobs']);
-    Route::patch('/confirm-booking/{id}', [ManagerBookingApi::class,'confirmBooking']);
-    Route::patch('/cancel-booking/{id}', [ManagerBookingApi::class,'cancelBooking']);
+    Route::post('/bookings', [ManagerBookingApi::class, 'createBooking']);
+    Route::get('/bookings', [ManagerBookingApi::class, 'getAllBookings']);
+    Route::get('/bookings-details', [ManagerBookingApi::class, 'getBookingDetails']);
+    Route::get('/booking-details/jobs', [ManagerBookingApi::class, 'getJobs']);
+    Route::patch('/confirm-booking/{id}', [ManagerBookingApi::class, 'confirmBooking']);
+    Route::patch('/cancel-booking/{id}', [ManagerBookingApi::class, 'cancelBooking']);
     // Review APIs
     Route::prefix('review')->group(function () {
         Route::get('/', [ReviewApi::class, 'index']);
@@ -61,13 +63,13 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{id}', [ReviewApi::class, 'destroy']);
     });
 
-      //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/user
-    Route::resource('users',UserApi::class);
-   
+    //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/user
+    Route::resource('users', UserApi::class);
+
     //api quan ly service  http://127.0.0.1:8000/api/admin/services
-    Route::resource('services',ServiceApi::class);  
-     //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
-     Route::resource('service-item',ServiceItemApi::class);    
+    Route::resource('services', ServiceApi::class);
+    //api quan ly serviceitem  http://127.0.0.1:8000/api/admin/service-item
+    Route::resource('service-item', ServiceItemApi::class);
     // User API
     Route::resource('users', UserApi::class);
 
@@ -97,19 +99,25 @@ Route::prefix('client')->group(function () {
         // lay du lieu service http://127.0.0.1:8000/api/client/service
         Route::get('/', [ClientServiceApi::class, 'index']);
     });
-  
- //Service item Api
-    Route::prefix('service-item')->group(function () {                                        
+
+    //Service item Api
+    Route::prefix('service-item')->group(function () {
         // lay du item service  http://127.0.0.1:8000/api/client/service-item
-       Route::get('/', [ServiceItem::class, 'index']);
-   });  
-   Route::get('service-item-other',[ServiceItemApi::class, 'serviceItemOther']);  
+        Route::get('/', [ServiceItem::class, 'index']);
+    });
+    Route::get('service-item-other', [ServiceItemApi::class, 'serviceItemOther']);
+
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/{id}', [ProfileApi::class, 'show']);
+        Route::post('{id}/avatar', [ProfileApi::class, 'uploadAvatar']);
+    });
 });
-    Route::get('/demo', function(){
-        return response()->json('da vao dc');
-    })->middleware('checkauth');
- 
+Route::get('/demo', function () {
+    return response()->json('da vao dc');
+})->middleware('checkauth');
+
 //Staff Api
 
 
-    
+
