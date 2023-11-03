@@ -10,11 +10,12 @@ class Role extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = "role";
+    protected $table = 'role';
+    protected $guarded = [];
+    public $fillable = ['name','display_name'];
 
-    protected $fillable = [
-        'id',
-        'name',
-        'display_name',
-    ];
+    public function users()
+    {
+        return $this->hasMany(User::class, 'role_id');
+    }
 }
