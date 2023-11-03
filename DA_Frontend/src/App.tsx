@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/UserSide/SigninAndSignup/ForgotPassword";
 import { IStaff } from "./interface/staff";
 import { getNews, addNews, updateNews, deleteNews } from "./api/news";
 import LoginAdmin from "./pages/UserSide/SigninAndSignup/LoginAdmin";
+import ChangePassWord from "./pages/UserSide/SigninAndSignup/ChangePassWord";
 import {
   getAllStaff,
   addStaff,
@@ -476,6 +477,10 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="verifyforget/:phone">
             <Route index element={<VerifyForget />} />
           </Route>
+          <Route path="changepw/:phone">
+            <Route index element={<ChangePassWord />} />
+          </Route>
+
 
           {/* Signup Page */}
           <Route path="signup">
