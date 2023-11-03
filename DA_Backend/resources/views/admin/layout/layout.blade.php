@@ -407,11 +407,8 @@
                                 <span>Quản lí tài khoản</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="tables-basic.html">Basic Tables</a></li>
-                                <li><a href="tables-datatable.htm l">Data Tables</a></li>
-                                <li><a href="tables-responsive.html">Responsive Table</a></li>
-                                <li><a href="tables-editable.html">Editable Table</a></li>
-                            </ul>
+                            <li><a href="{{ url('admin/user') }}">Danh sách tài khoản</a></li>
+                        </ul>
                         </li>
                         <li class="menu-title">Nhân viên</li>
                         <li>

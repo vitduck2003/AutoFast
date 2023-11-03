@@ -85,3 +85,7 @@ Route::get('/staff/home', function () {
     });
    
 
+    Route::prefix('admin')->group(function () {
+      Route::get('user', [AccountController::class, 'index'])->name('user.index');
+      Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
+  });
