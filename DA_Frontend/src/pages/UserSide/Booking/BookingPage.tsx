@@ -4,7 +4,28 @@ import instance from "../../../api/instance";
 
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
-
+  const maintenanceIntervals = {
+    'Bảo dưỡng cấp 1': [5000, 15000, 25000],
+    'Bảo dưỡng cấp 2': [10000, 30000, 50000],
+    'Bảo dưỡng cấp 3': [20000, 60000, 100000],
+    'Bảo dưỡng cấp 4': [40000, 80000, 120000],
+  };
+  const styles = {
+    table: {
+      width: '100%',
+      borderCollapse: 'collapse',
+    },
+    th: {
+      border: '1px solid #ddd',
+      padding: '8px',
+      textAlign: 'left',
+      backgroundColor: '#f2f2f2',
+    },
+    td: {
+      border: '1px solid #ddd',
+      padding: '8px',
+    },
+  };
   const validateForm = () => {
     const errors: Partial<FormData> = {};
 
@@ -73,7 +94,7 @@ const BookingPage = (props: any) => {
     detail: string;
   } | null>(null);
 
-  const NhanCong = 10000;
+
 
   type FormData = {
     full_name: string;
@@ -228,11 +249,12 @@ const BookingPage = (props: any) => {
       alert("Success");
     }
   };
-  const totalCost =
-    selectedServiceItems.reduce((total, item) => total + item.price, 0) +
-    NhanCong;
+  const totalCost = selectedServiceItems.reduce(
+    (total, item) => total + item.price,
+    0
+  );
 
-    const [selectedTotal, setSelectedTotal] = useState(0);
+  const [selectedTotal, setSelectedTotal] = useState(0);
 
   return (
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
@@ -361,9 +383,32 @@ const BookingPage = (props: any) => {
                   min={0}
                 />
               </div>
+              <div>
+                
+              </div>
+
               {formErrors.mileage && (
                 <p style={{ color: "red" }}>{formErrors.mileage}</p>
               )}
+              <table style={styles.table}>
+      <thead>
+        <tr>
+          <th style={styles.th}>Cấp Bảo dưỡng</th>
+          <th style={{ ...styles.th, textAlign: 'center' }} colSpan="4">Số km theo mỗi cấp bảo dưỡng </th>
+          {/* Add more <th> elements if you have more columns */}
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries(maintenanceIntervals).map(([level, distances]) => (
+          <tr key={level}>
+            <td style={styles.td}>{level}</td>
+            {distances.map((distance, index) => (
+              <td key={index} style={styles.td}>{distance.toLocaleString()} km</td>
+            ))}<td style={styles.td}>...</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
               <div className="form-group">
                 <label htmlFor="">Gói Bảo dưỡng</label>
                 <select
@@ -399,22 +444,82 @@ const BookingPage = (props: any) => {
                 </b>
                 {selectedServiceItems.length > 0 ? (
                   <>
-                    {selectedServiceItems.map((item, index) => (
-                      <div key={item.item_name}>
-                        <label style={{ color: "blue" }}>
-                          <input
-                            type="checkbox"
-                            value={item.item_name}
-                            defaultChecked
-                            disabled
-                          />
-                          {item.item_name}
-                        </label>
-                      </div>
-                    ))}
+                    {" "}
+                    <table
+                      style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        border: "1px solid #ddd",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <thead>
+                        <tr>
+                          <th
+                            style={{
+                              backgroundColor: "#f2f2f2",
+                              textAlign: "left",
+                              padding: "8px",
+                            }}
+                          >
+                            Action
+                          </th>
+                          <th
+                            style={{
+                              backgroundColor: "#f2f2f2",
+                              textAlign: "left",
+                              padding: "8px",
+                            }}
+                          >
+                            Service
+                          </th>
+                          <th
+                            style={{
+                              backgroundColor: "#f2f2f2",
+                              textAlign: "left",
+                              padding: "8px",
+                            }}
+                          >
+                            Price
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selectedServiceItems.map((item, index) => (
+                          <tr key={item.item_name}>
+                            <td style={{ borderRight: "1px solid #ddd" }}>
+                              <input
+                                type="checkbox"
+                                value={item.item_name}
+                                disabled
+                                defaultChecked
+                                style={{
+                                  width: "20px",
+                                  height: "20px",
+                                  border: "1px solid #ccc",
+                                  borderRadius: "3px",
+                                  cursor: "pointer",
+                                  verticalAlign: "middle",
+                                  // margin: '0 10px 0 0',
+                                  marginLeft: "10px",
+                                  paddingLeft: "10px",
+                                }}
+                              />
+                            </td>
+                            <td style={{ borderRight: "1px solid #ddd" ,   marginLeft: "10px",
+                                  paddingLeft: "10px", }}>
+                              <b>{item.item_name}</b>
+                            </td>
+                            <td style={{ padding: "8px" }}>
+                              <b>{item.price}</b>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                     <b>
                       <p style={{ marginTop: "20px" }}>
-                        Gói bảo dưỡng hiện tại khác gồm:
+                        Dịch vụ khác :
                         <table
                           style={{
                             width: "100%",
@@ -467,7 +572,6 @@ const BookingPage = (props: any) => {
                                         handleCheckboxChange(e, item)
                                       }
                                       style={{
-
                                         width: "20px",
                                         height: "20px",
                                         border: "1px solid #ccc",
@@ -475,12 +579,13 @@ const BookingPage = (props: any) => {
                                         cursor: "pointer",
                                         verticalAlign: "middle",
                                         // margin: '0 10px 0 0',
-                                        marginLeft:'10px',
+                                        marginLeft: "10px",
                                         paddingLeft: "10px",
                                       }}
                                     />
                                   </td>
-                                  <td style={{ borderRight: "1px solid #ddd" }}>
+                                  <td style={{ borderRight: "1px solid #ddd" ,   marginLeft: "10px",
+                                  paddingLeft: "10px", }}>
                                     {item.item_name}
                                   </td>
                                   <td style={{ padding: "8px" }}>
@@ -497,21 +602,14 @@ const BookingPage = (props: any) => {
                   <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
                 )}
 
-                {selectedService && (
-                  <>
-                    <p>
-                      Chi phí nhân công bảo dưỡng:{" "}
-                      <span style={{ color: "blue" }}>{NhanCong} VND</span>
-                    </p>
-                  </>
-                )}
-
                 <b>
                   <label style={{ marginTop: "10px" }} htmlFor="">
                     Tổng giá tiền:
                   </label>{" "}
                 </b>
-                <span style={{ color: "red" }}>{totalCost + selectedTotal} VND</span>
+                <span style={{ color: "red" }}>
+                  {totalCost + selectedTotal} VND
+                </span>
               </div>
             </div>
           </div>
