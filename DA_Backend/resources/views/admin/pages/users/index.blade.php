@@ -57,7 +57,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @foreach ($users as $item)
                     <!-- Nội dung chi tiết tài khoản -->
                     <p><strong>Họ tên:</strong> {{ $item->name }} <span id="name"></span></p>
                     <p><strong>Email:</strong> {{ $item->email }} <span id="email"></span></p>
@@ -74,7 +73,6 @@
                             @endforeach
                         @endif <span id="role_id"></span>
                     </p>
-                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
