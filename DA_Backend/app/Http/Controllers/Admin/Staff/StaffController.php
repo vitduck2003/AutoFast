@@ -60,24 +60,13 @@ class StaffController extends Controller
     }
     public function create(Request $request)
     {
-        $staffs = DB::table('users')
-            ->join('staff', 'users.id', '=', 'staff.id_user')
-            ->where('users.role_id', '=', 2)
-            ->whereNull(['users.deleted_at', 'staff.deleted_at'])
-            ->select(
-                'staff.*',
-                'users.name',
-                'users.password',
-                'users.avatar',
-                'users.email',
-                'users.phone',
-                'users.description',
-                'users.address'
-            )
-            ->get();
+        $keyword = $request->input('keyword');
+        $results = User::where('name', 'LIKE', "%$keyword%")
+        ->orWhere('email', 'LIKE', "%$keyword%")
+        ->get();
         if ($request->isMethod('POST')) {
             $validatedData = $request->validate([
-                'salary' => 'required|integer',
+                'salary' => 'required|integer|max:50',
                 'review' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
                 'id_user' => 'required|exists:users,id',
@@ -113,6 +102,7 @@ class StaffController extends Controller
             ];
             
             $validatedData = $request->validate($rules, $messages);
+            // dd($validatedData['address'],$validatedData['description']);
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
             if ($request->hasFile('avatar')) {
@@ -136,4 +126,5 @@ class StaffController extends Controller
             return redirect()->route('staff')->with('message','Xóa thành công');
         }
     }
+
 }

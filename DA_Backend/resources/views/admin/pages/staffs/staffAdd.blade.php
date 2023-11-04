@@ -22,6 +22,12 @@
             @endforeach
     </select>
         </div>
+        <dic class="mb-3">
+        <input type="text" id="search-input" placeholder="Search...">
+            <div>
+
+            </div>
+        </dic>
         <div class="mb-3">
             <label class="form-label">Lương</label>
             <input type="text" name="salary" class="form-control">
@@ -70,5 +76,33 @@
 
     });
 </script>
+<script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                var keyword = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    type: "GET",
+                    data: { keyword: keyword },
+                    success: function(response) {
+                        var tableBody = $('#search-results tbody');
+                        tableBody.empty();
+
+                        if (response.length > 0) {
+                            $.each(response, function(index, user) {
+                                var row = "<p>" + user.name + user.role_id "</p>" ;
+
+                                tableBody.append(row);
+                            });
+                        } else {
+                            var row = "<tr><td colspan='3'>No results found</td></tr>";
+                            tableBody.append(row);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 @endsection

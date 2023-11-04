@@ -110,7 +110,8 @@ Route::prefix('client')->group(function () {
 
     Route::prefix('profile')->group(function () {
         Route::get('/{id}', [ProfileApi::class, 'show']);
-        Route::post('{id}/avatar', [ProfileApi::class, 'uploadAvatar']);
+        Route::put('update/{id}', [ProfileApi::class, 'update']);
+        Route::post('update/avatar/{id}', [ProfileApi::class, 'uploadAvatar']);
     });
 });
 Route::get('/demo', function () {

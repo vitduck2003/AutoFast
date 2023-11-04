@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\News\NewController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\staff\StaffController;
-
+use App\Http\Controllers\Api\Client\ProfileApi;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +62,7 @@ Route::get('/staff/home', function () {
         Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
+        Route::get('/search', [StaffController::class,'search'])->name('search');
 
         Route::resource('service', ServiceController::class);
         Route::resource('serviceitem', ServiceItemController::class);
@@ -74,4 +75,3 @@ Route::get('/staff/home', function () {
       Route::post('/update-job-status', [StaffJobController::class, 'updateJobStatus'])->name('updateJobStatus');
     });
    
-
