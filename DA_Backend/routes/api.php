@@ -10,15 +10,16 @@ use App\Http\Controllers\API\Admin\ReviewApi;
 use App\Http\Controllers\Api\Admin\ServiceApi;
 use App\Http\Controllers\Api\Auth\RegisterApi;
 use App\Http\Controllers\Api\Client\BookingApi;
+use App\Http\Controllers\Api\Client\PaymentApi;
+use App\Http\Controllers\Api\Client\ProfileApi;
 use App\Http\Controllers\Api\Client\ServiceItem;
 use App\Http\Controllers\Api\Admin\ServiceItemApi;
 use App\Http\Controllers\Api\Auth\ForgetPasswordApi;
-use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use App\Http\Controllers\Admin\staff\StaffController;
+use App\Http\Controllers\Api\Admin\ManagerBookingApi;
+use App\Http\Controllers\Api\Client\TimKiemBookingApi;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
-use App\Http\Controllers\Api\Client\ProfileApi;
-use App\Http\Controllers\Api\Client\TimKiemBookingApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,8 @@ Route::prefix('admin')->group(function () {
 
 // Client APIs
 Route::prefix('client')->group(function () {
+    // booking manager 
+    Route::post('bookings', [BookingApi::class, 'getBookingPhone']);
     // News API
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
@@ -123,7 +126,8 @@ Route::get('/demo', function () {
     return response()->json('da vao dc');
 })->middleware('checkauth');
 
-//Staff Api
+// payment
+Route::post('/payment', [PaymentApi::class, 'pyament']);
 
 
 

@@ -80,4 +80,14 @@ class BookingApi extends Controller
             return response()->json(['message' => 'Lỗi khi tạo đặt lịch'], 500);
         }
     }
+    public function getBookingPhone(Request $request){
+        $phone = $request->only('phone');
+        $bookings = DB::table('booking')
+        ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
+        ->select('booking.*', 'jobs.*')
+        ->where('phone', '=', $phone)->get();
+        return response()->json([
+            $bookings
+        ]);
+    }
 }

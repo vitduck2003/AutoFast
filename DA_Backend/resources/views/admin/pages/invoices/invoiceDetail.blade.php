@@ -44,7 +44,7 @@
                         <div class="col-sm-6 mt-3 text-sm-right">
                             <address>
                                 <strong>Tạo vào ngày</strong><br>
-                                {{ $invoice->name }}<br><br>
+                                {{ $invoice->created_at }}<br><br>
                             </address>
                         </div>
                     </div>
