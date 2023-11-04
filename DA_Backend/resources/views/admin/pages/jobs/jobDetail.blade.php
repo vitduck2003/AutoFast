@@ -42,7 +42,12 @@
                                                 @endforeach
                                             </select>
                                     </td>
-                                    <td>{{ $job->status }}</td>
+                                    @if($job->status == "Đang làm")
+                                    <td class="text-danger">{{ $job->status }}</td>
+                                    @endif
+                                    @if($job->status == "Đã hoàn thành")
+                                    <td class="text-success">{{ $job->status }}</td>
+                                    @endif
                                     <td><button type="submit" class="btn btn-primary">Lưu</button></td>
                                     </form>
                                 </tr>

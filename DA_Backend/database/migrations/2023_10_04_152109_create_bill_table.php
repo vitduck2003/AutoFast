@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('bill', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_currency_repair');
-            $table->float('total_price');
-            $table->integer('id_item');
+            $table->integer('id_booking');
+            $table->float('total_amount');
+            $table->string('status_payment');
             $table->timestamps();
             $table->softDeletes();
         });

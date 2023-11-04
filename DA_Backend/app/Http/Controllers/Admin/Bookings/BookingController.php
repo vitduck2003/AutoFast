@@ -30,7 +30,7 @@ class BookingController extends Controller
             ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Chờ xác nhận')
             ->where('booking.id', '=', $id)
-            ->get();
+            ->get();        
         if ($booking) {
             // Trả về thông tin booking
             return response()->json($booking);

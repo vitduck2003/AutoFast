@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 use App\Http\Controllers\Api\Client\ProfileApi;
+use App\Http\Controllers\Api\Client\TimKiemBookingApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,10 @@ Route::prefix('client')->group(function () {
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
         Route::get('/{id}', [ClientNewsApi::class, 'show']);
+    });
+   // Tim kiem API
+   Route::prefix('timkiem_booking')->group(function () {
+    Route::get('/', [TimKiemBookingApi::class,'index']);
     });
 
     // Review APIs
