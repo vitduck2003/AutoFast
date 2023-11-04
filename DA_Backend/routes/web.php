@@ -10,13 +10,9 @@ use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
-<<<<<<< HEAD
-use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Api\Client\ProfileApi;
-=======
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
->>>>>>> 3abeefe662299a89f52d6a41fb610cf325b0245b
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,13 +85,8 @@ Route::get('/staff/home', function () {
       Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
       Route::post('/update-job-status', [StaffJobController::class, 'updateJobStatus'])->name('updateJobStatus');
     });
-<<<<<<< HEAD
-   
-=======
-   
 
     Route::prefix('admin')->group(function () {
       Route::get('user', [AccountController::class, 'index'])->name('user.index');
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
->>>>>>> 3abeefe662299a89f52d6a41fb610cf325b0245b

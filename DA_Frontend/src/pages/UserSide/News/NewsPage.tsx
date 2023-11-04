@@ -29,32 +29,34 @@ const NewsPage = ( props: any) => {
         </div>
       </div>
        <div className="container-xxl py-5">
-      <div className="container">
-        <div className="row g-4">
-        {props.news.map((item: any) => {
-                return <div key={item.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a href={`news/${item.id}`}>
-                <div className="d-flex py-5 px-4">
-                  <img style={{width: '120px', height: '120px'}} src="" alt="" />
-                  <div className="ps-4">
-                    <h5 className="mb-3">{item.title}</h5>
-                    <span style={{fontSize: '10px'}} >{item.date}</span>
-                    <b><p>{item.desc}</p></b>
-                  </div>
+       <div className="row">
+        <div className="col-md-8">
+            <h2>Tin Tức Mới Nhất</h2>
+            <div className="card mb-3">
+            <img style={{width: '200px'}} src="https://placehold.it/800x400" alt="..." />
+                <div className="card-body">
+                    <h5 className="card-title">Tiêu đề bài viết 1</h5>
+                    <p className="card-text">Nội dung mô tả ngắn gọn về bài viết 1.</p>
+                    <a href="#" className="btn btn-primary">Đọc thêm</a>
                 </div>
-                </a>
-              </div>
+            </div>
 
-            })}
-          
-
-
+            <div className="card mb-3">
+            <img style={{width: '200px'}} src="https://placehold.it/800x400" alt="..." />
+                <div className="card-body">
+                    <h5 className="card-title">Tiêu đề bài viết 2</h5>
+                    <p className="card-text">Nội dung mô tả ngắn gọn về bài viết 2.</p>
+                    <a href="#" className="btn btn-primary">Đọc thêm</a>
+                </div>
+            </div>
         </div>
+     
       </div>
 
       
     </div>
     </div>
+    
   )
 }
 
