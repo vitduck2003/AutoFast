@@ -5,6 +5,10 @@ const getUsers = () => {
   return instance.get("/users");
 };
 
+const getUserById = (id: number) => {
+  return instance.get(`/client/profile/${id}`);
+}
+
 const addUsers = (users: IUser) => {
   return instance.post("/register", users).then((response) => {
 
@@ -31,4 +35,11 @@ const updateUsers = (users: IUser) => {
 const deleteUsers = (id: number) => {
   return instance.delete("/users/" + id);
 };
-export { getUsers, addUsers, updateUsers, deleteUsers ,logIn};
+const uploadAvatar = (id: number, data: any) => {
+  return instance.post(`/client/profile/update/avatar/${id}`, data);
+}
+const updateProfile = (id: number, data: any) => {
+  return instance.put(`/client/profile/update/${id}`, data);
+}
+
+export { getUsers, addUsers, updateUsers, deleteUsers ,logIn, getUserById, uploadAvatar, updateProfile };

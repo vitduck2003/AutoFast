@@ -46,7 +46,7 @@ const BaseLayout = () => {
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
               <small className="fa fa-phone-alt text-primary me-2"></small>
               <small>+84 988 678 999 </small>
-              {isLoggedIn && <small className="px-5">Xin chào,{userName}</small>}
+              <Link to={`/account`}>{isLoggedIn && <small className="px-5">Xin chào,{userName}</small>}</Link>
             </div>
             <div className="h-100 d-inline-flex align-items-center">
            
