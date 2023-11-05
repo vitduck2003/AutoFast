@@ -17,7 +17,7 @@ const MyBooking = () => {
       }
     }
   }, []);
-
+console.log(bookings);
   useEffect(() => {
     if (phone) {
       const postPhone = async () => {
@@ -73,6 +73,7 @@ const MyBooking = () => {
   };
   const showJobDetails = (jobs) => {
     setSelectedJobDetails(jobs);
+    console.log(jobs);
   };
 
   // Function to close job details view
@@ -209,7 +210,7 @@ const MyBooking = () => {
               <th style={thStyle}>Loại xe</th>
            
               <th style={thStyle}>Trạng Thái </th>
-              <th style={thStyle}>Các công việc</th>
+              {/* <th style={thStyle}>Các công việc</th> */}
               <th style={thStyle}>Hành động</th>
 
               
@@ -226,7 +227,7 @@ const MyBooking = () => {
                 <td style={tdStyle}>{booking.booking.model_car}</td>
                
                 <td style={tdStyle}>{booking.booking.status}</td>
-                <td style={tdStyle}>
+                {/* <td style={tdStyle}>
                   <ul style={ulStyle}>
                     {booking.jobs.map((job) => (
                       <li key={job.id} style={liStyle}>
@@ -234,7 +235,7 @@ const MyBooking = () => {
                       </li>
                     ))}
                   </ul>
-                </td>
+                </td> */}
               
               
                 <td style={tdStyle}>
