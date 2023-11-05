@@ -63,15 +63,10 @@
                     <p><strong>Số điện thoại:</strong> {{ $item->phone }} <span id="phone"></span></p>
                     <p><strong>Địa chỉ:</strong> {{ $item->address }} <span id="address"></span></p>
                     <p><strong>Mô tả:</strong> {{ $item->description }} <span id="description"></span></p>
-                    <p><strong>Password:</strong> {{ $item->password }}<span id="password"></span></p>
                     <p><strong>Vai trò:</strong>
-                        @if($item->id_role == 0)
-                           Customer
-                        @else
-                            @foreach($item->roles as $role)
-                               <p>{{$role->name}}</p>
-                            @endforeach
-                        @endif <span id="role_id"></span>
+                    @foreach ($users as $user)
+                        {{($user->role_id == 2) ? 'Nhân viên' : (($user->role_id == 1) ? 'Admin' : 'Người dùng')}}
+                    @endforeach
                     </p>
                 </div>
                 <div class="modal-footer">
