@@ -19,7 +19,7 @@ class AccountController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('role_id', 'desc')->paginate(10);
+        $users = User::orderBy('role_id', 'desc')->get();
         return view('admin.pages.users.index', compact('users'));
     }
 
