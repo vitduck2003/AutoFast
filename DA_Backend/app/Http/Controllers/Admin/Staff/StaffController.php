@@ -126,5 +126,8 @@ class StaffController extends Controller
             return redirect()->route('staff')->with('message','Xóa thành công');
         }
     }
-
+    public function searchUser(){
+        $user = User::search()->get();
+        return $user;
+    }
 }

@@ -129,5 +129,6 @@ Route::get('/demo', function () {
 // payment
 Route::post('/payment', [PaymentApi::class, 'pyament']);
 
-
+// search
+Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
 
