@@ -72,7 +72,7 @@ import { IService, ISeviceItem } from "./interface/service";
 import ServiceItemAdmin from "./pages/Admin/Service/ServiceItem/ServiceItemAdmin";
 import ServiceItemAdd from "./pages/Admin/Service/ServiceItem/ServiceItemAdd";
 import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
-
+import MyBooking from "./pages/UserSide/Booking/MyBooking";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 
@@ -237,6 +237,10 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route path="contact">
               <Route index element={<ContactPage />} />
             </Route>
+            <Route path="mybooking">
+          <Route index element={<MyBooking />} />
+          </Route>
+
 
             {/* News Page */}
             <Route path="news">
@@ -480,7 +484,7 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="changepw/:phone">
             <Route index element={<ChangePassWord />} />
           </Route>
-
+        
 
           {/* Signup Page */}
           <Route path="signup">
