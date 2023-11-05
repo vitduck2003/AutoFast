@@ -44,7 +44,7 @@ const HomePage = (props: any) => {
   return (
     <div>
       {/* Carousel Start */}
-      <div className="container-fluid p-0 mb-5">
+      <div className="container-fluid p-0 mb-5" style={{ zIndex: 0 }}>
         <div
           id="header-carousel"
           className="carousel slide"
@@ -53,7 +53,7 @@ const HomePage = (props: any) => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img className="w-100" src={carouselbg1img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center">
+              <div className="carousel-caption d-flex align-items-center"style={{ zIndex: 0 }}>
                 <div className="container">
                   <div className="row align-items-center justify-content-center justify-content-lg-start">
                     <div className="col-10 col-lg-7 text-center text-lg-start">
@@ -80,7 +80,7 @@ const HomePage = (props: any) => {
             </div>
             <div className="carousel-item">
               <img className="w-100" src={carouselbg2img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center">
+              <div className="carousel-caption d-flex align-items-center" style={{ zIndex: 0 }}>
                 <div className="container">
                   <div className="row align-items-center justify-content-center justify-content-lg-start">
                     <div className="col-10 col-lg-7 text-center text-lg-start">

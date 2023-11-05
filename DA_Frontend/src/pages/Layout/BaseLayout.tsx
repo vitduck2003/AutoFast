@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const BaseLayout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName,setUserName] =useState(); //
-
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   // Kiểm tra Session Storage khi trang được tải
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
@@ -18,6 +18,7 @@ const BaseLayout = () => {
     }
   }, []);
  
+ 
   console.log(userName)
   function clearSession() {
     // Xóa toàn bộ dữ liệu từ Session Storage
@@ -26,6 +27,30 @@ const BaseLayout = () => {
     // Hoặc nếu bạn chỉ muốn xóa một mục cụ thể, bạn có thể sử dụng:
     // sessionStorage.removeItem('yourKey');
   }
+  const userTextStyle = {
+    display: 'inline-block',
+    cursor: 'pointer',
+  };
+
+  const dropdownContentStyle = {
+    display: isDropdownVisible ? 'block' : 'none',
+    position: 'absolute',
+    backgroundColor: '#f9f9f9',
+    minWidth: '160px',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: '10',
+  };
+
+  const dropdownContentLinkStyle = {
+    display: 'block',
+    padding: '12px 16px',
+    textDecoration: 'none',
+    color: 'black',
+  };
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
 
   return (
     <div>
@@ -46,7 +71,28 @@ const BaseLayout = () => {
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
               <small className="fa fa-phone-alt text-primary me-2"></small>
               <small>+84 988 678 999 </small>
-              <Link to={`/account`}>{isLoggedIn && <small className="px-5">Xin chào,{userName}</small>}</Link>
+              {/* <Link to={`/account`}> */}
+              <div>
+      {isLoggedIn && (
+        <div className="user-info">
+          <small
+            className="px-5"
+            style={userTextStyle}
+            onClick={toggleDropdown}
+          >
+            Xin chào, {userName}
+          </small>
+          <div style={dropdownContentStyle}>
+          
+            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
+            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
+          </div>
+        </div>
+      )}
+    </div>
+
+
+                {/* </Link> */}
             </div>
             <div className="h-100 d-inline-flex align-items-center">
            
@@ -76,7 +122,7 @@ const BaseLayout = () => {
         </div>
       </div>
       {/* NarBar */}
-      <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+      <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style={{ zIndex: 0 }}>
         <a
           href="/"
           className="navbar-brand d-flex align-items-center px-4 px-lg-5"
