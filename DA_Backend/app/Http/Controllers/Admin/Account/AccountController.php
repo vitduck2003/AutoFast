@@ -19,11 +19,8 @@ class AccountController extends Controller
 
     public function index()
     {
-<<<<<<< HEAD
-        $users = User::orderBy('role_id')->get();
-=======
+
         $users = User::orderBy('role_id', 'desc')->get();
->>>>>>> 7f2f4fd899975baa573b06a2e9cb2c3eaa2f568b
         return view('admin.pages.users.index', compact('users'));
     }
 

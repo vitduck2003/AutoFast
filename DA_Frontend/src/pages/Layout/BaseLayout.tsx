@@ -85,6 +85,7 @@ const BaseLayout = () => {
           <div style={dropdownContentStyle}>
           
             <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
+            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
             <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
           </div>
         </div>
