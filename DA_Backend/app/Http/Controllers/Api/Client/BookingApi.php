@@ -84,7 +84,7 @@ class BookingApi extends Controller
         $phone = $request->input('phone');
         $bookings = DB::table('booking')
             ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-            ->select('booking.*', 'jobs.*')
+            ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status')
             ->where('phone', '=', $phone)
             ->get();
     
@@ -104,7 +104,7 @@ class BookingApi extends Controller
                         'note' => $booking->note,
                         'model_car' => $booking->model_car,
                         'mileage' => $booking->mileage,
-                        'status' => $booking->status,
+                        'status' => $booking->booking_status,
                         'created_at' => $booking->created_at,
                     ],
                     'jobs' => [],
@@ -119,6 +119,7 @@ class BookingApi extends Controller
                 'target_time_done' => $booking->target_time_done,
                 'images_done' => $booking->images_done,
                 'price' => $booking->price,
+                'status' => $booking->job_status,
             ];
         }
     
