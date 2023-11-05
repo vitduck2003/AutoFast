@@ -23,9 +23,23 @@
     </select>
         </div>
         <dic class="mb-3">
-        <input type="text" id="search-input" placeholder="Search...">
-            <div>
+            <div class="form-group">
+                <label class="form-label" for="">Tìm người dùng</label>
+                <input type="text" class="form-control" id="input-search-ajax" placeholder="Tìm người dùng">
+                <div class="search-ajax-result position-absolute  " style="background-color:#FFFFCC ; padding:10px ; width:80%">
+                    <div class="media d-flex align-items-center" >
+                        <a class="pull-left">
+                            <img class="media-object" src="https://scontent.fsgn2-11.fna.fbcdn.net/v/t39.30808-6/217344925_370392091142406_4709204799596881558_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHCr9KXIs1OQjcW53u8guWNNj4-snVt1HY2Pj6ydW3UdrCfzySrLPeRhN2XOwbRtTLpcUZPrGojYDdBV_g3jzHQ&_nc_ohc=TL_ND6ckhwIAX9bbzWW&_nc_ht=scontent.fsgn2-11.fna&oh=00_AfAnTm659qzviTHTIViX_nyAPV4aHdG9VjS7Uz3OqfSP3Q&oe=654D5D50" alt="" style="width: 60px; height: 60px;border-radius: 99%;"  >
+                        </a>
+                        <div class="media-body p-2">
+                            <h5 class="mt-0">Media heading</h5>
+                            <p>hungpv@gmail.com</p>
+                      </div>
+                    </div>
 
+                </div>
+                
+                
             </div>
         </dic>
         <div class="mb-3">
@@ -77,32 +91,10 @@
     });
 </script>
 <script>
-        $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var keyword = $(this).val();
-
-                $.ajax({
-                    url: "{{ route('search') }}",
-                    type: "GET",
-                    data: { keyword: keyword },
-                    success: function(response) {
-                        var tableBody = $('#search-results tbody');
-                        tableBody.empty();
-
-                        if (response.length > 0) {
-                            $.each(response, function(index, user) {
-                                var row = "<p>" + user.name + user.role_id "</p>" ;
-
-                                tableBody.append(row);
-                            });
-                        } else {
-                            var row = "<tr><td colspan='3'>No results found</td></tr>";
-                            tableBody.append(row);
-                        }
-                    }
-                });
-            });
-        });
+        $('.input-search-ajax').keyup(function () {
+          var _text=$(this).val();
+          alert(_text)  
+        })
     </script>
 @endsection
 @endsection

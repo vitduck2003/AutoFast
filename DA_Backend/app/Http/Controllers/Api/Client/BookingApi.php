@@ -86,7 +86,9 @@ class BookingApi extends Controller
         ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
         ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
         ->leftJoin('users', 'users.id', '=', 'staff.id')
-        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name')
+        ->leftJoin('booking_detail', 'booking_detail.id_booking', '=', 'booking.id')
+        ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
+        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name')
         ->where('booking.phone', '=', $phone)
         ->get();
         $result = [];
@@ -100,6 +102,7 @@ class BookingApi extends Controller
                         'name' => $booking->name,
                         'phone' => $booking->phone,
                         'email' => $booking->email,
+                        'service_name' => $booking->service_name,
                         'target_date' => $booking->target_date,
                         'target_time' => $booking->target_time,
                         'note' => $booking->note,
@@ -111,7 +114,6 @@ class BookingApi extends Controller
                     'jobs' => [],
                 ];
             }
-    
             // Thêm thông tin job vào booking tương ứng
             $result[$bookingId]['jobs'][] = [
                 'id' => $booking->id,
@@ -122,7 +124,6 @@ class BookingApi extends Controller
                 'price' => $booking->price,
                 'status' => $booking->job_status,
                 "staff_name" =>  $booking->staff_name ? $booking->staff_name : 'Chưa nhận việc'
-
             ];
         }
     

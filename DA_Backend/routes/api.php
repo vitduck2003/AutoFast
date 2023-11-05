@@ -129,7 +129,12 @@ Route::get('/demo', function () {
 // payment
 Route::post('/payment', [PaymentApi::class, 'pyament']);
 
+<<<<<<< HEAD
 Route::get('users/{id}', [UserApi::class, 'show']);
 
 
+=======
+// search
+Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
+>>>>>>> 7f2f4fd899975baa573b06a2e9cb2c3eaa2f568b
 

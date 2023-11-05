@@ -18,7 +18,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $dates = ['deleted_at'];
     protected $fillable = [
         'name',
         'email',
@@ -53,5 +52,12 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+    public function scopeSearch($query){
+        if(request('key')){
+            $keys=request($query);
+            $query=$query->where('name','like','%'.$keys.'%');
+        }
+        return $query;
     }
 }
