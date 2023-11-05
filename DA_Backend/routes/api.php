@@ -129,5 +129,7 @@ Route::get('/demo', function () {
 // payment
 Route::post('/payment', [PaymentApi::class, 'pyament']);
 
+Route::get('users/{id}', [UserApi::class, 'show']);
+
 
 
