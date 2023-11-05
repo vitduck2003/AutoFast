@@ -83,11 +83,12 @@ class BookingApi extends Controller
     public function getBookingPhone(Request $request){
         $phone = $request->input('phone');
         $bookings = DB::table('booking')
-            ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-            ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status')
-            ->where('phone', '=', $phone)
-            ->get();
-    
+        ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
+        ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
+        ->leftJoin('users', 'users.id', '=', 'staff.id')
+        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name')
+        ->where('booking.phone', '=', $phone)
+        ->get();
         $result = [];
         foreach ($bookings as $booking) {
             $bookingId = $booking->id_booking;
@@ -120,6 +121,8 @@ class BookingApi extends Controller
                 'images_done' => $booking->images_done,
                 'price' => $booking->price,
                 'status' => $booking->job_status,
+                "staff_name" =>  $booking->staff_name ? $booking->staff_name : 'Chưa nhận việc'
+
             ];
         }
     
