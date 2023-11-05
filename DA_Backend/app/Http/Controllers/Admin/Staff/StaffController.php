@@ -66,7 +66,7 @@ class StaffController extends Controller
         ->get();
         if ($request->isMethod('POST')) {
             $validatedData = $request->validate([
-                'salary' => 'required|integer|max:50',
+                'salary' => 'required|integer',
                 'review' => 'required|string|max:255',
                 'status' => 'required|string|max:255',
                 'id_user' => 'required|exists:users,id',
