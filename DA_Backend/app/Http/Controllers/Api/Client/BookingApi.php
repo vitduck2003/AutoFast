@@ -81,13 +81,49 @@ class BookingApi extends Controller
         }
     }
     public function getBookingPhone(Request $request){
-        $phone = $request->only('phone');
+        $phone = $request->input('phone');
         $bookings = DB::table('booking')
-        ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-        ->select('booking.*', 'jobs.*')
-        ->where('phone', '=', $phone)->get();
+            ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
+            ->select('booking.*', 'jobs.*')
+            ->where('phone', '=', $phone)
+            ->get();
+    
+        $result = [];
+        foreach ($bookings as $booking) {
+            $bookingId = $booking->id_booking;
+            // Nếu booking chưa tồn tại trong mảng $result, tạo mới
+            if (!isset($result[$bookingId])) {
+                $result[$bookingId] = [
+                    'booking' => [
+                        'id' => $booking->id_booking,
+                        'name' => $booking->name,
+                        'phone' => $booking->phone,
+                        'email' => $booking->email,
+                        'target_date' => $booking->target_date,
+                        'target_time' => $booking->target_time,
+                        'note' => $booking->note,
+                        'model_car' => $booking->model_car,
+                        'mileage' => $booking->mileage,
+                        'status' => $booking->status,
+                        'created_at' => $booking->created_at,
+                    ],
+                    'jobs' => [],
+                ];
+            }
+    
+            // Thêm thông tin job vào booking tương ứng
+            $result[$bookingId]['jobs'][] = [
+                'id' => $booking->id,
+                'item_name' => $booking->item_name,
+                'item_price' => $booking->item_price,
+                'target_time_done' => $booking->target_time_done,
+                'images_done' => $booking->images_done,
+                'price' => $booking->price,
+            ];
+        }
+    
         return response()->json([
-            $bookings
+            array_values($result)
         ]);
     }
 }
