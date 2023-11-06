@@ -35,8 +35,8 @@ const updateUsers = (users: IUser) => {
 const deleteUsers = (id: number) => {
   return instance.delete("/users/" + id);
 };
-const uploadAvatar = (id: number, data: any) => {
-  return instance.post(`/client/profile/update/avatar/${id}`, data);
+const uploadAvatar = (id: number, formData: any) => {
+  return instance.post(`/client/profile/update/avatar/${id}`, formData, {});
 }
 const updateProfile = (id: number, data: any) => {
   return instance.put(`/client/profile/update/${id}`, data);
