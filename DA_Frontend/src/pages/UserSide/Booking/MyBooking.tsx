@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import instance from "../../../api/instance";
+import { SearchOutlined } from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
+import type { InputRef } from 'antd';
+import { Button, Input, Space, Table } from 'antd';
+import type { ColumnType, ColumnsType } from 'antd/es/table';
+import type { FilterConfirmProps } from 'antd/es/table/interface';
 
 const MyBooking = () => {
   const [phone, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
-
+ 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -68,9 +74,37 @@ console.log(bookings);
     padding: '0',
     margin: '0',
   };
-  const goToPayment = (bookingId) => {
-    history.push(`/payment/${bookingId}`); // Adjust the path as needed
+  const goToPayment = (booking) => {
+    // Extract the required properties from the booking object
+    const bookingId = booking.booking.id;
+    const serviceName = "Thanh toán " + booking.booking.service_name; // Prefixing service_name
+  
+    // Calculate the total price by summing the item_price of each job
+    const totalPrice = booking.jobs.reduce((sum, job) => sum + job.item_price, 0);
+  
+    // Construct the data object with the properties you want to send
+    const postData = {
+      id: bookingId,
+      service_name: serviceName, // This now includes the "Thanh toán" prefix
+      total_price: totalPrice
+    };
+  
+    // Send the data object in the POST request
+    instance.post("/payment", postData)
+      .then(response => {
+        // Handle the success response here
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle the error response here
+        console.error("Error making the payment request:", error);
+      });
   };
+  
+  
+  
+  
+  
   const showJobDetails = (jobs) => {
     setSelectedJobDetails(jobs);
     console.log(jobs);
@@ -139,7 +173,7 @@ console.log(bookings);
   };
   const buttonStyle = {
     margin: '5px',
-    padding: '10px 15px',
+    // padding: '10px 15px',
     cursor: 'pointer',
   };
   return (
@@ -208,7 +242,8 @@ console.log(bookings);
               <th style={thStyle}>Giờ đến</th>
               <th style={thStyle}>Ghi chú</th>
               <th style={thStyle}>Loại xe</th>
-           
+              <th style={thStyle}>Dịch vụ </th>
+
               <th style={thStyle}>Trạng Thái </th>
               {/* <th style={thStyle}>Các công việc</th> */}
               <th style={thStyle}>Hành động</th>
@@ -225,30 +260,24 @@ console.log(bookings);
                 <td style={tdStyle}>{booking.booking.target_time}</td>
                 <td style={tdStyle}>{booking.booking.note}</td>
                 <td style={tdStyle}>{booking.booking.model_car}</td>
-               
+                <td style={tdStyle}>{booking.booking.service_name}</td>
+
                 <td style={tdStyle}>{booking.booking.status}</td>
-                {/* <td style={tdStyle}>
-                  <ul style={ulStyle}>
-                    {booking.jobs.map((job) => (
-                      <li key={job.id} style={liStyle}>
-                        {job.item_name} - {job.item_price}
-                      </li>
-                    ))}
-                  </ul>
-                </td> */}
+             
               
               
                 <td style={tdStyle}>
                  
-                <button style={buttonStyle} onClick={() => showJobDetails(booking.jobs)}>
-                      Xem chi tiết
-                    </button>
+               
+                    <Button onClick={() => showJobDetails(booking.jobs)}>
+                    Xem chi tiết
+                    </Button>
 
                
                   {booking.booking.status === 'Đã hoàn thành' && (
-                    <button style={buttonStyle} onClick={() => goToPayment(booking.booking.id)}>
-                      Thanh toán
-                    </button>
+                   <Button style={buttonStyle} onClick={() => goToPayment(booking)}>
+                   Thanh toán
+                   </Button>
                   )}
                 </td>
              
