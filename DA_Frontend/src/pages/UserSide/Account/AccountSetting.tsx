@@ -3,8 +3,9 @@ import { notification } from 'antd';
 import { getUserById, uploadAvatar, updateProfile } from '../../../api/user';
 
 const AccountSetting = () => {
-	const [avatar, setAvatar] = useState<string>('https://picsum.photos/300/300');
-	const [firstName, setFirstName] = useState<string>('');
+	const [avatar, setAvatar] = useState<string>('');
+    const [uploadImg, setUploadImg] = useState<string>();
+	// const [firstName, setFirstName] = useState<string>('');
 	const [lastName, setLastName] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [phone, setPhone] = useState<string>('');
@@ -13,7 +14,7 @@ const AccountSetting = () => {
     const [address, setAddress] = useState<string>('');
     const [showNotification, setShowNotification] = useState(false);
     const [api, contextHolder] = notification.useNotification();
-
+    const [formData, setFormData] = useState();
 	const getUser = async (id: number) => {
 		await getUserById(id)
 			.then((res) => {
@@ -23,7 +24,7 @@ const AccountSetting = () => {
 				}
 				const name = dataUser.name.split(' '); // Chỗ này phải có space nha
 				setLastName(name.pop());
-				setFirstName(name.join(' '));
+
 				setEmail(dataUser.email);
 				setPhone(dataUser.phone);
                 setAddress(dataUser.address);
@@ -31,14 +32,7 @@ const AccountSetting = () => {
 			.catch(error => console.log(error))
 	}
 
-	useEffect(() => {
-        const sessionData = sessionStorage.getItem("user");
-        if (sessionData) {
-            const userData = JSON.parse(sessionData);
-
-            getUser(userData.id);
-        }
-	}, []);
+	
 	
 	const handleUpdateAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const input = event.target as HTMLInputElement;
@@ -50,20 +44,10 @@ const AccountSetting = () => {
             if (input.files?.length) {
                 let fd = new FormData();
                 fd.append("avatar", input.files[0]);
+                setFormData(fd)
                 const file = input.files[0];
                 const url = URL.createObjectURL(file);
-                await uploadAvatar(userData.id, fd)
-                .then((res) => {
-                    if(res.data.message) {
-                        openNotification(res.data.message, "black", "green", "Cập Nhật Avatar Thành Công");
-                    } else {
-                        openNotification(res.data.message, "white", "red", "Cập Nhật Avatar Thất Bại");
-                    }
-                })
-                .catch(error => {
-                    openNotification(error.response.message, "white", "red", "Cập Nhật Avatar Thất Bại");
-                });
-                setAvatar(url);
+                setUploadImg(url);
             } 
         }
 	}
@@ -85,60 +69,83 @@ const AccountSetting = () => {
       };
 
     const handleUpdateProfile = async () => {
-        const userId = JSON.parse(localStorage.getItem('userID') || '');
+        const user = JSON.parse(sessionStorage.getItem('user') || '');
         const data = {
-            name: `${firstName} ${lastName}`,
+            name: `${lastName}`,
             email: email,
             phone: phone,
             password: newPassword,
             address: address,
             description: "",
         }
-        await updateProfile(userId, data)
+
+        if (formData) {
+            await uploadAvatar(user.id, formData)
             .then((res) => {
                 if(res.data.message) {
-                    openNotification(res.data.message, "black", "green", "Cập Nhật Thành Công");
+                updateProfile(user.id, data)
+                .then((res) => {
+                    if(res.data.message) {
+                        openNotification(res.data.message, "black", "green", "Cập Nhật Thành Công");
+                    } else {
+                        openNotification(res.data.message, "white", "red", "Cập Nhật Thất Bại");
+                    }
+                })
+                .catch((error) => {
+                    openNotification(error.response.message, "white", "red", "Cập Nhật Thất Bại");
+                });
                 } else {
-                    openNotification(res.data.message, "white", "red", "Cập Nhật Thất Bại");
+                    openNotification(res.data.message, "white", "red", "Cập Nhật Avatar Thất Bại");
                 }
             })
-            .catch((error) => {
-                openNotification(error.response.message, "white", "red", "Cập Nhật Thất Bại");
+            .catch(error => {
+                openNotification(error.response.message, "white", "red", "Cập Nhật Avatar Thất Bại");
             });
+        }  else {
+
+
+            await updateProfile(user.id, data)
+                .then((res) => {
+                    if(res.data.message) {
+                        openNotification(res.data.message, "black", "green", "Cập Nhật Thành Công");
+                    } else {
+                        openNotification(res.data.message, "white", "red", "Cập Nhật Thất Bại");
+                    }
+                })
+                .catch((error) => {
+                    openNotification(error.response.message, "white", "red", "Cập Nhật Thất Bại");
+                });
+        }
     }
-	
+	useEffect(() => {
+        const sessionData = sessionStorage.getItem("user");
+        if (sessionData) {
+            const userData = JSON.parse(sessionData);
+
+            getUser(userData.id);
+        }
+	}, []);
+
+    if(avatar==''){
+        return null
+    }
   return (
     <div>
       <div className="container mt-5">
             <div className="row">
                 {contextHolder}
-                <div className="col-lg-4 pb-5">
+                <div className="col-lg-4 ">
                     {/* Account Sidebar */}
-                    <div className="author-card pb-3">
-                        <div className="author-card-profile">
-                            <div className="author-card-avatar" style={{width: '200px'}}>
-                              <img style={{width: '200px'}} src={avatar} alt="Daniel Adams" onError={(e: any) => {
-                                e.target.src = "https://picsum.photos/300/300";
-                              }}/>
-															<input type="file" onChange={handleUpdateAvatar}/>
+                    <div className="author-card pb-3 ">
+                        <div className="author-card-profile" >
+                            <div className="author-card-avatar" style={{textAlign:'center'}}>
+                              <img style={{width: '200px',height:"200px",borderRadius:"99%"}} src={`${uploadImg ? uploadImg : `http://localhost:8000/storage/${avatar}`}`} alt="Daniel Adams" />
+															<input className="form-control" type="file" onChange={handleUpdateAvatar}/>
                             </div>
-                            <div className="author-card-details">
-                                <h5 className="author-card-name text-lg">{ firstName } { lastName }</h5>
-                                <span className="author-card-position">Joined February 06, 2017</span>
+                            <div className="author-card-details" style={{textAlign:'center'}}>
+                                <h5 className="author-card-name text-lg text-capitalize"> { lastName }</h5>
                             </div>
                         </div>
-                    </div>
-                    <div style={{width: '200px'}} className="wizard">
-                        <nav className="list-group list-group-flush">
-                          
-                            <a className="list-group-item active" href="#">
-                                <i className="fe-icon-user text-muted"></i>Profile Settings
-                            </a>
-                            <a className="list-group-item" href="#">
-                                <i className="fe-icon-heart mr-1 text-muted"></i>My Oder
-                            </a>
-                            
-                        </nav>
                     </div>
                 </div>
                 {/* Profile Settings */}
@@ -146,14 +153,8 @@ const AccountSetting = () => {
                     <form className="row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label htmlFor="account-fn">First Name</label>
-                                <input className="form-control" type="text" id="account-fn" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="form-group">
                                 <label htmlFor="account-ln">Last Name</label>
-                                <input className="form-control" type="text" id="account-ln" value={lastName} onChange={(e) => setFirstName(e.target.value)} required />
+                                <input className="form-control" type="text" id="account-ln" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                             </div>
                         </div>
                         <div className="col-md-6">

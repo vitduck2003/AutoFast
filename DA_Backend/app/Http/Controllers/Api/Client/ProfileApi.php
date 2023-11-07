@@ -29,7 +29,10 @@ class ProfileApi extends Controller
         $profile = Profile::findOrFail($id);
         if ($request->file('avatar')) {
             Storage::delete('/public/' . $request->file('avatar'));
+            
             $path = $request->file('avatar')->store('public/avatar');
+            // $path=$request->image->move(public_path('avatar'), $request->file('avatar'));  
+            $path=substr($path, 7);
             $profile->avatar = $path;
             $profile->update($request->all());
             return response()->json(['message' => 'Avatar sửa thành công','avatr'=> $path]);

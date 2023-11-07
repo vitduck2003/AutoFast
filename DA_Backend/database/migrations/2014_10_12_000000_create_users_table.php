@@ -19,10 +19,10 @@ class CreateUsersTable extends Migration
             $table->index(['phone', 'verification_code']);
             $table->string('address')->nullable();
             $table->string('password');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('avatar/user-6380868_640.png');
             $table->text('description')->nullable();
             $table->unsignedInteger('role_id');
-            $table->rememberToken();
+            $table->rememberToken();    
             $table->timestamps();
             $table->softDeletes();
 
