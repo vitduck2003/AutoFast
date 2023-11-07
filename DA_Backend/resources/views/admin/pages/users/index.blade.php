@@ -1,11 +1,6 @@
 @extends('admin.layout.layout')
 @section('title', 'Danh sách tài khoản')
 @section('content')
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        <strong>{{ Session::get('success') }}</strong>
-    </div>
-@endif
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
@@ -27,37 +22,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $item)
+                        @foreach ($users as $user)
                         <tr>
                             <td> {{$loop->iteration}} </td>
-                            <td> {{$item->name}} </td>
-                            <td> {{$item->email}} </td>
-                            <td> {{$item->phone}} </td>
-                            <td>
-                                @if($item->address == '')
+                            <td> {{$user->name}} </td>
+                            <td> {{$user->email}} </td>
+                            <td> {{$user->phone}} </td>
+                            <td> @if($user->address == '')
                                 Chưa cập nhật
                                 @else
-                                {{ $item->address }}
+                                {{ $user->address }}
                                 @endif
                             </td>
                             <td>
-                                @if($item->role_id == 1)
+                                @if($user->role_id == 1)
                                 Admin
-                                @elseif($item->role_id == 2)
+                                @elseif($user->role_id == 2)
                                 Nhân viên
-                                @elseif($item->role_id == 3)
+                                @elseif($user->role_id == 3)
                                 Khách hàng
                                 @endif
-                                </p>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
-                                    data-target="#exampleModal" data-user-id="{{ $item->id }}">
+                                    data-target="#exampleModal" data-user-id="{{ $user->id }}">
                                     Chi tiết
                                 </button>
                                 <button type="button" class="btn btn-sm btn-danger"><a
                                         style="color:white;  text-decoration: none;"
-                                        href="{{ route('user.remove', ['id'=>$item->id]) }}"> Xóa</a></button>
+                                        href="{{ route('user.remove', ['id'=>$user->id]) }}"> Xóa</a></button>
                             </td>
                         </tr>
                         @endforeach
@@ -81,14 +74,14 @@
             </div>
             <div class="modal-body">
                 <!-- Nội dung chi tiết tài khoản -->
-                <p><strong>Họ tên:</strong> {{ $item->name }} <span id="name"></span></p>
-                <p><strong>Email:</strong> {{ $item->email }} <span id="email"></span></p>
-                <p><strong>Số điện thoại:</strong> {{ $item->phone }} <span id="phone"></span></p>
+                <p><strong>Họ tên:</strong> {{ $user->name }} <span id="name"></span></p>
+                <p><strong>Email:</strong> {{ $user->email }} <span id="email"></span></p>
+                <p><strong>Số điện thoại:</strong> {{ $user->phone }} <span id="phone"></span></p>
                 <p><strong>Địa chỉ:</strong>
-                    @if($item->address == '')
+                    @if($user->address == '')
                     Chưa cập nhật
                     @else
-                    {{ $item->address }}
+                    {{ $user->address }}
                     @endif
                     <span id="address"></span>
                 </p>
