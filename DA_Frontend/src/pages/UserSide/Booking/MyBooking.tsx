@@ -11,7 +11,26 @@ const MyBooking = () => {
   const [phone, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
- 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredBookings, setFilteredBookings] = useState([]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setFilteredBookings(bookings);
+    } else {
+      const filtered = bookings.filter((booking) =>
+        Object.values(booking.booking).some((value) =>
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+      setFilteredBookings(filtered);
+    }
+  }, [bookings, searchTerm]);
+
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -176,9 +195,19 @@ console.log(bookings);
     // padding: '10px 15px',
     cursor: 'pointer',
   };
+  
   return (
     <div style={containerStyle}>
       <h1 style={{ textAlign: 'center' }}>Lịch của tôi</h1>
+      {/* Phần tìm kiếm và filter */}
+      <div className="form-group row">
+  <div className=" timkiem" >
+    <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
+            onChange={handleSearch}/>
+  </div>
+  
+</div>
+
       {/* {selectedJobDetails && (
             <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px', borderRadius: '5px', position: 'absolute', background: 'white', zIndex: '10' }}>
               <h2>Các công việc</h2>
@@ -252,7 +281,7 @@ console.log(bookings);
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking) => (
+          {filteredBookings.map((booking) => (
               <tr key={booking.booking.id}>
                 <td style={tdStyle}>{booking.booking.id}</td>
               
@@ -287,7 +316,7 @@ console.log(bookings);
         </table>
         
       ) : (
-        <p>No bookings found.</p>
+        <p>Loading...</p>
       )}
     </div>
   );
