@@ -10,44 +10,22 @@ class PaymentApi extends Controller
     public function payment(Request $request)
     {
         $data = $request->all();
+        // return response()->json($data);
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
+        $vnp_Returnurl = "http://127.0.0.1:8000/payment-return";
         $vnp_TmnCode = "6S323993"; //Mã website tại VNPAY 
         $vnp_HashSecret = "WFRWTAEZJTEQOKUHOBGWJJBNSBOGKVOF"; //Chuỗi bí mật
 
-        $vnp_TxnRef = $data['id_bill']; 
-        $vnp_OrderInfo = 'Thanh toán hóa đơn';
+        $vnp_TxnRef = $data['id']; 
+        $vnp_OrderInfo = $data['service_name'];
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $data['total_amount'] * 100;
+        $vnp_Amount = $data['total_price'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        //Add Params of 2.0.1 Version
-        $vnp_ExpireDate = $_POST['txtexpire'];
-        //Billing
-        $vnp_Bill_Mobile = $_POST['txt_billing_mobile'];
-        $vnp_Bill_Email = $_POST['txt_billing_email'];
-        $fullName = trim($_POST['txt_billing_fullname']);
-        if (isset($fullName) && trim($fullName) != '') {
-            $name = explode(' ', $fullName);
-            $vnp_Bill_FirstName = array_shift($name);
-            $vnp_Bill_LastName = array_pop($name);
-        }
-        $vnp_Bill_Address = $_POST['txt_inv_addr1'];
-        $vnp_Bill_City = $_POST['txt_bill_city'];
-        $vnp_Bill_Country = $_POST['txt_bill_country'];
-        $vnp_Bill_State = $_POST['txt_bill_state'];
-        // Invoice
-        $vnp_Inv_Phone = $_POST['txt_inv_mobile'];
-        $vnp_Inv_Email = $_POST['txt_inv_email'];
-        $vnp_Inv_Customer = $_POST['txt_inv_customer'];
-        $vnp_Inv_Address = $_POST['txt_inv_addr1'];
-        $vnp_Inv_Company = $_POST['txt_inv_company'];
-        $vnp_Inv_Taxcode = $_POST['txt_inv_taxcode'];
-        $vnp_Inv_Type = $_POST['cbo_inv_type'];
         $inputData = array(
             "vnp_Version" => "2.1.0",
             "vnp_TmnCode" => $vnp_TmnCode,
@@ -60,22 +38,7 @@ class PaymentApi extends Controller
             "vnp_OrderInfo" => $vnp_OrderInfo,
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
-            "vnp_ExpireDate" => $vnp_ExpireDate,
-            "vnp_Bill_Mobile" => $vnp_Bill_Mobile,
-            "vnp_Bill_Email" => $vnp_Bill_Email,
-            "vnp_Bill_FirstName" => $vnp_Bill_FirstName,
-            "vnp_Bill_LastName" => $vnp_Bill_LastName,
-            "vnp_Bill_Address" => $vnp_Bill_Address,
-            "vnp_Bill_City" => $vnp_Bill_City,
-            "vnp_Bill_Country" => $vnp_Bill_Country,
-            "vnp_Inv_Phone" => $vnp_Inv_Phone,
-            "vnp_Inv_Email" => $vnp_Inv_Email,
-            "vnp_Inv_Customer" => $vnp_Inv_Customer,
-            "vnp_Inv_Address" => $vnp_Inv_Address,
-            "vnp_Inv_Company" => $vnp_Inv_Company,
-            "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
-            "vnp_Inv_Type" => $vnp_Inv_Type
+            "vnp_TxnRef" => $vnp_TxnRef
         );
 
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -108,12 +71,35 @@ class PaymentApi extends Controller
         $returnData = array(
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
-        if (isset($_POST['redirect'])) {
-            header('Location: ' . $vnp_Url);
-            die();
+        if (isset($data['redirect']) && $data['redirect'] == true) {
+            $returnData = array(
+                'code' => '00',
+                'message' => 'success',
+                'redirect_url' => $vnp_Url
+            );
+            return response()->json($returnData);
         } else {
             echo json_encode($returnData);
         }
-        // vui lòng tham khảo thêm tại code demo
     }
+    public function paymentReturn(Request $request)
+{
+    $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+    $vnp_TxnRef = $request->input('vnp_TxnRef');
+    return response()->json('Duc dep trai vcl');
+    if ($vnp_ResponseCode == '00') {
+        // Thành công: xử lý logic sau khi thanh toán thành công
+        // Dùng $vnp_TxnRef để xác định đơn hàng tương ứng và cập nhật trạng thái, thông tin thanh toán, vv.
+        // Ví dụ: Order::where('transaction_id', $vnp_TxnRef)->update(['status' => 'paid']);
+
+        // Chuyển hướng người dùng đến trang thành công
+        return redirect()->route('payment.success');
+    } else {
+        // Lỗi: xử lý logic khi thanh toán thất bại
+        // Ví dụ: Order::where('transaction_id', $vnp_TxnRef)->update(['status' => 'failed']);
+
+        // Chuyển hướng người dùng đến trang lỗi
+        return redirect()->route('payment.error');
+    }
+}
 }

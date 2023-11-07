@@ -85,19 +85,23 @@ console.log(bookings);
     // Construct the data object with the properties you want to send
     const postData = {
       id: bookingId,
-      service_name: serviceName, // This now includes the "Thanh toán" prefix
-      total_price: totalPrice
+      service_name: serviceName,
+      total_price: totalPrice,
+      redirect: true // Add the redirect parameter
     };
   
     // Send the data object in the POST request
     instance.post("/payment", postData)
       .then(response => {
-        // Handle the success response here
         console.log(response.data);
+        if (response.data.code === '00') {
+          window.location.href = response.data.redirect_url;
+        } else {
+          // Xử lý lỗi nếu cần
+        }
       })
       .catch(error => {
-        // Handle the error response here
-        console.error("Error making the payment request:", error);
+        console.error("Lỗi con mẹ r:", error);
       });
   };
   
@@ -275,7 +279,7 @@ console.log(bookings);
 
                
                   {booking.booking.status === 'Đã hoàn thành' && (
-                   <Button style={buttonStyle} onClick={() => goToPayment(booking)}>
+                   <Button name="redirect" style={buttonStyle} onClick={() => goToPayment(booking)}>
                    Thanh toán
                    </Button>
                   )}
