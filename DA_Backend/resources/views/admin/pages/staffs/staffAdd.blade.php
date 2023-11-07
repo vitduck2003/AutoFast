@@ -14,15 +14,15 @@
     <div class="col-6"> <div class="staff"> <div class="staff-body"> <h4 class="staff-title">Đây là thêm nhân viên</h4>
         <form action="{{route('staff.create')}}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="mb-3">
+        <!-- <div class="mb-3">
         <label for="id_user">Người dùng:</label>
             <select class="form-control" name="id_user" id="id_user" required>
             @foreach ($users as $user)
             <option value="{{ $user->id }}">{{ $user->name }} -{{($user->role_id == 2) ? 'Nhân viên' : (($user->role_id == 1) ? 'Admin' : 'Người dùng')}}</option>
             @endforeach
     </select>
-        </div>
-        <dic class="mb-3">
+        </div> -->
+        <!-- <dic class="mb-3">
             <div class="form-group">
                 <label class="form-label" for="">Tìm người dùng</label>
                 <input type="text" class="form-control" id="input-search-ajax" placeholder="Tìm người dùng">
@@ -41,7 +41,18 @@
                 
                 
             </div>
-        </dic>
+        </dic> -->
+        
+        <div class="mb-3">
+        <label for="exampleDataList" class="form-label">Datalist example</label>
+            <input class="form-control" name="id_user" id="id_user"  list="datalistOptions" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                @foreach ($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }} -{{($user->role_id == 2) ? 'Nhân viên' : (($user->role_id == 1) ? 'Admin' : 'Người dùng')}}</option>
+            @endforeach
+            </datalist>
+        </div>
+
         <div class="mb-3">
             <label class="form-label">Lương</label>
             <input type="text" name="salary" class="form-control">

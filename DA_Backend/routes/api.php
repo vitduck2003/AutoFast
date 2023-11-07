@@ -127,7 +127,8 @@ Route::get('/demo', function () {
 })->middleware('checkauth');
 
 // payment
-Route::post('/payment', [PaymentApi::class, 'pyament']);
+Route::post('/payment', [PaymentApi::class, 'payment']);
+Route::get('/payment-return', [PaymentApi::class, 'paymentReturn'])->name('payment.return');
 
 Route::get('users/{id}', [UserApi::class, 'show']);
 

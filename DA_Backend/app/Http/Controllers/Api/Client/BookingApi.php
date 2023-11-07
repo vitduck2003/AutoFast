@@ -81,15 +81,16 @@ class BookingApi extends Controller
         }
     }
     public function getBookingPhone(Request $request){
-        $phone = $request->input('phone');
+        $user_id = $request->input('user_id');
         $bookings = DB::table('booking')
         ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
         ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
         ->leftJoin('users', 'users.id', '=', 'staff.id')
         ->leftJoin('booking_detail', 'booking_detail.id_booking', '=', 'booking.id')
         ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
-        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name')
-        ->where('booking.phone', '=', $phone)
+        ->leftJoin('bill', 'bill.id_booking', '=', 'booking.id')
+        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount')
+        ->where('booking.phone', '=', $user_id)
         ->get();
         $result = [];
         foreach ($bookings as $booking) {
@@ -103,6 +104,7 @@ class BookingApi extends Controller
                         'phone' => $booking->phone,
                         'email' => $booking->email,
                         'service_name' => $booking->service_name,
+                        'total_amount' => $booking->total_amount ? $booking->total_amount : "Chưa hoàn thành" ,
                         'target_date' => $booking->target_date,
                         'target_time' => $booking->target_time,
                         'note' => $booking->note,
