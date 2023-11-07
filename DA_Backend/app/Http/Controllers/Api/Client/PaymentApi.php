@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\Client;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class PaymentApi extends Controller
 {
@@ -15,7 +16,7 @@ class PaymentApi extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://127.0.0.1:8000/payment-return";
+        $vnp_Returnurl = route('payment.return');
         $vnp_TmnCode = "6S323993"; //Mã website tại VNPAY 
         $vnp_HashSecret = "WFRWTAEZJTEQOKUHOBGWJJBNSBOGKVOF"; //Chuỗi bí mật
 
@@ -82,24 +83,4 @@ class PaymentApi extends Controller
             echo json_encode($returnData);
         }
     }
-    public function paymentReturn(Request $request)
-{
-    $vnp_ResponseCode = $request->input('vnp_ResponseCode');
-    $vnp_TxnRef = $request->input('vnp_TxnRef');
-    return response()->json('Duc dep trai vcl');
-    if ($vnp_ResponseCode == '00') {
-        // Thành công: xử lý logic sau khi thanh toán thành công
-        // Dùng $vnp_TxnRef để xác định đơn hàng tương ứng và cập nhật trạng thái, thông tin thanh toán, vv.
-        // Ví dụ: Order::where('transaction_id', $vnp_TxnRef)->update(['status' => 'paid']);
-
-        // Chuyển hướng người dùng đến trang thành công
-        return redirect()->route('payment.success');
-    } else {
-        // Lỗi: xử lý logic khi thanh toán thất bại
-        // Ví dụ: Order::where('transaction_id', $vnp_TxnRef)->update(['status' => 'failed']);
-
-        // Chuyển hướng người dùng đến trang lỗi
-        return redirect()->route('payment.error');
-    }
-}
 }
