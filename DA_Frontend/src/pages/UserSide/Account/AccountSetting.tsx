@@ -21,7 +21,7 @@ const AccountSetting = () => {
 				if (dataUser.avatar) {
 					setAvatar(dataUser.avatar);
 				}
-				const name = dataUser.name.split(' ');
+				const name = dataUser.name.split(' '); // Chỗ này phải có space nha
 				setLastName(name.pop());
 				setFirstName(name.join(' '));
 				setEmail(dataUser.email);
@@ -32,27 +32,40 @@ const AccountSetting = () => {
 	}
 
 	useEffect(() => {
-		const userId = JSON.parse(localStorage.getItem('userID') || '');
+        const sessionData = sessionStorage.getItem("user");
+        if (sessionData) {
+            const userData = JSON.parse(sessionData);
 
-		if (userId) {
-			getUser(userId);
-		}
+            getUser(userData.id);
+        }
 	}, []);
 	
 	const handleUpdateAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const input = event.target as HTMLInputElement;
-		const userId = JSON.parse(localStorage.getItem('userID') || '');
+		const sessionData = sessionStorage.getItem("user");
 
-        if (input.files?.length) {
-            const file = input.files[0];
-            const url = URL.createObjectURL(file);
-            // Chỗ này bạn hỏi người viết api là truyền lên data gì nha. Là xong rồi á
-            const data = {
-                avatar: `public/avatar/${file.name}`
-            }
-            await uploadAvatar(userId, data).then((res) => console.log(res)).catch(error => console.log(error));
-            setAvatar(url)
-        } 
+        if (sessionData) {
+            const userData = JSON.parse(sessionData);
+
+            if (input.files?.length) {
+                let fd = new FormData();
+                fd.append("avatar", input.files[0]);
+                const file = input.files[0];
+                const url = URL.createObjectURL(file);
+                await uploadAvatar(userData.id, fd)
+                .then((res) => {
+                    if(res.data.message) {
+                        openNotification(res.data.message, "black", "green", "Cập Nhật Avatar Thành Công");
+                    } else {
+                        openNotification(res.data.message, "white", "red", "Cập Nhật Avatar Thất Bại");
+                    }
+                })
+                .catch(error => {
+                    openNotification(error.response.message, "white", "red", "Cập Nhật Avatar Thất Bại");
+                });
+                setAvatar(url);
+            } 
+        }
 	}
 
     const openNotification = (mess: string, text_color: string, bg_color: string, title: string) => {
@@ -104,7 +117,9 @@ const AccountSetting = () => {
                     <div className="author-card pb-3">
                         <div className="author-card-profile">
                             <div className="author-card-avatar" style={{width: '200px'}}>
-                              <img style={{width: '200px'}} src={avatar} alt="Daniel Adams" />
+                              <img style={{width: '200px'}} src={avatar} alt="Daniel Adams" onError={(e: any) => {
+                                e.target.src = "https://picsum.photos/300/300";
+                              }}/>
 															<input type="file" onChange={handleUpdateAvatar}/>
                             </div>
                             <div className="author-card-details">
