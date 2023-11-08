@@ -8,7 +8,7 @@ import type { ColumnType, ColumnsType } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
 
 const MyBooking = () => {
-  const [phone, setPhone] = useState("");
+  const [user_id, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,10 +44,11 @@ const MyBooking = () => {
   }, []);
 console.log(bookings);
   useEffect(() => {
-    if (phone) {
+    if (user_id) {
       const postPhone = async () => {
         try {
-          const response = await instance.post("/client/bookings", { phone });
+          const response = await instance.post("/client/bookings", { user_id });
+          console.log(response);
           const allBookings = response.data.flatMap(innerArray => innerArray);
           setBookings(allBookings);
         } catch (error) {
@@ -57,7 +58,7 @@ console.log(bookings);
 
       postPhone();
     }
-  }, [phone]);
+  }, [user_id]);
 
   const containerStyle = {
     display: 'flex',
