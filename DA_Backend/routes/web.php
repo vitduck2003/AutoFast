@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
-use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*
