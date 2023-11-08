@@ -12,12 +12,8 @@ use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
-<<<<<<< HEAD
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
-=======
->>>>>>> fd3ef456f00bc64c058a7a3e75dc5a403cb12c1a
-
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
