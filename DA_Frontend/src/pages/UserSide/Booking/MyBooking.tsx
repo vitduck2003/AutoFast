@@ -13,6 +13,9 @@ const MyBooking = () => {
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
+  const [showBill, setShowBill] = useState(false);
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
+  const [selectedStatus, setSelectedStatus] = useState("Tất cả");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -30,10 +33,10 @@ const MyBooking = () => {
       setFilteredBookings(filtered);
     }
   }, [bookings, searchTerm]);
-  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
-
+  const toggleBill = () => {
+    setShowBill(!showBill);
+  };
   // Define the selected booking status
-  const [selectedStatus, setSelectedStatus] = useState("Tất cả");
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -90,11 +93,7 @@ console.log(bookings);
     textAlign: 'center', // centers the text inside the container
   };
   
-  // const tableStyle = {
-  //   width: '80%', // sets the width of the table to 80% of its container
-  //   borderCollapse: 'collapse',
-  //   marginTop: '20px',
-  // };
+
   
   const thStyle = {
     backgroundColor: '#f0f0f0',
@@ -195,6 +194,31 @@ console.log(bookings);
     paddingBottom: '10px',
     marginBottom: '20px',
   };
+  const billContainerStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#ffffff',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    width: '90%', // You can adjust the width as needed
+    maxWidth: '600px', // You can adjust the maximum width as needed
+    maxHeight: '60vh',
+    overflowY: 'auto',
+    zIndex: 1051, // Make sure it's on top of the backdrop
+  };
+  
+  const closeBillButtonStyle = {
+    backgroundColor: '#007bff', // Bootstrap primary color
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    float: 'right', // If you want it to be on the right
+  };
   
   // Styles for the modal body
   const modalBodyStyle = {
@@ -253,7 +277,17 @@ console.log(bookings);
   
 </div>
 
-      
+{showBill && (
+  <div style={billContainerStyle}>
+    {/* Add your bill content here */}
+    <h2>Hóa đơn</h2>
+    <hr />
+    {/* You can display the bill details here */}
+    <button style={closeBillButtonStyle} onClick={toggleBill}>
+      Đóng hóa đơn
+    </button>
+  </div>
+)}
           {selectedJobDetails && (
     <div style={backdropStyle}>
       <div style={modalContentStyle}>
@@ -333,12 +367,15 @@ console.log(bookings);
                     Xem chi tiết
                     </Button>
 
-               
-                  {booking.booking.status === 'Đã hoàn thành' && (
-                   <Button name="redirect" style={buttonStyle} onClick={() => goToPayment(booking)}>
-                   Thanh toán
-                   </Button>
-                  )}
+                    {booking.booking.status === 'Đã hoàn thành' && (
+  <Button
+    name="redirect"
+    style={buttonStyle}
+    onClick={toggleBill}
+  >
+    Xem hóa đơn
+  </Button>
+)}
                 </td>
              
               </tr>

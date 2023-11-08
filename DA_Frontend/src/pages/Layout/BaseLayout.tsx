@@ -99,9 +99,7 @@ const BaseLayout = () => {
            
             {isLoggedIn ? (
       <b style={{ color: "blue" }}>
-        <a href="/" className="nav-item nav-link" onClick={clearSession}>
-          Đăng Xuất
-        </a>
+      
       </b>
     ) : (
       <div className="h-100 d-inline-flex align-items-center">
