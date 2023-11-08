@@ -28,23 +28,23 @@
                                 <td>{{ $row->item_name }}</td>
                                 <td>{{ $row->time_done }}</td>
                                 <td>{{ $row->price }}</td>
-                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image_serviceitem)}}" alt="{{asset('/storage/images/'.$row->image_serviceitem)}}"></td>
+                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image)}}" alt="{{asset('/storage/images/'.$row->image)}}"></td>
                            
                            
                           
                                 <td>
                                   
                                         <a href="{{route('serviceitem.edit',$row)}}" class="btn btn-success">
-                                            
                                                 Sửa
-                                          
                                         </a>
                                
-                                    <a href="">
-                                        <button type="button" class="btn btn-primary">
-                                              Xóa
-                                        </button>
-                                    </a>
+                                   
+                                        <form action="{{route('serviceitem.destroy',$row)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">xoas</button>
+                                        </form>
+                                    
                                 </td>
                             </tr>
                             @endforeach

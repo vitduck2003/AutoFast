@@ -17,7 +17,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Chọn dịch vụ</strong>
-                <input type="text" name="id_service" value="" class="form-control">
+                <input type="text" name="id_service" value="" class="form-control" >
                     
                 @error('id_service')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>thời gian hoàn thành</strong>
-                <input type="text" name="time_done" value="" class="form-control" placeholder="thời gian hoành thành">
+                <input type="text" name="time_done" value="" class="form-control" placeholder="chọn gian hoành thành">
                     
                 @error('time_done')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>nhập giá</strong>
-                <input type="text" name="price" value="" class="form-control" placeholder="nhập giá">
+                <input type="text" name="price" value="" class="form-control" placeholder="nhập giá sản phẩm">
                 @error('price')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
