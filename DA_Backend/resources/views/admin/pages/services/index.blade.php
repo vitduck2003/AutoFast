@@ -25,7 +25,7 @@
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->service_name }}</td>
                          
-                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image_service)}}" alt="{{asset('/storage/images/'.$row->image_service)}}"></td>
+                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image_service)}}" alt="{{asset('storage/'.$row->image_service)}}"></td>
                                 <td>{{ $row->content }}</td>
                                 <td>{{ $row->updated_at }}</td>
                           
@@ -37,11 +37,11 @@
                                           
                                         </a>
                                
-                                    <a href="">
-                                        <button type="button" class="btn btn-primary">
-                                              Xóa
-                                        </button>
-                                    </a>
+                                        <form action="{{route('service.destroy',$row)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">xoas</button>
+                                        </form>
                                 </td>
                             </tr>
                             @endforeach

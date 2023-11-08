@@ -99,9 +99,7 @@ const BaseLayout = () => {
            
             {isLoggedIn ? (
       <b style={{ color: "blue" }}>
-        <a href="/" className="nav-item nav-link" onClick={clearSession}>
-          Đăng Xuất
-        </a>
+      
       </b>
     ) : (
       <div className="h-100 d-inline-flex align-items-center">
@@ -123,7 +121,7 @@ const BaseLayout = () => {
         </div>
       </div>
       {/* NarBar */}
-      <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style={{ zIndex: 0 }}>
+      <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style={{ zIndex: 1 }}>
         <a
           href="/"
           className="navbar-brand d-flex align-items-center px-4 px-lg-5"

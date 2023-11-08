@@ -8,11 +8,14 @@ import type { ColumnType, ColumnsType } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
 
 const MyBooking = () => {
-  const [phone, setPhone] = useState("");
+  const [user_id, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
+  const [showBill, setShowBill] = useState(false);
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
+  const [selectedStatus, setSelectedStatus] = useState("Tất cả");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -30,7 +33,10 @@ const MyBooking = () => {
       setFilteredBookings(filtered);
     }
   }, [bookings, searchTerm]);
-
+  const toggleBill = () => {
+    setShowBill(!showBill);
+  };
+  // Define the selected booking status
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -42,12 +48,31 @@ const MyBooking = () => {
       }
     }
   }, []);
+  useEffect(() => {
+    if (selectedStatus === "Tất cả") {
+      // Show all bookings
+      setFilteredBookings(bookings);
+    } else {
+      // Filter bookings based on the selected status
+      const filtered = bookings.filter((booking) =>
+        booking.booking.status === selectedStatus
+      );
+      setFilteredBookings(filtered);
+    }
+  }, [bookings, selectedStatus]);
+
+  // Handle filter button click
+  const handleFilter = (status) => {
+    setSelectedStatus(status);
+  };
+
 console.log(bookings);
   useEffect(() => {
-    if (phone) {
+    if (user_id) {
       const postPhone = async () => {
         try {
-          const response = await instance.post("/client/bookings", { phone });
+          const response = await instance.post("/client/bookings", { user_id });
+          console.log(response);
           const allBookings = response.data.flatMap(innerArray => innerArray);
           setBookings(allBookings);
         } catch (error) {
@@ -57,7 +82,7 @@ console.log(bookings);
 
       postPhone();
     }
-  }, [phone]);
+  }, [user_id]);
 
   const containerStyle = {
     display: 'flex',
@@ -68,11 +93,7 @@ console.log(bookings);
     textAlign: 'center', // centers the text inside the container
   };
   
-  // const tableStyle = {
-  //   width: '80%', // sets the width of the table to 80% of its container
-  //   borderCollapse: 'collapse',
-  //   marginTop: '20px',
-  // };
+
   
   const thStyle = {
     backgroundColor: '#f0f0f0',
@@ -158,7 +179,7 @@ console.log(bookings);
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     width: '90%', // You can adjust the width as needed
     maxWidth: '600px', // You can adjust the maximum width as needed
-    maxHeight: '90vh',
+    maxHeight: '60vh',
     overflowY: 'auto',
   };
 
@@ -172,6 +193,31 @@ console.log(bookings);
     borderBottom: '1px solid #eeeeee',
     paddingBottom: '10px',
     marginBottom: '20px',
+  };
+  const billContainerStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#ffffff',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    width: '90%', // You can adjust the width as needed
+    maxWidth: '600px', // You can adjust the maximum width as needed
+    maxHeight: '60vh',
+    overflowY: 'auto',
+    zIndex: 1051, // Make sure it's on top of the backdrop
+  };
+  
+  const closeBillButtonStyle = {
+    backgroundColor: '#007bff', // Bootstrap primary color
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    float: 'right', // If you want it to be on the right
   };
   
   // Styles for the modal body
@@ -209,24 +255,39 @@ console.log(bookings);
     <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
             onChange={handleSearch}/>
   </div>
+  <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
+  {bookingStatuses.map((status) => (
+    <Button
+      key={status}
+      style={{
+        backgroundColor: selectedStatus === status ? "#007bff" : "gray",
+        color: "white",
+        border: "none",
+        // padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+      onClick={() => handleFilter(status)}
+    >
+      {status}
+    </Button>
+  ))}
+</div>
+  
   
 </div>
 
-      {/* {selectedJobDetails && (
-            <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px', borderRadius: '5px', position: 'absolute', background: 'white', zIndex: '10' }}>
-              <h2>Các công việc</h2>
-              <ul style={ulStyle}>
-                {selectedJobDetails.map((job) => (
-                  <li key={job.id} style={liStyle}>
-                    {job.item_name} - {job.item_price}
-                  </li>
-                ))}
-              </ul>
-              <button style={buttonStyle} onClick={closeJobDetails}>
-                Đóng
-              </button>
-            </div>
-          )} */}
+{showBill && (
+  <div style={billContainerStyle}>
+    {/* Add your bill content here */}
+    <h2>Hóa đơn</h2>
+    <hr />
+    {/* You can display the bill details here */}
+    <button style={closeBillButtonStyle} onClick={toggleBill}>
+      Đóng hóa đơn
+    </button>
+  </div>
+)}
           {selectedJobDetails && (
     <div style={backdropStyle}>
       <div style={modalContentStyle}>
@@ -306,12 +367,15 @@ console.log(bookings);
                     Xem chi tiết
                     </Button>
 
-               
-                  {booking.booking.status === 'Đã hoàn thành' && (
-                   <Button name="redirect" style={buttonStyle} onClick={() => goToPayment(booking)}>
-                   Thanh toán
-                   </Button>
-                  )}
+                    {booking.booking.status === 'Đã hoàn thành' && (
+  <Button
+    name="redirect"
+    style={buttonStyle}
+    onClick={toggleBill}
+  >
+    Xem hóa đơn
+  </Button>
+)}
                 </td>
              
               </tr>

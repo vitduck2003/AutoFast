@@ -5,15 +5,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Client\ProfileApi;
 use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\News\NewController;
+use App\Http\Controllers\Cilent\PaymentController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
+=======
+>>>>>>> fd3ef456f00bc64c058a7a3e75dc5a403cb12c1a
 
+use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*
@@ -41,6 +46,8 @@ Route::get('/staff/home', function () {
     Route::get('/api/bookings-cancel/{id}', [BookingController::class, 'getBookingCancel']);
     Route::get('/api/bookings-complete/{id}', [BookingController::class, 'getBookingComplete']);
 
+    // payemnts
+    Route::get('/payment-return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
     Route::prefix('admin')->group(function () {
         
         Route::get('bookings', [BookingController::class, 'index']);

@@ -18,7 +18,8 @@ class ServiceItemController extends Controller
     public function index()
     {
         $data = ServiceItem::all();
-        return view('admin\pages\ServiceItems\index');
+       
+        return view('admin\pages\ServiceItems\index',compact('data'));
     }
 
     /**
@@ -39,12 +40,14 @@ class ServiceItemController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Service();
-        $model->fillable($request->except('image'));
+        $model = new ServiceItem();
+        $model->fill($request->except('image'));
         if($request->has('image')){
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
         }
+       
         $model->save();
+        return redirect()->route('serviceitem.index');
     }
 
     /**
@@ -64,9 +67,9 @@ class ServiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServiceItem $service)
+    public function edit(ServiceItem $serviceitem)
     {
-        return   view('admin\pages\ServiceItems\edit',compact('service'));
+        return   view('admin\pages\ServiceItems\edit',compact('serviceitem'));
     }
 
     /**
@@ -79,11 +82,12 @@ class ServiceItemController extends Controller
     public function update(Request $request, $id)
     {
         $model = ServiceItem::findOrFail($id);
-        $model->fillable($request->except('image'));
+        $model->fill($request->except('image'));
         if($request->has('image')){
            $model->image = Storage::disk('public')->put('images',$request->file('image'));  
         }
         $model->save();
+        return back();
     }
 
     /**
@@ -92,9 +96,9 @@ class ServiceItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceItem $service)
+    public function destroy($id)
     {
-        ServiceItem::destroy($service);
+        ServiceItem::destroy($id);
         return back();
     }
 }

@@ -128,7 +128,6 @@ Route::get('/demo', function () {
 
 // payment
 Route::post('/payment', [PaymentApi::class, 'payment']);
-Route::get('/payment-return', [PaymentApi::class, 'paymentReturn'])->name('payment.return');
 
 Route::get('users/{id}', [UserApi::class, 'show']);
 

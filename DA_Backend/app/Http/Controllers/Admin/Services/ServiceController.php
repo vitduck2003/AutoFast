@@ -97,9 +97,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-        Service::destroy($service);
+        Service::destroy($id);
         return back();
     }
 }
