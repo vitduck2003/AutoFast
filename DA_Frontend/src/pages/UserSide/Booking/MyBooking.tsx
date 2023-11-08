@@ -30,7 +30,10 @@ const MyBooking = () => {
       setFilteredBookings(filtered);
     }
   }, [bookings, searchTerm]);
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
 
+  // Define the selected booking status
+  const [selectedStatus, setSelectedStatus] = useState("Tất cả");
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -42,6 +45,24 @@ const MyBooking = () => {
       }
     }
   }, []);
+  useEffect(() => {
+    if (selectedStatus === "Tất cả") {
+      // Show all bookings
+      setFilteredBookings(bookings);
+    } else {
+      // Filter bookings based on the selected status
+      const filtered = bookings.filter((booking) =>
+        booking.booking.status === selectedStatus
+      );
+      setFilteredBookings(filtered);
+    }
+  }, [bookings, selectedStatus]);
+
+  // Handle filter button click
+  const handleFilter = (status) => {
+    setSelectedStatus(status);
+  };
+
 console.log(bookings);
   useEffect(() => {
     if (user_id) {
@@ -159,7 +180,7 @@ console.log(bookings);
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     width: '90%', // You can adjust the width as needed
     maxWidth: '600px', // You can adjust the maximum width as needed
-    maxHeight: '90vh',
+    maxHeight: '60vh',
     overflowY: 'auto',
   };
 
@@ -210,24 +231,29 @@ console.log(bookings);
     <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
             onChange={handleSearch}/>
   </div>
+  <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
+  {bookingStatuses.map((status) => (
+    <Button
+      key={status}
+      style={{
+        backgroundColor: selectedStatus === status ? "#007bff" : "gray",
+        color: "white",
+        border: "none",
+        // padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+      onClick={() => handleFilter(status)}
+    >
+      {status}
+    </Button>
+  ))}
+</div>
+  
   
 </div>
 
-      {/* {selectedJobDetails && (
-            <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px', borderRadius: '5px', position: 'absolute', background: 'white', zIndex: '10' }}>
-              <h2>Các công việc</h2>
-              <ul style={ulStyle}>
-                {selectedJobDetails.map((job) => (
-                  <li key={job.id} style={liStyle}>
-                    {job.item_name} - {job.item_price}
-                  </li>
-                ))}
-              </ul>
-              <button style={buttonStyle} onClick={closeJobDetails}>
-                Đóng
-              </button>
-            </div>
-          )} */}
+      
           {selectedJobDetails && (
     <div style={backdropStyle}>
       <div style={modalContentStyle}>
