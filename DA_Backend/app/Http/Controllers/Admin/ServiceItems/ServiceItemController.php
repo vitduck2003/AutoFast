@@ -18,7 +18,8 @@ class ServiceItemController extends Controller
     public function index()
     {
         $data = ServiceItem::all();
-        return view('admin\pages\ServiceItems\index');
+       
+        return view('admin\pages\ServiceItems\index',compact('data'));
     }
 
     /**
