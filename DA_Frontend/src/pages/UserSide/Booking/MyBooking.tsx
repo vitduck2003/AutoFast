@@ -16,6 +16,9 @@ const MyBooking = () => {
   const [showBill, setShowBill] = useState(false);
   const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
   const [selectedStatus, setSelectedStatus] = useState("Tất cả");
+  const [user,setUser]=useState();
+  const [selectBooking,setSelectedBooking]=useState();
+  const [selectJob,setSelectJob]=useState();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -33,8 +36,16 @@ const MyBooking = () => {
       setFilteredBookings(filtered);
     }
   }, [bookings, searchTerm]);
-  const toggleBill = () => {
+  const toggleBill = (booking) => {
     setShowBill(!showBill);
+    setSelectedBooking(booking);
+  
+    // console.log(booking);
+  
+  };
+  const showJob = (jobs) => {
+    setSelectJob(jobs);
+    console.log(selectJob);
   };
   // Define the selected booking status
   useEffect(() => {
@@ -43,11 +54,13 @@ const MyBooking = () => {
       try {
         const userData = JSON.parse(storedUser);
         setPhone(userData.phone);
+        setUser(userData);
       } catch (e) {
         console.error("Failed to parse user data from session storage", e);
       }
     }
   }, []);
+  // console.log(user)
   useEffect(() => {
     if (selectedStatus === "Tất cả") {
       // Show all bookings
@@ -66,7 +79,7 @@ const MyBooking = () => {
     setSelectedStatus(status);
   };
 
-console.log(bookings);
+// console.log(bookings);
   useEffect(() => {
     if (user_id) {
       const postPhone = async () => {
@@ -116,11 +129,12 @@ console.log(bookings);
   };
   const goToPayment = (booking) => {
     // Extract the required properties from the booking object
-    const bookingId = booking.booking.id;
-    const serviceName = "Thanh toán " + booking.booking.service_name; // Prefixing service_name
+    const bookingId = booking.id;
+    const serviceName = "Thanh toán " + booking.service_name; // Prefixing service_name
   
     // Calculate the total price by summing the item_price of each job
-    const totalPrice = booking.jobs.reduce((sum, job) => sum + job.item_price, 0);
+    const totalPrice = booking.total_amount;
+    console.log(booking);
   
     // Construct the data object with the properties you want to send
     const postData = {
@@ -141,7 +155,7 @@ console.log(bookings);
         }
       })
       .catch(error => {
-        console.error("Lỗi con mẹ r:", error);
+        console.error("Lỗi r:", error);
       });
   };
   
@@ -278,14 +292,70 @@ console.log(bookings);
 </div>
 
 {showBill && (
+   <div style={backdropStyle}>
   <div style={billContainerStyle}>
     {/* Add your bill content here */}
     <h2>Hóa đơn</h2>
     <hr />
+    
+    <div style={{ textAlign: 'left' }}>
+      <b>Thông tin khách hàng</b>
+  <div >
+    <b>Tên khách hàng : </b>{user.name}
+  </div>
+  <div >
+    <b>Số điện thoại  : </b>{user.phone}
+  </div>
+  <div >
+    <b>Email : </b>{user.email}
+  </div>
+  <div >
+  <b>Loại xe : </b>{selectBooking.model_car}
+</div>
+  <div >
+    <b>Số km đã đi : </b>{selectBooking.mileage} Km
+  </div>
+  <div>
+  <b>Tất cả dịch vụ </b>
+  <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px', marginBottom: '10px' }}>
+    <thead>
+      <tr>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>ID</th>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>Name</th>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {selectJob.map((job) => (
+        <tr key={job.id} style={{ border: '1px solid #ddd' }}>
+          <td style={{ padding: '8px' }}>{job.id}</td>
+          <td style={{ padding: '8px' }}>{job.item_name}</td>
+          <td style={{ padding: '8px' }}>{job.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colSpan="2" style={{ textAlign: 'right', fontWeight: 'bold' }}>Total:</td>
+        <td style={{ padding: '8px', fontWeight: 'bold' }}>
+          {selectJob.reduce((total, job) => total + job.price, 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+ 
+</div>
+
     {/* You can display the bill details here */}
+    <Button onClick={()=>goToPayment(selectBooking)}>
+      Thanh toán 
+
+    </Button>
     <button style={closeBillButtonStyle} onClick={toggleBill}>
       Đóng hóa đơn
     </button>
+  </div>
   </div>
 )}
           {selectedJobDetails && (
@@ -369,12 +439,14 @@ console.log(bookings);
 
                     {booking.booking.status === 'Đã hoàn thành' && (
   <Button
-    name="redirect"
-    style={buttonStyle}
-    onClick={toggleBill}
-  >
-    Xem hóa đơn
-  </Button>
+  name="redirect"
+  style={buttonStyle}
+  onClick={() =>{ toggleBill( booking.booking)
+    showJob(booking.jobs)
+  }}
+>
+  Xem hóa đơn
+</Button>
 )}
                 </td>
              
