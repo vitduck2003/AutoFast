@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('coupon', function (Blueprint $table) {
-            $table->coupon_id();
+            $table->id("coupon_id");
             $table->string('coupon_name')->nullable();
             $table->integer('coupon_time')->nullable();
             $table->integer('coupon_condition')->nullable();
