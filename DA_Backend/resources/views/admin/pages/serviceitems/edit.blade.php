@@ -16,12 +16,14 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Chọn dịch vụ</strong>
-                <input type="text" name="id_service" value="{{$serviceitem->id_service}}" class="form-control" >
-                    
-                @error('id_service')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
+                <strong>Chọn dịch vụ</strong>     <br>
+                <select style="width:300px;height:30px" name="id_service" id="">
+                    <option style="width:200px" value="{{$serviceitem->idservice}}">{{$serviceitem->servicename}}</option>
+                    <option style="width:200px" value="">Không chọn</option>
+               @foreach ($dataservice as $dataservice)
+                <option style="width:200px" value="{{$dataservice->id}}">{{$dataservice->service_name}}</option>
+               @endforeach
+             </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

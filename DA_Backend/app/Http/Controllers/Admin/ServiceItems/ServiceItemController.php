@@ -17,8 +17,16 @@ class ServiceItemController extends Controller
      */
     public function index()
     {
-        $data = ServiceItem::all();
-       
+        $data = ServiceItem::all();  
+        foreach($data as $item){
+            $service = Service::select('service_name')->where('id', $item->id_service)->first();
+            if($service){
+                $item['servicename'] = $service->service_name;
+            }else{
+                $item['servicename'] ="không nằm trong dịch vụ nào";
+            }
+        }
+
         return view('admin\pages\ServiceItems\index',compact('data'));
     }
 
@@ -29,7 +37,8 @@ class ServiceItemController extends Controller
      */
     public function create()
     {
-        return view('admin\pages\ServiceItems\create');
+        $data = Service::all();
+        return view('admin\pages\ServiceItems\create',compact('data'));
     }
 
     /**
@@ -69,7 +78,20 @@ class ServiceItemController extends Controller
      */
     public function edit(ServiceItem $serviceitem)
     {
-        return   view('admin\pages\ServiceItems\edit',compact('serviceitem'));
+        $dataservice = Service::all();
+
+         $service = Service::select('id','service_name')->where('id', $serviceitem->id_service)->first();
+        
+         if($service){
+                $serviceitem['servicename'] = $service->service_name;
+                $serviceitem['idservice'] = $service->id;
+            }else{
+                $serviceitem['servicename'] ="không nằm trong dịch vụ nào";
+                $serviceitem['idservice'] = "";
+            }
+        
+
+        return   view('admin\pages\ServiceItems\edit',compact(['serviceitem','dataservice']));
     }
 
     /**

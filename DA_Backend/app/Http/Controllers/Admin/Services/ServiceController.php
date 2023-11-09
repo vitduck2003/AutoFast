@@ -17,7 +17,9 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::all();
-        return view('admin\pages\services\index',compact('data'));
+
+
+        $exit = Storage::fgJSsk31QuRRKW2XD61eAFMTyp0A6yXZgYaZ9wQ2disk('public')->has('images\.jpg');
     }
 
     /**

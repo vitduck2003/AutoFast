@@ -24,7 +24,7 @@
                             @foreach($data as $row):
                             <tr>
                                 <td>{{ $row->id }}</td>
-                                <td>{{ $row->id_service}}</td>
+                                <td>{{ $row->servicename}}</td>
                                 <td>{{ $row->item_name }}</td>
                                 <td>{{ $row->time_done }}</td>
                                 <td>{{ $row->price }}</td>
