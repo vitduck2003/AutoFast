@@ -1,32 +1,15 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
 
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const maintenanceIntervals = {
     'Bảo dưỡng cấp 1': [5000, 15000, 25000],
     'Bảo dưỡng cấp 2': [10000, 30000, 50000],
     'Bảo dưỡng cấp 3': [20000, 60000, 100000],
     'Bảo dưỡng cấp 4': [40000, 80000, 120000],
   };
-  useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const userData = JSON.parse(storedUser);
-        setPhone(userData.phone);
-        setEmail(userData.email);
-        setName(userData.name);
-      } catch (e) {
-        console.error("Failed to parse user data from session storage", e);
-      }
-    }
-  }, []);
-  console.log(phone)
   const styles = {
     table: {
       width: '100%',
@@ -44,51 +27,50 @@ const BookingPage = (props: any) => {
     },
   };
   const validateForm = () => {
-    const errors = {};
-  
+    const errors: Partial<FormData> = {};
+
     // Kiểm tra họ và tên
-    if (!formData.full_name.trim() && !name.trim()) {
+    if (!formData.full_name.trim()) {
       errors.full_name = "Họ và tên không được để trống";
     }
-  
+
     // Kiểm tra số điện thoại
     const phonePattern = /^(03|07|09)\d{8}$/; // Regular expression
-    if (!formData.phone.trim() && !phone.trim() && !phonePattern.test(formData.phone)) {
+    if (!formData.phone.trim() || !phonePattern.test(formData.phone)) {
       errors.phone = "Số điện thoại không hợp lệ";
     }
-  
+
     // Kiểm tra email
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!formData.email.trim() && !email.trim() && !emailPattern.test(formData.email)) {
+    if (!formData.email.trim() || !emailPattern.test(formData.email)) {
       errors.email = "Email không hợp lệ";
     }
-  
+
     // Kiểm tra loại xe
-    if (!formData.model_car || formData.model_car === "Lựa chọn loại xe của bạn") {
+    if (formData.model_car === "Lựa chọn loại xe của bạn") {
       errors.model_car = "Vui lòng chọn loại xe";
     }
-  
+
     // Kiểm tra thời gian đến
     if (!formData.target_date || !formData.target_time) {
       errors.target_date = "Vui lòng chọn thời gian đến";
     }
-  
+
     // Kiểm tra số KM của xe
     const mileageValue = parseInt(formData.mileage, 10);
     if (isNaN(mileageValue) || mileageValue < 0) {
       errors.mileage = "Số KM không hợp lệ";
     }
-  
+
     // Kiểm tra gói bảo dưỡng
-    if (!formData.service || formData.service === "0") {
+    if (formData.service === "0") {
       errors.service = "Vui lòng chọn gói bảo dưỡng";
     }
-  
+
     setFormErrors(errors);
-  
+
     return Object.keys(errors).length === 0; // Trả về true nếu không có lỗi
   };
-  
 
   const dataService = props.service;
   const dataServiceItem = props.serviceItem;
@@ -180,7 +162,21 @@ const BookingPage = (props: any) => {
       const kmValue = parseInt(value, 10);
       let recommendedServiceId = null;
 
-    
+      if (kmValue < 1000) {
+        setKmMessage("Xe của bạn chưa cần bảo dưỡng");
+      } else if (kmValue >= 1000 && kmValue < 5000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 1");
+        recommendedServiceId = 1;
+      } else if (kmValue > 5000 && kmValue < 10000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 2");
+        recommendedServiceId = 2;
+      } else if (kmValue >= 10000 && kmValue <= 15000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
+        recommendedServiceId = 3;
+      } else if (kmValue > 15000) {
+        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
+        recommendedServiceId = 3;
+      }
 
       if (recommendedServiceId !== null) {
         const chosenService = dataService.find(
@@ -271,69 +267,40 @@ const BookingPage = (props: any) => {
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Họ và tên *
               </label>
-              {name ==""? 
               <input
                 onChange={handleInputChange}
                 name="full_name"
                 type="text"
                 className="form-control"
                 placeholder="Nhập họ và tên"
-              />  :  <input
-              onChange={handleInputChange}
-              name="full_name"
-              type="text"
-              className="form-control"
-              placeholder="Nhập họ và tên"
-            value={name} 
-            disabled
-          />}
+              />
               {formErrors.full_name && (
                 <p style={{ color: "red" }}>{formErrors.full_name}</p>
               )}
 
-<label style={{ marginTop: "20px" }} htmlFor="">
-        Số điện thoại *
-      </label>
-   
-      {phone ==""? <input
-        onChange={handleInputChange}
-        name="phone"
-        type="text" // Sửa type thành "text" thay vì "string"
-        className="form-control"
-        placeholder="Tối thiểu 10 số"
-      
-      /> :  <input
-      onChange={handleInputChange}
-      name="phone"
-      type="text" // Sửa type thành "text" thay vì "string"
-      className="form-control"
-      placeholder="Tối thiểu 10 số"
-      value={phone} 
-      disabled
-    />}
+              <label style={{ marginTop: "20px" }} htmlFor="">
+                Số điện thoại *
+              </label>
+              <input
+                onChange={handleInputChange}
+                name="phone"
+                type="string"
+                className="form-control"
+                placeholder="Tối thiểu 10 số"
+              />
               {formErrors.phone && (
                 <p style={{ color: "red" }}>{formErrors.phone}</p>
               )}
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Email *
               </label>
-            
-                {email ==""? 
-                 <input
-                 onChange={handleInputChange}
-                 name="email"
-                 type="string"
-                 className="form-control"
-                 placeholder="vidu@gmail.com"
-               />  :  <input
-               onChange={handleInputChange}
-               name="email"
-               type="string"
-               className="form-control"
-               placeholder="vidu@gmail.com"
-            value={email} 
-            disabled
-          />}
+              <input
+                onChange={handleInputChange}
+                name="email"
+                type="string"
+                className="form-control"
+                placeholder="vidu@gmail.com"
+              />
               {formErrors.email && (
                 <p style={{ color: "red" }}>{formErrors.email}</p>
               )}
