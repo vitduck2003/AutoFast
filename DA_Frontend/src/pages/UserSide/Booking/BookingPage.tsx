@@ -44,50 +44,51 @@ const BookingPage = (props: any) => {
     },
   };
   const validateForm = () => {
-    const errors: Partial<FormData> = {};
-
+    const errors = {};
+  
     // Kiểm tra họ và tên
-    if (!formData.full_name.trim()) {
+    if (!formData.full_name.trim() && !name.trim()) {
       errors.full_name = "Họ và tên không được để trống";
     }
-
+  
     // Kiểm tra số điện thoại
     const phonePattern = /^(03|07|09)\d{8}$/; // Regular expression
-    if (!formData.phone.trim() || !phonePattern.test(formData.phone)) {
+    if (!formData.phone.trim() && !phone.trim() && !phonePattern.test(formData.phone)) {
       errors.phone = "Số điện thoại không hợp lệ";
     }
-
+  
     // Kiểm tra email
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!formData.email.trim() || !emailPattern.test(formData.email)) {
+    if (!formData.email.trim() && !email.trim() && !emailPattern.test(formData.email)) {
       errors.email = "Email không hợp lệ";
     }
-
+  
     // Kiểm tra loại xe
-    if (formData.model_car === "Lựa chọn loại xe của bạn") {
+    if (!formData.model_car || formData.model_car === "Lựa chọn loại xe của bạn") {
       errors.model_car = "Vui lòng chọn loại xe";
     }
-
+  
     // Kiểm tra thời gian đến
     if (!formData.target_date || !formData.target_time) {
       errors.target_date = "Vui lòng chọn thời gian đến";
     }
-
+  
     // Kiểm tra số KM của xe
     const mileageValue = parseInt(formData.mileage, 10);
     if (isNaN(mileageValue) || mileageValue < 0) {
       errors.mileage = "Số KM không hợp lệ";
     }
-
+  
     // Kiểm tra gói bảo dưỡng
-    if (formData.service === "0") {
+    if (!formData.service || formData.service === "0") {
       errors.service = "Vui lòng chọn gói bảo dưỡng";
     }
-
+  
     setFormErrors(errors);
-
+  
     return Object.keys(errors).length === 0; // Trả về true nếu không có lỗi
   };
+  
 
   const dataService = props.service;
   const dataServiceItem = props.serviceItem;
