@@ -60,10 +60,19 @@ class JobController extends Controller
     {
         $jobId = $request->input('job_id');
         $staffId = $request->input('staff_id');
-        
         DB::table('jobs')
             ->where('id', '=', $jobId)
             ->update(['id_staff' => $staffId]);
+            $checkstaff = DB::table('jobs') ->where('id', '=', $jobId)->first();
+            if($checkstaff->id_staff == NULL){
+                $status = "Chưa phân công việc";
+            }
+            else{
+                $status = "Đang chờ nhận việc";
+            }
+            DB::table('jobs')
+            ->where('id', '=', $jobId)
+            ->update(['status' => $status]);
             return redirect()->back();
     }
 }

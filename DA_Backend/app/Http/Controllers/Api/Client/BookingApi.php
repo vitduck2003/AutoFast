@@ -19,7 +19,7 @@ class BookingApi extends Controller
             'target_time' => $data['target_time'],
             'model_car' => $data['model_car'],
             'mileage' => $data['mileage'],
-            'note' => $data['note'],
+            'note' => $data['note'] ? $data['note'] : null,
             'status' => $data['status'],
         ]);
 
@@ -47,7 +47,7 @@ class BookingApi extends Controller
                         'target_time_done' => $itemService->time_done,
                         'images_done' => null,
                         'price' => $itemService->price,
-                        'status' => 'Đang làm',
+                        'status' => 'Chưa phân công việc',
                     ]);
                 }
 
@@ -67,17 +67,20 @@ class BookingApi extends Controller
                             'target_time_done' => $itemServiceOther->time_done,
                             'images_done' => null,
                             'price' => $itemServiceOther->price,
-                            'status' => 'Đang làm',
+                            'status' => 'Chưa phân công việc',
                         ]);
                     }
                 }
 
-                return response()->json(['message' => 'Đặt lịch thành công'], 200);
+                return response()->json([
+                    'message' => 'Đặt lịch thành công', 
+                    'success' => true,
+                ], 200);
             } else {
-                return response()->json(['message' => 'Lỗi khi thêm chi tiết đặt lịch'], 500);
+                return response()->json(['message' => 'Lỗi khi thêm chi tiết đặt lịch',   'success' => false,], 500);
             }
         } else {
-            return response()->json(['message' => 'Lỗi khi tạo đặt lịch'], 500);
+            return response()->json(['message' => 'Lỗi khi tạo đặt lịch',   'success' => false,], 500);
         }
     }
     public function getBookingPhone(Request $request){

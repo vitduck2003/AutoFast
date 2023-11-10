@@ -30,11 +30,20 @@
                                 <td>{{ $job->target_time_done }}</td>
                                 <td class="text-success">{{ $job->status }}</td>
                                 <td>
-                                    <form method="post" action="{{ route('updateJobStatus') }}">
-                                        @csrf
-                                        <input type="hidden" name="job_id" value="{{ $job->id }}">
-                                        <button type="submit" class="btn btn-success">Hoàn thành</button>
-                                    </form>
+                                   @if($job->status == 'Đang chờ nhận việc')
+                                   <form method="post" action="{{ route('staff.job.start') }}" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="job_id" value="{{ $job->id }}">
+                                    <button type="submit" class="btn btn-primary">Bắt đầu làm</button>
+                                </form>
+                                   @endif
+                                   @if($job->status == 'Đang làm')
+                                   <form method="post" action="{{ route('staff.job.complete') }}" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="job_id" value="{{ $job->id }}">
+                                    <button type="submit" class="btn btn-success">Hoàn thành</button>
+                                </form>
+                                   @endif
                                 </td>
                             </tr>
                             @endforeach

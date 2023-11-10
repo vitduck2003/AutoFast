@@ -67,6 +67,7 @@ Route::get('/staff/home', function () {
           route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
           route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
           route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
+          route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
         
 
         Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -88,7 +89,8 @@ Route::get('/staff/home', function () {
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
       Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
-      Route::post('/update-job-status', [StaffJobController::class, 'updateJobStatus'])->name('updateJobStatus');
+      Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
+      Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
     });
 
     Route::prefix('admin')->group(function () {
