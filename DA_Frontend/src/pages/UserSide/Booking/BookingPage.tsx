@@ -12,6 +12,22 @@ const BookingPage = (props: any) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const getUserFromSession = () => {
+    const storedUser = sessionStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  };
+  
+ 
+  useEffect(() => {
+    // Fetch user from session when the component mounts
+    const userFromSession = getUserFromSession();
+  
+    if (userFromSession) {
+      setPhone(userFromSession.phone);
+      setEmail(userFromSession.email);
+      setName(userFromSession.name);
+    }
+  }, []);
 
   const maintenanceIntervals = {
     'Bảo dưỡng cấp 1': [5000, 15000, 25000],
