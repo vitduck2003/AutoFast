@@ -128,6 +128,7 @@ const BookingPage = (props: any) => {
     service_item_other: [];
   };
 
+  
   const [formData, setFormData] = useState<FormData>({
     full_name: "",
     phone: "",
@@ -141,6 +142,40 @@ const BookingPage = (props: any) => {
     mileage: "",
     service_item_other: [],
   });
+
+  useEffect(() => {
+    if (phone!="") {
+      // Phone number exists, set data for name, phone, and email
+      setFormData({
+        full_name: name, // Replace with actual data
+        phone: phone,
+        email:email, // Replace with actual data
+        note: "",
+        model_car: "",
+        status: "Chờ xác nhận",
+        target_date: "",
+        target_time: "",
+        service: "",
+        mileage: "",
+        service_item_other: [],
+      });
+    } else {
+      // No phone number, set initial empty form data
+      setFormData({
+        full_name: "", // Replace with actual data
+        phone: "",
+        email: "", // Replace with actual data
+        note: "",
+        model_car: "",
+        status: "Chờ xác nhận",
+        target_date: "",
+        target_time: "",
+        service: "",
+        mileage: "",
+        service_item_other: [],
+      });
+    }
+  }, [phone]);
   const handleCheckboxChange = (e, item) => {
     // Phần select action để cộng vào cả tổng giá tiền
     if (e.target.checked) {
@@ -273,6 +308,7 @@ const BookingPage = (props: any) => {
               </label>
               {name ==""? 
               <input
+<<<<<<< Updated upstream
                 onChange={handleInputChange}
                 name="full_name"
                 type="text"
@@ -287,6 +323,16 @@ const BookingPage = (props: any) => {
             value={name} 
             disabled
           />}
+=======
+  onChange={name === "" ? handleInputChange : undefined}
+  name="full_name"
+  type="text"
+  className="form-control"
+  placeholder="Nhập họ và tên"
+  value={name}
+  disabled={name !== ""}
+/>
+>>>>>>> Stashed changes
               {formErrors.full_name && (
                 <p style={{ color: "red" }}>{formErrors.full_name}</p>
               )}
@@ -295,7 +341,11 @@ const BookingPage = (props: any) => {
         Số điện thoại *
       </label>
    
+<<<<<<< Updated upstream
       {phone ==""? <input
+=======
+      {phone ===""? <input
+>>>>>>> Stashed changes
         onChange={handleInputChange}
         name="phone"
         type="text" // Sửa type thành "text" thay vì "string"
@@ -314,6 +364,7 @@ const BookingPage = (props: any) => {
               {formErrors.phone && (
                 <p style={{ color: "red" }}>{formErrors.phone}</p>
               )}
+<<<<<<< Updated upstream
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Email *
               </label>
@@ -334,6 +385,20 @@ const BookingPage = (props: any) => {
             value={email} 
             disabled
           />}
+=======
+            <label style={{ marginTop: "20px" }} htmlFor="">
+  Email *
+</label>
+<input
+  onChange={handleInputChange}
+  name="email"
+  type="string"
+  className="form-control"
+  placeholder="vidu@gmail.com"
+  value={email === "" ? undefined : email}
+  disabled={email !== ""}
+/>
+>>>>>>> Stashed changes
               {formErrors.email && (
                 <p style={{ color: "red" }}>{formErrors.email}</p>
               )}
@@ -544,8 +609,8 @@ const BookingPage = (props: any) => {
                               <b>{item.item_name}</b>
                             </td>
                             <td style={{ padding: "8px" }}>
-                              <b>{item.price}</b>
-                            </td>
+  <b>{item.price.toLocaleString("vi-VN")} VND</b>
+</td>
                           </tr>
                         ))}
                       </tbody>
@@ -622,8 +687,8 @@ const BookingPage = (props: any) => {
                                     {item.item_name}
                                   </td>
                                   <td style={{ padding: "8px" }}>
-                                    {item.price}
-                                  </td>
+  <b>{item.price.toLocaleString("vi-VN")} VND</b>
+</td>
                                 </tr>
                               ))}
                           </tbody>
@@ -641,8 +706,8 @@ const BookingPage = (props: any) => {
                   </label>{" "}
                 </b>
                 <span style={{ color: "red" }}>
-                  {totalCost + selectedTotal} VND
-                </span>
+  {(totalCost + selectedTotal).toLocaleString("vn-VN")} VND
+</span>
               </div>
             </div>
           </div>
