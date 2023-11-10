@@ -454,7 +454,7 @@
                             <span>Quản lí tin tức</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="tables-basic.html">Thêm tin tức</a></li>
+                            <li><a href="{{route('new.index')}}">tất cả tin tức</a></li>
                         </ul>
                     </li>
                     </ul>

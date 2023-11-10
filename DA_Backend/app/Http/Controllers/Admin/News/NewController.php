@@ -17,6 +17,7 @@ class NewController extends Controller
     public function index()
     {
         $data = News::all();
+        return view('admin\pages\news\index',compact('data'));
     }
 
     /**
@@ -26,7 +27,7 @@ class NewController extends Controller
      */
     public function create()
     {
-        return view('admin\pages\ServiceItems\create');
+        return view('admin\pages\news\create');
     }
 
     /**
@@ -43,6 +44,7 @@ class NewController extends Controller
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
         }
         $model->save();
+        return redirect()->route('new.index');
     }
 
     /**
@@ -64,7 +66,7 @@ class NewController extends Controller
      */
     public function edit(News $new)
     {
-        return   view('admin\pages\ServiceItems\edit',compact('new'));
+        return   view('admin\pages\news\edit',compact('new'));
     }
 
     /**
@@ -82,6 +84,7 @@ class NewController extends Controller
            $model->image = Storage::disk('public')->put('images',$request->file('image'));  
         }
         $model->save();
+        return back();
     }
 
     /**
@@ -92,7 +95,11 @@ class NewController extends Controller
      */
     public function destroy($id)
     {
-        News::destroy($id);
+        $new = News::find($id);
+        if(!empty($new->image)){
+            Storage::disk('public')->delete($new->image);
+        }
+        $new->delete($id);
         return back();
     }
 }
