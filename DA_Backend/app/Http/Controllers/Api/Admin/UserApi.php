@@ -61,6 +61,13 @@ class UserApi extends Controller
     public function show($id)
     {
         //
+        $users = User::findOrFail($id);
+        if($users){
+            return response()->json($users, 200);
+        }else{
+            return response()->json('Không tìm thấy người dùng này!',40);
+        }
+
     }
 
     /**

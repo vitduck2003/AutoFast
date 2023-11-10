@@ -17,7 +17,9 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::all();
-        return view('admin\pages\services\index',compact('data'));
+
+        return   view('admin\pages\services\index',compact('data'));
+        
     }
 
     /**
@@ -97,9 +99,13 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-        Service::destroy($service);
+        $ser = Service::find($id);
+        if(!empty($ser->image_service)){
+            Storage::disk('public')->delete($seritem->image);
+        }
+        $ser->delete($id);
         return back();
     }
 }

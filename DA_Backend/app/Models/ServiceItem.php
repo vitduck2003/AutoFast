@@ -11,6 +11,6 @@ class ServiceItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_service','item_name','time_done','price'
+        'id_service','item_name','time_done','price','image'
     ];
 }

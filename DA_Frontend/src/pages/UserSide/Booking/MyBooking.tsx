@@ -8,11 +8,17 @@ import type { ColumnType, ColumnsType } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
 
 const MyBooking = () => {
-  const [phone, setPhone] = useState("");
+  const [user_id, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
+  const [showBill, setShowBill] = useState(false);
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
+  const [selectedStatus, setSelectedStatus] = useState("Tất cả");
+  const [user,setUser]=useState();
+  const [selectBooking,setSelectedBooking]=useState();
+  const [selectJob,setSelectJob]=useState();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -30,24 +36,56 @@ const MyBooking = () => {
       setFilteredBookings(filtered);
     }
   }, [bookings, searchTerm]);
-
+  const toggleBill = (booking) => {
+    setShowBill(!showBill);
+    setSelectedBooking(booking);
+  
+    // console.log(booking);
+  
+  };
+  const showJob = (jobs) => {
+    setSelectJob(jobs);
+    console.log(selectJob);
+  };
+  // Define the selected booking status
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       try {
         const userData = JSON.parse(storedUser);
         setPhone(userData.phone);
+        setUser(userData);
       } catch (e) {
         console.error("Failed to parse user data from session storage", e);
       }
     }
   }, []);
-console.log(bookings);
+  // console.log(user)
   useEffect(() => {
-    if (phone) {
+    if (selectedStatus === "Tất cả") {
+      // Show all bookings
+      setFilteredBookings(bookings);
+    } else {
+      // Filter bookings based on the selected status
+      const filtered = bookings.filter((booking) =>
+        booking.booking.status === selectedStatus
+      );
+      setFilteredBookings(filtered);
+    }
+  }, [bookings, selectedStatus]);
+
+  // Handle filter button click
+  const handleFilter = (status) => {
+    setSelectedStatus(status);
+  };
+
+// console.log(bookings);
+  useEffect(() => {
+    if (user_id) {
       const postPhone = async () => {
         try {
-          const response = await instance.post("/client/bookings", { phone });
+          const response = await instance.post("/client/bookings", { user_id });
+          console.log(response);
           const allBookings = response.data.flatMap(innerArray => innerArray);
           setBookings(allBookings);
         } catch (error) {
@@ -57,7 +95,7 @@ console.log(bookings);
 
       postPhone();
     }
-  }, [phone]);
+  }, [user_id]);
 
   const containerStyle = {
     display: 'flex',
@@ -68,11 +106,7 @@ console.log(bookings);
     textAlign: 'center', // centers the text inside the container
   };
   
-  // const tableStyle = {
-  //   width: '80%', // sets the width of the table to 80% of its container
-  //   borderCollapse: 'collapse',
-  //   marginTop: '20px',
-  // };
+
   
   const thStyle = {
     backgroundColor: '#f0f0f0',
@@ -95,11 +129,12 @@ console.log(bookings);
   };
   const goToPayment = (booking) => {
     // Extract the required properties from the booking object
-    const bookingId = booking.booking.id;
-    const serviceName = "Thanh toán " + booking.booking.service_name; // Prefixing service_name
+    const bookingId = booking.id;
+    const serviceName = "Thanh toán " + booking.service_name; // Prefixing service_name
   
     // Calculate the total price by summing the item_price of each job
-    const totalPrice = booking.jobs.reduce((sum, job) => sum + job.item_price, 0);
+    const totalPrice = booking.total_amount;
+    console.log(booking);
   
     // Construct the data object with the properties you want to send
     const postData = {
@@ -120,7 +155,7 @@ console.log(bookings);
         }
       })
       .catch(error => {
-        console.error("Lỗi con mẹ r:", error);
+        console.error("Lỗi r:", error);
       });
   };
   
@@ -158,7 +193,7 @@ console.log(bookings);
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     width: '90%', // You can adjust the width as needed
     maxWidth: '600px', // You can adjust the maximum width as needed
-    maxHeight: '90vh',
+    maxHeight: '60vh',
     overflowY: 'auto',
   };
 
@@ -172,6 +207,31 @@ console.log(bookings);
     borderBottom: '1px solid #eeeeee',
     paddingBottom: '10px',
     marginBottom: '20px',
+  };
+  const billContainerStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#ffffff',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    width: '90%', // You can adjust the width as needed
+    maxWidth: '600px', // You can adjust the maximum width as needed
+    maxHeight: '60vh',
+    overflowY: 'auto',
+    zIndex: 1051, // Make sure it's on top of the backdrop
+  };
+  
+  const closeBillButtonStyle = {
+    backgroundColor: '#007bff', // Bootstrap primary color
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    float: 'right', // If you want it to be on the right
   };
   
   // Styles for the modal body
@@ -209,24 +269,95 @@ console.log(bookings);
     <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
             onChange={handleSearch}/>
   </div>
+  <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
+  {bookingStatuses.map((status) => (
+    <Button
+      key={status}
+      style={{
+        backgroundColor: selectedStatus === status ? "#007bff" : "gray",
+        color: "white",
+        border: "none",
+        // padding: "10px 20px",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+      onClick={() => handleFilter(status)}
+    >
+      {status}
+    </Button>
+  ))}
+</div>
+  
   
 </div>
 
-      {/* {selectedJobDetails && (
-            <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px', borderRadius: '5px', position: 'absolute', background: 'white', zIndex: '10' }}>
-              <h2>Các công việc</h2>
-              <ul style={ulStyle}>
-                {selectedJobDetails.map((job) => (
-                  <li key={job.id} style={liStyle}>
-                    {job.item_name} - {job.item_price}
-                  </li>
-                ))}
-              </ul>
-              <button style={buttonStyle} onClick={closeJobDetails}>
-                Đóng
-              </button>
-            </div>
-          )} */}
+{showBill && (
+   <div style={backdropStyle}>
+  <div style={billContainerStyle}>
+    {/* Add your bill content here */}
+    <h2>Hóa đơn</h2>
+    <hr />
+    
+    <div style={{ textAlign: 'left' }}>
+      <b>Thông tin khách hàng</b>
+  <div >
+    <b>Tên khách hàng : </b>{user.name}
+  </div>
+  <div >
+    <b>Số điện thoại  : </b>{user.phone}
+  </div>
+  <div >
+    <b>Email : </b>{user.email}
+  </div>
+  <div >
+  <b>Loại xe : </b>{selectBooking.model_car}
+</div>
+  <div >
+    <b>Số km đã đi : </b>{selectBooking.mileage} Km
+  </div>
+  <div>
+  <b>Tất cả dịch vụ </b>
+  <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px', marginBottom: '10px' }}>
+    <thead>
+      <tr>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>ID</th>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>Name</th>
+        <th style={{ backgroundColor: '#f2f2f2', padding: '8px', textAlign: 'left' }}>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {selectJob.map((job) => (
+        <tr key={job.id} style={{ border: '1px solid #ddd' }}>
+          <td style={{ padding: '8px' }}>{job.id}</td>
+          <td style={{ padding: '8px' }}>{job.item_name}</td>
+          <td style={{ padding: '8px' }}>{job.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colSpan="2" style={{ textAlign: 'right', fontWeight: 'bold' }}>Total:</td>
+        <td style={{ padding: '8px', fontWeight: 'bold' }}>
+          {selectJob.reduce((total, job) => total + job.price, 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+ 
+</div>
+
+    {/* You can display the bill details here */}
+    <Button onClick={()=>goToPayment(selectBooking)}>
+      Thanh toán 
+
+    </Button>
+    <button style={closeBillButtonStyle} onClick={toggleBill}>
+      Đóng hóa đơn
+    </button>
+  </div>
+  </div>
+)}
           {selectedJobDetails && (
     <div style={backdropStyle}>
       <div style={modalContentStyle}>
@@ -306,12 +437,17 @@ console.log(bookings);
                     Xem chi tiết
                     </Button>
 
-               
-                  {booking.booking.status === 'Đã hoàn thành' && (
-                   <Button name="redirect" style={buttonStyle} onClick={() => goToPayment(booking)}>
-                   Thanh toán
-                   </Button>
-                  )}
+                    {booking.booking.status === 'Đã hoàn thành' && (
+  <Button
+  name="redirect"
+  style={buttonStyle}
+  onClick={() =>{ toggleBill( booking.booking)
+    showJob(booking.jobs)
+  }}
+>
+  Xem hóa đơn
+</Button>
+)}
                 </td>
              
               </tr>

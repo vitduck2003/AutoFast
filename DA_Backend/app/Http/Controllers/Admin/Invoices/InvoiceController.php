@@ -32,8 +32,9 @@ class InvoiceController extends Controller
     public function detailInvoice($id){
         $invoice = DB::table('bill')
         ->join('booking', 'booking.id', '=', 'bill.id_booking')
-        ->join('jobs', 'jobs.id', '=', 'booking.id')
-        ->select('bill.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'bill.created_at', 'bill.total_amount', 'booking.id as id_booking', 'bill.created_at')
+        ->join('jobs', 'jobs.id_booking', '=', 'booking.id')
+        ->select('bill.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'bill.created_at', 'bill.total_amount', 'booking.id as id_booking', 'bill.created_at', 'bill.status_payment')
+        ->where('bill.id', '=', $id)
         ->first();
         $jobs = DB::table('jobs')
         ->select('item_name', 'item_price')
@@ -41,5 +42,12 @@ class InvoiceController extends Controller
         ->get();
         // dd($invoice, $jobs);
         return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs'));
+    }
+    public function updatePayment($id){
+        $status = "Đã thanh toán";
+        DB::table('bill')
+        ->where('id', $id)
+        ->update(['status_payment' => $status]);   
+        return redirect()->back()->with('success','Cập nhật thành công');
     }
 }

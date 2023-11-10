@@ -17,7 +17,9 @@ class StaffJobController extends Controller
         $staff = Staff::where('id_user', $user->id)->first();
         $jobs = DB::table('jobs')
             ->where('id_staff', $staff->id)
-            ->where('status', 'LIKE', 'Đang làm')
+            ->where('status', 'LIKE', 'Đang chờ nhận việc')
+            ->orWhere('status', 'LIKE', 'Đang làm')
+            ->orWhere('status', 'LIKE', 'Đã xong')
             ->get();
         
         foreach ($jobs as $job) {
@@ -32,7 +34,18 @@ class StaffJobController extends Controller
         }
         return view('staff/pages/jobs/currentJob', compact('jobs'));
     }
-    public function updateJobStatus(Request $request)
+    public function startJob(Request $request)
+{
+    $jobId = $request->input('job_id');
+    $job = Job::find($jobId);
+
+    if ($job) {
+        $job->status = 'Đang làm';
+        $job->save();
+    }
+    return redirect()->back();
+}
+    public function jobDone(Request $request)
 {
     $jobId = $request->input('job_id');
     $job = Job::find($jobId);

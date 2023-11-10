@@ -386,93 +386,93 @@ background: #0d45a5;
                 <ul class="metismenu list-unstyled" id="side-menu">
                     <li class="menu-title">Menu</li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="waves-effect">
-                            <i class="bx bx-home-circle"></i><span
-                                class="badge badge-pill badge-info float-right">03</span>
-                            <span>Dashboards</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="index.html">Default</a></li>
-                            <li><a href="dashboard-saas.html">Saas</a></li>
-                            <li><a href="dashboard-crypto.html">Crypto</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Đặt lịch</li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-file"></i>
-                            <span>Quản lí đặt lịch</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ url('admin/bookings') }}">Lịch đang chờ xác nhận</a></li>
-                            <li><a href="{{ url('admin/bookings-wait') }}">Lịch đang chờ khách đến</a></li>
-                            <li><a href="{{ url('admin/bookings-complete') }}">Lịch đã hoàn thành</a></li>
-                            <li><a href="{{ url('admin/bookings-cancel') }}">Lịch đã hủy</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Công việc</li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-file"></i>
-                            <span>Quản lí công việc</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ url('admin/jobs') }}">Công việc đang làm</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Hóa đơn</li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-file"></i>
-                            <span>Quản lí hóa đơn</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Dịch vụ</li>
-                    <li>
-                        <a class="has-arrow waves-effect">
-                            <i class="bx bx-tone"></i>
-                            <span>Quản lí phụ tùng</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
-                            <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Tài khoản</li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-list-ul"></i>
-                            <span>Quản lí tài khoản</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                <i class="bx bx-home-circle"></i><span
+                                    class="badge badge-pill badge-info float-right">03</span>
+                                <span>Dashboards</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="index.html">Default</a></li>
+                                <li><a href="dashboard-saas.html">Saas</a></li>
+                                <li><a href="dashboard-crypto.html">Crypto</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Đặt lịch</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Quản lí đặt lịch</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/bookings') }}">Lịch đang chờ xác nhận</a></li>
+                                <li><a href="{{ url('admin/bookings-wait') }}">Lịch đang chờ khách đến</a></li>
+                                <li><a href="{{ url('admin/bookings-complete') }}">Lịch đã hoàn thành</a></li>
+                                <li><a href="{{ url('admin/bookings-cancel') }}">Lịch đã hủy</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Công việc</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Quản lí công việc</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/jobs') }}">Công việc đang làm</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Hóa đơn</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Quản lí hóa đơn</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Dịch vụ</li>
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="bx bx-tone"></i>
+                                <span>Quản lí phụ tùng</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
+                                <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Tài khoản</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Quản lí tài khoản</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{ url('admin/user') }}">Danh sách tài khoản</a></li>
                         </ul>
-                    </li>
-                    <li class="menu-title">Nhân viên</li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-list-ul"></i>
-                            <span>Quản lí nhân viên</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
-                        </ul>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Tin tức</li>
+                        </li>
+                        <li class="menu-title">Nhân viên</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Quản lí nhân viên</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
+                            </ul>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Tin tức</li>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-list-ul"></i>
                             <span>Quản lí tin tức</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="tables-basic.html">Thêm tin tức</a></li>
+                            <li><a href="{{route('new.index')}}">tất cả tin tức</a></li>
                         </ul>
                     </li>
                 </ul>

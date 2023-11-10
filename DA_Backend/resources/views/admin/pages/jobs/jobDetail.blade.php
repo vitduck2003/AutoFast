@@ -42,6 +42,12 @@
                                                 @endforeach
                                             </select>
                                     </td>
+                                    @if($job->status == "Chưa phân công việc")
+                                    <td class="text-danger">{{ $job->status }}</td>
+                                    @endif
+                                    @if($job->status == "Đang chờ nhận việc")
+                                    <td class="text-danger">{{ $job->status }}</td>
+                                    @endif
                                     @if($job->status == "Đang làm")
                                     <td class="text-danger">{{ $job->status }}</td>
                                     @endif
