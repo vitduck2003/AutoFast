@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
 
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
+ 
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -127,6 +129,8 @@ const BookingPage = (props: any) => {
     mileage: string;
     service_item_other: [];
   };
+
+  
 
   
   const [formData, setFormData] = useState<FormData>({
@@ -306,24 +310,9 @@ const BookingPage = (props: any) => {
               <label style={{ marginTop: "20px" }} htmlFor="">
                 Họ và tên *
               </label>
-              {name ==""? 
+             
               <input
-<<<<<<< Updated upstream
-                onChange={handleInputChange}
-                name="full_name"
-                type="text"
-                className="form-control"
-                placeholder="Nhập họ và tên"
-              />  :  <input
-              onChange={handleInputChange}
-              name="full_name"
-              type="text"
-              className="form-control"
-              placeholder="Nhập họ và tên"
-            value={name} 
-            disabled
-          />}
-=======
+
   onChange={name === "" ? handleInputChange : undefined}
   name="full_name"
   type="text"
@@ -332,7 +321,7 @@ const BookingPage = (props: any) => {
   value={name}
   disabled={name !== ""}
 />
->>>>>>> Stashed changes
+
               {formErrors.full_name && (
                 <p style={{ color: "red" }}>{formErrors.full_name}</p>
               )}
@@ -341,11 +330,9 @@ const BookingPage = (props: any) => {
         Số điện thoại *
       </label>
    
-<<<<<<< Updated upstream
-      {phone ==""? <input
-=======
+
       {phone ===""? <input
->>>>>>> Stashed changes
+
         onChange={handleInputChange}
         name="phone"
         type="text" // Sửa type thành "text" thay vì "string"
@@ -364,29 +351,8 @@ const BookingPage = (props: any) => {
               {formErrors.phone && (
                 <p style={{ color: "red" }}>{formErrors.phone}</p>
               )}
-<<<<<<< Updated upstream
-              <label style={{ marginTop: "20px" }} htmlFor="">
-                Email *
-              </label>
-            
-                {email ==""? 
-                 <input
-                 onChange={handleInputChange}
-                 name="email"
-                 type="string"
-                 className="form-control"
-                 placeholder="vidu@gmail.com"
-               />  :  <input
-               onChange={handleInputChange}
-               name="email"
-               type="string"
-               className="form-control"
-               placeholder="vidu@gmail.com"
-            value={email} 
-            disabled
-          />}
-=======
-            <label style={{ marginTop: "20px" }} htmlFor="">
+<label>
+         
   Email *
 </label>
 <input
@@ -398,7 +364,7 @@ const BookingPage = (props: any) => {
   value={email === "" ? undefined : email}
   disabled={email !== ""}
 />
->>>>>>> Stashed changes
+
               {formErrors.email && (
                 <p style={{ color: "red" }}>{formErrors.email}</p>
               )}
