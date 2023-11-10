@@ -393,11 +393,22 @@
                         <li>
                             <a class="has-arrow waves-effect">
                                 <i class="bx bx-tone"></i>
+                                <span>Quản lí dịch vụ</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('service.index') }}">Tất cả dịch vụ</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="menu-title">Phụ Tùng</li>
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="bx bx-tone"></i>
                                 <span>Quản lí phụ tùng</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
-                                <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
+                                <li><a href="{{ route('serviceitem.index') }}">Tất cả phụ tùng</a></li>
+                               
                             </ul>
                         </li>
                         <li class="menu-title">Tài khoản</li>
@@ -421,6 +432,19 @@
                             </ul>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Mã giảm giá</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Quản lí mã giảm giá</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/coupon') }}">Danh sách mã</a></li>
+                            </ul>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/coupon/form/add') }}">Thêm mã giảm giá</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Tin tức</li>

@@ -38,7 +38,7 @@ class NewController extends Controller
     public function store(Request $request)
     {
         $model = new News();
-        $model->fillable($request->except('image'));
+        $model->fill($request->except('image'));
         if($request->has('image')){
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
         }
@@ -77,7 +77,7 @@ class NewController extends Controller
     public function update(Request $request, $id)
     {
         $model = News::findOrFail($id);
-        $model->fillable($request->except('image'));
+        $model->fill($request->except('image'));
         if($request->has('image')){
            $model->image = Storage::disk('public')->put('images',$request->file('image'));  
         }

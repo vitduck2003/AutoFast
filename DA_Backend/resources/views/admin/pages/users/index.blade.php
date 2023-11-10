@@ -9,8 +9,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead class="thead">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
                         <tr>
                             <th scope="col">STT</th>
                             <th scope="col">Họ và Tên</th>

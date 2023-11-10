@@ -12,8 +12,8 @@ use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
-
 use App\Http\Controllers\Admin\Services\ServiceController;
+use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*
@@ -95,3 +95,12 @@ Route::get('/staff/home', function () {
       Route::get('user', [AccountController::class, 'index'])->name('user.index');
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
+
+  Route::prefix('admin')->group(function () {
+    Route::get('coupon', [CouponController::class, 'list_coupon'])->name('coupon.list_coupon');
+    Route::get('unset-coupon', [CouponController::class, 'unset_coupon'])->name('coupon.unset_coupon');
+    Route::get('delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
+    Route::get('coupon/form/add', [CouponController::class, 'insert_coupon'])->name('coupon.form.add');
+    Route::post('coupon', [CouponController::class, 'create_coupon'])->name('coupon.create_coupon');
+  });
+
