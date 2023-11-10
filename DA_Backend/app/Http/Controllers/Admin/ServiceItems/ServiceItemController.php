@@ -120,7 +120,11 @@ class ServiceItemController extends Controller
      */
     public function destroy($id)
     {
-        ServiceItem::destroy($id);
+        $seritem = ServiceItem::find($id);
+        if(!empty($seritem->image)){
+            Storage::disk('public')->delete($seritem->image);
+        }
+        $seritem->delete($id);
         return back();
     }
 }

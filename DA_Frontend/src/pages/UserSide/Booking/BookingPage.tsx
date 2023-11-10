@@ -12,6 +12,7 @@ const BookingPage = (props: any) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [user_id,setUserId]=useState("");
   const getUserFromSession = () => {
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
@@ -26,6 +27,7 @@ const BookingPage = (props: any) => {
       setPhone(userFromSession.phone);
       setEmail(userFromSession.email);
       setName(userFromSession.name);
+      setUserId(userFromSession.id)
     }
   }, []);
 
@@ -35,6 +37,7 @@ const BookingPage = (props: any) => {
     'Bảo dưỡng cấp 3': [20000, 60000, 100000],
     'Bảo dưỡng cấp 4': [40000, 80000, 120000],
   };
+  console.log(user_id)
   const styles = {
     table: {
       width: '100%',
@@ -122,6 +125,7 @@ const BookingPage = (props: any) => {
 
 
   type FormData = {
+    user_id:string,
     full_name: string;
     phone: string;
     email: string;
@@ -139,6 +143,7 @@ const BookingPage = (props: any) => {
 
   
   const [formData, setFormData] = useState<FormData>({
+    user_id: "",
     full_name: "",
     phone: "",
     email: "",
@@ -156,6 +161,7 @@ const BookingPage = (props: any) => {
     if (phone!="") {
       // Phone number exists, set data for name, phone, and email
       setFormData({
+        user_id: user_id,
         full_name: name, // Replace with actual data
         phone: phone,
         email:email, // Replace with actual data
@@ -171,6 +177,7 @@ const BookingPage = (props: any) => {
     } else {
       // No phone number, set initial empty form data
       setFormData({
+        user_id: "",
         full_name: "", // Replace with actual data
         phone: "",
         email: "", // Replace with actual data

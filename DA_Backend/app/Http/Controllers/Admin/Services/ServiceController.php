@@ -18,8 +18,8 @@ class ServiceController extends Controller
     {
         $data = Service::all();
 
-
-        $exit = Storage::fgJSsk31QuRRKW2XD61eAFMTyp0A6yXZgYaZ9wQ2disk('public')->has('images\.jpg');
+        return   view('admin\pages\services\index',compact('data'));
+        
     }
 
     /**
@@ -101,7 +101,11 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        Service::destroy($id);
+        $ser = Service::find($id);
+        if(!empty($ser->image_service)){
+            Storage::disk('public')->delete($seritem->image);
+        }
+        $ser->delete($id);
         return back();
     }
 }

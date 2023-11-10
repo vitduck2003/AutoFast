@@ -28,7 +28,7 @@
                                 <td>{{ $row->item_name }}</td>
                                 <td>{{ $row->time_done }}</td>
                                 <td>{{ $row->price }}</td>
-                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image)}}" alt="{{asset('/storage/images/'.$row->image)}}"></td>
+                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image)}}" alt=""></td>
                            
                            
                           
