@@ -132,4 +132,5 @@ Route::get('/payment-return', [PaymentApi::class, 'paymentReturn'])->name('payme
 
 // search
 Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
+Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview');
 

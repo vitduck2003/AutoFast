@@ -42,15 +42,14 @@
                 <label class="col-md-3 col-sm-4 control-label">Ảnh đại diện</label>
                 <div class="col-md-9 col-sm-8">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" style="text-align:center">
                             <img id="anh_preview"
                                 src="{{$staff->avatar?Storage::url($staff->avatar):'https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg'}}"
                                 alt="your avatar"
-                                style="max-width: 200px; height:100px; margin-bottom: 10px;border-radius:70%"
+                                style="width: 200px; height:200px; margin-bottom: 10px;border-radius:70%"
                                 class="img-fluid" />
                             <input type="file" name="avatar" accept="avatar/*"
                                 class="form-control-file @error('avatar') is-invalid @enderror" id="cmt_anh">
-                            <label for="cmt_truoc">Ảnh đại diện</label><br />
                         </div>
                     </div>
                 </div>
