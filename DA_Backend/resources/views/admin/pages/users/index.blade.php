@@ -103,7 +103,7 @@ $(document).ready(function() {
         var userId = button.data('user-id'); // Lấy từ User ID từ thuộc tính data-user-id
         // Tạo yêu cầu GET tới API để lấy dữ liệu user từ server
 
-        const arrayField = ['name', 'phone', 'email', 'description']
+        const arrayField = ['name', 'phone', 'email', 'address', 'description']
 
         $.get('/api/users/' + userId, function(data) {
 
