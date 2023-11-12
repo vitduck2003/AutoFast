@@ -20,20 +20,14 @@ class AccountController extends Controller
     public function index()
     {
 
-        $users = User::orderBy('role_id', 'desc')->get();
+        $users = User::orderBy('role_id', 'asc')->get();
         return view('admin.pages.users.index', compact('users'));
     }
 
     public function remove($id)
     {
-        $model=User::find($id);
-        if(!empty($model->avatar)){
-            $imgPath = str_replace('storage/', 'public/', $model->avatar);
-            Storage::delete($imgPath);
-        }
+        $model = User::find($id);
         $model->delete();
         return redirect(route('user.index'));
     }
-    
 }
-

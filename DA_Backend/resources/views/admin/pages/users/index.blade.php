@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th scope="col">STT</th>
@@ -49,9 +49,12 @@
                                     data-target="#exampleModal" data-user-id="{{ $user->id }}">
                                     Chi tiết
                                 </button>
-                                <button type="button" class="btn btn-sm btn-danger"><a
-                                        style="color:white;  text-decoration: none;"
-                                        href="{{ route('user.remove', ['id'=>$user->id]) }}"> Xóa</a></button>
+                                <a class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Bạn có chắc là muốn xóa tài khoản này ko?')"
+                                    href="{{ route('user.remove', ['id'=>$user->id] )}}" class="active styling-edit"
+                                    ui-toggle-class="">
+                                    Xóa
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -75,23 +78,13 @@
             </div>
             <div class="modal-body">
                 <!-- Nội dung chi tiết tài khoản -->
-                <p><strong>Họ tên:</strong> {{ $user->name }} <span id="name"></span></p>
-                <p><strong>Email:</strong> {{ $user->email }} <span id="email"></span></p>
-                <p><strong>Số điện thoại:</strong> {{ $user->phone }} <span id="phone"></span></p>
-                <p><strong>Địa chỉ:</strong>
-                    @if($user->address == '')
-                    Chưa cập nhật
-                    @else
-                    {{ $user->address }}
-                    @endif
+                <p><strong>Họ tên: </strong> <span id="name"></span></p>
+                <p><strong>Email: </strong><span id="email"></span></p>
+                <p><strong>Số điện thoại: </strong> <span id="phone"></span></p>
+                <p><strong>Địa chỉ: </strong>
                     <span id="address"></span>
                 </p>
-                <p><strong>Mô tả:</strong>
-                    @if($user->description == '')
-                    Chưa cập nhật
-                    @else
-                    {{ $user->description }}
-                    @endif
+                <p><strong>Mô tả: </strong>
                     <span id="description"></span>
                 </p>
             </div>
@@ -108,19 +101,28 @@ $(document).ready(function() {
     $('#exampleModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
         var userId = button.data('user-id'); // Lấy từ User ID từ thuộc tính data-user-id
-        console.log(userId);
         // Tạo yêu cầu GET tới API để lấy dữ liệu user từ server
+
+        const arrayField = ['name', 'phone', 'email', 'description']
+
         $.get('/api/users/' + userId, function(data) {
+
+
+                arrayField.forEach(function(key, index) {
+
+
+                    $('#' + key).html(data[key])
+                })
                 // Thiết lập dữ liệu user vào modal
-                var modal = $('#exampleModal');
-                modal.find('.modal-title').text('Chi tiết tài khoản');
-                // Đổ dữ liệu user vào các phần tử trong modal
-                modal.find('#name').text(data[0].name);
-                modal.find('#phone').text(data[0].phone);
-                modal.find('#email').text(data[0].email);
-                modal.find('#description').text(data[0].description);
-                modal.find('#password').text(data[0].password);
-                modal.find('#role_id').text(data[0].role_id);
+                // var modal = $('#exampleModal');
+                // modal.find('.modal-title').text('Chi tiết tài khoản');
+                // // Đổ dữ liệu user vào các phần tử trong modal
+                // modal.find('#name').text(data[0].name);
+                // modal.find('#phone').text(data[0].phone);
+                // modal.find('#email').text(data[0].email);
+                // modal.find('#description').text(data[0].description);
+                // modal.find('#password').text(data[0].password);
+                // modal.find('#role_id').text(data[0].role_id);
 
                 // Update the data-user-id attribute for Confirm and Cancel buttons
                 modal.find('.btn-confirm').attr('data-user-id', userId);
