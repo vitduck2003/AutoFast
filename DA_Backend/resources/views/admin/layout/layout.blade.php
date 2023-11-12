@@ -3,7 +3,7 @@
     name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"> <meta content="Themesbrand"
     name="author"> <!-- App favicon -->
-<link rel="shortcut icon" href={{ asset('assets\images\favicon.ico') }}> <link rel="shortcut icon" href="{{
+<link rel="shortcut icon" href="{{asset('assets\images\favicon.ico')}}"> <link rel="shortcut icon" href="{{
     asset('assets/images/favicon.ico') }}"> <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
         alpha/css/bootstrap.css"
         rel="stylesheet">
@@ -104,19 +104,19 @@ background: #0d45a5;
         <div class="navbar-brand-box">
             <a href="index.html" class="logo logo-dark">
             <span class="logo-sm">
-            <img {{ asset('assets\images\logo.svg') }} alt="" height="22">
+            <img src="{{ asset('assets\images\logo.svg') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-            <img src={{ asset('assets\images\logo-dark.png') }} alt="" height="17">
+            <img src="{{ asset('assets\images\logo-dark.png') }} "alt="" height="17">
             </span>
             </a>
 
             <a href="index.html" class="logo logo-light">
             <span class="logo-sm">
-            <img src={{ asset('assets\images\logo-light.svg') }} alt="" height="22">
+            <img src="{{asset('assets\images\logo-light.svg')}}" alt="" height="22">
             </span>
             <span class="logo-lg">
-            <img src={{ asset('assets\images\logo-light.png') }} alt="" height="19">
+            <img src="{{ asset('assets\images\logo-light.png') }}" alt="" height="19">
             </span>
             </a>
         </div>
@@ -164,32 +164,32 @@ background: #0d45a5;
 
     <div class="dropdown d-inline-block">
     <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false"> <img class="" src={{ asset('assets\images\flags\us.jpg') }} alt="Header Language"
+        aria-expanded="false"> <img class="" src="{{ asset('assets\images\flags\us.jpg') }}" alt="Header Language"
         height="16">
     </button>
     <div class="dropdown-menu dropdown-menu-right">
 
         <!-- item-->
         <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src={{ asset('assets\images\flags\spain.jpg') }} alt="user-image" class="mr-1" height="12"> <span
+            <img src="{{ asset('assets\images\flags\spain.jpg') }}" alt="user-image" class="mr-1" height="12"> <span
                 class="align-middle">Spanish</span>
         </a>
 
         <!-- item-->
         <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src={{ asset('assets\images\flags\germany.jpg') }} alt="user-image" class="mr-1" height="12"> <span
+            <img src="{{ asset('assets\images\flags\germany.jpg') }} "alt="user-image" class="mr-1" height="12"> <span
                 class="align-middle">German</span>
         </a>
 
         <!-- item-->
         <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src={{ asset('assets\images\flags\italy.jpg') }} alt="user-image" class="mr-1" height="12"> <span
+            <img src="{{ asset('assets\images\flags\italy.jpg') }}" alt="user-image" class="mr-1" height="12"> <span
                 class="align-middle">Italian</span>
         </a>
 
         <!-- item-->
         <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <img src={{ asset('assets\images\flags\russia.jpg') }} alt="user-image" class="mr-1" height="12"> <span
+            <img src="{{ asset('assets\images\flags\russia.jpg') }}" alt="user-image" class="mr-1" height="12"> <span
                 class="align-middle">Russian</span>
         </a>
     </div>
@@ -205,19 +205,19 @@ background: #0d45a5;
                 <div class="row no-gutters">
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\github.png') }} alt="Github">
+                            <img src="{{ asset('assets\images\brands\github.png') }}" alt="Github">
                             <span>GitHub</span>
                         </a>
                     </div>
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\bitbucket.png') }} alt="bitbucket">
+                            <img src="{{ asset('assets\images\brands\bitbucket.png') }}" alt="bitbucket">
                             <span>Bitbucket</span>
                         </a>
                     </div>
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\dribbble.png') }} alt="dribbble">
+                            <img src="{{ asset('assets\images\brands\dribbble.png') }} "alt="dribbble">
                             <span>Dribbble</span>
                         </a>
                     </div>
@@ -226,19 +226,19 @@ background: #0d45a5;
                 <div class="row no-gutters">
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\dropbox.png') }} alt="dropbox">
+                            <img src="{{ asset('assets\images\brands\dropbox.png') }}" alt="dropbox">
                             <span>Dropbox</span>
                         </a>
                     </div>
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\mail_chimp.png') }} alt="mail_chimp">
+                            <img src="{{ asset('assets\images\brands\mail_chimp.png') }}" alt="mail_chimp">
                             <span>Mail Chimp</span>
                         </a>
                     </div>
                     <div class="col">
                         <a class="dropdown-icon-item" href="#">
-                            <img src={{ asset('assets\images\brands\slack.png') }} alt="slack">
+                            <img src="{{ asset('assets\images\brands\slack.png') }}" alt="slack">
                             <span>Slack</span>
                         </a>
                     </div>
@@ -346,22 +346,25 @@ background: #0d45a5;
     <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="rounded-circle header-profile-user" src={{ asset('assets\images\users\avatar-1.jpg') }}
+            <img class="rounded-circle header-profile-user" src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}"
                 alt="Header Avatar">
-            <span class="d-none d-xl-inline-block ml-1">Henry</span>
+            <span class="d-none d-xl-inline-block ml-1">{{session('user_name')}}</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
-            <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle mr-1"></i> My Wallet</a>
-            <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i
-                    class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Lock
-                screen</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#"><i
-                    class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+            <a class="dropdown-item" href="{{ route('profile-admin', ['id' => session('id')]) }}"><i
+                                    class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="bx bx-wallet font-size-16 align-middle mr-1"></i> My Wallet</a>
+                            <a class="dropdown-item d-block" href="#"><span
+                                    class="badge badge-success float-right">11</span><i
+                                    class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
+                            <a class="dropdown-item" href="{{ url('admin/profile/show/password', ['id' => session('id')]) }}"><i
+                                    class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Change password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}"><i
+                                    class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>Logout</a>
         </div>
     </div>
 

@@ -22,9 +22,10 @@ class LoginController extends Controller
         $user = User::where('phone', $credentials['phone'])->first();
         if ($user && Hash::check($credentials['password'], $user->password)) {
             if ($user->role_id == 1) {
+                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar,]);
                 return redirect()->route('admin.home');
             } elseif ($user->role_id == 2) {
-                session(['user_name' => $user->name, 'phone' => $user->phone]);
+                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone]);
                 return redirect()->to('staff/home');
             }
         }

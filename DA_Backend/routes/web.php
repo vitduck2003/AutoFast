@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Profile\ProfileAdminController;
+use App\Http\Controllers\Staff\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Client\ProfileApi;
@@ -85,12 +87,29 @@ Route::get('/staff/home', function () {
         Route::resource('serviceitem', ServiceItemController::class);
         Route::resource('new',NewController::class);
 
+
+        Route::prefix('profile')->group(function () {
+          Route::get('/{id}',[ProfileAdminController::class, 'showDetail'])->name('profile-admin');
+          Route::put('/update/{id}',[ProfileAdminController::class, 'update'])->name('update-admin');
+          Route::put('/update/avatar/{id}',[ProfileAdminController::class, 'updateAvatar'])->name('update-avatar-admin');
+          Route::get('/show/password/{id}',[ProfileAdminController::class, 'showPass'])->name('show-password-admin');
+          Route::put('/update/password/{id}',[ProfileAdminController::class, 'changePassword'])->name('change-password-admin');
+    
+    
+        });
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
       Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
       Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
       Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
+      Route::get('profile/{id}',[ProfileController::class, 'showDetail'])->name('profile');
+      Route::put('profile/update/{id}',[ProfileController::class, 'update'])->name('update-profile');
+      Route::put('profile/update/avatar/{id}',[ProfileController::class, 'updateAvatar'])->name('update-avatar');
+      Route::get('profile/show/password/{id}',[ProfileController::class, 'showPass'])->name('show-password');
+      Route::put('profile/update/password/{id}',[ProfileController::class, 'changePassword'])->name('change-password');
+
+
     });
 
     Route::prefix('admin')->group(function () {
@@ -105,4 +124,5 @@ Route::get('/staff/home', function () {
     Route::get('coupon/form/add', [CouponController::class, 'insert_coupon'])->name('coupon.form.add');
     Route::post('coupon', [CouponController::class, 'create_coupon'])->name('coupon.create_coupon');
   });
+
 

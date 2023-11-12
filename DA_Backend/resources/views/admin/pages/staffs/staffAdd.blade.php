@@ -11,21 +11,23 @@
         <strong>{{ Session::get('success') }}</strong>
     @endif
     <div class="row">
-    <div class="col-6">
+        <div class="col-6">
             <div class="staff">
                 <div class="staff-body">
                     <h4 class="staff-title">Đây là thêm nhân viên</h4>
                     <form action="{{ route('staff.create') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <dic class="mb-3">
-                <div class="form-group">
-                    <label class="form-label" for="">Tìm người dùng</label>
-                    <input type="text" name="id_user" class="form-control" id="input-search-ajax" placeholder="Tìm người dùng">
-                    <ul  id="searchResults" class="search-ajax-result position-absolute " style="background-color:#FFFFCC ; padding:10px ; width:80%">                  
-                    </ul>             
-                </div>
-            </dic>
-
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label class="form-label" for="">Tìm người dùng</label>
+                                <input type="text" class="form-control" id="input-search-ajax"
+                                    placeholder="Tìm người dùng">
+                                <input type="hidden" id="input-search-result" name="id_user">
+                                <ul id="searchResults" class="search-ajax-result position-absolute "
+                                    style="background-color:#FFFFCC ; padding:10px ; width:80%">
+                                </ul>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Lương</label>
                             <input type="text" name="salary" class="form-control">
@@ -41,13 +43,13 @@
                         <button class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
-            </div> 
-            <!-- end col -->
-            
-        </div> 
-        <div class="preview-user col-6">
-                
             </div>
+            <!-- end col -->
+
+        </div>
+        <div class="preview-user col-6">
+
+        </div>
         <!-- end row -->
     </div>
 @section('script')
@@ -81,56 +83,64 @@
         });
     </script>
     <script>
-        const result =document.getElementById('input-search-ajax');
-        function handleItemClick(id) {
-            $('#input-search-ajax').val(id);   
+        const result = document.getElementById('input-search-ajax');
+
+        function handleItemClick(userID, userName) {
+            $('#input-search-ajax').val(userName);
+            $('#input-search-result').val(userID);
             $('.search-ajax-result').hide();
-            var _userID=id;
-            var _url="{{url('storage')}}"
-                $.ajax({
-                url:'http://127.0.0.1:8000/api/preview/'+_userID,
-                type:'GET',
-                success:function (res) {
-                    var _html='';
-                        _html+= '<div class="user-item" style="text-align:center">'
-                        _html+=  ' <img src="'+_url+'/'+res.avatar+'" style=" margin-right:10px;width: 200px; height: 200px;border-radius: 99%;" alt="">'
-                        _html+=  '<h4>Name: '+res.name+'</h4>'
-                        _html+=  '<p>Email: '+res.email+'</p>'
-                        _html+=  '<span>SĐT: '+res.phone+'</span>'
-                        _html+= '</div>'
+            var _userID = userID;
+            var _url = "{{ url('storage') }}";
+
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/preview/' + _userID,
+                type: 'GET',
+                success: function(res) {
+                    var _html = '';
+                    _html += '<div class="user-item" style="text-align:center">';
+                    _html += '<img src="' + _url + '/' + res.avatar +
+                        '" style="margin-right:10px;width: 200px; height: 200px;border-radius: 99%;" alt="">';
+                    _html += '<h4>Name: ' + res.name + '</h4>';
+                    _html += '<p>Email: ' + res.email + '</p>';
+                    _html += '<span>SĐT: ' + res.phone + '</span>';
+                    _html += '</div>';
+
                     $('.preview-user').show(300);
-                    $('.preview-user').html(_html);   
+                    $('.preview-user').html(_html);
                 }
-                
-            })
-    }
+            });
+        }
+
         $('.search-ajax-result').hide();
         $('#input-search-ajax').keyup(function() {
             var _text = $(this).val();
-            var _url="{{url('storage')}}"
-            if(_text !=''){ 
+            var _url = "{{ url('storage') }}";
+
+            if (_text != '') {
                 $.ajax({
-                url:'http://127.0.0.1:8000/api/search?key='+_text,
-                type:'GET',
-                success:function (res) {
-                    var _html='';
-                    for(var user of res){
-                        _html+= '<li class="user-item" key="'+user.id+'"  style="margin:10px;list-style: none;padding: 0;"  onclick="handleItemClick(' + user.id +')">'
-                        _html+=  ' <img src="'+_url+'/'+user.avatar+'" style=" margin-right:10px;width: 60px; height: 60px;border-radius: 99%;" alt="">'
-                        _html+=  '<span>'+user.name+'</span>'
-                        _html+= '</li>'   
+                    url: 'http://127.0.0.1:8000/api/search?key=' + _text,
+                    type: 'GET',
+                    success: function(res) {
+                        var _html = '';
+                        for (var user of res) {
+                            _html +=
+                                '<li class="user-item" style="margin:10px;list-style: none;padding: 0;" onclick="handleItemClick(' +
+                                user.id + ', \'' + user.name + '\')    ">';
+                            _html += '<img src="' + _url + '/' + user.avatar +
+                                '" style="margin-right:10px;width: 60px; height: 60px;border-radius: 99%;" alt="">';
+                            _html += '<span>' + user.name + '</span>';
+                            _html += '</li>';
+                        }
+
+                        $('.search-ajax-result').show(300);
+                        $('.search-ajax-result').html(_html);
                     }
-                    $('.search-ajax-result').show(300);
-                    $('.search-ajax-result').html(_html);   
-                }
-            })
-            }else{
+                });
+            } else {
                 $('.search-ajax-result').html('');
                 $('.search-ajax-result').hide();
             }
-        })
+        });
     </script>
 @endsection
 @endsection
-
-

@@ -102,11 +102,10 @@ class StaffController extends Controller
             ];
             
             $validatedData = $request->validate($rules, $messages);
-            // dd($validatedData['address'],$validatedData['description']);
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
             if ($request->hasFile('avatar')) {
-                Storage::delete('/avatar/'.$request->file('avatar'));
+                Storage::delete($user->avatar);
                 $path = $request->file('avatar')->store('public/avatar');
                 $user->avatar = $path;
             }
