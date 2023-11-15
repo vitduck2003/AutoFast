@@ -165,9 +165,9 @@ const AccountSetting = () => {
     if (sessionData) {
       const userData = JSON.parse(sessionData);
 
-      getUser(userData.id);
-    }
-  }, []);
+            getUser(userData.id);
+        }
+	}, []);
   return (
     <div>
       <div className="container mt-5">

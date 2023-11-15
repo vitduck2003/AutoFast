@@ -347,7 +347,7 @@ background: #0d45a5;
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <img class="rounded-circle header-profile-user" src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}"
-                alt="Header Avatar">
+                >
             <span class="d-none d-xl-inline-block ml-1">{{session('user_name')}}</span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>

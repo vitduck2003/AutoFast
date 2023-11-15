@@ -41,7 +41,6 @@ class ProfileAdminController extends Controller
             $validatedData = $request->validate($rules, $messages);
             $user = DB::table('users')
                 ->where('id', '=', $id);
-                
             $user->update($validatedData);
             return redirect()->route('profile-admin', ['id' => $id])->with('message', 'Sửa thành công');
 
@@ -55,7 +54,7 @@ class ProfileAdminController extends Controller
             $user->avatar = $path;
 
             $user->save();
-            session('user_name')===$user->name;
+            session('avatar')===$user->avatar;
 
         }
         return redirect()->route('profile-admin', ['id' => $id])->with('message', 'Sửa ảnh thành công');
