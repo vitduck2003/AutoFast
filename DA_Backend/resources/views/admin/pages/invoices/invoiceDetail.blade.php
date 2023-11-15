@@ -89,6 +89,9 @@
                         <div class="float-right">
                             <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-1"><i class="fa fa-print"></i></a>
                             <a href="#" class="btn btn-primary w-md waves-effect waves-light">Send</a>
+                           @if($invoice->status_payment == "Chưa thanh toán")
+                           <a href="{{ route('status.payment', ['id'=> $invoice->id]) }}" class="btn btn-success w-md waves-effect waves-light">Đã thanh toán</a>
+                           @endif
                         </div>
                     </div>
                 </div>

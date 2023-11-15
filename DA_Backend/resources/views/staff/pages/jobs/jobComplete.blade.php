@@ -30,7 +30,7 @@
                                 <td>{{ $job->target_time_done }}</td>
                                 <td class="text-success">{{ $job->status }}</td>
                                 <td>
-                                    <form method="post" action="{{ route('updateJobStatus') }}">
+                                    <form method="post" action="{{ route('staff.job.start') }}">
                                         @csrf
                                         <input type="hidden" name="job_id" value="{{ $job->id }}">
                                         <button type="submit" class="btn btn-danger">Làm lại</button>

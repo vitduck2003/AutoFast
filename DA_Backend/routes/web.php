@@ -124,3 +124,7 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
     Route::get('coupon/form/add', [CouponController::class, 'insert_coupon'])->name('coupon.form.add');
     Route::post('coupon', [CouponController::class, 'create_coupon'])->name('coupon.create_coupon');
   });
+
+  Route::get('sendbasicemail',[MailController::class,'basic_email']);
+  Route::get('sendhtmlemail',[MailController::class,'html_email']);
+  Route::get('sendattachmentemail',[MailController::class,'attachment_email']);

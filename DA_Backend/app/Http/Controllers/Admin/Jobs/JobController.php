@@ -49,21 +49,30 @@ class JobController extends Controller
     {
         $status = 'Đang làm';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Lịch đã bắt đầu làm');
     }
     public function confirmComplete($id){
         $status = 'Đã hoàn thành';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Xác nhận lịch đã hoàn thành');
     }
     public function saveStaff(Request $request)
     {
         $jobId = $request->input('job_id');
         $staffId = $request->input('staff_id');
-        
         DB::table('jobs')
             ->where('id', '=', $jobId)
             ->update(['id_staff' => $staffId]);
-            return redirect()->back();
+            $checkstaff = DB::table('jobs') ->where('id', '=', $jobId)->first();
+            if($checkstaff->id_staff == NULL){
+                $status = "Chưa phân công việc";
+            }
+            else{
+                $status = "Đang chờ nhận việc";
+            }
+            DB::table('jobs')
+            ->where('id', '=', $jobId)
+            ->update(['status' => $status]);
+            return redirect()->back()->with('message','Cập nhật nhân viên thành công');
     }
 }

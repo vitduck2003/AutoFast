@@ -102,11 +102,10 @@ class StaffController extends Controller
             ];
             
             $validatedData = $request->validate($rules, $messages);
-            // dd($validatedData['address'],$validatedData['description']);
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
             if ($request->hasFile('avatar')) {
-                Storage::delete('/public/'.$request->file('avatar'));
+                Storage::delete($user->avatar);
                 $path = $request->file('avatar')->store('public/avatar');
                 $user->avatar = $path;
             }
@@ -127,7 +126,14 @@ class StaffController extends Controller
         }
     }
     public function searchUser(){
-        $user = User::search()->get();
+        $user = User::search()->where('role_id','=',3)->get();
         return $user;
+    }
+    public function preview($id){
+        $users =DB::table('users')->where([
+            ['role_id', '=', 3],
+            ['id', '=', $id]
+        ])->first();
+        return response()->json($users);
     }
 }

@@ -79,7 +79,7 @@
         </div>
         <hr>
         <div class="text-center">
-          <a href="index.html" class="btn btn-primary">Quay lại trang chủ</a>
+             <a href="http://localhost:5173/" class="btn btn-primary">Quay lại trang chủ</a>
         </div>
       </div>
     </div>

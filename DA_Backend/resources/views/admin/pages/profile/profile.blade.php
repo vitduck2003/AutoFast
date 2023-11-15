@@ -12,61 +12,61 @@
         <div class="col-6">
             <div class="staff">
                 <div class="staff-body">
-                    <h4 class="staff-title">Đây là sửa nhân viên</h4>
-                    <form action="{{ route('staff-update', ['id' => $staff->id]) }}" method="POST" style="display: inline;"
+                    <h4 class="staff-title">Thông tin người dùng</h4>
+                    <form action="{{ route('update-admin', ['id' => $profile->id]) }}" method="POST" style="display: inline;"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
                             <label class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" name="name" value="{{ $staff->name }}">
+                            <input type="text" class="form-control" name="name" value="{{ $profile->name }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ $staff->email }}">
+                            <input type="email" class="form-control" name="email" value="{{ $profile->email }}">
                         </div>
                         <div class="mb-3"> <label class="form-label">Số điện thoại</label> <input type="text"
-                                class="form-control" name="phone" value="{{ $staff->phone }}">
+                                class="form-control" name="phone" value="{{ $profile->phone }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" value="{{ $staff->address }}">
+                            <input type="text" class="form-control" name="address" value="{{ $profile->address }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Mô tả</label>
-                            <input type="text" class="form-control" name="description" value="{{ $staff->description }}">
+                            <input type="text" class="form-control" name="description"
+                                value="{{ $profile->description }}">
                         </div>
-                        <div class="mb-3"> <label class="form-label">Lương</label>
-                            <input type="text" class="form-control" name="salary" value="{{ $staff->salary }}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" name="status" value="{{ $staff->status }}">
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 col-sm-4 control-label">Ảnh đại diện</label>
-                            <div class="col-md-9 col-sm-8">
-                                <div class="row">
-                                    <div class="col-xs-6" style="text-align:center">
-                                        <img id="anh_preview"
-                                            src="{{ $staff->avatar ? Storage::url($staff->avatar) : 'https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg' }}"
-                                            alt="your avatar"
-                                            style="width: 200px; height:200px; margin-bottom: 10px;border-radius:70%"
-                                            class="img-fluid" />
-                                        <input type="file" name="avatar" accept="avatar/*"
-                                            class="form-control-file @error('avatar') is-invalid @enderror" id="cmt_anh">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <button type="submit" class="btn btn-primary">Sửa</button>
 
                     </form>
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
+        <div class="row form-group ">
+            <label class="col-md-3 col-sm-4 control-label">Ảnh đại diện</label>
+            <div class="col-md-9 col-sm-8">
+                <div class="row">
+                    <div class="col-xs-6" style="text-align:center">
+                        <form action="{{ route('update-avatar-admin', ['id' => $profile->id]) }}" method="POST"
+                            style="display: inline;" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <img id="anh_preview"
+                                src="{{ $profile->avatar ? Storage::url($profile->avatar) : 'https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg' }}"
+                                alt="your avatar" style="width: 200px; height:200px; margin-bottom: 10px;border-radius:70%"
+                                class="img-fluid" />
+                            <input type="file" name="avatar" accept="avatar/*"
+                                class="form-control-file @error('avatar') is-invalid @enderror" id="cmt_anh">
+                            <button class="btn btn-success">Sửa ảnh</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-@section('script')
+    @section('script')
     <!-- Thư viện jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha384-Ds0X1ls0BU+X+gX3sVY7qclY4mBeO8z9qL6ahxRc0QY2yYJ5TQI1vzN0LYW8X0Hh" crossorigin="anonymous">
@@ -105,5 +105,6 @@
             toastr.success("{{ session('message') }}");
         @endif
     </script>
+
 @endsection
 @endsection

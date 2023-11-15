@@ -1,7 +1,7 @@
 import instance from "./instance";
 import { INews } from "../interface/news";
 const getNews = () => {
-  return instance.get("/news");
+  return instance.get("/client/news");
 };
 
 const addNews = (news: INews) => {

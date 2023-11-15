@@ -1,8 +1,17 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const NewsPage = ( props: any) => {
+  
+  const news = props.news
+  console.log(news);
+  
   return (
+
+    
+
     <div>
+      
      <div className="container-fluid page-header mb-5 p-0">
         <div className="container-fluid page-header-inner py-5">
           <div className="container text-center">
@@ -32,23 +41,23 @@ const NewsPage = ( props: any) => {
        <div className="row">
         <div className="col-md-8">
             <h2>Tin Tức Mới Nhất</h2>
-            <div className="card mb-3">
-            <img style={{width: '200px'}} src="https://placehold.it/800x400" alt="..." />
-                <div className="card-body">
-                    <h5 className="card-title">Tiêu đề bài viết 1</h5>
-                    <p className="card-text">Nội dung mô tả ngắn gọn về bài viết 1.</p>
-                    <a href="#" className="btn btn-primary">Đọc thêm</a>
-                </div>
+            {props.news.map((item) => {
+    return (
+      
+                <div className="card mb-3" key={item.id}>
+            <img style={{ width: '200px' }} src={item.image} alt="..." />
+            <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+                <p className="card-text">{item.des}</p>
+                <Link  to={`/news/${item.id}`}>Doc them</Link>
             </div>
+        </div>
+              
+        
+    );
+})}
 
-            <div className="card mb-3">
-            <img style={{width: '200px'}} src="https://placehold.it/800x400" alt="..." />
-                <div className="card-body">
-                    <h5 className="card-title">Tiêu đề bài viết 2</h5>
-                    <p className="card-text">Nội dung mô tả ngắn gọn về bài viết 2.</p>
-                    <a href="#" className="btn btn-primary">Đọc thêm</a>
-                </div>
-            </div>
+           
         </div>
      
       </div>

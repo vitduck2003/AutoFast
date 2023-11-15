@@ -55,8 +55,8 @@ class User extends Authenticatable
     }
     public function scopeSearch($query){
         if(request('key')){
-            $keys=request($query);
-            $query=$query->where('name','like','%'.$keys.'%');
+            $key=request('key');
+            $query=$query->where('name','like','%'.$key.'%');
         }
         return $query;
     }

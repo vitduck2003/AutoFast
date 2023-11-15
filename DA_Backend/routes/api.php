@@ -137,4 +137,5 @@ Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser'
 
 // search
 Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
+Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview');
 
