@@ -121,6 +121,11 @@ Route::prefix('client')->group(function () {
         Route::put('update/{id}', [ProfileApi::class, 'update']);
         Route::post('update/avatar/{id}', [ProfileApi::class, 'uploadAvatar']);
     });
+    //staff api
+    Route::prefix('staff')->group(function () {
+        // lay du lieu service http://127.0.0.1:8000/api/client/service
+        Route::get('/', [StaffController::class, 'showClient']);
+    });
 });
 Route::get('/demo', function () {
     return response()->json('da vao dc');

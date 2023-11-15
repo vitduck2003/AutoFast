@@ -54,16 +54,17 @@ class StaffController extends Controller
             ->first();
         return view('admin/pages/staffs/staffEdit', compact('staff'));
     }
-    public function formAdd(){
-        $users = User::all()->where('role_id', '=',3);
-        return view('admin/pages/staffs/staffAdd',compact('users'));
+    public function formAdd()
+    {
+        $users = User::all()->where('role_id', '=', 3);
+        return view('admin/pages/staffs/staffAdd', compact('users'));
     }
     public function create(Request $request)
     {
         $keyword = $request->input('keyword');
         $results = User::where('name', 'LIKE', "%$keyword%")
-        ->orWhere('email', 'LIKE', "%$keyword%")
-        ->get();
+            ->orWhere('email', 'LIKE', "%$keyword%")
+            ->get();
         if ($request->isMethod('POST')) {
             $validatedData = $request->validate([
                 'salary' => 'required|integer',
@@ -74,7 +75,7 @@ class StaffController extends Controller
             User::where('id', $validatedData['id_user'])->update(['role_id' => 2]);
             $staff = Staff::create($validatedData);
             if ($staff) {
-                return redirect()->route('staff')->with('message','Thêm thành công');
+                return redirect()->route('staff')->with('message', 'Thêm thành công');
             }
         }
     }
@@ -100,7 +101,7 @@ class StaffController extends Controller
                 'salary.required' => 'Vui lòng nhập Lương.',
                 'status.required' => 'Vui lòng nhập trạng thái.',
             ];
-            
+
             $validatedData = $request->validate($rules, $messages);
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
@@ -109,12 +110,12 @@ class StaffController extends Controller
                 $path = $request->file('avatar')->store('public/avatar');
                 $user->avatar = $path;
             }
-            $staff->update( $validatedData);
+            $staff->update($validatedData);
             $user->update($validatedData);
-            return redirect()->route('showDetail', ['id'=> $staff->id])->with('message','Sửa thành công');
+            return redirect()->route('showDetail', ['id' => $staff->id])->with('message', 'Sửa thành công');
 
+        }
     }
-}
     public function remove($id)
     {
         $staff = Staff::findOrFail($id);
@@ -122,18 +123,38 @@ class StaffController extends Controller
         $staff->delete();
         $user->delete();
         if ($staff && $user) {
-            return redirect()->route('staff')->with('message','Xóa thành công');
+            return redirect()->route('staff')->with('message', 'Xóa thành công');
         }
     }
-    public function searchUser(){
-        $user = User::search()->where('role_id','=',3)->get();
+    public function searchUser()
+    {
+        $user = User::search()->where('role_id', '=', 3)->get();
         return $user;
     }
-    public function preview($id){
-        $users =DB::table('users')->where([
+    public function preview($id)
+    {
+        $users = DB::table('users')->where([
             ['role_id', '=', 3],
             ['id', '=', $id]
         ])->first();
         return response()->json($users);
+    }
+    public function showClient()
+    {
+        $staff = DB::table('users')
+            ->join('staff', 'users.id', '=', 'staff.id_user')
+            ->where('users.role_id', '=', 2)
+            ->select(
+                'staff.*',
+                'users.name',
+                'users.password',
+                'users.avatar',
+                'users.email',
+                'users.phone',
+                'users.description',
+                'users.address'
+            )
+            ->first();
+        return response()->json($staff);
     }
 }

@@ -125,10 +125,6 @@ const AccountSetting = () => {
             getUser(userData.id);
         }
 	}, []);
-
-    if(avatar==''){
-        return null
-    }
   return (
     <div>
       <div className="container mt-5">
