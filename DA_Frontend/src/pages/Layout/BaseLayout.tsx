@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const BaseLayout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName,setUserName] =useState(); //
+  const [img,setImg]=useState(); //
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   // Kiểm tra Session Storage khi trang được tải
   useEffect(() => {
@@ -13,6 +14,7 @@ const BaseLayout = () => {
     if (sessionData) {
       // Session Storage tồn tại, người dùng đã đăng nhập
       const userData = JSON.parse(sessionData); // Parse the JSON string into an object
+    setImg(userData);
      setUserName( userData.name)
       setIsLoggedIn(true);
     }
@@ -80,7 +82,7 @@ const BaseLayout = () => {
             style={userTextStyle}
             onClick={toggleDropdown}
           >
-            Xin chào, {userName}
+            Xin chào,<img src={img}/>  {userName}
           </small>
           <div style={dropdownContentStyle}>
           

@@ -43,19 +43,19 @@ class BookingController extends Controller
     {
         $status = 'Đang đợi khách đến';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Xác nhận lịch thành công');
     }
     public function restore($id)
     {
         $status = 'Chờ xác nhận';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Khôi phục lịch thành công');
     }
     public function revoke($id)
     {
         $status = 'Đã được hủy';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('error','Hủy lịch thành công');
     }
     public function bookingWait()
     {
