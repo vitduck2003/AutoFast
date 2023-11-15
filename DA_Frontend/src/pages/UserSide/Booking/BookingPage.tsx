@@ -231,22 +231,7 @@ const BookingPage = (props: any) => {
       const kmValue = parseInt(value, 10);
       let recommendedServiceId = null;
 
-      if (kmValue < 1000) {
-        setKmMessage("Xe của bạn chưa cần bảo dưỡng");
-      } else if (kmValue >= 1000 && kmValue < 5000) {
-        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 1");
-        recommendedServiceId = 1;
-      } else if (kmValue > 5000 && kmValue < 10000) {
-        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 2");
-        recommendedServiceId = 2;
-      } else if (kmValue >= 10000 && kmValue <= 15000) {
-        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
-        recommendedServiceId = 3;
-      } else if (kmValue > 15000) {
-        setKmMessage("Khuyến nghị bảo dưỡng cấp độ 3");
-        recommendedServiceId = 3;
-      }
-
+ 
       if (recommendedServiceId !== null) {
         const chosenService = dataService.find(
           (item) => item.id === recommendedServiceId
@@ -338,7 +323,7 @@ const BookingPage = (props: any) => {
               </label>
 
              
-              <input
+              {/* <input
 
   onChange={name === "" ? handleInputChange : undefined}
   name="full_name"
@@ -347,8 +332,25 @@ const BookingPage = (props: any) => {
   placeholder="Nhập họ và tên"
   value={name}
   disabled={name !== ""}
-/>
+/> */}
 
+{name ===""? <input
+
+onChange={handleInputChange}
+name="full_name"
+type="text" // Sửa type thành "text" thay vì "string"
+className="form-control"
+placeholder="Nhập họ và tên"
+
+/> :  <input
+onChange={handleInputChange}
+name="phone"
+type="text" // Sửa type thành "text" thay vì "string"
+className="form-control"
+placeholder="Tối thiểu 10 số"
+value={name} 
+disabled
+/>}
 
               {formErrors.full_name && (
                 <p style={{ color: "red" }}>{formErrors.full_name}</p>
