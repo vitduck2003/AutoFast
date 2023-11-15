@@ -28,7 +28,7 @@ class ProfileApi extends Controller
     {
         $profile = Profile::findOrFail($id);
         if ($request->file('avatar')) {
-            Storage::delete('/public/' . $request->file('avatar'));
+            Storage::delete('/public/' . $request->avatar);
             
             $path = $request->file('avatar')->store('public/avatar');
             // $path=$request->image->move(public_path('avatar'), $request->file('avatar'));  

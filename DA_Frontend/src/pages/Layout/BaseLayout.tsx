@@ -14,7 +14,7 @@ const BaseLayout = () => {
     if (sessionData) {
       // Session Storage tồn tại, người dùng đã đăng nhập
       const userData = JSON.parse(sessionData); // Parse the JSON string into an object
-    setImg(userData);
+    setImg(userData.avatar);
      setUserName( userData.name)
       setIsLoggedIn(true);
     }
@@ -33,7 +33,11 @@ const BaseLayout = () => {
     display: 'inline-block',
     cursor: 'pointer',
   };
-
+  const avatarUser = {
+    width:'30px',
+    height:'30px',
+    borderRadius:'99%'
+  }
   const dropdownContentStyle = {
     display: isDropdownVisible ? 'block' : 'none',
     position: 'absolute',
@@ -82,7 +86,10 @@ const BaseLayout = () => {
             style={userTextStyle}
             onClick={toggleDropdown}
           >
-            Xin chào,<img src={img}/>  {userName}
+            Xin chào,<img style={avatarUser} src={
+                      img ? `http://localhost:8000/storage/${img}` : ""
+                    }/>  
+                    {userName}
           </small>
           <div style={dropdownContentStyle}>
           

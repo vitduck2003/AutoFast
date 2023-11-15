@@ -5,7 +5,6 @@ import { getUserById, uploadAvatar, updateProfile } from "../../../api/user";
 const AccountSetting = () => {
   const [avatar, setAvatar] = useState<string>("");
   const [uploadImg, setUploadImg] = useState<string>();
-  // const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -32,8 +31,10 @@ const AccountSetting = () => {
       .catch((error) => console.log(error));
   };
 
+  const user = sessionStorage.getItem("user");
+
   const handleUpdateAvatar = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const input = event.target as HTMLInputElement;
     const sessionData = sessionStorage.getItem("user");
@@ -56,7 +57,7 @@ const AccountSetting = () => {
     mess: string,
     text_color: string,
     bg_color: string,
-    title: string
+    title: string,
   ) => {
     setShowNotification(true);
     api.open({
@@ -85,6 +86,8 @@ const AccountSetting = () => {
     };
 
     if (formData) {
+      console.log(formData.avatar);
+
       await uploadAvatar(user.id, formData)
         .then((res) => {
           if (res.data.message) {
@@ -95,14 +98,19 @@ const AccountSetting = () => {
                     res.data.message,
                     "black",
                     "green",
-                    "Cập Nhật Thành Công"
+                    "Cập Nhật Thành Công",
                   );
+                  getUserById(user.id)
+                    .then((res) => {
+                      sessionStorage.setItem("user", JSON.stringify(res.data));
+                    })
+                    .catch((error) => console.log(error));
                 } else {
                   openNotification(
                     res.data.message,
                     "white",
                     "red",
-                    "Cập Nhật Thất Bại"
+                    "Cập Nhật Thất Bại",
                   );
                 }
               })
@@ -111,7 +119,7 @@ const AccountSetting = () => {
                   error.response.message,
                   "white",
                   "red",
-                  "Cập Nhật Thất Bại"
+                  "Cập Nhật Thất Bại",
                 );
               });
           } else {
@@ -119,7 +127,7 @@ const AccountSetting = () => {
               res.data.message,
               "white",
               "red",
-              "Cập Nhật Avatar Thất Bại"
+              "Cập Nhật Avatar Thất Bại",
             );
           }
         })
@@ -128,7 +136,7 @@ const AccountSetting = () => {
             error.response.message,
             "white",
             "red",
-            "Cập Nhật Avatar Thất Bại"
+            "Cập Nhật Avatar Thất Bại",
           );
         });
     } else {
@@ -139,14 +147,17 @@ const AccountSetting = () => {
               res.data.message,
               "black",
               "green",
-              "Cập Nhật Thành Công"
+              "Cập Nhật Thành Công",
             );
+            if (formData) {
+              user.avatar = formData;
+            }
           } else {
             openNotification(
               res.data.message,
               "white",
               "red",
-              "Cập Nhật Thất Bại"
+              "Cập Nhật Thất Bại",
             );
           }
         })
@@ -155,7 +166,7 @@ const AccountSetting = () => {
             error.response.message,
             "white",
             "red",
-            "Cập Nhật Thất Bại"
+            "Cập Nhật Thất Bại",
           );
         });
     }
@@ -165,9 +176,9 @@ const AccountSetting = () => {
     if (sessionData) {
       const userData = JSON.parse(sessionData);
 
-            getUser(userData.id);
-        }
-	}, []);
+      getUser(userData.id);
+    }
+  }, []);
   return (
     <div>
       <div className="container mt-5">
@@ -187,9 +198,11 @@ const AccountSetting = () => {
                       height: "200px",
                       borderRadius: "99%",
                     }}
-                    src={
-                      avatar ? `http://localhost:8000/storage/${avatar}` : ""
-                    }
+                    src={`${
+                      uploadImg
+                        ? uploadImg
+                        : `http://localhost:8000/storage/${avatar}`
+                    }`}
                     alt="Daniel Adams"
                   />
                   <input
