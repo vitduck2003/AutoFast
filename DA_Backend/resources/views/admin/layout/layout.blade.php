@@ -438,11 +438,22 @@ background: #0d45a5;
                         <li>
                             <a class="has-arrow waves-effect">
                                 <i class="bx bx-tone"></i>
-                                <span>Quản lí phụ tùng</span>
+                                <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
-                                <li><a href="ui-buttons.html">Công việc dịch vụ</a></li>
+                         
+                            </ul>
+                        </li>
+                        <li class="menu-title">Phụ Tùng</li>
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="bx bx-tone"></i>
+                                <span>Quản lí phụ tùng</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('serviceitem.index') }}">Tất cả phụ tùng</a></li>
+                               
                             </ul>
                         </li>
                         <li class="menu-title">Tài khoản</li>
@@ -477,7 +488,9 @@ background: #0d45a5;
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('new.index')}}">tất cả tin tức</a></li>
                         </ul>
-                    </li>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('new.create')}}">them tin tuc</a></li>
+                        </ul>
                 </ul>
             </div>
             <!-- Sidebar -->

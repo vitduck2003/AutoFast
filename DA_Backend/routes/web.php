@@ -47,6 +47,8 @@ Route::get('/staff/home', function () {
     Route::get('/payment-return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
     Route::prefix('admin')->group(function () {
         
+        
+
         Route::get('bookings', [BookingController::class, 'index']);
         Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
         Route::post('/bookings/{id}/revoke', [BookingController::class, 'revoke'])->name('booking.revoke');
@@ -56,7 +58,7 @@ Route::get('/staff/home', function () {
         Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
 
         Route::get('jobs', [JobController::class, 'index']);
-        Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
+Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
         Route::post('job-save-staff',  [JobController::class, 'saveStaff'])->name('save.staff');
 
 
@@ -102,7 +104,7 @@ Route::get('/staff/home', function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
       Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
       Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
-      Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
+Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
       Route::get('profile/{id}',[ProfileController::class, 'showDetail'])->name('profile');
       Route::put('profile/update/{id}',[ProfileController::class, 'update'])->name('update-profile');
       Route::put('profile/update/avatar/{id}',[ProfileController::class, 'updateAvatar'])->name('update-avatar');
@@ -125,4 +127,6 @@ Route::get('/staff/home', function () {
     Route::post('coupon', [CouponController::class, 'create_coupon'])->name('coupon.create_coupon');
   });
 
-
+  Route::get('sendbasicemail',[MailController::class,'basic_email']);
+  Route::get('sendhtmlemail',[MailController::class,'html_email']);
+  Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
