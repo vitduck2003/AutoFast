@@ -49,12 +49,12 @@ class JobController extends Controller
     {
         $status = 'Đang làm';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Lịch đã bắt đầu làm');
     }
     public function confirmComplete($id){
         $status = 'Đã hoàn thành';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back();
+        return redirect()->back()->with('message','Xác nhận lịch đã hoàn thành');
     }
     public function saveStaff(Request $request)
     {
@@ -73,6 +73,6 @@ class JobController extends Controller
             DB::table('jobs')
             ->where('id', '=', $jobId)
             ->update(['status' => $status]);
-            return redirect()->back();
+            return redirect()->back()->with('message','Cập nhật nhân viên thành công');
     }
 }

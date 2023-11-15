@@ -27,7 +27,7 @@ class InvoiceController extends Controller
             'status_payment' => "Chưa thanh toán",
             'created_at' => now()->toDateTimeString()
         ]);
-        return redirect()->back()->with('success','Tạo hóa đơn thành công');
+        return redirect()->back()->with('message','Tạo hóa đơn thành công');
     }
     public function detailInvoice($id){
         $invoice = DB::table('bill')
@@ -48,6 +48,6 @@ class InvoiceController extends Controller
         DB::table('bill')
         ->where('id', $id)
         ->update(['status_payment' => $status]);   
-        return redirect()->back()->with('success','Cập nhật thành công');
+        return redirect()->back()->with('message','Cập nhật thành công');
     }
 }
