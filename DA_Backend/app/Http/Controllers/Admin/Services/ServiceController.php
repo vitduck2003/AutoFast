@@ -102,9 +102,9 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         $ser = Service::find($id);
-        if(!empty($ser->image_service)){
-            Storage::disk('public')->delete($seritem->image);
-        }
+    
+     Storage::disk('public')->delete($ser->image_service);
+       
         $ser->delete($id);
         return back();
     }

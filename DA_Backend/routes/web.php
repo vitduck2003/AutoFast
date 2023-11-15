@@ -47,6 +47,8 @@ Route::get('/staff/home', function () {
     Route::get('/payment-return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
     Route::prefix('admin')->group(function () {
         
+        
+
         Route::get('bookings', [BookingController::class, 'index']);
         Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
         Route::post('/bookings/{id}/revoke', [BookingController::class, 'revoke'])->name('booking.revoke');
