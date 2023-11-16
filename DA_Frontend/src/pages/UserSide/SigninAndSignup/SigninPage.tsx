@@ -73,7 +73,16 @@ const SigninPage = (props) => {
           
         }else if (response.success === false) {
           openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
+        }else if(response.phone_verified ) {
+          openNotification(response.message, "white", "red","Vui lòng xác thực tài khoản");
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/verify/${response.phone_verified}`); // Navigate to the verification page with the phone number
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
         }
+
       })
       .catch((error) => {
         // Handle any errors here if needed
