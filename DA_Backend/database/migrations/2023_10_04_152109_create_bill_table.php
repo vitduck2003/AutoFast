@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_booking');
             $table->float('total_amount');
-            $table->string('status_payment');
+            $table->string('status_payment')->default('Chưa thanh toán');
             $table->timestamps();
             $table->softDeletes();
         });
