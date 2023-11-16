@@ -295,6 +295,7 @@ const BookingPage = (props: any) => {
     if (isFormValid) {
       const updatedFormData = {
         ...formData,
+         TotalPrice: totalCost + selectedTotal,
       };
 
       console.log(updatedFormData);
