@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->table('user_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->date('target_date');
             $table->time('target_time');
             $table->text('note')->nullable();

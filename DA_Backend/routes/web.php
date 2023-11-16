@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Staff\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,9 @@ use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 */
 Route::get('/', function(){
   return view('admin/pages/auth/login');
+});
+Route::get('/register', function(){
+  return view('admin/pages/auth/register');
 });
 Route::get('/admin/home', function () {
        return view('admin.pages.index');
@@ -110,6 +114,7 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
       Route::put('profile/update/avatar/{id}',[ProfileController::class, 'updateAvatar'])->name('update-avatar');
       Route::get('profile/show/password/{id}',[ProfileController::class, 'showPass'])->name('show-password');
       Route::put('profile/update/password/{id}',[ProfileController::class, 'changePassword'])->name('change-password');
+      Route::post('/register', [StaffController::class, 'register'])->name('staff.register');
 
 
     });
