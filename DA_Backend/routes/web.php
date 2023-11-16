@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\News\NewController;
 use App\Http\Controllers\Cilent\PaymentController;
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\staff\StaffController;
+use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Account\AccountController;
