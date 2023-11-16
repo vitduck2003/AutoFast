@@ -1,22 +1,28 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Staff\ProfileController;
+=======
+>>>>>>> 8ac1cf1c46884dc38466b736620720c4bd1a8323
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Api\Client\ProfileApi;
+use App\Http\Controllers\Staff\ProfileController;
 use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\News\NewController;
 use App\Http\Controllers\Cilent\PaymentController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
+use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
-use App\Http\Controllers\Admin\Coupon\CouponController;
+use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*

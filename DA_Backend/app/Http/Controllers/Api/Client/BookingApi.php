@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 
 class BookingApi extends Controller
 {
@@ -21,6 +22,7 @@ class BookingApi extends Controller
             'model_car' => $data['model_car'],
             'mileage' => $data['mileage'],
             'note' => $data['note'] ? $data['note'] : null,
+            'total_price' => $data['TotalPrice'],
             'status' => $data['status'],
         ]);
 
@@ -72,7 +74,14 @@ class BookingApi extends Controller
                         ]);
                     }
                 }
-
+                $content = [
+                    'name' => $data['name'],
+                    'phone' => $data['phone'],
+                    'email' => $data['email'],
+                ];
+                $subject = 'Đặt lịch thành công';
+                $mail = new MailController;
+                $mail->html_email($content, $subject);
                 return response()->json([
                     'message' => 'Đặt lịch thành công', 
                     'success' => true,
@@ -132,7 +141,6 @@ class BookingApi extends Controller
                 "staff_name" =>  $booking->staff_name ? $booking->staff_name : 'Chưa nhận việc'
             ];
         }
-    
         return response()->json([
             array_values($result)
         ]);
