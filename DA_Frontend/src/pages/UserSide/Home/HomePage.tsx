@@ -5,24 +5,14 @@ import carousel2img from "../../../assets/img/carousel-2.png";
 import carouselbg1img from "../../../assets/img/carousel-bg-1.jpg";
 import carouselbg2img from "../../../assets/img/carousel-bg-2.jpg";
 import service1img from "../../../assets/img/service-1.jpg";
-import service2img from "../../../assets/img/service-2.jpg";
-import service3img from "../../../assets/img/service-3.jpg";
-import service4img from "../../../assets/img/service-3.jpg";
-import team1img from "../../../assets/img/team-1.jpg";
-import team2img from "../../../assets/img/team-2.jpg";
-import team3img from "../../../assets/img/team-3.jpg";
-import team4img from "../../../assets/img/team-4.jpg";
-import testimo1img from "../../../assets/img/testimonial-1.jpg";
-import testimo2img from "../../../assets/img/testimonial-2.jpg";
-import testimo3img from "../../../assets/img/testimonial-3.jpg";
-import testimo4img from "../../../assets/img/testimonial-4.jpg";
+
 
 import khabanhimg from "../../../assets/img/ngobakha.jpg";
 import khanhskyimg from "../../../assets/img/khanhsky.jpg";
 import huanhoahongimg from "../../../assets/img/huanhoahong.jpg";
 import traizanimeimg from "../../../assets/img/boizanime.jpg";
 import { useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
 const HomePage = (props: any) => {
