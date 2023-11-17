@@ -78,7 +78,34 @@ const articleStyle = {
   borderRadius: '8px',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
 };
-
+const articleStyle2 = {
+  backgroundColor: '#fff',
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '8px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+};
+const articleStyle3 = {
+  backgroundColor: '#fff',
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '8px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+};
+const articleStyle4 = {
+  backgroundColor: '#fff',
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '8px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+};
+const articleStyle5 = {
+  backgroundColor: '#fff',
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '8px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+};
 const imageStyle = {
   maxWidth: '100%',
   height: 'auto',
