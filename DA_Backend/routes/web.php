@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
+use App\Http\Controllers\Admin\Reviews\ReviewController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Staff\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -135,3 +136,5 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
   Route::get('sendbasicemail',[MailController::class,'basic_email']);
   Route::get('sendhtmlemail',[MailController::class,'html_email']);
   Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
+
+  Route::get('reviews',[ReviewController::class,'index']);
