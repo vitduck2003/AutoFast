@@ -260,7 +260,22 @@ const MyBooking = () => {
     cursor: 'pointer',
   };
   
-  return (
+  return ( 
+    <div>
+    <div className="container-fluid page-header mb-5 p-0" id=''>
+    <div className="container-fluid page-header-inner py-5" id=''>
+        <div className="container text-center" id=''>
+            <h1 className="display-3 text-white mb-3 animated slideInDown" id=''>About Us</h1>
+            <nav aria-label="breadcrumb" id=''>
+                <ol className="breadcrumb justify-content-center text-uppercase" id=''>
+                    <li className="breadcrumb-item" id=''><a href="#">Home</a></li>
+                    <li className="breadcrumb-item" id=''><a href="#">Pages</a></li>
+                    <li className="breadcrumb-item text-white active" aria-current="page" id=''>About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
     <div style={containerStyle}>
       <h1 style={{ textAlign: 'center' }}>Lịch của tôi</h1>
       {/* Phần tìm kiếm và filter */}
@@ -458,6 +473,7 @@ const MyBooking = () => {
       ) : (
         <p>Loading...</p>
       )}
+    </div>
     </div>
   );
 };

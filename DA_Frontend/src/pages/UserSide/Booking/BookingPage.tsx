@@ -326,6 +326,23 @@ const BookingPage = (props: any) => {
   const [selectedTotal, setSelectedTotal] = useState(0);
 
   return (
+   <div>
+    <div className="container-fluid page-header mb-5 p-0" id=''>
+    <div className="container-fluid page-header-inner py-5" id=''>
+        <div className="container text-center" id=''>
+            <h1 className="display-3 text-white mb-3 animated slideInDown" id=''>About Us</h1>
+            <nav aria-label="breadcrumb" id=''>
+                <ol className="breadcrumb justify-content-center text-uppercase" id=''>
+                    <li className="breadcrumb-item" id=''><a href="#">Home</a></li>
+                    <li className="breadcrumb-item" id=''><a href="#">Pages</a></li>
+                    <li className="breadcrumb-item text-white active" aria-current="page" id=''>About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+    
+
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
       <h1 style={{ textAlign: "center", marginTop: "20px" }}>Đặt lịch</h1>
       <form onSubmit={handleSubmit} style={{ marginTop: "80px" }}>
@@ -736,6 +753,7 @@ disabled
           </div>
         </div>
       </form>
+    </div>
     </div>
   );
 };
