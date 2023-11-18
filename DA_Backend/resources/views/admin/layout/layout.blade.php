@@ -463,6 +463,22 @@ background: #0d45a5;
                                
                             </ul>
                         </li>
+                        <li class="menu-title">Khuyến Mại</li>
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="bx bx-tone"></i>
+                                <span>Quản lí khuyến mại</span>
+                            </a>
+
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('coupon.list_coupon') }}">Tất cả mã giảm giá</a></li>
+                               
+                            </ul>
+
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('coupon.form.add') }}">Thêm mã giảm giá</a></li>
+                            </ul>
+                        </li>
                         <li class="menu-title">Tài khoản</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
