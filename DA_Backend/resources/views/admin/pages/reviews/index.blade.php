@@ -21,28 +21,23 @@
                             </tr>
                         </thead>
                         <tbody class="">
-                            @foreach ($reviews as $rv)
-                                :
-                                <tr>
-                                    <td>{{ $rv->id }}</td>
-                                    <td>{{ $rv->name }}</td>
-                                    <td>{{ $rv->service_name }}</td>
-                                    <td>{{ $rv->content }}</td>
-                                    <td> 
-                                        <div id="rateYo"  data-rating="{{ $rv->rating }}"></div>
-                                    </td>
-                                    
-                                    <td>
-                                        <form action="{{ route('staff-delete', ['id' => $rv->id]) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf @method('DELETE') <button type="submit"
-                                                class="btn btn-danger">Xóa</button></form>
-                                        <button type="button" class="btn btn-success"><a
-                                                href="{{ route('showDetail', ['id' => $rv->id]) }}"
-                                                style="color:white">Sửa</a></button>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach ($reviews as $rv)
+                            <tr>
+                                <td>{{ $rv->id }}</td>
+                                <td>{{ $rv->name }}</td>
+                                <td>{{ $rv->service_name }}</td>
+                                <td>{{ $rv->content }}</td>
+                                <td> 
+                                    <div class="rateYo" data-rating="{{ $rv->rating }}"></div>
+                                </td>
+                                <td>
+                                    <form action="{{ route('review-delete', ['id' => $rv->id]) }}" method="POST" style="display: inline;">
+                                        @csrf @method('DELETE') 
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -88,9 +83,8 @@
             </script>
             <script>
                 $(function () {
-                    $("#rateYo").each(function () {
+                    $(".rateYo").each(function () {
                         var rating = $(this).data("rating");
-                        console.log(rating); // Kiểm tra giá trị rating trong console
                         $(this).rateYo({
                             rating: rating,
                             fullStar: true,

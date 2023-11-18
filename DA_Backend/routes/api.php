@@ -101,6 +101,19 @@ Route::prefix('client')->group(function () {
 
         // Get reviews by service
         Route::get('service/{serviceId}', [ReviewController::class, 'showByService']);
+
+        //update review
+        Route::put('update/{id}', [ReviewController::class, 'update']);
+
+        //store review
+        Route::post('/', [ReviewController::class, 'store']);
+
+        //list reviews
+        Route::get('/', [ReviewController::class, 'list']);
+
+
+        //Delete reviews
+        Route::delete('delete/{id}', [ReviewController::class, 'destroy']);
     });
 
     //Service Api

@@ -51,8 +51,6 @@ Route::get('/staff/home', function () {
     // payemnts
     Route::get('/payment-return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
     Route::prefix('admin')->group(function () {
-        
-        
 
         Route::get('bookings', [BookingController::class, 'index']);
         Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
@@ -102,8 +100,11 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
           Route::get('/show/password/{id}',[ProfileAdminController::class, 'showPass'])->name('show-password-admin');
           Route::put('/update/password/{id}',[ProfileAdminController::class, 'changePassword'])->name('change-password-admin');
     
-    
+          
+
         });
+        Route::get('reviews',[ReviewController::class,'index'])->name('review');
+        Route::delete('review/delete/{id}', [ReviewController::class, 'remove'])->name('review-delete');
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
@@ -137,4 +138,3 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
   Route::get('sendhtmlemail',[MailController::class,'html_email']);
   Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
 
-  Route::get('reviews',[ReviewController::class,'index']);
