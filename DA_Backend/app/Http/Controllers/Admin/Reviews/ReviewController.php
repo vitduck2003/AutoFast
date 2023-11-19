@@ -94,4 +94,26 @@ class ReviewController extends Controller
         ]);
         return response()->json(['message' => 'đây là danh sách đánh giá','reviews'=> $reviews], 201);
     }
+    public function showDelete(){
+
+        $reviews = DB::table('review')
+            ->join('users', 'users.id','=','review.user_id')->join('services','services.id','=','review.service_id')
+            ->whereNotNull('review.deleted_at')
+            ->select(
+                'users.name',
+                'review.*',
+                'services.service_name'
+            )
+            ->get();
+        return view('admin/pages/reviews/delete',compact('reviews'));
+    }
+    public function restoteReview($id){
+        $review=DB::table('review')->where('id', $id)->update(['deleted_at'=>NULL]);
+        if($review){
+            return redirect()->route('review-show-delete')->with('message', 'Khôi phục thành công');
+        }else{
+            return redirect()->route('review-show-delete')->with('error', 'Khôi phục không thành công');
+
+        }
+    }
 }

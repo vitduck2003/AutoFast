@@ -104,7 +104,10 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
 
         });
         Route::get('reviews',[ReviewController::class,'index'])->name('review');
+        Route::get('reviews/delete',[ReviewController::class,'showDelete'])->name('review-show-delete');
         Route::delete('review/delete/{id}', [ReviewController::class, 'remove'])->name('review-delete');
+        Route::put('review/restore/{id}', [ReviewController::class, 'restoteReview'])->name('review-restore');
+
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');

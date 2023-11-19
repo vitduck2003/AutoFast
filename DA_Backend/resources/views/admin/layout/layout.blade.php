@@ -497,9 +497,18 @@ background: #0d45a5;
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
-                            </ul>
-                            <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">Đánh giá</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Quản lí Đánh giá</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/reviews') }}">Tất cả đánh giá</a></li>
+                                <li><a href="{{ url('admin/reviews/delete') }}">Tất cả đánh giá đã xóa</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Tin tức</li>
