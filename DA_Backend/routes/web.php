@@ -87,6 +87,9 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
         Route::get('/search', [StaffController::class,'search'])->name('search');
+        Route::get('staff-action', [StaffController::class, 'staffAction'])->name('staff-action');
+        Route::put('staff/retore/{id}', [StaffController::class, 'restore'])->name('staff-restore');
+
 
         Route::resource('service', ServiceController::class);
         Route::resource('serviceitem', ServiceItemController::class);
