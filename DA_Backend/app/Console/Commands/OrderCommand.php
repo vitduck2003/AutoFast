@@ -42,11 +42,11 @@ class OrderCommand extends Command
      */
     public function handle()
     {
-        $user = BookingDetail::whereMonth('created_at', '=', Carbon::now()->month)
+        $users = BookingDetail::whereMonth('created_at', '=', Carbon::now()->month)
             ->whereDay('created_at', '=', now()->day)
             ->get();
-        $user->load('booking');
-        foreach ($user as $item) {
+        $users->load('booking');
+        foreach ($users as $user) {
             $email = $item->booking->email;
             $name = $item->booking->full_name;
             $details = [
