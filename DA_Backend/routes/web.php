@@ -123,7 +123,6 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
 
     Route::prefix('admin')->group(function () {
       Route::get('user', [AccountController::class, 'index'])->name('user.index');
-      
       Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
 
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');

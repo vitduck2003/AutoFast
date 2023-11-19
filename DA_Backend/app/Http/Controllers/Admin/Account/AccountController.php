@@ -16,8 +16,6 @@ use Illuminate\Auth\SessionGuard;
 
 class AccountController extends Controller
 {
-
-    
     public function notifications(){
        $notification = auth()->user()->unreadNotifications->markAsRead();
         return view('admin.layout.layout',[
