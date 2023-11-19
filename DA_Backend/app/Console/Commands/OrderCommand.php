@@ -46,9 +46,9 @@ class OrderCommand extends Command
             ->whereDay('created_at', '=', now()->day)
             ->get();
         $users->load('booking');
-        foreach ($users as $user) {
+        foreach ($users as $item) {
             $email = $item->booking->email;
-            $name = $item->booking->full_name;
+            $name = $item->booking->name;
             $details = [
                 'email' => $email,
                 'name' => $name,
