@@ -32,8 +32,8 @@ use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 */
 Route::get('/', function(){
   return view('admin/pages/auth/login');
-});
-Route::get('/register', function(){
+})->name('auth');
+Route::get('/staff-register', function(){
   return view('admin/pages/auth/register');
 });
 Route::get('/admin/home', function () {

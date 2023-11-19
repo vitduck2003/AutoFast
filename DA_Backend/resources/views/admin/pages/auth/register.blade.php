@@ -20,17 +20,19 @@
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         <!-- App js -->
         <script src="assets/js/plugin.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </head>
 
     <body>
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
                 <div class="row justify-content-center">
@@ -49,52 +51,52 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0"> 
-                                <div>
-                                    <a href="index.html">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
                                 <div class="p-2">
                                     <form action="{{route('staff.register')}}" method="POST" class="needs-validation" novalidate action="index.html">
                                         @csrf
                                         @method('POST')
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>  
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>  
                                             <div class="invalid-feedback">
                                                 Please Enter Email
                                             </div>      
                                         </div>
                 
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter username" required>
+                                            <label for="username" class="form-label">Họ và tên</label>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="Họ và tên" required>
                                             <div class="invalid-feedback">
                                                 Please Enter Username
                                             </div>  
                                         </div>
                                         <div class="mb-3">
-                                            <label for="phone" class="form-label">Phone</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" required>
+                                            <label for="phone" class="form-label">Số điện thoại</label>
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" required>
                                             <div class="invalid-feedback">
                                                 Please Enter phone
                                             </div>  
                                         </div>
                 
                                         <div class="mb-3">
-                                            <label for="userpassword" class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password" required>
+                                            <label for="userpassword" class="form-label">Mật Khẩu</label>
+                                            <input type="password" class="form-control" name="password" id="userpassword" placeholder="Mật khẩu" required>
                                             <div class="invalid-feedback">
                                                 Please Enter Password
                                             </div>       
                                         </div>
-                    
+                                        <div>
+                                            @if ($errors->any())
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li style="color:red">{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </div>
+
                                         <div class="mt-4 d-grid">
-                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Register</button>
+                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Đăng Ký</button>
                                         </div>
                                     </form>
                                 </div>
@@ -119,6 +121,42 @@
         
         <!-- App js -->
         <script src="assets/js/app.js"></script>
+        <script>
+  @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
 
+  @if(Session::has('error'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('error') }}");
+  @endif
+
+  @if(Session::has('info'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.info("{{ session('info') }}");
+  @endif
+
+  @if(Session::has('warning'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.warning("{{ session('warning') }}");
+  @endif
+</script>
     </body>
 </html>

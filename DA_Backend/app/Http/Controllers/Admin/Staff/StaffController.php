@@ -167,6 +167,8 @@ class StaffController extends Controller
                 'email.required' => 'Vui lòng nhập email.',
                 'email.email' => 'Vui lòng nhập đúng định dạng email.',
                 'phone.required' => 'Vui lòng nhập số điện thoại.',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu không nhỏ hơn 6 chữ số'
             ];
 
             $validatedData = $request->validate($rules, $messages);
@@ -192,7 +194,10 @@ class StaffController extends Controller
                 'status' => '',
                 'id_user' => $user->id,
             ]);
-            return redirect()->route('staff')->with('message', 'Thêm thành công');
+            if($user->id & $staff->id){
+                return redirect()->route('auth')->with('message', 'Đăng ký thành công');
+
+            }
         }
     }
 }
