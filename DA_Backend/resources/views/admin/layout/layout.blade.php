@@ -362,7 +362,7 @@ background: #0d45a5;
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <!-- item-->
-            <a class="dropdown-item" href=""><i
+            <a class="dropdown-item" href="{{ url('admin/profile', ['id' => session('id')]) }}"><i
                                     class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
                             <a class="dropdown-item" href="#"><i
                                     class="bx bx-wallet font-size-16 align-middle mr-1"></i> My Wallet</a>
