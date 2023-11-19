@@ -1,8 +1,8 @@
 {
-  "HomePage": [
+  "technicians": [
     {
       "id": 1,
-      "banner": "abc"
+      "name": "Mlem The Nhi "
     }
   ]
 }
