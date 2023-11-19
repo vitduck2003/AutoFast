@@ -7,9 +7,16 @@ import traizanimeimg from '../../../assets/img/boizanime.jpg';
 
 
 
-const TeamPage = () => {
+const TeamPage = (props: any) => {
   return (
+    
     <div>
+       {props.technicians.map((item: any) => {
+                return <div key={item.id}>
+                    <h2>{item.name}</h2>
+                </div>
+
+            })}
         <div className="container-fluid page-header mb-5 p-0">
     <div className="container-fluid page-header-inner py-5">
         <div className="container text-center">
