@@ -31,5 +31,56 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVBAwAEjHz9k1CWw2d7FShw5kDlA9VdybWPQ&usqp=CAU"
     }
    
+  ],
+  "about": [
+    {
+      "id": 1,
+      "name": "Dịch vụ chất lượng",
+      "content": "Chúng tôi hân hạnh là một trong những Gara đầu tiên đạt 1 sao Michelin tại Việt Nam"
+
+    },
+    {
+      "id": 2,
+      "name": "Kỹ thuật chuyên nghiệp",
+      "content": "Đội ngũ kỹ thuật viên người Việt nhưng kỹ năng hơn người Châu Phi"
+
+    },
+    {
+      "id": 3,
+      "name": "Thiết bị hiện đại",
+      "content": "Thiết bị hiện đại bậc nhất của chúng tôi được nhập khẩu từ Châu Nam Mỹ, bạn có thể hoàn toàn yên tâm"
+
+    }
+  ],
+  "aboutz": [
+    {
+      "id": 1,
+      "name": "Auto Fast Dịch vụ bảo dưỡng xe cao cấp",
+      "img": "http://localhost:5173/src/assets/img/about.jpg",
+      "content": "Với 15 năm kinh nghiệm trong lĩnh vực bảo dưỡng và sửa chữa xe ô tô, chúng tôi tự tin nói rằng chúng tôi chính là bố của các Gara ô tô, gọi bố đi các con"
+
+    }
+  ],
+  "abouts" : [
+    {
+      "id": 1,
+      "name": "Năm kinh nghiệm",
+      "soluong": "15"
+    },
+    {
+      "id": 2,
+      "name": "Kỹ sư đẳng cấp",
+      "soluong": "5"
+    },
+    {
+      "id": 3,
+      "name": "Khách hài lòng",
+      "soluong": "3123"
+    },
+    {
+      "id": 4,
+      "name": "Dự án hoàn thiện",
+      "soluong": "123"
+    }
   ]
 }

@@ -5,7 +5,11 @@ import khanhskyimg from '../../../assets/img/khanhsky.jpg';
 import huanhoahongimg from '../../../assets/img/huanhoahong.jpg';
 import traizanimeimg from '../../../assets/img/boizanime.jpg';
 
-const AboutUsPage = () => {
+const AboutUsPage = ({about, abouts, aboutz, technicians}   ) => {
+console.log(about);
+console.log(abouts);
+
+  
   return (
     <div>
          <div className="container-fluid page-header mb-5 p-0" id=''>
@@ -80,9 +84,9 @@ const AboutUsPage = () => {
                     <span className="fw-bold text-secondary" id=''>01</span>
                   </div>
                   <div className="ps-3" id=''>
-                    <h6 className=''> Chuyên nghiệp</h6>
+                    <h6 className=''> Chuyên nghiệp </h6>
                     <span className=''>Trang thiết bị hiện đại </span>
-                  </div>
+                  </div>  
                 </div>
               </div>
               <div className="col-12 wow fadeIn" data-wow-delay="0.3s" id=''>
@@ -123,7 +127,7 @@ const AboutUsPage = () => {
                 </div>
                 <div id='' className="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
                     <i id='' className="fa fa-users-cog fa-2x text-white mb-3"></i>
-                    <h2 id='' className="text-white mb-2" data-toggle="counter-up">10</h2>
+                    <h2 id='' className="text-white mb-2" data-toggle="counter-up">5</h2>
                     <p id='' className="text-white mb-0">Kỹ sư đẳng cấp</p>
                 </div>
                 <div id='' className="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
