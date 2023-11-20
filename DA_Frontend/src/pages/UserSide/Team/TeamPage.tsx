@@ -10,11 +10,11 @@ import traizanimeimg from '../../../assets/img/boizanime.jpg';
 const TeamPage = (props: any) => {
   return (
     
-    <div>
+     <div>
        {props.technicians.map((item: any) => {
                 return <div key={item.id}>
                     <h2>{item.name}</h2>
-                </div>
+     </div>
 
             })}
         <div className="container-fluid page-header mb-5 p-0">
@@ -33,7 +33,8 @@ const TeamPage = (props: any) => {
 </div>
 {/* Team Start */}
 <div className="container-xxl py-5">
-      <div className="container">
+  {props.technicians.map((item: any)=>{
+    return <div className="container" key={item.id}>
         <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
           <h6 className="text-primary text-uppercase">// Các kỹ sư của chúng tôi //</h6>
           <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
@@ -173,6 +174,8 @@ const TeamPage = (props: any) => {
           </div>
         </div>
       </div>
+  })}
+      
     </div>
 </div>
   )

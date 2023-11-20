@@ -2,7 +2,29 @@
   "technicians": [
     {
       "id": 1,
-      "name": "Mlem The Nhi "
+      "name": "Nguyễn Lê Trường Sơn",
+      "information": "Có kinh nghiệm 5 năm trong nghành sửa chữa oto"
+    },
+    {
+      "id": 2,
+      "name": "Phạm Đăng Đức Anh",
+      "information": "Có kinh nghiệm 5 năm trong nghành sửa chữa oto"
+    },
+    {
+      "id": 3,
+      "name": "Nguyễn Phong",
+      "information": "Có kinh nghiệm 5 năm trong nghành sửa chữa oto"
+    },
+    {
+      "id": 4,
+      "name": "Nguyễn Trọng",
+      "information": "Có kinh nghiệm 5 năm trong nghành sửa chữa oto"
+    },
+    {
+      "id": 5,
+      "name": "Nguyễn Hùng",
+      "information": "Có kinh nghiệm 5 năm trong nghành sửa chữa oto"
     }
+   
   ]
 }
