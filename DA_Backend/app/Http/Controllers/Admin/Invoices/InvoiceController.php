@@ -9,7 +9,6 @@ use App\Models\Coupon;
 
 class InvoiceController extends Controller
 {
-
     public function check_coupon(Request $request){
         $data = $request->all();
         $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
@@ -44,7 +43,9 @@ class InvoiceController extends Controller
         }else{
             return redirect()->back()->with('error','Mã giảm giá không đúng');
         }
-    }   
+    }
+
+       
 
 
     public function index(){
