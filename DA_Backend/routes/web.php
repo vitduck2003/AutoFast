@@ -134,6 +134,8 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
 
+  Route::post('check-coupon', [InvoiceController::class, 'list_coupon']);
+
   Route::prefix('admin')->group(function () {
     Route::get('coupon', [CouponController::class, 'list_coupon'])->name('coupon.list_coupon');
     Route::get('unset-coupon', [CouponController::class, 'unset_coupon'])->name('coupon.unset_coupon');
