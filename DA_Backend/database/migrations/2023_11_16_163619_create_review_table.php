@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('review', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('salary');
-            $table->string('review');
-            $table->string('status');
+            $table->string('content');
+            $table->integer('user_id');
+            $table->integer('service_id');
+            $table->integer('rating');
+            $table->SoftDeletes();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('review');
     }
 };

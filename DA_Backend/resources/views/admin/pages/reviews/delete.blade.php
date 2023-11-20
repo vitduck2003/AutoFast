@@ -5,54 +5,39 @@
     @endif
     <div class="row">
         <div class="col-12">
-            <div class="staff">
-                <div class="staff-body">
-                    <h4 class="staff-title">Đây là toàn bộ nhân viên</h4>
-                    <table id="datatable" class="table table-striped "
+            <div class="review">
+                <div class="review-body">
+                    <h4 class="review-title">Đây là toàn bộ nhân viên</h4>
+                    <table id="review-list" class="table table-striped "
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Họ tên</th>
-                                <th>email</th>
-                                <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
-                                <th>Mô tả</th>
-                                <th>
-                                    Lương</th>
+                                <th>Họ tên người đánh giá</th>
+                                <th>dịch vụ đánh giá</th>
                                 <th>Đánh giá</th>
-                                <th>Trạng thái</th>
-                                <th>Ảnh đại diện</th>
+                                <th>Sao</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody class="">
-                            @foreach ($staffs as $staff)
-                                :
-                                <tr>
-                                    <td>{{ $staff->id }}</td>
-                                    <td>{{ $staff->name }}</td>
-                                    <td>{{ $staff->email }}</td>
-                                    <td>{{ $staff->phone }}</td>
-                                    <td>{{ $staff->address }}</td>
-                                    <td>{{ $staff->description }}</td>
-                                    <td>{{ $staff->salary }}</td>
-                                    <td>{{ $staff->review }}</td>
-                                    <td>{{ $staff->status }}</td>
-                                    <td><img src="{{ $staff->avatar ? Storage::url($staff->avatar) : '' }}"
-                                            style="width: 60px; height: 60px;border-radius: 99%;">
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('staff-delete', ['id' => $staff->id]) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf @method('DELETE') <button type="submit"
-                                                class="btn btn-danger">Xóa</button></form>
-                                        <button type="button" class="btn btn-success"><a
-                                                href="{{ route('showDetail', ['id' => $staff->id]) }}"
-                                                style="color:white">Sửa</a></button>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach ($reviews as $rv)
+                            <tr>
+                                <td>{{ $rv->id }}</td>
+                                <td>{{ $rv->name }}</td>
+                                <td>{{ $rv->service_name }}</td>
+                                <td>{{ $rv->content }}</td>
+                                <td> 
+                                    <div class="rateYo" data-rating="{{ $rv->rating }}"></div>
+                                </td>
+                                <td>
+                                    <form action="{{ route('review-restore', ['id' => $rv->id]) }}" method="POST" style="display: inline;">
+                                        @csrf @method('PUT') 
+                                        <button type="submit" class="btn btn-success">Khôi Phục</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -67,6 +52,7 @@
                 integrity="sha384-k9o4f/+cB8C0QV6eAlM7i0V0jKj+3tB4XqDyq5djBv8w/3eWt0YJ/6WfqK0IeFVy" crossorigin="anonymous">
             </script>
             <script>
+                
                 $(function() {
                     function readURL(input, selector) {
                         if (input.files && input.files[0]) {
@@ -118,6 +104,18 @@
                     }
                     toastr.warning("{{ session('warning') }}");
                 @endif
+            </script>
+            <script>
+                $(function () {
+                    $(".rateYo").each(function () {
+                        var rating = $(this).data("rating");
+                        $(this).rateYo({
+                            rating: rating,
+                            fullStar: true,
+                            readOnly: true
+                        });
+                    });
+                });
             </script>
         @endsection
     @endsection

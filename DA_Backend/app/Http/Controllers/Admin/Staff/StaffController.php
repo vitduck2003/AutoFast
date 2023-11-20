@@ -61,10 +61,6 @@ class StaffController extends Controller
     }
     public function create(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $results = User::where('name', 'LIKE', "%$keyword%")
-            ->orWhere('email', 'LIKE', "%$keyword%")
-            ->get();
         if ($request->isMethod('POST')) {
             $validatedData = $request->validate([
                 'salary' => 'required|integer',
@@ -87,8 +83,8 @@ class StaffController extends Controller
                 'name' => 'required|string|max:255',
                 'phone' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
-                'address' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+                'address' => 'max:255',
+                'description' => 'max:255',
                 'salary' => 'required|integer',
                 'status' => 'required|string|max:255',
             ];
@@ -97,7 +93,6 @@ class StaffController extends Controller
                 'email.required' => 'Vui lòng nhập email.',
                 'email.email' => 'Vui lòng nhập đúng định dạng email.',
                 'phone.required' => 'Vui lòng nhập số điện thoại.',
-                'description.required' => 'Vui lòng nhập mô tả.',
                 'salary.required' => 'Vui lòng nhập Lương.',
                 'status.required' => 'Vui lòng nhập trạng thái.',
             ];
@@ -156,5 +151,82 @@ class StaffController extends Controller
             )
             ->first();
         return response()->json($staff);
+    }
+    public function register(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $rules = [
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:6',
+            ];
+            $messages = [
+                'name.required' => 'Vui lòng nhập tên.',
+                'email.required' => 'Vui lòng nhập email.',
+                'email.email' => 'Vui lòng nhập đúng định dạng email.',
+                'phone.required' => 'Vui lòng nhập số điện thoại.',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu không nhỏ hơn 6 chữ số'
+            ];
+
+            $validatedData = $request->validate($rules, $messages);
+            $checkemail = User::where('email', $validatedData['email'])->exists();
+            $checkphone = User::where('phone', $validatedData['phone'])->exists();
+            if ($checkemail) {
+                return response()->json(['message' => 'Email đã tồn tại', 'success' => false], 200);
+            }
+            if ($checkphone) {
+                return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
+            }
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'phone' => $validatedData['phone'],
+                'email' => $validatedData['email'],
+                'role_id' => 2,
+                'password' => Hash::make($validatedData['password']),
+            ]);
+            
+            $staff=Staff::Create([
+                'salary'=>0,
+                'review' => '',
+                'status' => '',
+                'id_user' => $user->id,
+            ]);
+            if($user->id & $staff->id){
+                return redirect()->route('auth')->with('message', 'Đăng ký thành công');
+
+            }
+        }
+    }
+    public function StaffAction(){
+        $staffs = DB::table('users')
+        ->join('staff', 'users.id', '=', 'staff.id_user')
+        ->where([
+            ['users.role_id', '=', 2],
+            ['staff.status','=','Không hoạt động']
+        ])
+        ->whereNull(['users.deleted_at', 'staff.deleted_at'])
+        ->select(
+            'staff.*',
+            'users.name',
+            'users.password',
+            'users.avatar',
+            'users.email',
+            'users.phone',
+            'users.description',
+            'users.address'
+        )
+        ->get();
+    return view('admin/pages/staffs/staffAction', compact('staffs'));
+    }
+    public function restore($id){
+        $staff=DB::table('staff')->where('id', $id)->update(['status'=>'Hoạt động']);
+        if($staff){
+            return redirect()->route('staff-action')->with('message', 'Khôi phục thành công');
+        }else{
+            return redirect()->route('staff-action')->with('error', 'Khôi phục không thành công');
+
+        }
     }
 }

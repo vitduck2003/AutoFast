@@ -8,6 +8,42 @@ interface IProps {
   news: INews[];
   onUpdateNews: (staff: INews) => void;
 }
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
 
 const NewsAddminEdit = (props: IProps) => {
   const { id } = useParams();

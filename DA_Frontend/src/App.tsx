@@ -82,6 +82,8 @@ import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
 import PayPage from "./pages/UserSide/Pay/PayPage";
 import SearchBooking from "./pages/UserSide/SearchBooking/SearchBooking";
 import { searchBooking } from "./api/searchBooking";
+import { getTechnicians } from "./api/Client/technicians";
+import { getAbout, getAbouts, getAboutz } from "./api/Client/about";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -92,6 +94,10 @@ function App() {
   const [mess, setMess] = useState();
   const [services, setService] = useState<IService[]>([]);
   const [serviceItem, setServiceItem] = useState<ISeviceItem[]>([]);
+  const [technicians, setTechnicians] = useState<any>([]);
+  const [about, setAbout] = useState<any>([]);
+  const [abouts, setAbouts] = useState<any>([]);
+  const [aboutz, setAboutz] = useState<any>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -101,6 +107,10 @@ function App() {
     getService().then(({ data }) => setService(data));
     getServiceItem().then(({ data }) => setServiceItem(data));
     searchBooking().then(({ data }) => setSearchBK(data));
+    getTechnicians().then(({ data }) => setTechnicians(data));
+    getAbout().then(({data}) => setAbout(data));
+    getAbouts().then(({data}) => setAbouts(data));
+    getAboutz().then(({data}) => setAboutz(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -253,11 +263,11 @@ const onHandleRemoveServiceItem = (id: number) => {
 
             {/* About Page */}
             <Route path="about">
-              <Route index element={<AboutUsPage />} />
+              <Route index element={<AboutUsPage about={about} abouts={abouts} aboutz={aboutz} technicians={technicians} />} />
             </Route>
             {/* Team Page */}
             <Route path="technicians">
-              <Route index element={<TeamPage />} />
+              <Route index element={<TeamPage technicians={technicians} />} />
             </Route>
             {/* Bill Page */}
           <Route path="bill">

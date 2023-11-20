@@ -1,6 +1,16 @@
 
 import React, { useState,useEffect } from "react";
-
+import {
+  BorderBottomOutlined,
+  BorderTopOutlined,
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+  RadiusUpleftOutlined,
+  RadiusUprightOutlined,
+} from '@ant-design/icons';
+import { Button, Divider, Space } from 'antd';
+import type { NotificationPlacement } from 'antd/es/notification/interface';
+import { notification } from 'antd';
 
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
@@ -20,7 +30,7 @@ const BookingPage = (props: any) => {
   
  
   useEffect(() => {
-    // Fetch user from session when the component mounts
+    // Lấy dữ liệu người dùng từ session khi chạy
     const userFromSession = getUserFromSession();
   
     if (userFromSession) {
@@ -109,12 +119,10 @@ const BookingPage = (props: any) => {
     }>
   >([]);
 
-  // console.log(dataService);
-  console.log(dataServiceItem);
-  console.log(dataService);
+
 
   const [kmMessage, setKmMessage] = useState<string>("");
-  // const navigate = useNavigate();
+
 
   const [selectedService, setSelectedService] = useState<{
     service_name: string;
@@ -159,12 +167,12 @@ const BookingPage = (props: any) => {
 
   useEffect(() => {
     if (phone!="") {
-      // Phone number exists, set data for name, phone, and email
+      // Điện thoại không được trống, Set dữ liệu theo tên, phone, email
       setFormData({
         user_id: user_id,
-        full_name: name, // Replace with actual data
+        full_name: name, // Thay đổi dữ liệu theo trường
         phone: phone,
-        email:email, // Replace with actual data
+        email:email, // Thay đổi dữ liệu theo trường
         note: "",
         model_car: "",
         status: "Chờ xác nhận",
@@ -176,11 +184,12 @@ const BookingPage = (props: any) => {
       });
     } else {
       // No phone number, set initial empty form data
+      // Không có số điện thoại data not empty
       setFormData({
         user_id: "",
-        full_name: "", // Replace with actual data
+        full_name: "", // Replace with actual data // Thay đổi dữ liệu theo trường
         phone: "",
-        email: "", // Replace with actual data
+        email: "", // Replace with actual data // Thay đổi dữ liệu theo trường
         note: "",
         model_car: "",
         status: "Chờ xác nhận",
@@ -204,12 +213,14 @@ const BookingPage = (props: any) => {
     setFormData((prevData: any) => {
       if (checked) {
         // If the checkbox is checked, add the item.id to the service_item_other array
+        // Nếu như checkbox được select, thêm item.id vào list service_item_other
         return {
           ...prevData,
           service_item_other: [...prevData.service_item_other, item.id],
         };
       } else {
         // If the checkbox is unchecked, remove the item.id from the service_item_other array
+        // Nếu như checkbox được bỏ, xóa item.id khỏi list service_item_other
         return {
           ...prevData,
           service_item_other: prevData.service_item_other.filter(
@@ -301,7 +312,10 @@ const BookingPage = (props: any) => {
       console.log(updatedFormData);
 
       props.onAddBooking(updatedFormData);
-      alert("Success");
+      notification.success({
+        message: 'Đặt lịch thành công',
+        description: '',
+      });
     }
   };
   const totalCost = selectedServiceItems.reduce(
@@ -312,6 +326,23 @@ const BookingPage = (props: any) => {
   const [selectedTotal, setSelectedTotal] = useState(0);
 
   return (
+   <div>
+    <div className="container-fluid page-header mb-5 p-0" id=''>
+    <div className="container-fluid page-header-inner py-5" id=''>
+        <div className="container text-center" id=''>
+            <h1 className="display-3 text-white mb-3 animated slideInDown" id=''>About Us</h1>
+            <nav aria-label="breadcrumb" id=''>
+                <ol className="breadcrumb justify-content-center text-uppercase" id=''>
+                    <li className="breadcrumb-item" id=''><a href="#">Home</a></li>
+                    <li className="breadcrumb-item" id=''><a href="#">Pages</a></li>
+                    <li className="breadcrumb-item text-white active" aria-current="page" id=''>About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+    
+
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
       <h1 style={{ textAlign: "center", marginTop: "20px" }}>Đặt lịch</h1>
       <form onSubmit={handleSubmit} style={{ marginTop: "80px" }}>
@@ -722,6 +753,7 @@ disabled
           </div>
         </div>
       </form>
+    </div>
     </div>
   );
 };

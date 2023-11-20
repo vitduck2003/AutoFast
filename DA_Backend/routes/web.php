@@ -1,22 +1,23 @@
 <?php
 
+use App\Http\Controllers\Admin\Profile\ProfileAdminController;
+use App\Http\Controllers\Admin\Reviews\ReviewController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\Staff\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\Api\Client\ProfileApi;
-use App\Http\Controllers\Staff\ProfileController;
 use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\News\NewController;
 use App\Http\Controllers\Cilent\PaymentController;
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\staff\StaffController;
+use App\Http\Controllers\Admin\Staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
-use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 
 /*
@@ -31,6 +32,9 @@ use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 */
 Route::get('/', function(){
   return view('admin/pages/auth/login');
+})->name('auth');
+Route::get('/staff-register', function(){
+  return view('admin/pages/auth/register');
 });
 Route::get('/admin/home', function () {
        return view('admin.pages.index');
@@ -47,8 +51,6 @@ Route::get('/staff/home', function () {
     // payemnts
     Route::get('/payment-return', [PaymentController::class, 'paymentReturn'])->name('payment.return');
     Route::prefix('admin')->group(function () {
-        
-        
 
         Route::get('bookings', [BookingController::class, 'index']);
         Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
@@ -80,11 +82,14 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
 
         Route::get('staff', [StaffController::class, 'index'])->name('staff');
         Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
-        Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
-        Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+        // Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
+        // Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
         Route::get('/search', [StaffController::class,'search'])->name('search');
+        Route::get('staff-action', [StaffController::class, 'staffAction'])->name('staff-action');
+        Route::put('staff/retore/{id}', [StaffController::class, 'restore'])->name('staff-restore');
+
 
         Route::resource('service', ServiceController::class);
         Route::resource('serviceitem', ServiceItemController::class);
@@ -98,8 +103,14 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
           Route::get('/show/password/{id}',[ProfileAdminController::class, 'showPass'])->name('show-password-admin');
           Route::put('/update/password/{id}',[ProfileAdminController::class, 'changePassword'])->name('change-password-admin');
     
-    
+          
+
         });
+        Route::get('reviews',[ReviewController::class,'index'])->name('review');
+        Route::get('reviews/delete',[ReviewController::class,'showDelete'])->name('review-show-delete');
+        Route::delete('review/delete/{id}', [ReviewController::class, 'remove'])->name('review-delete');
+        Route::put('review/restore/{id}', [ReviewController::class, 'restoteReview'])->name('review-restore');
+
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
@@ -111,14 +122,19 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
       Route::put('profile/update/avatar/{id}',[ProfileController::class, 'updateAvatar'])->name('update-avatar');
       Route::get('profile/show/password/{id}',[ProfileController::class, 'showPass'])->name('show-password');
       Route::put('profile/update/password/{id}',[ProfileController::class, 'changePassword'])->name('change-password');
+      Route::post('/register', [StaffController::class, 'register'])->name('staff.register');
 
 
     });
 
     Route::prefix('admin')->group(function () {
       Route::get('user', [AccountController::class, 'index'])->name('user.index');
+      Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
+
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
+
+  Route::post('check-coupon', [InvoiceController::class, 'list_coupon'])->name('coupon.list_coupon');
 
   Route::prefix('admin')->group(function () {
     Route::get('coupon', [CouponController::class, 'list_coupon'])->name('coupon.list_coupon');
@@ -131,3 +147,4 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
   Route::get('sendbasicemail',[MailController::class,'basic_email']);
   Route::get('sendhtmlemail',[MailController::class,'html_email']);
   Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
+

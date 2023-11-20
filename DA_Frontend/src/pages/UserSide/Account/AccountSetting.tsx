@@ -11,7 +11,7 @@ const AccountSetting = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [address, setAddress] = useState<string>("");
-  const [showNotification, setShowNotification] = useState(false);
+  // const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const [formData, setFormData] = useState();
   const getUser = async (id: number) => {
@@ -30,8 +30,6 @@ const AccountSetting = () => {
       })
       .catch((error) => console.log(error));
   };
-
-  const user = sessionStorage.getItem("user");
 
   const handleUpdateAvatar = async (
     event: React.ChangeEvent<HTMLInputElement>,

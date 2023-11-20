@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Login | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>Login Admin | AutoFast</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -17,7 +17,15 @@
     <link href={{ asset('assets\css\icons.min.css') }} rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href={{ asset('assets\css\app.min.css') }} id="app-style" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 
 <body>
@@ -45,14 +53,12 @@
                         </div>
                         <div class="card-body pt-0">
                             <div>
-                                <a href="#">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src={{ asset('assets\images\logo.svg') }} alt=""
                                                 class="rounded-circle" height="34">
                                         </span>
                                     </div>
-                                </a>
                             </div>
                             <div class="p-2">
                                 <form class="form-horizontal" action="{{ route('login') }}" method="POST">
@@ -64,7 +70,7 @@
 
                                     <div class="form-group">
                                         <label for="userpassword">Mật khẩu </label>
-                                        <input type="text" name="password" class="form-control" id="userpassword"
+                                        <input type="password" name="password" class="form-control" id="userpassword"
                                             placeholder="Nhập mật khẩu">
                                     </div>
 
@@ -86,30 +92,6 @@
 
 
 
-                                    <div class="mt-4 text-center">
-                                        <h5 class="font-size-14 mb-3">Đăng nhập với</h5>
-
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-primary text-white border-primary">
-                                                    <i class="mdi mdi-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-info text-white border-info">
-                                                    <i class="mdi mdi-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-danger text-white border-danger">
-                                                    <i class="mdi mdi-google"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
 
                                     <div class="mt-4 text-center">
                                         <a href="auth-recoverpw.html" class="text-muted"><i
@@ -117,17 +99,8 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-
-                        <div>
-                            <p>Bạn chưa có tài khoản ? <a href="auth-register.html"
-                                    class="font-weight-medium text-primary"> Đăng kí ngay </a> </p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -142,6 +115,43 @@
 
     <!-- App js -->
     <script src="assets\js\app.js"></script>
+    <script>
+  @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('error') }}");
+  @endif
+
+  @if(Session::has('info'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.info("{{ session('info') }}");
+  @endif
+
+  @if(Session::has('warning'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.warning("{{ session('warning') }}");
+  @endif
+</script>
 </body>
 
 </html>

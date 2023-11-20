@@ -43,13 +43,10 @@
                                             style="width: 60px; height: 60px;border-radius: 99%;">
                                     </td>
                                     <td>
-                                        <form action="{{ route('staff-delete', ['id' => $staff->id]) }}" method="POST"
+                                        <form action="{{ route('staff-restore', ['id' => $staff->id]) }}" method="POST"
                                             style="display: inline;">
-                                            @csrf @method('DELETE') <button type="submit"
-                                                class="btn btn-danger">Xóa</button></form>
-                                        <button type="button" class="btn btn-success"><a
-                                                href="{{ route('showDetail', ['id' => $staff->id]) }}"
-                                                style="color:white">Sửa</a></button>
+                                            @csrf @method('PUT') <button type="submit"
+                                                class="btn btn-danger">Khôi phục trạng thái</button></form>
                                     </td>
                                 </tr>
                             @endforeach

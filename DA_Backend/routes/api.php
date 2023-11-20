@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\Reviews\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -96,10 +97,23 @@ Route::prefix('client')->group(function () {
     // Review APIs
     Route::prefix('review')->group(function () {
         // Get reviews by user
-        Route::get('user/{userId}', [ReviewApi::class, 'showByUser']);
+        Route::get('user/{userId}', [ReviewController::class, 'showByUser']);
 
         // Get reviews by service
-        Route::get('service/{serviceId}', [ReviewApi::class, 'showByService']);
+        Route::get('service/{serviceId}', [ReviewController::class, 'showByService']);
+
+        //update review
+        Route::put('update/{id}', [ReviewController::class, 'update']);
+
+        //store review
+        Route::post('/', [ReviewController::class, 'store']);
+
+        //list reviews
+        Route::get('/', [ReviewController::class, 'list']);
+
+
+        //Delete reviews
+        Route::delete('delete/{id}', [ReviewController::class, 'destroy']);
     });
 
     //Service Api
