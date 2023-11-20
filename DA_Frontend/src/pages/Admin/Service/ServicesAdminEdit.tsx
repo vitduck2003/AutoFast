@@ -9,7 +9,106 @@ import { IService } from '../../../interface/service';
 interface IProps {
   service: IService[];
   onHandleUpdateService: (service: IService) => void;
+}interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
 }
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+
 
 const ServicesAdminEdit = (props: any) => {
   const { id } = useParams();

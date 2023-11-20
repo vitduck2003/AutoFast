@@ -27,6 +27,69 @@ interface IProps {
   booking: IBooking[],
   onCancelBooking: (booking: IBooking) => void;
 }
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
 
 
 const BookingHtAdmin = (props: IProps) => {

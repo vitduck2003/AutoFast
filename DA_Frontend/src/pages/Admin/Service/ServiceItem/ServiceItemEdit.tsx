@@ -10,6 +10,42 @@ type Props = {
   serviceItem: ISeviceItem[];
   onUpdateServiceItem: (service: ISeviceItem) => void;
 }
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
 
 const ServiceItemEdit = (props: Props) => {
   console.log(props);
