@@ -17,6 +17,50 @@ interface DataType {
   time_done: string;
   price: number;
 }
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+
+
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+
+
+
+interface DataType {
+  key: string | number;
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  role: string ;
+  phone: number;
+}
+
+
 const ServiceItemAdmin = (props: Props) => {
   console.log(props);
   const removeServiceItem = (id: any)=>{
