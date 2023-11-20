@@ -207,15 +207,15 @@
                                                 <i class="bx bx-cart"></i>
                                             </span>
                                         </div>
-                                        @if(Auth::user())
+                                        @foreach($users as $key => $user)
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">{{ Auth::user()->name }}: đã đặt lịch</h6>
+                                            <h6 class="mt-0 mb-1">{{ $user['name'] }}: đã đặt lịch</h6>
                                             <div class="font-size-12 text-muted">
                                                 <p class="mb-1">If several languages coalesce the grammar</p>
                                                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
                                             </div>
                                         </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                 </a>
                                 <a href="" class="text-reset notification-item">
@@ -571,5 +571,5 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @yield('script');
-    
+
 </body>
