@@ -391,10 +391,6 @@
 
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('coupon.list_coupon') }}">Tất cả mã giảm giá</a></li>
-
-                            </ul>
-
-                            <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('coupon.form.add') }}">Thêm mã giảm giá</a></li>
                             </ul>
                         </li>
@@ -416,7 +412,6 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
-                                <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
                                 <li><a href="{{ url('admin/staff-action') }}">Danh sách nhân viên không hoạt động</a>
                                 </li>
 
@@ -440,10 +435,8 @@
                                 <span>Quản lí tin tức</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('new.index')}}">tất cả tin tức</a></li>
-                            </ul>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('new.create')}}">them tin tuc</a></li>
+                                <li><a href="{{route('new.index')}}">Tất cả tin tức</a></li>
+                                <li><a href="{{route('new.create')}}">Tạo tin tức</a></li>
                             </ul>
                     </ul>
                 </div>

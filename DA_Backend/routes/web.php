@@ -82,8 +82,8 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
 
         Route::get('staff', [StaffController::class, 'index'])->name('staff');
         Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
-        Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
-        Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+        // Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
+        // Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
         Route::get('/search', [StaffController::class,'search'])->name('search');
