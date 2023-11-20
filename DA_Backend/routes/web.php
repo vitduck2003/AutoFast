@@ -103,7 +103,7 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
-      Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
+      Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
       Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
 Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
       Route::get('profile/{id}',[ProfileController::class, 'showDetail'])->name('profile');
