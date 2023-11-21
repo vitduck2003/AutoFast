@@ -270,7 +270,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route path=":id" element={<NewsDetailPage news={news} />} />
             </Route>
             <Route path="service">
-              <Route index element={<ServicePage />} />
+              <Route index element={<ServicePage servicePage={servicePage} />} />
             </Route>
 
             {/* About Page */}
