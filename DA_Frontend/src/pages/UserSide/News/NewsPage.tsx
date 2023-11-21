@@ -18,7 +18,7 @@ const NewsPage = ( props: any) => {
         <div className="container-fluid page-header-inner py-4">
           <div className="container text-center p">
             <h1 className="display-3 text-white mb-3 animated slideInDown s">
-              New
+              Tin Tức
             </h1>
             <nav aria-label="breadcrumb a">
               <ol className="breadcrumb justify-content-center text-uppercase a">
@@ -57,7 +57,7 @@ const NewsPage = ( props: any) => {
       </div>
     
       <div className="col-md-6 mb-4">
-        <span className="badge bg-danger px-2 py-1 shadow-1-strong mb-3">{item.title}</span>
+        <span className="badge black px-2 py-1 shadow-1-strong mb-3">{item.title}</span>
         <h4><strong>{item.des}</strong></h4>
         <p className="text-muted">
          {item.content}

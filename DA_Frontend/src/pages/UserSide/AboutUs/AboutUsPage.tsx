@@ -17,7 +17,7 @@ console.log(technicians);
          <div className="container-fluid page-header mb-5 p-0 " id=''>
         <div className="container-fluid page-header-inner py-5 " id=''>
             <div className="container text-center"  id=''>
-                <h1 className="display-3 text-white mb-3 animated slideInDown " id=''>About Us</h1>
+                <h1 className="display-3 text-white mb-3 animated slideInDown " id=''>Về Chúng Tôi</h1>
                 <nav aria-label="breadcrumb " id=''>
                     <ol className="breadcrumb justify-content-center text-uppercase " id=''>
                         <li className="breadcrumb-item " id=''><a href="#">Home</a></li>

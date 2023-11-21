@@ -84,6 +84,7 @@ import SearchBooking from "./pages/UserSide/SearchBooking/SearchBooking";
 import { searchBooking } from "./api/searchBooking";
 import { getTechnicians } from "./api/Client/technicians";
 import { getAbout, getAbouts, getAboutz } from "./api/Client/about";
+import Home from "./pages/UserSide/Home/Home";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -230,7 +231,7 @@ const onHandleRemoveServiceItem = (id: number) => {
         <Routes>
           {/* User Side */}
           <Route path="/" element={<BaseLayout />}>
-            <Route index element={<HomePage onAddBooking={onHandleBooking} />} />
+            <Route index element={<HomePage onAddBooking={onHandleBooking} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
             {/* Booking Page */}
             <Route path="booking">
               <Route
@@ -242,7 +243,9 @@ const onHandleRemoveServiceItem = (id: number) => {
                 }
               />
             </Route>
-
+                <Route path="home" >
+                  <Route index element={<Home/>}/>
+                </Route>
             {/* Contact Page */}
             <Route path="contact">
               <Route index element={<ContactPage />} />

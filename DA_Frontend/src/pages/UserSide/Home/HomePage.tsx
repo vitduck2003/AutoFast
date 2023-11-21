@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
-const HomePage = (props: any) => {
+const HomePage = ({about, technicians, abouts, aboutz}) => {
   const navigate = useNavigate();
   const {
     register,
@@ -125,17 +125,14 @@ const HomePage = (props: any) => {
       <div className="container-xxl py-5">
         <div className="container">
           <div className="row g-4">
-            <div
-              className="col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay="0.1s"
-            >
+            {about.map((item:any)=>{
+              return <div key={item.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
               <div className="d-flex py-5 px-4">
                 <i className="fa fa-certificate fa-3x text-primary flex-shrink-0"></i>
                 <div className="ps-4">
-                  <h5 className="mb-3">Dịch vụ chất lượng</h5>
+                  <h5 className="mb-3">{item.name}</h5>
                   <p>
-                    Chúng tôi hân hạnh là một trong những Gara đầu tiên đạt 1
-                    sao Michelin tại Việt Nam
+                    {item.content}
                   </p>
                   <a
                     style={{ textDecoration: "none" }}
@@ -147,50 +144,7 @@ const HomePage = (props: any) => {
                 </div>
               </div>
             </div>
-            <div
-              className="col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
-              <div className="d-flex bg-light py-5 px-4">
-                <i className="fa fa-users-cog fa-3x text-primary flex-shrink-0"></i>
-                <div className="ps-4">
-                  <h5 className="mb-3">Kỹ thuật chuyên nghiệp</h5>
-                  <p>
-                    Đội ngũ kỹ thuật viên người Việt nhưng kỹ năng hơn người
-                    Châu Phi
-                  </p>
-                  <a
-                    style={{ textDecoration: "none" }}
-                    className="text-secondary border-bottom"
-                    href=""
-                  >
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay="0.5s"
-            >
-              <div className="d-flex py-5 px-4">
-                <i className="fa fa-tools fa-3x text-primary flex-shrink-0"></i>
-                <div className="ps-4">
-                  <h5 className="mb-3">Thiết bị hiện đại</h5>
-                  <p>
-                    Thiết bị hiện đại bậc nhất của chúng tôi được nhập khẩu từ
-                    Châu Nam Mỹ, bạn có thể hoàn toàn yên tâm
-                  </p>
-                  <a
-                    style={{ textDecoration: "none" }}
-                    className="text-secondary border-bottom"
-                    href=""
-                  >
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
-            </div>
+            })}
           </div>
         </div>
       </div>
