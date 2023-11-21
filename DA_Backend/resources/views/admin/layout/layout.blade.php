@@ -207,15 +207,15 @@
                                                 <i class="bx bx-cart"></i>
                                             </span>
                                         </div>
-                                        @if(Auth::user())
+                                        @foreach($users as $key => $user)
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">{{ Auth::user()->name }}: đã đặt lịch</h6>
+                                            <h6 class="mt-0 mb-1">{{ $user['name'] }}: đã đặt lịch</h6>
                                             <div class="font-size-12 text-muted">
                                                 <p class="mb-1">If several languages coalesce the grammar</p>
                                                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
                                             </div>
                                         </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                 </a>
                                 <a href="" class="text-reset notification-item">
@@ -391,10 +391,6 @@
 
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('coupon.list_coupon') }}">Tất cả mã giảm giá</a></li>
-
-                            </ul>
-
-                            <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('coupon.form.add') }}">Thêm mã giảm giá</a></li>
                             </ul>
                         </li>
@@ -416,7 +412,6 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
-                                <li><a href="{{ url('admin/staff/form/add') }}">Thêm nhân viên</a></li>
                                 <li><a href="{{ url('admin/staff-action') }}">Danh sách nhân viên không hoạt động</a>
                                 </li>
 
@@ -440,10 +435,8 @@
                                 <span>Quản lí tin tức</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('new.index')}}">tất cả tin tức</a></li>
-                            </ul>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('new.create')}}">them tin tuc</a></li>
+                                <li><a href="{{route('new.index')}}">Tất cả tin tức</a></li>
+                                <li><a href="{{route('new.create')}}">Tạo tin tức</a></li>
                             </ul>
                     </ul>
                 </div>
@@ -571,5 +564,5 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @yield('script');
-    
+
 </body>

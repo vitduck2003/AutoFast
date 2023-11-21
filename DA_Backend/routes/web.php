@@ -82,8 +82,8 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
 
         Route::get('staff', [StaffController::class, 'index'])->name('staff');
         Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
-        Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
-        Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+        // Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
+        // Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
         Route::get('/search', [StaffController::class,'search'])->name('search');
@@ -114,7 +114,7 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
     });
     Route::prefix('staff')->group(function () {
       Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
-      Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.currentJob');
+      Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
       Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
 Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
       Route::get('profile/{id}',[ProfileController::class, 'showDetail'])->name('profile');
@@ -133,6 +133,8 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
 
       Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
+
+  Route::post('check-coupon', [InvoiceController::class, 'list_coupon'])->name('coupon.list_coupon');
 
   Route::prefix('admin')->group(function () {
     Route::get('coupon', [CouponController::class, 'list_coupon'])->name('coupon.list_coupon');

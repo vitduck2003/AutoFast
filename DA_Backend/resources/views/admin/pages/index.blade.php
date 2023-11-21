@@ -169,10 +169,9 @@
                     <div class="float-right">
                         <div class="input-group input-group-sm">
                             <select class="custom-select custom-select-sm">
-                                <option selected="">Jan</option>
-                                <option value="1">Dec</option>
-                                <option value="2">Nov</option>
-                                <option value="3">Oct</option>
+                                <option selected value="week">Tuần</option>
+                                <option value="month">Tháng</option>
+                                <option value="year">Năm</option>
                             </select>
                             <div class="input-group-append">
                                 <label class="input-group-text">Month</label>
@@ -204,7 +203,7 @@
                     </div>
 
                     <div class="col-lg-8">
-                        <div id="line-chart" class="apex-charts" dir="ltr"></div>
+                        <div id="chart" class="apex-charts" dir="ltr"></div>
                     </div>
                 </div>
             </div>
@@ -246,4 +245,74 @@
         </div>
     </div>
 </div>
+<!-- Include the ApexCharts library -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3/dist/apexcharts.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var selectElement = document.querySelector('.custom-select');
+    selectElement.addEventListener('change', function() {
+        var selectedValue = selectElement.value; // Lấy giá trị được chọn từ select
+
+        // Xóa biểu đồ hiện có (nếu có)
+        var chartElement = document.querySelector('#chart');
+        if (chartElement) {
+            chartElement.innerHTML = '';
+        }
+
+        // Tạo biểu đồ mới tương ứng với giá trị được chọn
+        if (selectedValue === 'week') {
+            createLineChart(7, ['Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ nhật']);
+        } else if (selectedValue === 'month') {
+            createLineChart(30, ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4']);
+        } else if (selectedValue === 'year') {
+            createLineChart(365, ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']);
+        }
+    });
+
+    // Hàm tạo biểu đồ
+    function createLineChart(numDataPoints, categories) {
+        var chartElement = document.querySelector('#chart');
+
+        // Tạo mảng dữ liệu cho biểu đồ
+        var data = [];
+        var currentDate = new Date();
+
+        for (var i = 0; i < numDataPoints; i++) {
+            data.push({
+                x: currentDate.getTime(),
+                y: Math.floor(Math.random() * 100) + 2
+            });
+
+            // Di chuyển ngày hiện tại đến ngày trước đó
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        // Cấu hình biểu đồ
+        var options = {
+            series: [{
+                name: 'Earning',
+                data: data
+            }],
+            chart: {
+                type: 'line',
+                height: 350,
+                zoom: {
+                    enabled: false
+                }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: categories.reverse() // Đảo ngược mảng để hiển thị theo thứ tự đúng
+            }
+        };
+
+        // Tạo biểu đồ ApexCharts
+        var chart = new ApexCharts(chartElement, options);
+        chart.render();
+    }
+
+    // Gọi hàm createLineChart() với giá trị mặc định là "week" khi trang được tải xong
+    createLineChart(7, ['Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ nhật']);
+});
+    </script>
 @endsection

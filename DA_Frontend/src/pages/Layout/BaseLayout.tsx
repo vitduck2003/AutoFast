@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Header from "./Header";
 const BaseLayout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName,setUserName] =useState(); //
@@ -60,8 +61,8 @@ const BaseLayout = () => {
 
   return (
     <div>
-      {/* TopBar */}
-      <div className="container-fluid bg-light p-0">
+
+       <div className="container-fluid bg-light p-0">
         <div className="row gx-0 d-none d-lg-flex">
           <div className="col-lg-7 px-5 text-start">
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
@@ -77,7 +78,7 @@ const BaseLayout = () => {
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
               <small className="fa fa-phone-alt text-primary me-2"></small>
               <small>+84 988 678 999 </small>
-              {/* <Link to={`/account`}> */}
+          
               <div>
       {isLoggedIn && (
         <div className="user-info">
@@ -102,7 +103,7 @@ const BaseLayout = () => {
     </div>
 
 
-                {/* </Link> */}
+           
             </div>
             <div className="h-100 d-inline-flex align-items-center">
            
@@ -128,8 +129,8 @@ const BaseLayout = () => {
             </div>
           </div>
         </div>
-      </div>
-      {/* NarBar */}
+      </div> 
+ 
       <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style={{ zIndex: 1 }}>
         <a
           href="/"
@@ -194,7 +195,12 @@ const BaseLayout = () => {
             Đặt lịch ngay<i className="fa fa-arrow-right ms-3"></i>
           </a>
         </div>
-      </nav>
+      </nav> 
+      <div>
+        <Header></Header>
+      </div>
+
+      
       <Outlet />
       <div
         className="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
