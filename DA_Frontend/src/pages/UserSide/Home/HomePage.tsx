@@ -153,13 +153,15 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
         <div className="container">
           <div className="row g-5">
             <div className="col-lg-6 pt-4" style={{ minHeight: "400px" }}>
-              <div
+              {aboutz.map((item:any ) =>{
+                return <div
+                key={item.id}
                 className="position-relative h-100 wow fadeIn"
                 data-wow-delay="0.1s"
               >
                 <img
                   className="position-absolute img-fluid w-100 h-100"
-                  src={aboutimg}
+                  src={item.img}
                   alt=""
                 />
                 <div className="position-absolute top-0 end-0 mt-n4 me-n4 py-4 px-5">
@@ -169,20 +171,25 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
                   <h4 className="text-white">Kinh nghiệm</h4>
                 </div>
               </div>
+              })}
             </div>
             <div className="col-lg-6">
-              <h6 className="text-primary text-uppercase">
+              <div>
+                {aboutz.map((item: any) =>{
+                  return <div>
+                <h6 className="text-primary text-uppercase">
                 // Về chúng tôi //
               </h6>
               <h1 className="mb-4">
-                <span className="text-primary">Auto Fast</span> Dịch vụ bảo
-                dưỡng xe cao cấp
+                <span className="text-primary">{item.name}</span> 
               </h1>
               <p className="mb-4">
-                Với 15 năm kinh nghiệm trong lĩnh vực bảo dưỡng và sửa chữa xe ô
-                tô, chúng tôi tự tin nói rằng chúng tôi chính là bố của các Gara
-                ô tô, gọi bố đi các con
+              {item.content}
               </p>
+                </div>
+                 })}
+              </div>
+             
               <div className="row g-4 mb-3 pb-3">
                 <div className="col-12 wow fadeIn" data-wow-delay="0.1s">
                   <div className="d-flex">
@@ -238,46 +245,19 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
       <div className="container-fluid fact bg-dark my-5 py-5">
         <div className="container">
           <div className="row g-4">
-            <div
+            {abouts.map((item: any)=>{
+              return <div
+              key={item.id}
               className="col-md-6 col-lg-3 text-center wow fadeIn"
               data-wow-delay="0.1s"
             >
               <i className="fa fa-check fa-2x text-white mb-3"></i>
               <h2 className="text-white mb-2" data-toggle="counter-up">
-                15
+                {item.soluong}
               </h2>
-              <p className="text-white mb-0">Năm kinh nghiệm</p>
+              <p className="text-white mb-0">{item.name}</p>
             </div>
-            <div
-              className="col-md-6 col-lg-3 text-center wow fadeIn"
-              data-wow-delay="0.3s"
-            >
-              <i className="fa fa-users-cog fa-2x text-white mb-3"></i>
-              <h2 className="text-white mb-2" data-toggle="counter-up">
-                10
-              </h2>
-              <p className="text-white mb-0">Kỹ sư đẳng cấp</p>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 text-center wow fadeIn"
-              data-wow-delay="0.5s"
-            >
-              <i className="fa fa-users fa-2x text-white mb-3"></i>
-              <h2 className="text-white mb-2" data-toggle="counter-up">
-                83454
-              </h2>
-              <p className="text-white mb-0">Khách hài lòng</p>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 text-center wow fadeIn"
-              data-wow-delay="0.7s"
-            >
-              <i className="fa fa-car fa-2x text-white mb-3"></i>
-              <h2 className="text-white mb-2" data-toggle="counter-up">
-                123454
-              </h2>
-              <p className="text-white mb-0">Dự án hoàn thiện</p>
-            </div>
+            })}
           </div>
         </div>
       </div>
@@ -399,7 +379,9 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>
           <div className="row g-4">
-            <div
+            {technicians.map((item:any) =>{
+              return  <div
+              key={item.id}
               className="col-lg-3 col-md-6 wow fadeInUp"
               data-wow-delay="0.1s"
             >
@@ -408,7 +390,7 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
                   <img
                     style={{ width: "500px" }}
                     className="img-fluid"
-                    src={khabanhimg}
+                    src={item.image}
                     alt=""
                   />
                   <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
@@ -424,106 +406,13 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
                   </div>
                 </div>
                 <div className="bg-light text-center p-4">
-                  <h5 className="fw-bold mb-0">Ngô Bá Khá </h5>
-                  <small>Với kinh nghiệm từng đi tù 10 năm</small>
+                  <h5 className="fw-bold mb-0">{item.name}</h5>
+                  <small>{item.information}</small>
                 </div>
               </div>
             </div>
-            <div
-              className="col-lg-3 col-md-6 wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
-              <div className="team-item">
-                <div className="position-relative overflow-hidden">
-                  <img
-                    style={{ width: "500px" }}
-                    className="img-fluid"
-                    src={huanhoahongimg}
-                    alt=""
-                  />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="bg-light text-center p-4">
-                  <h5 className="fw-bold mb-0">Huấn Hoa Hồng</h5>
-                  <small>Với kinh nghiệm cụt một ngón tay khi chơi 3 cây</small>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-3 col-md-6 wow fadeInUp"
-              data-wow-delay="0.5s"
-            >
-              <div className="team-item">
-                <div className="position-relative overflow-hidden">
-                  <img
-                    style={{ width: "500px" }}
-                    className="img-fluid"
-                    src={khanhskyimg}
-                    alt=""
-                  />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="bg-light text-center p-4">
-                  <h5 className="fw-bold mb-0">Khánh sờ Kai</h5>
-                  <small>
-                    Kinh nghiệm 15 năm thích nói mồm, nói phét trên mạng
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-3 col-md-6 wow fadeInUp"
-              data-wow-delay="0.7s"
-            >
-              <div className="team-item">
-                <div className="position-relative overflow-hidden">
-                  <img
-                    style={{ width: "500px" }}
-                    className="img-fluid"
-                    src={traizanimeimg}
-                    alt=""
-                  />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                    <a className="btn btn-square mx-1" href="">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="bg-light text-center p-4">
-                  <h5 className="fw-bold mb-0">Nguyễn Đức Trọng</h5>
-                  <small>
-                    Hơn 20 năm kinh nghiệm đóng vai trai alime tại Osaka Nhật
-                    bản
-                  </small>
-                </div>
-              </div>
-            </div>
+            
+          })}
           </div>
         </div>
       </div>
