@@ -50,15 +50,14 @@ const SearchBooking = (props: IProps) => {
 
   return (
     <div>
-      <div className="container-fluid page-header mb-5 p-0">
-        <div className="container-fluid page-header-inner py-5">
-          <div className="container text-center">
-            <h1 className="display-3 text-white mb-3 animated slideInDown">
-              Tìm kiếm lịch bảo dưỡng
-            </h1>
-          </div>
+     <div className="text-center wow fadeInUp" data-wow-delay="0.1s" style={{textAlign: 'center',  marginTop: '50px'}}>
+          <h6 className="text-primary text-uppercase">
+            // Search Booking //
+          </h6>
+          <h1 className="mb-5" style={{marginBottom: '5rem',}}>
+            Tìm kiếm lịch đặt
+          </h1>
         </div>
-      </div>
       <div style={{ marginTop: "50px" }} className="container">
         <div className="row">
           <div style={{ marginTop: "20px" }} className="col-md-6 form-search">
