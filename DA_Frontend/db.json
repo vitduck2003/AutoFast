@@ -82,5 +82,54 @@
       "name": "Dự án hoàn thiện",
       "soluong": "123"
     }
-  ]
+  ],
+   "servicehome": [
+    {
+      "id": 1,
+      "name": "Đại Tu Động Cơ Ô Tô",
+      "img": "https://otohathanh.com/upload/images/bao-duong-khoang-may-o-to.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Bảo Dưỡng Ô Tô Định Kỳ",
+      "img": "https://otohathanh.com/upload/images/bao-duong-co-ban.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Sửa Chữa Hộp Số Tự Động",
+      "img": "https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-ha-noi.jpg"
+    }
+   ],
+   "servicepage": [
+    {
+      "id": 1, 
+      "name": "Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi",
+      "img": "https://otohathanh.com/upload/images/noi-soi-dieu-hoa-o-to.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Đại Tu Động Cơ Ô Tô",
+      "img": "https://otohathanh.com/upload/images/bao-duong-khoang-may-o-to.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Chẩn Đoán & Xử Lý Hệ Thống Điện Ô Tô",
+      "img": "https://otohathanh.com/upload/images/sua-dien-o-to.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Sửa Chữa Khung Gầm Ô Tô",
+      "img": "https://otohathanh.com/upload/images/chay-dau-gam-may-o-to(1).jpg"
+    },
+    {
+      "id": 5,
+      "name": "Bảo Dưỡng Ô Tô Định Kỳ",
+      "img": "https://otohathanh.com/upload/images/bao-duong-co-ban.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Sửa Chữa Hộp Số Tự Động",
+      "img": "https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-ha-noi.jpg"
+    }
+   ]
 }

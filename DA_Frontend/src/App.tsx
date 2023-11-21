@@ -85,6 +85,8 @@ import { searchBooking } from "./api/searchBooking";
 import { getTechnicians } from "./api/Client/technicians";
 import { getAbout, getAbouts, getAboutz } from "./api/Client/about";
 import Home from "./pages/UserSide/Home/Home";
+import ServiceClientNew from "./pages/UserSide/Service/ServiceClineNew";
+import { getServiceHome, getServicePage } from "./api/Client/servicecl";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -99,6 +101,8 @@ function App() {
   const [about, setAbout] = useState<any>([]);
   const [abouts, setAbouts] = useState<any>([]);
   const [aboutz, setAboutz] = useState<any>([]);
+  const [serviceHome, setServiceHome] = useState<any>([]);
+  const [servicePage, setServicePage] = useState<any>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -112,6 +116,8 @@ function App() {
     getAbout().then(({data}) => setAbout(data));
     getAbouts().then(({data}) => setAbouts(data));
     getAboutz().then(({data}) => setAboutz(data));
+    getServiceHome().then(({data}) => setServiceHome(data));
+    getServicePage().then(({data}) => setServicePage(data));
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -231,7 +237,7 @@ const onHandleRemoveServiceItem = (id: number) => {
         <Routes>
           {/* User Side */}
           <Route path="/" element={<BaseLayout />}>
-            <Route index element={<HomePage onAddBooking={onHandleBooking} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
+            <Route index element={<HomePage onAddBooking={onHandleBooking} serviceHome={serviceHome} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
             {/* Booking Page */}
             <Route path="booking">
               <Route
@@ -245,6 +251,9 @@ const onHandleRemoveServiceItem = (id: number) => {
             </Route>
                 <Route path="home" >
                   <Route index element={<Home/>}/>
+                </Route>
+                <Route path="servicenew" >
+                  <Route index element={<ServiceClientNew/>}/>
                 </Route>
             {/* Contact Page */}
             <Route path="contact">

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
-const HomePage = ({about, technicians, abouts, aboutz}) => {
+const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
   const navigate = useNavigate();
   const {
     register,
@@ -31,6 +31,14 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
   //     navigate("/");
   //   }
   // };
+  const slideStyle = {
+    transitionDuration: '0ms',
+    transform: "translate3d(-657.333px, 0px, 0px)"
+};
+const slideStyle2 ={
+    width: "278.667px",
+    marginRight: "50px"
+}
   return (
     <div>
       {/* Carousel Start */}
@@ -262,86 +270,54 @@ const HomePage = ({about, technicians, abouts, aboutz}) => {
         </div>
       </div>
       {/* Service Start */}
-      <div className="container-xxl service py-5">
-        <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 className="text-primary text-uppercase">
-              // Các dịch vụ của chúng tôi //
-            </h6>
-            <h1 className="mb-5">Khám phá các dịch vụ</h1>
+      <div className="container">
+    <h3 className="heading-main text-center text-uppercase bm-lv-1">
+        <span>Dịch vụ</span>
+        <span>nổi bật</span>
+    </h3>
+    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events">
+      <div  className="swiper-wrapper" style={slideStyle}>
+      {serviceHome.map((item:any)=>(
+         <><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
+          <div className="service-item">
+            <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
+              <span className="img img-cover auto-scale img-effect zoom-in-1">
+                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></span>
+              <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></a>
+            <h4 className="title text-center text-uppercase fw-700">
+              <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
+            </h4>
           </div>
-          <div className="row g-4 wow fadeInUp" data-wow-delay="0.3s">
-            <div className="col-lg-4">
-              <div className="nav w-100 nav-pills me-4">
-                <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4">
-                  <i className="fa fa-car-side fa-2x me-3"></i>
-                  <h4 className="m-0">Bảo Dưỡng và sửa chữa</h4>
-                </button>
-                <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4">
-                  <i className="fa fa-car fa-2x me-3"></i>
-                  <h4 className="m-0">Chuẩn đoán và vệ sinh</h4>
-                </button>
-                <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-4">
-                  <i className="fa fa-cog fa-2x me-3"></i>
-                  <h4 className="m-0">Thay thế phụ tùng chính hãng </h4>
-                </button>
-                <button className="nav-link w-100 d-flex align-items-center text-start p-4 mb-0">
-                  <i className="fa fa-oil-can fa-2x me-3"></i>
-                  <h4 className="m-0">Thay dầu và vệ sinh</h4>
-                </button>
-              </div>
+        </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
+            <div className="service-item">
+              <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô" className="img-wrap">
+                <span className="img img-cover auto-scale img-effect zoom-in-1">
+                  <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-don-noi-that-o-to-chuyen-nghiep.jpg" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-2.png" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></a>
+              <h4 className="title text-center text-uppercase fw-700">
+                <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô">Chăm Sóc &amp; Làm Đẹp Ô Tô</a>
+              </h4>
             </div>
-            <div className="col-lg-8">
-              <div className="tab-content w-100">
-                <div className="tab-pane fade show active" id="tab-pane-1">
-                  <div className="row g-4">
-                    <div className="col-md-6" style={{ minHeight: "350px" }}>
-                      <div className="position-relative h-100">
-                        <img
-                          className="position-absolute img-fluid w-100 h-100"
-                          src={service1img}
-                          style={{ objectFit: "cover" }}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <h3 className="mb-3">
-                        15 năm kinh nghiệm trong dịch vụ bảo dưỡng
-                      </h3>
-                      <p className="mb-4">
-                        Với các kỹ sư chuyên nghiệp từng làm việc tại các hãng
-                        lớn như Lamborghin, Ferrari, MCLaren, Porsche, Bugatti
-                        và các thiết bị công nghệ cao và hiện đại bậc nhất Việc
-                        Nam, chúng tôi tự tin nói rằng mấy thàng khác không có
-                        tuổi với chúng tôi{" "}
-                      </p>
-                      <p>
-                        <i className="fa fa-check text-success me-3"></i>Dịch vụ
-                        cao cấp
-                      </p>
-                      <p>
-                        <i className="fa fa-check text-success me-3"></i>Kỹ sư
-                        chuyên nghiệp
-                      </p>
-                      <p>
-                        <i className="fa fa-check text-success me-3"></i>Trang
-                        thiết bị hiện đại
-                      </p>
-                      <a
-                        href="booking"
-                        className="btn btn-primary py-3 px-5 mt-3"
-                      >
-                        Đặt lịch<i className="fa fa-arrow-right ms-3"></i>
-                      </a>
-                    </div>
-                  </div>
+          </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
+            <div className="service-item">
+              <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" className="img-wrap">
+                <span className="img img-cover auto-scale img-effect zoom-in-1">
+                  <img className=" ls-is-cached lazyloaded" src={item.img} alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-3.png" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
+              <h4 className="title text-center text-uppercase fw-700">
+                <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ">{item.name}</a>
+              </h4>
+            </div>
+          </div></>
+      ))}
+         
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+        <div className="swiper-button-next"></div>
+        <div className="swiper-button-prev"></div>
+        
+    </div>
+</div>
 
       {/* Booking */}
 
