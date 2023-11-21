@@ -87,6 +87,7 @@ import { getAbout, getAbouts, getAboutz } from "./api/Client/about";
 import Home from "./pages/UserSide/Home/Home";
 import ServiceClientNew from "./pages/UserSide/Service/ServiceClineNew";
 import { getServiceHome, getServicePage } from "./api/Client/servicecl";
+import ServiceDetailV from "./pages/UserSide/Service/ServiceDetailV";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -255,6 +256,7 @@ const onHandleRemoveServiceItem = (id: number) => {
                 <Route path="servicenew" >
                   <Route index element={<ServiceClientNew/>}/>
                 </Route>
+                
             {/* Contact Page */}
             <Route path="contact">
               <Route index element={<ContactPage />} />
@@ -271,6 +273,7 @@ const onHandleRemoveServiceItem = (id: number) => {
             </Route>
             <Route path="service">
               <Route index element={<ServicePage servicePage={servicePage} />} />
+              <Route path="vesinh" element={<ServiceDetailV/>}/>
             </Route>
 
             {/* About Page */}

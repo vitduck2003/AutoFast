@@ -35,7 +35,7 @@ const ServicePage = (props:any) => {
               {props.servicePage.map((item: any)=>{
                 return <div key={item.id} className="col mb-5">
             <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
-              <a href="bao-duong-dieu-hoa-o-to-cong-nghe-noi-soi.aspx" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
+              <a href="/service/vesinh" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
                 <img className=" lazyloaded" src={item.img} alt="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" />
               </a>
               <h4 className="title fw-600"><a href="bao-duong-dieu-hoa-o-to-cong-nghe-noi-soi.aspx" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.name}</a></h4>
