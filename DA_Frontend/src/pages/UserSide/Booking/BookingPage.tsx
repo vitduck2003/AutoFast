@@ -327,24 +327,16 @@ const BookingPage = (props: any) => {
 
   return (
    <div>
-    <div className="container-fluid page-header mb-5 p-0" id=''>
-    <div className="container-fluid page-header-inner py-5" id=''>
-        <div className="container text-center" id=''>
-            <h1 className="display-3 text-white mb-3 animated slideInDown" id=''>About Us</h1>
-            <nav aria-label="breadcrumb" id=''>
-                <ol className="breadcrumb justify-content-center text-uppercase" id=''>
-                    <li className="breadcrumb-item" id=''><a href="#">Home</a></li>
-                    <li className="breadcrumb-item" id=''><a href="#">Pages</a></li>
-                    <li className="breadcrumb-item text-white active" aria-current="page" id=''>About Us</li>
-                </ol>
-            </nav>
+    <div className="text-center wow fadeInUp" data-wow-delay="0.1s" style={{textAlign: 'center', marginTop: '80px'}}>
+          <h6 className="text-primary text-uppercase">
+            // Booking //
+          </h6>
+          <h1 className="mb-5" style={{marginBottom: '5rem',}}>
+            Đặt lịch
+          </h1>
         </div>
-    </div>
-</div>
-    
 
     <div style={{ marginLeft: "50px", marginRight: "50px" }}>
-      <h1 style={{ textAlign: "center", marginTop: "20px" }}>Đặt lịch</h1>
       <form onSubmit={handleSubmit} style={{ marginTop: "80px" }}>
         <div className="container">
           <div className="row">

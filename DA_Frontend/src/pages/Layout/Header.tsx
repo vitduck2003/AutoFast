@@ -15,14 +15,14 @@ const Header = (props: Props) => {
         <div className="middle-bar">
           <div className="container d-flex align-items-center justify-content-between">
             <div className="logo text-center mb-4">
-              <a href="index.html" title="Trang chủ" className="img img-scaledown d-inline-block">
+              <a href="#" title="Trang chủ" className="img img-scaledown d-inline-block">
                 <img
                   className="lazyload"
                   data-src="/upload/images/logo/logo-chinh-moi-t6.png"
                   alt="logo"
                 />
               </a>
-              <span className="slogan d-block">Hệ Thống Sửa Chữa & Chăm Sóc Ô Tô Cao Cấp</span>
+              <span className="slogan d-block">Hệ Thống Sửa Chữa & Chăm Sóc Ô Tô Cao Cấp Auto Fast</span>
             </div>
             <div className="contact-header d-flex align-items-center">
               <ul className="list-social list-unstyled d-flex align-items-center mb-0">
@@ -51,38 +51,24 @@ const Header = (props: Props) => {
               <nav className="main-menu" aria-label="main-menu">
             <ul className="list-unstyled d-flex justify-content-end m-0">
                                             <li>
-                    <a href="index.html" className="d-block fw-bold"
+                    <a href="/" className="d-block fw-bold"
                        title="TRANG CHỦ">TRANG CHỦ </a>
                                     </li>
 
                                             <li>
-                    <a href="gioi-thieu.html" className="d-block fw-bold"
-                       title="GIỚI THIỆU">GIỚI THIỆU <i
-                       className="fa-solid fa-chevron-down ms-1"></i></a>
+                    <a  className="d-block fw-bold"
+                       title="GIỚI THIỆU">GIỚI THIỆU ↓</a>
                                             <ul className="sub-menu list-unstyled m-0 ">
                     <li>
-            <a href="ve-chung-toi.html"
+            <a href="about"
                title="Về Chúng Tôi">Về Chúng Tôi</a>
-                    </li>
-                    <li>
-            <a href="bao-chi-noi-ve-ha-thanh-garage.html"
-               title="Báo Chí Nói Về Hà Thành">Báo Chí Nói Về Hà Thành</a>
-                    </li>
-                    <li>
-            <a href="su-kien-ha-thanh-garage.html"
-               title="Sự Kiện Hà Thành">Sự Kiện Hà Thành</a>
-                    </li>
-                    <li>
-            <a href="he-thong-chi-nhanh-garage-o-to-ha-thanh.html"
-               title="Hệ Thống Chi Nhánh">Hệ Thống Chi Nhánh</a>
                     </li>
     </ul>
                                     </li>
 
                                             <li>
-                    <a href="dich-vu.html" className="d-block fw-bold"
-                       title="DỊCH VỤ">DỊCH VỤ <i
-                       className="fa-solid fa-chevron-down ms-1"></i></a>
+                    <a href="service" className="d-block fw-bold"
+                       title="DỊCH VỤ">DỊCH VỤ ↓</a>
                                             <ul className="sub-menu list-unstyled m-0 ">
                     <li>
             <a href="danh-muc-bao-duong-sua-chua.html"
@@ -179,8 +165,7 @@ const Header = (props: Props) => {
 
                                             <li>
                     <a href="san-pham-o-to.html" className="d-block fw-bold"
-                       title="PHỤ KIỆN">PHỤ KIỆN <i
-                       className="fa-solid fa-chevron-down ms-1"></i></a>
+                       title="PHỤ KIỆN">PHỤ KIỆN ↓</a>
                                             <ul className="sub-menu list-unstyled m-0 ">
                     <li>
             <a href="man-hinh-o-to.html"
@@ -228,69 +213,22 @@ const Header = (props: Props) => {
                     </li>
     </ul>
                                     </li>
-
-                                            <li>
-                    <a href="blog.html" className="d-block fw-bold"
-                       title="BLOG">BLOG <i
-                       className="fa-solid fa-chevron-down ms-1"></i></a>
-                                            <ul className="sub-menu list-unstyled m-0 ">
-                    <li>
-            <a href="kinh-nghiem-sua-chua-bao-duong.html"
-               title="Chuyên Mục Bảo Dưỡng & Sửa Chữa">Chuyên Mục Bảo Dưỡng & Sửa Chữa</a>
-                    </li>
-                    <li>
-            <a href="kinh-nghiem-son-xe-o-to.html"
-               title="Chuyên Mục Sơn Ô Tô">Chuyên Mục Sơn Ô Tô</a>
-                    </li>
-                    <li>
-            <a href="kinh-nghiem-cham-soc-xe.html"
-               title="Chuyên Mục Chăm Sóc & Làm Đẹp Ô Tô">Chuyên Mục Chăm Sóc & Làm Đẹp Ô Tô</a>
-                    </li>
-                    <li>
-            <a href="tin-tuc-o-to-cap-nhat-moi.html"
-               title="Tin Tức Ô Tô">Tin Tức Ô Tô</a>
-                    </li>
-                    <li>
-            <a href="kien-thuc-trai-nghiem-o-to.html"
-               title="Kiến Thức & Trải Nghiệm Ô Tô">Kiến Thức & Trải Nghiệm Ô Tô</a>
-                    </li>
-                    <li>
-            <a href="phu-kien-phu-tung-hoa-chat.html"
-               title="Phụ Kiện Ô Tô">Phụ Kiện Ô Tô</a>
-                    </li>
-                    <li>
-            <a href="tin-tuc-giao-thong.html"
-               title="Tin Tức Giao Thông">Tin Tức Giao Thông</a>
-                    </li>
-    </ul>
+                                    <li>
+                    <a href="news" className="d-block fw-bold"
+                       title="KHUYẾN MẠI">Tin Tức</a>
                                     </li>
 
-                                            <li>
-                    <a href="tin-khuyen-mai.html" className="d-block fw-bold"
-                       title="KHUYẾN MẠI">KHUYẾN MẠI </a>
-                                    </li>
+                                         
 
                                             <li>
-                    <a href="lien-he.html" className="d-block fw-bold"
-                       title="LIÊN HỆ">LIÊN HỆ <i
-                       className="fa-solid fa-chevron-down ms-1"></i></a>
+                    <a className="d-block fw-bold"
+                       title="LIÊN HỆ">LIÊN HỆ ↓ </a>
                                             <ul className="sub-menu list-unstyled m-0 ">
                     <li>
-            <a href="lien-he-2.html"
+            <a href="contact"
                title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a>
                     </li>
-                    <li>
-            <a href="lien-he-2.html"
-               title="Hợp tác đối tác">Hợp tác đối tác</a>
-                    </li>
-                    <li>
-            <a href="tuyen-dung.html"
-               title="Tuyển dụng">Tuyển dụng</a>
-                    </li>
-                    <li>
-            <a href="dao-tao.html"
-               title="Đào tạo">Đào tạo</a>
-                    </li>
+                    
     </ul>
                                     </li>
 

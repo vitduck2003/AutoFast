@@ -14,31 +14,9 @@ const NewsPage = ( props: any) => {
       <div>
         
       </div>
-     <div className="container-fluid page-header mb-5 p-1">
-        <div className="container-fluid page-header-inner py-4">
-          <div className="container text-center p">
-            <h1 className="display-3 text-white mb-3 animated slideInDown s">
-              Tin Tức
-            </h1>
-            <nav aria-label="breadcrumb a">
-              <ol className="breadcrumb justify-content-center text-uppercase a">
-                <li className="breadcrumb-item b">
-                  <a href="">Home</a>
-                </li>
-                <li className="breadcrumb-item bb">
-                  <a href="">Pages</a>
-                </li>
-                <li
-                  className="breadcrumb-item text-white active z"
-                  aria-current="page"
-                >
-                  Newss
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-      </div>
+
+
+      
        <div className="container-xxl py-5 4">
        <div className="row sa">
         <div className="col-md-8 g">

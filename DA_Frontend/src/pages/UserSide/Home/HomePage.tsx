@@ -333,6 +333,7 @@ const slideStyle2 ={
                   Một trong những Gara ô tô từng được đề cử và đạt giải thưởng
                   Nobel Hòa Bình{" "}
                 </h1>
+                
                 <p className="text-white mb-0">
                   Sóng bắt đầu từ gió, gió bắt đầu từ đâu, em cũng không biết
                   nữa, khi nào ta yêu nhau!

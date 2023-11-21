@@ -176,9 +176,6 @@ const BaseLayout = () => {
                 <a href="technicians" className="dropdown-item">
                   Kỹ thuật viên
                 </a>
-                <a href="review" className="dropdown-item">
-                  Đánh giá
-                </a>
               </div>
             </div>
             <a href="contact" className="nav-item nav-link">

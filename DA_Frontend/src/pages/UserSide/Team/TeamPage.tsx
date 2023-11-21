@@ -18,25 +18,11 @@ const TeamPage = (props: any) => {
      </div>
 
             })}
-        <div className="container-fluid page-header mb-5 p-0 ">
-    <div className="container-fluid page-header-inner py-5 ">
-        <div className="container text-center ">
-            <h1 className="display-3 text-white mb-3 animated slideInDown ">Kỹ thuật viên</h1>
-            <nav aria-label="breadcrumb" >
-                <ol className="breadcrumb justify-content-center text-uppercase ">
-                    <li className="breadcrumb-item "><a href="#">Home</a></li>
-                    <li className="breadcrumb-item "><a href="#">Pages</a></li>
-                    <li className="breadcrumb-item text-white active" aria-current="page">Technicians</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
 {/* Team Start */}
 <div className="container">
   
      <div className="container" >
-        <div className="text-center" data-wow-delay="0.1s">
+        <div className="text-center" data-wow-delay="0.1s" style={{marginTop: '80px'}}>
           <h6 className="text-primary text-uppercase">// Các kỹ sư của chúng tôi //</h6>
           <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
         </div>
