@@ -300,12 +300,12 @@ const slideStyle2 ={
             </div>
           </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
             <div className="service-item">
-              <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" className="img-wrap">
+              <a href="/service" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
                   <img className=" ls-is-cached lazyloaded" src={item.img} alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></span>
                 <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-3.png" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
-                <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ">{item.name}</a>
+                <a href="/service" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ">{item.name}</a>
               </h4>
             </div>
           </div></>
