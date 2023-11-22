@@ -4,6 +4,7 @@ import './style.css'
 
 
 const NewsPage = ( props: any) => {
+  console.log(props);
   
   const news = props.news
   console.log(news);
@@ -15,16 +16,20 @@ const NewsPage = ( props: any) => {
                         <h2 className="heading-primary mb-4 text-start"><a href="kinh-nghiem-cham-soc-xe.aspx">Chuyên Mục Chăm Sóc Xe</a></h2>
 
                     </div>
-                                                                    <div className="col-lg-8 col-12" data-sal-duration="1600">
-                            <div className="blog-item">
+                        <div className="col-lg-8 col-12" data-sal-duration="1600">
+                            {news.map((item:any)=>{
+
+                            
+                           return <div key={item.id} className="blog-item">
                                 <a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="img img-cover img-effect zoom-in-1 auto-scale">
-                                    <img className=" lazyloaded" src="https://otohathanh.com/uploads/images/bai-viet/kinh-nghiem/1-2-.jpg" alt="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" />
+                                    <img className=" lazyloaded" src={item.image} alt="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" />
                                 </a>
                                 <time className="d-inline-flex align-items-center" dateTime="2020-08-13"><i className="me-1 fa-solid fa-calendar-days"></i> 13-08-2020</time>
-                                <h4 className="title fw-700 mb-2"><a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?">Tại vì sao động cơ xe ô tô của bạn lại quá nóng?</a>
+                                <h4 className="title fw-700 mb-2"><a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?">{item.title}</a>
                                 </h4>
-                                <p className="description">Động cơ ô tô quá nóng nếu không được bảo dưỡng kịp thời có thể gây ra những phiền phức lớn trên đường. Việc kiểm tra thường xuyên giúp bạn tìm hiểu nguyên nhân và sớm có biện pháp khắc phục. Hôm nay ô tô Hà Thành sẽ chia sẻ cho bạn một...<a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="read-more">Xem thêm <i className="fa-solid fa-angles-right"></i></a></p>
+                                <p className="description">{item.content}<a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="read-more"><i className="fa-solid fa-angles-right"></i></a></p>
                             </div>
+                            })}
                         </div>
                     
                     <div className="col-lg-4 col-12">
