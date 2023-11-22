@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
+use App\Http\Controllers\Admin\Statistic\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,3 +150,7 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
   Route::get('sendbasicemail',[MailController::class,'basic_email']);
   Route::get('sendhtmlemail',[MailController::class,'html_email']);
   Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
+
+  Route::prefix('admin')->group(function () {
+    Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
+});

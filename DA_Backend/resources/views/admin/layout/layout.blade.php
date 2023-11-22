@@ -319,6 +319,19 @@
                                 <li><a href="dashboard-crypto.html">Crypto</a></li>
                             </ul>
                         </li>
+
+                        <li class="menu-title">Thống kê</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Thống kê</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/statistic') }}">Tất cả thống kê</a></li>
+                            </ul>
+                        </li>
+
+                        
                         <li class="menu-title">Đặt lịch</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -420,6 +433,7 @@
                                 <li><a href="{{ url('admin/reviews/delete') }}">Tất cả đánh giá đã xóa</a></li>
                             </ul>
                         </li>
+
                         <li class="menu-title">Tin tức</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
