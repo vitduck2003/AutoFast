@@ -1,9 +1,61 @@
 import React from 'react';
 import './main.css';
 import './style.css'
+import { useEffect, useState } from "react";
+import Link from 'antd/es/typography/Link';
 type Props = {};
 
 const Header = (props: Props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName,setUserName] =useState(); //
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [img,setImg]=useState(); //
+  useEffect(() => {
+    const sessionData = sessionStorage.getItem("user");
+    console.log({sessionData});
+    if (sessionData) {
+      // Session Storage tồn tại, người dùng đã đăng nhập
+      const userData = JSON.parse(sessionData); // Parse the JSON string into an object
+    setImg(userData.avatar);
+     setUserName( userData.name)
+      setIsLoggedIn(true);
+    }
+  }, []);
+  function clearSession() {
+    // Xóa toàn bộ dữ liệu từ Session Storage
+    sessionStorage.clear();
+
+    // Hoặc nếu bạn chỉ muốn xóa một mục cụ thể, bạn có thể sử dụng:
+    // sessionStorage.removeItem('yourKey');
+  }
+  const userTextStyle = {
+    display: 'inline-block',
+    cursor: 'pointer',
+  };
+  const avatarUser = {
+    width:'30px',
+    height:'30px',
+    borderRadius:'99%'
+  }
+  const dropdownContentStyle = {
+    display: isDropdownVisible ? 'block' : 'none',
+    position: 'absolute',
+    backgroundColor: '#f9f9f9',
+    minWidth: '160px',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: '10',
+  };
+
+  const dropdownContentLinkStyle = {
+    display: 'block',
+    padding: '12px 16px',
+    textDecoration: 'none',
+    color: 'black',
+  };
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
   return (
     <header className="header">
       <section
@@ -25,22 +77,9 @@ const Header = (props: Props) => {
               <span className="slogan d-block">Hệ Thống Sửa Chữa & Chăm Sóc Ô Tô Cao Cấp Auto Fast</span>
             </div>
             <div className="contact-header d-flex align-items-center">
-              <ul className="list-social list-unstyled d-flex align-items-center mb-0">
-                <li className="mx-1">
-                  <a href="https://www.facebook.com/spaoto.caocap.HaThanh" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/facebook.png" alt="" />
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a href="https://www.youtube.com/channel/UCB9l9dhVspUECgyOeWflqog" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/youtube.png" alt="" />
-                  </a>
-                </li>
-                {/* Add the rest of your social media links */}
-              </ul>
               <div className="contact ms-3">
                 <a href="tel:0568.05.05.05" title="" className="phone d-inline-flex align-baseline">
-                  <i className="fa-solid fa-phone me-2"></i> 0568.05.05.05
+                  0568.05.05.05
                 </a>
                 <span className="d-block">Liên hệ với chúng tôi</span>
               </div>
@@ -231,7 +270,48 @@ const Header = (props: Props) => {
                     
     </ul>
                                     </li>
-
+                            
+{/*                                   
+                                  <li>
+  <a  href="/signup" className="d-block fw-bold"
+     title="Đăng Ký">Đăng Ký</a>
+                  </li> */}
+                  {!isLoggedIn ?      <li>
+  <a  href="/signup" className="d-block fw-bold"
+     title="Đăng Ký">Đăng Ký</a>
+                  </li> : <div></div> }
+                  {!isLoggedIn ?<li>
+  <a  href="/signin" className="d-block fw-bold"
+     title="Đăng nhập">Đăng nhập</a>
+                  </li> : <div></div> }
+                  {/* <li>
+  <a  href="/signin" className="d-block fw-bold"
+     title="Đăng nhập">Đăng nhập</a>
+                  </li> */}
+ <div>
+      {isLoggedIn && (
+        <div className="user-info">
+          <small
+            className="px-5"
+            style={userTextStyle}
+            onClick={toggleDropdown}
+            onMouseOver={toggleDropdown}
+            onMouseOut={toggleDropdown}
+          >
+            Xin chào,<img style={avatarUser} src={
+                      img ? `http://localhost:8000/storage/${img}` : ""
+                    }/>  
+                    {userName}
+          </small>
+          <div style={dropdownContentStyle}>
+          
+            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
+            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
+            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
+          </div>
+        </div>
+      )}
+    </div>
                     </ul>
     </nav>
             
@@ -255,7 +335,7 @@ const Header = (props: Props) => {
             <a href="index.html" className="logo d-inline-block p-2 img img-sd">
                 <img className="lazyload" data-src="/upload/images/logo/logo-chinh-moi-t6.png" alt="logo"/>
             </a>
-            <button type="button" className="btn search-button"><i className="fa-solid fa-magnifying-glass"></i></button>
+      
         </nav>
       </section>
     </header>

@@ -66,18 +66,18 @@ const BaseLayout = () => {
         <div className="row gx-0 d-none d-lg-flex">
           <div className="col-lg-7 px-5 text-start">
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
-              <small className="fa fa-map-marker-alt text-primary me-2"></small>
-              <small>Số 88 Đường Quang Trung, Hà Đông, Hà Nội</small>
+              {/* <small className="fa fa-map-marker-alt text-primary me-2"></small> */}
+              <small> 📍 Số 88 Đường Quang Trung, Hà Đông, Hà Nội</small>
             </div>
             <div className="h-100 d-inline-flex align-items-center py-3">
-              <small className="far fa-clock text-primary me-2"></small>
-              <small>Thứ hai - Thứ bảy : 08.00 AM - 09.00 PM</small>
+              {/* <small className="far fa-clock text-primary me-2"></small> */}
+              <small> 🕒 Thứ hai - Thứ bảy : 08.00 AM - 09.00 PM</small>
             </div>
           </div>
           <div className="col-lg-5 px-5 text-end">
             <div className="h-100 d-inline-flex align-items-center py-3 me-4">
-              <small className="fa fa-phone-alt text-primary me-2"></small>
-              <small>+84 988 678 999 </small>
+              {/* <small className="fa fa-phone-alt text-primary me-2"></small> */}
+              <small> ☎ +84 988 678 999 </small>
           
               <div>
       {isLoggedIn && (
@@ -189,7 +189,7 @@ const BaseLayout = () => {
             href="booking"
             className="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
           >
-            Đặt lịch ngay<i className="fa fa-arrow-right ms-3"></i>
+            Đặt lịch ngay
           </a>
         </div>
       </nav> 

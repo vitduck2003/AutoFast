@@ -26,6 +26,9 @@ return new class extends Migration
             $table->integer('mileage');
             $table->string('status');
             $table->integer('total_price');
+            $table->timestamp('canceled_at')->nullable();
+            $table->timestamp('confirmed_at')->nullable();
+            $table->string('admin_name');
             $table->timestamps();
             $table->softDeletes();
         });
