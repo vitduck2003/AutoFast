@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Log\LogController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\Reviews\ReviewController;
 use App\Http\Controllers\MailController;
@@ -106,6 +107,7 @@ Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
           
 
         });
+
         Route::get('reviews',[ReviewController::class,'index'])->name('review');
         Route::get('reviews/delete',[ReviewController::class,'showDelete'])->name('review-show-delete');
         Route::delete('review/delete/{id}', [ReviewController::class, 'remove'])->name('review-delete');
@@ -147,4 +149,3 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
   Route::get('sendbasicemail',[MailController::class,'basic_email']);
   Route::get('sendhtmlemail',[MailController::class,'html_email']);
   Route::get('sendattachmentemail',[MailController::class,'attachment_email']);
-
