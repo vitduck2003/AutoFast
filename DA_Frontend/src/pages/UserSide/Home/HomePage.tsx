@@ -225,41 +225,45 @@ const slideStyle2 ={
       </div>
       {/* Service Start */}
       <div className="container">
-    <h3 className="heading-main text-center text-uppercase bm-lv-1">
-        <span>Dịch vụ</span>
-        <span>nổi bật</span>
-    </h3>
+      <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 className="text-primary text-uppercase">
+              // Dịch vụ //
+            </h6>
+            <h1 className="mb-5">Dịch vụ của chúng tôi</h1>
+          </div>
     <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events" style={{ zIndex: 0}}>
       <div  className="swiper-wrapper" style={slideStyle}>
       {serviceHome.map((item:any)=>(
-         <><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
+         <>
+         <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
           <div className="service-item">
-            <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
+            <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
               <span className="img img-cover auto-scale img-effect zoom-in-1">
                 <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></span>
               <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></a>
             <h4 className="title text-center text-uppercase fw-700">
-              <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
+              <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
             </h4>
           </div>
-        </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
+        </div>
+        <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
             <div className="service-item">
-              <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô" className="img-wrap">
+              <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-don-noi-that-o-to-chuyen-nghiep.jpg" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-2.png" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src="" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
-                <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô">Chăm Sóc &amp; Làm Đẹp Ô Tô</a>
+                <a href="service" title=""></a>
               </h4>
             </div>
           </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
             <div className="service-item">
-              <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" className="img-wrap">
+              <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src={item.img} alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-3.png" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src={item.image_service} alt="" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
-                <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ">{item.name}</a>
+                <a href="service" title="">{item.service_name}</a>
               </h4>
             </div>
           </div></>

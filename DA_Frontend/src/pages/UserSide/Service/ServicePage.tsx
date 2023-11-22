@@ -28,17 +28,16 @@ const ServicePage = (props:any) => {
           </ol>
         </div>
       </nav>
-
       <div className="container">
         <h1 className="heading-primary text-center" style={slideStyle2}><span>Bảo Dưỡng &amp; Sửa Chữa Ô Tô</span> </h1>
         <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1">
               {props.servicePage.map((item: any)=>{
                 return <div key={item.id} className="col mb-5">
             <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
-              <a href="/service/vesinh" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
-                <img className=" lazyloaded" src={item.img} alt="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" />
+              <a href={`/service/${item.id}`} title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
+                <img className=" lazyloaded" src={item.img_service} alt="" />
               </a>
-              <h4 className="title fw-600"><a href="bao-duong-dieu-hoa-o-to-cong-nghe-noi-soi.aspx" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.name}</a></h4>
+              <h4 className="title fw-600"><a href="" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.service_name}</a></h4>
             </div>
           </div>
 })}
