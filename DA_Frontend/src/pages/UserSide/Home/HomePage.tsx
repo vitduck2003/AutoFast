@@ -145,7 +145,7 @@ const slideStyle2 ={
                   <a
                     style={{ textDecoration: "none" }}
                     className="text-secondary border-bottom"
-                    href=""
+                    href="/about/chitiet"
                   >
                     Xem thêm
                   </a>
@@ -242,7 +242,7 @@ const slideStyle2 ={
                   </div>
                 </div>
               </div>
-              <a href="about" className="btn btn-primary py-3 px-5">
+              <a href="/about/chitiet" className="btn btn-primary py-3 px-5">
                 Xem thêm<i className="fa fa-arrow-right ms-3"></i>
               </a>
             </div>
