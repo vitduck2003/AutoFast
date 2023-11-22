@@ -77,22 +77,9 @@ const Header = (props: Props) => {
               <span className="slogan d-block">Hệ Thống Sửa Chữa & Chăm Sóc Ô Tô Cao Cấp Auto Fast</span>
             </div>
             <div className="contact-header d-flex align-items-center">
-              <ul className="list-social list-unstyled d-flex align-items-center mb-0">
-                <li className="mx-1">
-                  <a href="https://www.facebook.com/spaoto.caocap.HaThanh" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/facebook.png" alt="" />
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a href="https://www.youtube.com/channel/UCB9l9dhVspUECgyOeWflqog" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/youtube.png" alt="" />
-                  </a>
-                </li>
-                {/* Add the rest of your social media links */}
-              </ul>
               <div className="contact ms-3">
                 <a href="tel:0568.05.05.05" title="" className="phone d-inline-flex align-baseline">
-                  <i className="fa-solid fa-phone me-2"></i> 0568.05.05.05
+                  0568.05.05.05
                 </a>
                 <span className="d-block">Liên hệ với chúng tôi</span>
               </div>

@@ -42,67 +42,21 @@ const slideStyle2 ={
   return (
     <div>
       {/* Carousel Start */}
-      <div className="container-fluid p-0 mb-5" style={{ zIndex: 0 }}>
+      <div className="container-fluid p-0 mb-5" style={{ zIndex: 0}}>
         <div
           id="header-carousel"
           className="carousel slide"
           data-ride="carousel"
         >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img className="w-100" src={carouselbg1img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center"style={{ zIndex: 0 }}>
-                <div className="container">
-                  <div className="row align-items-center justify-content-center justify-content-lg-start">
-                    <div className="col-10 col-lg-7 text-center text-lg-start">
-                      <h6 className="text-white text-uppercase mb-3 animated slideInDown">
-                        // Dịch vụ //
-                      </h6>
-                      <h1 className="display-3 text-white mb-4 pb-3 animated slideInDown">
-                        Bảo dưỡng và sửa chữa xe
-                      </h1>
+         <div className="carousel-inner">
+  <div style={{ height: '600px' }} className="carousel-item active">
+    <img className="w-100 h-600" src={carouselbg1img} alt="Image" />
+  </div>
 
-                      <a
-                        href="service"
-                        className="btn btn-primary py-3 px-5 animated slideInDown"
-                      >
-                        Xem thêm<i className="fa fa-arrow-right ms-3"></i>
-                      </a>
-                    </div>
-                    <div className="col-lg-5 d-none d-lg-flex animated zoomIn">
-                      <img className="img-fluid" src={carousel1img} alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img className="w-100" src={carouselbg2img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center" style={{ zIndex: 0 }}>
-                <div className="container">
-                  <div className="row align-items-center justify-content-center justify-content-lg-start">
-                    <div className="col-10 col-lg-7 text-center text-lg-start">
-                      <h6 className="text-white text-uppercase mb-3 animated slideInDown">
-                        // Dịch vụ //
-                      </h6>
-                      <h1 className="display-3 text-white mb-4 pb-3 animated slideInDown">
-                        Thay dầu, vệ sinh và thay thế phụ tùng
-                      </h1>
-                      <a
-                        href="service"
-                        className="btn btn-primary py-3 px-5 animated slideInDown"
-                      >
-                        Xem thêm<i className="fa fa-arrow-right ms-3"></i>
-                      </a>
-                    </div>
-                    <div className="col-lg-5 d-none d-lg-flex animated zoomIn">
-                      <img className="img-fluid" src={carousel2img} alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div style={{ height: '600px' }} className="carousel-item">
+    <img className="w-100 h-600" src={carouselbg2img} alt="Image" />
+  </div>
+</div>
           <button
             className="carousel-control-prev"
             type="button"
@@ -275,7 +229,7 @@ const slideStyle2 ={
         <span>Dịch vụ</span>
         <span>nổi bật</span>
     </h3>
-    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events">
+    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events" style={{ zIndex: 0}}>
       <div  className="swiper-wrapper" style={slideStyle}>
       {serviceHome.map((item:any)=>(
          <><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
