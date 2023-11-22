@@ -141,59 +141,6 @@ session_start();
                     </div>
                 </div>
             </div>
-
-            <!-- Nhân viên -->
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="avatar-xs mr-3">
-                                <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-18">
-                                    <i class="bx bx-purchase-tag-alt"></i>
-                                </span>
-                            </div>
-                            <h5 class="font-size-14 mb-0">Thành viên</h5>
-                        </div>
-                        <div class="text-muted mt-4">
-                        <?php
-                        $total_staff = Session::get('total_staff');
-                        ?>
-                            <h4>{{ $total_staff }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-
-                                <a href="{{ route('staff') }}" class="small-box-footer">Chi tiết <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end -->
-            
-            <!-- Tài khoản -->
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="avatar-xs mr-3">
-                                <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-18">
-                                    <i class="bx bx-purchase-tag-alt"></i>
-                                </span>
-                            </div>
-                            <h5 class="font-size-14 mb-0">Người dùng</h5>
-                        </div>
-                        <div class="text-muted mt-4">
-                        <?php
-                        $total_user = Session::get('total_user');
-                        ?>
-                            <h4>{{ $total_user }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-
-                                <a href="{{ route('user.index') }}" class="small-box-footer">Chi tiết <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end -->
-            
         </div>
         <!-- end row -->
     </div>
