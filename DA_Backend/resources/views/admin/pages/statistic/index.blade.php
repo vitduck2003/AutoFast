@@ -152,15 +152,12 @@ session_start();
                                     <i class="bx bx-purchase-tag-alt"></i>
                                 </span>
                             </div>
-                            <h5 class="font-size-14 mb-0">Thành viên</h5>
+                            <h5 class="font-size-14 mb-0">Staff</h5>
                         </div>
                         <div class="text-muted mt-4">
-                        <?php
-                        $total_staff = Session::get('total_staff');
-                        ?>
-                            <h4>{{ $total_staff }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
+                            <h4>Staff: {{ $total_staff }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
 
-                                <a href="{{ route('staff') }}" class="small-box-footer">Chi tiết <i
+                                <a href="{{ route('staff') }}" class="small-box-footer">Detail <i
                                         class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -178,15 +175,12 @@ session_start();
                                     <i class="bx bx-purchase-tag-alt"></i>
                                 </span>
                             </div>
-                            <h5 class="font-size-14 mb-0">Người dùng</h5>
+                            <h5 class="font-size-14 mb-0">Customer</h5>
                         </div>
                         <div class="text-muted mt-4">
-                        <?php
-                        $total_user = Session::get('total_user');
-                        ?>
-                            <h4>{{ $total_user }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
+                            <h4>Customer: {{ $total_user }}<i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
 
-                                <a href="{{ route('user.index') }}" class="small-box-footer">Chi tiết <i
+                                <a href="{{ route('user.index') }}" class="small-box-footer">Detail <i
                                         class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
