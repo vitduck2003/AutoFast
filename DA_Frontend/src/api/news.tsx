@@ -7,6 +7,7 @@ const getNews = () => {
 const addNews = (news: INews) => {
   return instance.post("/news", news);
 };
+
 const updateNews = (news: INews) => {
   return instance.patch("/news/" + news.id, news);
 };

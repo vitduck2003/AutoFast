@@ -264,6 +264,7 @@ const slideStyle2 ={
                 <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title="">{item.service_name}</a>
+
               </h4>
             </div>
           </div></>

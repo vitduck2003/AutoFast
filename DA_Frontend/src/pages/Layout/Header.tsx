@@ -2,7 +2,7 @@ import React from 'react';
 import './main.css';
 import './style.css'
 import { useEffect, useState } from "react";
-import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
 type Props = {};
 
 const Header = (props: Props) => {
@@ -30,7 +30,12 @@ const Header = (props: Props) => {
   }
   const userTextStyle = {
     display: 'inline-block',
-    cursor: 'pointer',
+  cursor: 'pointer',
+  padding: '12.5px 16px', // Thêm padding để tăng kích thước của nút
+  borderRadius: '4px', // Thêm bo tròn cho góc của nút
+ 
+  color: 'black', // Màu chữ của nút
+  textDecoration: 'none',
   };
   const avatarUser = {
     width:'30px',
@@ -97,12 +102,11 @@ const Header = (props: Props) => {
                                             <li>
                     <a  className="d-block fw-bold"
                        title="GIỚI THIỆU">GIỚI THIỆU ↓</a>
-                                            <ul className="sub-menu list-unstyled m-0 ">
-                    <li>
-            <a href="about"
-               title="Về Chúng Tôi">Về Chúng Tôi</a>
-                    </li>
-    </ul>
+                   <ul className="sub-menu list-unstyled m-0 ">
+                      <li>
+                           <a href="about"title="Về Chúng Tôi">Về Chúng Tôi</a>
+                       </li>
+                  </ul>
                                     </li>
 
                                             <li>
@@ -270,7 +274,40 @@ const Header = (props: Props) => {
                     
     </ul>
                                     </li>
-                            
+                 <a  className="d-block fw-bold"> 
+                 <div>
+      {isLoggedIn && (
+        <div className="user-info">
+          <small
+            className="px-5"
+            style={userTextStyle}
+            onClick={toggleDropdown}
+            onMouseOver={toggleDropdown}
+            onMouseOut={toggleDropdown}
+          >
+            Xin chào,<img style={avatarUser} src={
+                      img ? `http://localhost:8000/storage/${img}` : ""
+                    }/>  
+                    {userName}
+          </small>
+          <div style={{ display: isDropdownVisible ? 'block' : 'none',
+    position: 'absolute',
+    backgroundColor: '#f9f9f9',
+    minWidth: '160px',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: '10',}}>
+          
+            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
+            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
+            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
+          </div>
+        </div>
+      )}
+    </div>
+           <ul  className="sub-menu list-unstyled m-0 ">
+           
+            </ul>     
+            </a>            
 {/*                                   
                                   <li>
   <a  href="/signup" className="d-block fw-bold"
@@ -288,30 +325,7 @@ const Header = (props: Props) => {
   <a  href="/signin" className="d-block fw-bold"
      title="Đăng nhập">Đăng nhập</a>
                   </li> */}
- <div>
-      {isLoggedIn && (
-        <div className="user-info">
-          <small
-            className="px-5"
-            style={userTextStyle}
-            onClick={toggleDropdown}
-            onMouseOver={toggleDropdown}
-            onMouseOut={toggleDropdown}
-          >
-            Xin chào,<img style={avatarUser} src={
-                      img ? `http://localhost:8000/storage/${img}` : ""
-                    }/>  
-                    {userName}
-          </small>
-          <div style={dropdownContentStyle}>
-          
-            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
-            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
-            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
-          </div>
-        </div>
-      )}
-    </div>
+ 
                     </ul>
     </nav>
             
