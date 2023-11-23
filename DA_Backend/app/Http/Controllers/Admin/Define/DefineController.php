@@ -10,6 +10,7 @@ class DefineController extends Controller
 
     public function save_file_path($file){
         
+  
         $path_goc = 'C:/xampp/htdocs/duan/';
         $backend_path=  $path_goc.'AutoFast/DA_Backend/storage/app/public/images/'.$file;
         $fontend_path =  $path_goc.'AutoFast/DA_Frontend/src/assets/img/'.$file;

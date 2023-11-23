@@ -7,6 +7,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\Define\DefineController;
+// use App\Http\Controllers\MailController;
 
 class ServiceController extends Controller
 {
@@ -21,7 +22,10 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::all();
-
+        // $mail = new MailController();
+        // $userdata =$data;
+        // $mail->xac_nhan_dat_lich($userdata);
+     
         return   view('admin\pages\services\index',compact('data'));
         
     }

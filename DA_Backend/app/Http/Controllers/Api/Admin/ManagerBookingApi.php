@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
+
 class ManagerBookingApi extends Controller
 {
     public function createBooking(Request $request)
     {
         // Lấy dữ liệu từ request
         $data = $request->all();
-
+   
         // Thực hiện insert vào bảng 'booking'
         $bookingId = DB::table('booking')->insertGetId([
             'name' => $data['full_name'],
@@ -27,6 +28,21 @@ class ManagerBookingApi extends Controller
         ]);
 
         if ($bookingId) {
+            //sendmailer
+    
+            // Thực hiện insert vào bảng 'booking_detail'
+            $bookingDetailId = DB::table('booking_detail')->insertGetId([
+                'booking_id' => $bookingId,
+                'name' => $data['name'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'target_date' => $data['target_date'],
+                'target_time' => $data['target_time'],
+                'note' => $data['note'],
+              'model_car' => $data['model_car'],
+              'mileage' => $data['mileage'],
+              'status' => $data['status'],
+            ]);
             // Thực hiện insert vào bảng 'booking_detail'
             $bookingDetailId = DB::table('booking_detail')->insertGetId([
                 'id_booking' => $bookingId,
