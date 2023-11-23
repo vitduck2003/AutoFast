@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author"> <!-- App favicon -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="shortcut icon" href="{{asset('assets\images\favicon.ico')}}">
     <link rel="shortcut icon" href="{{
     asset('assets/images/favicon.ico') }}">
@@ -207,15 +208,15 @@
                                                 <i class="bx bx-cart"></i>
                                             </span>
                                         </div>
-                                        @foreach($users as $key => $user)
+                                        {{-- @foreach($users as $key => $user) --}}
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">{{ $user['name'] }}: đã đặt lịch</h6>
+                                            {{-- <h6 class="mt-0 mb-1">{{ $user['name'] }}: đã đặt lịch</h6> --}}
                                             <div class="font-size-12 text-muted">
                                                 <p class="mb-1">If several languages coalesce the grammar</p>
                                                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
                                             </div>
                                         </div>
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </div>
                                 </a>
                                 <a href="" class="text-reset notification-item">
@@ -529,6 +530,8 @@
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
 
     <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
