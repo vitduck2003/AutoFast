@@ -208,15 +208,6 @@
                                                 <i class="bx bx-cart"></i>
                                             </span>
                                         </div>
-                                        {{-- @foreach($users as $key => $user) --}}
-                                        <div class="media-body">
-                                            {{-- <h6 class="mt-0 mb-1">{{ $user['name'] }}: đã đặt lịch</h6> --}}
-                                            <div class="font-size-12 text-muted">
-                                                <p class="mb-1">If several languages coalesce the grammar</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                            </div>
-                                        </div>
-                                        {{-- @endforeach --}}
                                     </div>
                                 </a>
                                 <a href="" class="text-reset notification-item">
@@ -328,6 +319,19 @@
                                 <li><a href="dashboard-crypto.html">Crypto</a></li>
                             </ul>
                         </li>
+
+                        <li class="menu-title">Thống kê</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Thống kê</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/statistic') }}">Tất cả thống kê</a></li>
+                            </ul>
+                        </li>
+
+                        
                         <li class="menu-title">Đặt lịch</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -429,6 +433,7 @@
                                 <li><a href="{{ url('admin/reviews/delete') }}">Tất cả đánh giá đã xóa</a></li>
                             </ul>
                         </li>
+
                         <li class="menu-title">Tin tức</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">

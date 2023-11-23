@@ -42,67 +42,21 @@ const slideStyle2 ={
   return (
     <div>
       {/* Carousel Start */}
-      <div className="container-fluid p-0 mb-5" style={{ zIndex: 0 }}>
+      <div className="container-fluid p-0 mb-5" style={{ zIndex: 0}}>
         <div
           id="header-carousel"
           className="carousel slide"
           data-ride="carousel"
         >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img className="w-100" src={carouselbg1img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center"style={{ zIndex: 0 }}>
-                <div className="container">
-                  <div className="row align-items-center justify-content-center justify-content-lg-start">
-                    <div className="col-10 col-lg-7 text-center text-lg-start">
-                      <h6 className="text-white text-uppercase mb-3 animated slideInDown">
-                        // Dịch vụ //
-                      </h6>
-                      <h1 className="display-3 text-white mb-4 pb-3 animated slideInDown">
-                        Bảo dưỡng và sửa chữa xe
-                      </h1>
+         <div className="carousel-inner">
+  <div style={{ height: '600px' }} className="carousel-item active">
+    <img className="w-100 h-600" src={carouselbg1img} alt="Image" />
+  </div>
 
-                      <a
-                        href="service"
-                        className="btn btn-primary py-3 px-5 animated slideInDown"
-                      >
-                        Xem thêm<i className="fa fa-arrow-right ms-3"></i>
-                      </a>
-                    </div>
-                    <div className="col-lg-5 d-none d-lg-flex animated zoomIn">
-                      <img className="img-fluid" src={carousel1img} alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img className="w-100" src={carouselbg2img} alt="Image" />
-              <div className="carousel-caption d-flex align-items-center" style={{ zIndex: 0 }}>
-                <div className="container">
-                  <div className="row align-items-center justify-content-center justify-content-lg-start">
-                    <div className="col-10 col-lg-7 text-center text-lg-start">
-                      <h6 className="text-white text-uppercase mb-3 animated slideInDown">
-                        // Dịch vụ //
-                      </h6>
-                      <h1 className="display-3 text-white mb-4 pb-3 animated slideInDown">
-                        Thay dầu, vệ sinh và thay thế phụ tùng
-                      </h1>
-                      <a
-                        href="service"
-                        className="btn btn-primary py-3 px-5 animated slideInDown"
-                      >
-                        Xem thêm<i className="fa fa-arrow-right ms-3"></i>
-                      </a>
-                    </div>
-                    <div className="col-lg-5 d-none d-lg-flex animated zoomIn">
-                      <img className="img-fluid" src={carousel2img} alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div style={{ height: '600px' }} className="carousel-item">
+    <img className="w-100 h-600" src={carouselbg2img} alt="Image" />
+  </div>
+</div>
           <button
             className="carousel-control-prev"
             type="button"
@@ -145,7 +99,7 @@ const slideStyle2 ={
                   <a
                     style={{ textDecoration: "none" }}
                     className="text-secondary border-bottom"
-                    href=""
+                    href="/about/chitiet"
                   >
                     Xem thêm
                   </a>
@@ -242,7 +196,7 @@ const slideStyle2 ={
                   </div>
                 </div>
               </div>
-              <a href="about" className="btn btn-primary py-3 px-5">
+              <a href="/about/chitiet" className="btn btn-primary py-3 px-5">
                 Xem thêm<i className="fa fa-arrow-right ms-3"></i>
               </a>
             </div>
@@ -271,41 +225,46 @@ const slideStyle2 ={
       </div>
       {/* Service Start */}
       <div className="container">
-    <h3 className="heading-main text-center text-uppercase bm-lv-1">
-        <span>Dịch vụ</span>
-        <span>nổi bật</span>
-    </h3>
-    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events">
+      <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 className="text-primary text-uppercase">
+              // Dịch vụ //
+            </h6>
+            <h1 className="mb-5">Dịch vụ của chúng tôi</h1>
+          </div>
+    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events" style={{ zIndex: 0}}>
       <div  className="swiper-wrapper" style={slideStyle}>
       {serviceHome.map((item:any)=>(
-         <><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
+         <>
+         <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
           <div className="service-item">
-            <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
+            <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
               <span className="img img-cover auto-scale img-effect zoom-in-1">
                 <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></span>
               <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></a>
             <h4 className="title text-center text-uppercase fw-700">
-              <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
+              <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
             </h4>
           </div>
-        </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
+        </div>
+        <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
             <div className="service-item">
-              <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô" className="img-wrap">
+              <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-don-noi-that-o-to-chuyen-nghiep.jpg" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-2.png" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src="" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
-                <a href="https://otohathanh.com/danh-muc-cham-soc-lam-dep.aspx" title="Chăm Sóc &amp; Làm Đẹp Ô Tô">Chăm Sóc &amp; Làm Đẹp Ô Tô</a>
+                <a href="service" title=""></a>
               </h4>
             </div>
           </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
             <div className="service-item">
-              <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" className="img-wrap">
+              <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src={item.img} alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-3.png" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src={item.image_service} alt="" loading="lazy" /></span>
+                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
-                <a href="https://otohathanh.com/danh-muc-son-phuc-hoi-than-vo.aspx" title="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ">{item.name}</a>
+                <a href="service" title="">{item.service_name}</a>
+
               </h4>
             </div>
           </div></>

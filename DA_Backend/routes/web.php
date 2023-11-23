@@ -1,8 +1,12 @@
 <?php
 
+
+use App\Http\Controllers\Admin\Log\LogController;
+
+use App\Http\Controllers\Admin\Reviews\ReviewController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\Api\Client\ProfileApi;
 use App\Http\Controllers\Staff\ProfileController;
 use App\Http\Controllers\Admin\Jobs\JobController;
@@ -19,6 +23,7 @@ use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
+use App\Http\Controllers\Admin\Statistic\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +68,71 @@ Route::prefix('admin')->group(function () {
   Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');
   Route::get('confirm-complete/{id}', [JobController::class, 'confirmComplete'])->name('job.confirm.complete');
 
-  Route::get('invoice', function () {
-    return view('admin/pages/invoices/invoice');
+        Route::get('invoice', function (){
+          return view('admin/pages/invoices/invoice');
+        });
+          route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
+          route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
+          route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
+          route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
+        
+
+        Route::post('login', [LoginController::class, 'login'])->name('login');
+        Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+        Route::get('staff', [StaffController::class, 'index'])->name('staff');
+        Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
+        // Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
+        // Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+        Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
+        Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
+        Route::get('/search', [StaffController::class,'search'])->name('search');
+        Route::get('staff-action', [StaffController::class, 'staffAction'])->name('staff-action');
+        Route::put('staff/retore/{id}', [StaffController::class, 'restore'])->name('staff-restore');
+
+
+        Route::resource('service', ServiceController::class);
+        Route::resource('serviceitem', ServiceItemController::class);
+        Route::resource('new',NewController::class);
+
+
+        Route::prefix('profile')->group(function () {
+          Route::get('/{id}',[ProfileAdminController::class, 'showDetail'])->name('profile-admin');
+          Route::put('/update/{id}',[ProfileAdminController::class, 'update'])->name('update-admin');
+          Route::put('/update/avatar/{id}',[ProfileAdminController::class, 'updateAvatar'])->name('update-avatar-admin');
+          Route::get('/show/password/{id}',[ProfileAdminController::class, 'showPass'])->name('show-password-admin');
+          Route::put('/update/password/{id}',[ProfileAdminController::class, 'changePassword'])->name('change-password-admin');
+    
+          
+
+        });
+
+        Route::get('reviews',[ReviewController::class,'index'])->name('review');
+        Route::get('reviews/delete',[ReviewController::class,'showDelete'])->name('review-show-delete');
+        Route::delete('review/delete/{id}', [ReviewController::class, 'remove'])->name('review-delete');
+        Route::put('review/restore/{id}', [ReviewController::class, 'restoteReview'])->name('review-restore');
+
+    });
+    Route::prefix('staff')->group(function () {
+      Route::get('current-jobs',[StaffJobController::class, 'currentJob'])->name('staff.currentJob');
+      Route::get('jobs-complete',[StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
+      Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
+Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
+      Route::get('profile/{id}',[ProfileController::class, 'showDetail'])->name('profile');
+      Route::put('profile/update/{id}',[ProfileController::class, 'update'])->name('update-profile');
+      Route::put('profile/update/avatar/{id}',[ProfileController::class, 'updateAvatar'])->name('update-avatar');
+      Route::get('profile/show/password/{id}',[ProfileController::class, 'showPass'])->name('show-password');
+      Route::put('profile/update/password/{id}',[ProfileController::class, 'changePassword'])->name('change-password');
+      Route::post('/register', [StaffController::class, 'register'])->name('staff.register');
+
+
+    });
+
+    Route::prefix('admin')->group(function () {
+      Route::get('user', [AccountController::class, 'index'])->name('user.index');
+      Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
+
+      Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
   });
   route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
   route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
@@ -95,7 +163,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/show/password/{id}', [ProfileAdminController::class, 'showPass'])->name('show-password-admin');
     Route::put('/update/password/{id}', [ProfileAdminController::class, 'changePassword'])->name('change-password-admin');
   });
-});
 Route::prefix('staff')->group(function () {
   Route::get('current-jobs', [StaffJobController::class, 'currentJob'])->name('staff.currentJob');
   Route::get('jobs-complete', [StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
@@ -124,3 +191,7 @@ Route::prefix('admin')->group(function () {
 Route::get('sendbasicemail', [MailController::class, 'basic_email']);
 Route::get('sendhtmlemail', [MailController::class, 'html_email']);
 Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
+
+  Route::prefix('admin')->group(function () {
+    Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
+});

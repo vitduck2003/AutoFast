@@ -18,6 +18,8 @@
                                 <th>Số KM</th>
                                 <th>Ngày giờ đến</th>
                                 <th>Trạng thái</th>
+                                <th>Người xác nhận</th>
+                                <th>Thời gian hủy</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -31,6 +33,12 @@
                                 <td>{{ $booking->mileage }}Km</td>
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                 <td class="text-danger">{{ $booking->status }}</td>
+                                <td>
+                                    Admin:{{$booking->admin_name}}
+                                </td>
+                                <td>
+                                    Đã hủy lúc: {{ $booking->canceled_at}}
+                                </td>
                                 <td>
                                     <form action="{{ route('booking.restore', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf

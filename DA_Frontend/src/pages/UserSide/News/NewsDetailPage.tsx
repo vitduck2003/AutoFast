@@ -4,13 +4,15 @@ import { INews } from '../../../interface/news';
 
 const NewsDetailPage = (props: any) => {
   const { id } = useParams()
+  console.log(id);
+  
   const [New, setNews] = useState<any>([]);
   
   useEffect(() => {
     setNews(props.news.find(New => New.id == id))
 })
 const containerStyle = {
-  maxWidth: '800px',
+  maxWidth: '1600px',
   margin: '0 auto',
   padding: '20px',
 };
@@ -128,9 +130,8 @@ const contentStyle = {
           </header>
     
           <article style={articleStyle}>
-              <img src="your-image-url.jpg" alt="Hình ảnh tin tức" style={imageStyle} />
+              <img src={New?.image} alt="Hình ảnh tin tức" style={imageStyle} />
               <p style={dateAuthorStyle}>Ngày Đăng: 16 tháng 11, 2023</p>
-              <p style={dateAuthorStyle}>{New?.des}</p>
               <p style={contentStyle}>
                  {New?.content}
               </p>

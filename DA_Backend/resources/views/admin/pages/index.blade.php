@@ -40,7 +40,6 @@
                                         <p class="text-muted mb-0">Doanh thu</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -136,13 +135,13 @@
                     <div class="float-sm-right">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" onclick="updateChartData('week')">Week</a>
+                                <a class="nav-link active" href="#" onclick="updateChartData('week')">Tuần</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="updateChartData('month')">Month</a>
+                                <a class="nav-link" href="#" onclick="updateChartData('month')">Tháng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="updateChartData('year')">Year</a>
+                                <a class="nav-link" href="#" onclick="updateChartData('year')">Năm</a>
                             </li>
                         </ul>
                     </div>
@@ -153,7 +152,6 @@
         </div>
     </div>
     <!-- end row -->
-
     <div class="row">
         <div class="col-xl-4">
             <div class="card">
@@ -695,3 +693,4 @@
         }
     </script>
 @endsection
+

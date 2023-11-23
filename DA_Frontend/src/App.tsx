@@ -88,6 +88,7 @@ import Home from "./pages/UserSide/Home/Home";
 import ServiceClientNew from "./pages/UserSide/Service/ServiceClineNew";
 import { getServiceHome, getServicePage } from "./api/Client/servicecl";
 import ServiceDetailV from "./pages/UserSide/Service/ServiceDetailV";
+import AboutDetail from "./pages/UserSide/AboutUs/AboutDetail";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -102,8 +103,8 @@ function App() {
   const [about, setAbout] = useState<any>([]);
   const [abouts, setAbouts] = useState<any>([]);
   const [aboutz, setAboutz] = useState<any>([]);
-  const [serviceHome, setServiceHome] = useState<any>([]);
-  const [servicePage, setServicePage] = useState<any>([]);
+  // const [serviceHome, setServiceHome] = useState<any>([]);
+  // const [servicePage, setServicePage] = useState<any>([]);
 
   useEffect(() => {
     getAllStaff().then(({ data }) => setStaffs(data));
@@ -238,16 +239,12 @@ const onHandleRemoveServiceItem = (id: number) => {
         <Routes>
           {/* User Side */}
           <Route path="/" element={<BaseLayout />}>
-            <Route index element={<HomePage onAddBooking={onHandleBooking} serviceHome={serviceHome} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
+            <Route index element={<HomePage serviceHome={services} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
             {/* Booking Page */}
             <Route path="booking">
               <Route
                 index
-                element={
-                  
-                    <BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />
-                  
-                }
+                element={<BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />}
               />
             </Route>
                 <Route path="home" >
@@ -272,14 +269,18 @@ const onHandleRemoveServiceItem = (id: number) => {
               <Route path=":id" element={<NewsDetailPage news={news} />} />
             </Route>
             <Route path="service">
-              <Route index element={<ServicePage servicePage={servicePage} />} />
-              <Route path="vesinh" element={<ServiceDetailV/>}/>
+              <Route index element={<ServicePage servicePage={services} />} />
+              <Route path=":id" element={<ServiceDetailV   serviceItem={serviceItem} />}/>
             </Route>
 
             {/* About Page */}
             <Route path="about">
               <Route index element={<AboutUsPage about={about} abouts={abouts} aboutz={aboutz} technicians={technicians} />} />
+             
+              <Route path="chitiet" element={<AboutDetail />} />
+            
             </Route>
+            
             {/* Team Page */}
             <Route path="technicians">
               <Route index element={<TeamPage technicians={technicians} />} />
