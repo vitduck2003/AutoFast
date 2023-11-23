@@ -6,18 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\Define\DefineController;
+// use App\Http\Controllers\MailController;
 
 class ServiceController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $data = Service::all();
-
+        // $mail = new MailController();
+        // $userdata =$data;
+        // $mail->xac_nhan_dat_lich($userdata);
+     
         return   view('admin\pages\services\index',compact('data'));
         
     }
@@ -45,6 +53,9 @@ class ServiceController extends Controller
         $model->fill($request->except('image_service'));
         if($request->has('image_service')){
            $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
+           $file = str_replace('images/','',$model->image_service ); 
+           $define = new DefineController();
+           $define->save_file_path($file);
         }
         $model->save();
         return redirect()->route('service.index');
@@ -87,6 +98,9 @@ class ServiceController extends Controller
         $model->fill($request->except('image_service'));
         if($request->has('image_service')){
            $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
+           $file = str_replace('images/','',$model->image_service ); 
+           $define = new DefineController();
+           $define->save_file_path($file);
         }
         $model->save();
 

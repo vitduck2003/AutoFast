@@ -21,7 +21,7 @@ const NewsPage = ( props: any) => {
 
                             
                            return <div key={item.id} className="blog-item">
-                                <a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="img img-cover img-effect zoom-in-1 auto-scale">
+                                <a href={`/news/${item.id}`} title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="img img-cover img-effect zoom-in-1 auto-scale">
                                     <img className=" lazyloaded" src={item.image} alt="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" />
                                 </a>
                                 <time className="d-inline-flex align-items-center" dateTime="2020-08-13"><i className="me-1 fa-solid fa-calendar-days"></i> 13-08-2020</time>

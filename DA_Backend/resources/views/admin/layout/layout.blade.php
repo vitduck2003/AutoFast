@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author"> <!-- App favicon -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="shortcut icon" href="{{asset('assets\images\favicon.ico')}}">
     <link rel="shortcut icon" href="{{
     asset('assets/images/favicon.ico') }}">
@@ -207,7 +208,6 @@
                                                 <i class="bx bx-cart"></i>
                                             </span>
                                         </div>
-
                                     </div>
                                 </a>
                                 <a href="" class="text-reset notification-item">
@@ -319,6 +319,19 @@
                                 <li><a href="dashboard-crypto.html">Crypto</a></li>
                             </ul>
                         </li>
+
+                        <li class="menu-title">Thống kê</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-list-ul"></i>
+                                <span>Thống kê</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ url('admin/statistic') }}">Tất cả thống kê</a></li>
+                            </ul>
+                        </li>
+
+                        
                         <li class="menu-title">Đặt lịch</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -359,7 +372,7 @@
                                 <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
+                                <li><a href="{{ route('service.index') }}">Tất cả dich vu</a></li>
 
                             </ul>
                         </li>
@@ -420,6 +433,7 @@
                                 <li><a href="{{ url('admin/reviews/delete') }}">Tất cả đánh giá đã xóa</a></li>
                             </ul>
                         </li>
+
                         <li class="menu-title">Tin tức</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -521,6 +535,8 @@
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
 
     <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>

@@ -25,7 +25,6 @@ class AccountController extends Controller
     
     public function index()
     {
-
         $users = User::orderBy('role_id', 'asc')->get();
         return view('admin.pages.users.index', compact('users'));
     }

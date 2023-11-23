@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Controllers\Admin\Reviews\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -15,10 +14,12 @@ use App\Http\Controllers\Api\Client\PaymentApi;
 use App\Http\Controllers\Api\Client\ProfileApi;
 use App\Http\Controllers\Api\Client\ServiceItem;
 use App\Http\Controllers\Api\Admin\ServiceItemApi;
+use App\Http\Controllers\Api\Admin\StatisticalApi;
 use App\Http\Controllers\Api\Auth\ForgetPasswordApi;
 use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Api\Admin\ManagerBookingApi;
 use App\Http\Controllers\Api\Client\TimKiemBookingApi;
+use App\Http\Controllers\Admin\Reviews\ReviewController;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
 
@@ -158,3 +159,4 @@ Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser'
 Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
 Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview');
 
+Route::get('booking-stats', [StatisticalApi::class, 'getBookingStats']);

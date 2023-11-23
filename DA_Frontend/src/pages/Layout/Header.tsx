@@ -2,7 +2,7 @@ import React from 'react';
 import './main.css';
 import './style.css'
 import { useEffect, useState } from "react";
-import Link from 'antd/es/typography/Link';
+import { Link } from 'react-router-dom';
 type Props = {};
 
 const Header = (props: Props) => {
@@ -30,7 +30,12 @@ const Header = (props: Props) => {
   }
   const userTextStyle = {
     display: 'inline-block',
-    cursor: 'pointer',
+  cursor: 'pointer',
+  padding: '12.5px 16px', // Thêm padding để tăng kích thước của nút
+  borderRadius: '4px', // Thêm bo tròn cho góc của nút
+ 
+  color: 'black', // Màu chữ của nút
+  textDecoration: 'none',
   };
   const avatarUser = {
     width:'30px',
@@ -77,22 +82,9 @@ const Header = (props: Props) => {
               <span className="slogan d-block">Hệ Thống Sửa Chữa & Chăm Sóc Ô Tô Cao Cấp Auto Fast</span>
             </div>
             <div className="contact-header d-flex align-items-center">
-              <ul className="list-social list-unstyled d-flex align-items-center mb-0">
-                <li className="mx-1">
-                  <a href="https://www.facebook.com/spaoto.caocap.HaThanh" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/facebook.png" alt="" />
-                  </a>
-                </li>
-                <li className="mx-1">
-                  <a href="https://www.youtube.com/channel/UCB9l9dhVspUECgyOeWflqog" className="img img-scaledown" title="">
-                    <img src="template/frontend/otoht/images/icon/youtube.png" alt="" />
-                  </a>
-                </li>
-                {/* Add the rest of your social media links */}
-              </ul>
               <div className="contact ms-3">
                 <a href="tel:0568.05.05.05" title="" className="phone d-inline-flex align-baseline">
-                  <i className="fa-solid fa-phone me-2"></i> 0568.05.05.05
+                  0568.05.05.05
                 </a>
                 <span className="d-block">Liên hệ với chúng tôi</span>
               </div>
@@ -110,12 +102,11 @@ const Header = (props: Props) => {
                                             <li>
                     <a  className="d-block fw-bold"
                        title="GIỚI THIỆU">GIỚI THIỆU ↓</a>
-                                            <ul className="sub-menu list-unstyled m-0 ">
-                    <li>
-            <a href="about"
-               title="Về Chúng Tôi">Về Chúng Tôi</a>
-                    </li>
-    </ul>
+                   <ul className="sub-menu list-unstyled m-0 ">
+                      <li>
+                           <a href="about"title="Về Chúng Tôi">Về Chúng Tôi</a>
+                       </li>
+                  </ul>
                                     </li>
 
                                             <li>
@@ -283,7 +274,40 @@ const Header = (props: Props) => {
                     
     </ul>
                                     </li>
-                            
+                 <a  className="d-block fw-bold"> 
+                 <div>
+      {isLoggedIn && (
+        <div className="user-info">
+          <small
+            className="px-5"
+            style={userTextStyle}
+            onClick={toggleDropdown}
+            onMouseOver={toggleDropdown}
+            onMouseOut={toggleDropdown}
+          >
+            Xin chào,<img style={avatarUser} src={
+                      img ? `http://localhost:8000/storage/${img}` : ""
+                    }/>  
+                    {userName}
+          </small>
+          <div style={{ display: isDropdownVisible ? 'block' : 'none',
+    position: 'absolute',
+    backgroundColor: '#f9f9f9',
+    minWidth: '160px',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: '10',}}>
+          
+            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
+            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
+            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
+          </div>
+        </div>
+      )}
+    </div>
+           <ul  className="sub-menu list-unstyled m-0 ">
+           
+            </ul>     
+            </a>            
 {/*                                   
                                   <li>
   <a  href="/signup" className="d-block fw-bold"
@@ -301,30 +325,7 @@ const Header = (props: Props) => {
   <a  href="/signin" className="d-block fw-bold"
      title="Đăng nhập">Đăng nhập</a>
                   </li> */}
- <div>
-      {isLoggedIn && (
-        <div className="user-info">
-          <small
-            className="px-5"
-            style={userTextStyle}
-            onClick={toggleDropdown}
-            onMouseOver={toggleDropdown}
-            onMouseOut={toggleDropdown}
-          >
-            Xin chào,<img style={avatarUser} src={
-                      img ? `http://localhost:8000/storage/${img}` : ""
-                    }/>  
-                    {userName}
-          </small>
-          <div style={dropdownContentStyle}>
-          
-            <Link style={dropdownContentLinkStyle} to="/mybooking">Quản lý lịch của tôi</Link>
-            <Link style={dropdownContentLinkStyle} to={`/account`}>Quản lý tài khoản</Link>
-            <a  href="/" style={dropdownContentLinkStyle} onClick={clearSession}>Logout</a>
-          </div>
-        </div>
-      )}
-    </div>
+ 
                     </ul>
     </nav>
             
