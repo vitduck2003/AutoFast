@@ -363,7 +363,7 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user"
-                                src={{ asset('assets\images\users\avatar-1.jpg') }} alt="Header Avatar">
+                            src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}">
                             @if (!empty(session('user_name')))
                                 <span class="d-none d-xl-inline-block ml-1">{{ session('user_name') }}</span>
                             @else

@@ -25,7 +25,7 @@ class LoginController extends Controller
                 session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar,]);
                 return redirect()->route('admin.home');
             } elseif ($user->role_id == 2) {
-                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone]);
+                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar]);
                 return redirect()->to('staff/home');
             }
         }
@@ -37,6 +37,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return view('admin/pages/auth/login');
     }
 }
