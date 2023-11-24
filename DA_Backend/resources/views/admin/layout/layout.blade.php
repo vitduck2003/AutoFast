@@ -400,6 +400,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
+                                <li><a href="{{ route('show.form.add') }}">Thêm nhân viên</a></li>
                                 <li><a href="{{ url('admin/staff-action') }}">Danh sách nhân viên không hoạt động</a>
                                 </li>
 
