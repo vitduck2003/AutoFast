@@ -1,6 +1,4 @@
 import React from 'react'
-import service1img from '../../../assets/img/service-1.jpg';
-
 const ServicePage = (props:any) => {
   console.log(props);
   
@@ -17,13 +15,13 @@ const ServicePage = (props:any) => {
         <div className="container text-center">
           <ol className="breadcrumb mb-0">
             <li className="breadcrumb-item">
-              <a href="https://otohathanh.com/" title="Trang chủ">Trang chủ</a>
+              <a href="" title="Trang chủ">Trang chủ</a>
             </li>
             <li className="breadcrumb-item ">
-              <a href="https://otohathanh.com/dich-vu.aspx" title="Dịch Vụ">Dịch Vụ</a>
+              <a href="" title="Dịch Vụ">Dịch Vụ</a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              <a href="https://otohathanh.com/danh-muc-bao-duong-sua-chua.aspx" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
+              <a href="" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
             </li>
           </ol>
         </div>
@@ -35,7 +33,7 @@ const ServicePage = (props:any) => {
                 return <div key={item.id} className="col mb-5">
             <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
               <a href={`/service/${item.id}`} title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
-                <img className=" lazyloaded" src={item.img_service} alt="" />
+                <img className=" lazyloaded" src={`./src/assets/img/${item.image_service}`} alt="" />
               </a>
               <h4 className="title fw-600"><a href="" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.service_name}</a></h4>
             </div>
