@@ -309,8 +309,7 @@
 
                         <li>
                             <a href="{{ route('admin.home') }}" class="waves-effect">
-                                {{-- <i class="bx bx-home-circle"></i><span
-                                    class="badge badge-pill badge-info float-right">03</span> --}}
+                                <i class="bx bx-home-circle"></i>
                                 <span>Trang chủ</span>
                             </a>
                            
@@ -400,6 +399,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
+                                <li><a href="{{ route('show.form.add') }}">Thêm nhân viên</a></li>
                                 <li><a href="{{ url('admin/staff-action') }}">Danh sách nhân viên không hoạt động</a>
                                 </li>
 

@@ -57,22 +57,64 @@ class StaffController extends Controller
     public function formAdd()
     {
         $users = User::all()->where('role_id', '=', 3);
-        return view('admin/pages/staffs/staffAdd', compact('users'));
+        return view('admin/pages/staffs/staffFormAdd');
     }
     public function create(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $validatedData = $request->validate([
+            $rules = [
+                'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:6',
+                'description' => 'max:255',
                 'salary' => 'required|integer',
-                'review' => 'required|string|max:255',
-                'status' => 'required|string|max:255',
-                'id_user' => 'required|exists:users,id',
-            ]);
-            User::where('id', $validatedData['id_user'])->update(['role_id' => 2]);
-            $staff = Staff::create($validatedData);
-            if ($staff) {
-                return redirect()->route('staff')->with('message', 'Thêm thành công');
+            ];
+            $messages = [
+                'name.required' => 'Vui lòng nhập tên.',
+                'email.required' => 'Vui lòng nhập email.',
+                'email.email' => 'Vui lòng nhập đúng định dạng email.',
+                'phone.required' => 'Vui lòng nhập số điện thoại.',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu không nhỏ hơn 6 chữ số',
+                'salary.required' => 'Vui lòng nhập Lương.',
+            ];
+
+            $validatedData = $request->validate($rules, $messages);
+            $checkemail = User::where('email', $validatedData['email'])->exists();
+            $checkphone = User::where('phone', $validatedData['phone'])->exists();
+            if ($checkemail) {
+                return response()->json(['message' => 'Email đã tồn tại', 'success' => false], 200);
             }
+            if ($checkphone) {
+                return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
+            }
+
+            $user = new User();            
+            $user->name = $validatedData['name'];
+            $user->phone = $validatedData['phone'];
+            $user->email = $validatedData['email'];
+            $user->role_id = 2;
+            $user->password = Hash::make($validatedData['password']);
+            $user->description = $validatedData['description'];
+            
+            if ($request->hasFile('avatar')) {
+                if ($user->avatar) {
+                    Storage::delete($user->avatar);
+                }
+                $path = $request->file('avatar')->store('public/avatar');
+                $user->avatar = $path;
+            }
+            $user->save();
+
+            $staff=Staff::Create([
+                'salary'=>$validatedData['salary'],
+                'review' => '',
+                'status' =>'Đang chờ việc',
+                'id_user' => $user->id,
+            ]);
+            return redirect()->route('staff')->with('message', 'Thêm thành công');
+
         }
     }
     public function update(Request $request, $id)
@@ -195,7 +237,6 @@ class StaffController extends Controller
             ]);
             if($user->id & $staff->id){
                 return redirect()->route('auth')->with('message', 'Đăng ký thành công');
-
             }
         }
     }
@@ -204,7 +245,7 @@ class StaffController extends Controller
         ->join('staff', 'users.id', '=', 'staff.id_user')
         ->where([
             ['users.role_id', '=', 2],
-            ['staff.status','=','Không hoạt động']
+            ['staff.status','=','Nghỉ']
         ])
         ->whereNull(['users.deleted_at', 'staff.deleted_at'])
         ->select(
@@ -221,12 +262,15 @@ class StaffController extends Controller
     return view('admin/pages/staffs/staffAction', compact('staffs'));
     }
     public function restore($id){
-        $staff=DB::table('staff')->where('id', $id)->update(['status'=>'Hoạt động']);
+        $staff=DB::table('staff')->where('id', $id)->update(['status'=>'Đang chờ việc']);
         if($staff){
             return redirect()->route('staff-action')->with('message', 'Khôi phục thành công');
         }else{
             return redirect()->route('staff-action')->with('error', 'Khôi phục không thành công');
 
         }
+    }
+    public function showRegister(){
+        return view('admin/pages/auth/register');
     }
 }

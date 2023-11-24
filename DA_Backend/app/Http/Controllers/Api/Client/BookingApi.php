@@ -39,7 +39,6 @@ class BookingApi extends Controller
                     ->get();
 
                 foreach ($itemServices as $itemService) {
-                    // Thực hiện insert vào bảng job
                     $jobId = DB::table('jobs')->insertGetId([
                         'id_booking' => $bookingId,
                         'id_booking_detail' => $bookingDetailId,
@@ -74,14 +73,12 @@ class BookingApi extends Controller
                         ]);
                     }
                 }
-                $content = [
-                    'name' => $data['name'],
-                    'phone' => $data['phone'],
-                    'email' => $data['email'],
-                ];
-                $subject = 'Đặt lịch thành công';
-                $mail = new MailController;
-                $mail->html_email($content, $subject);
+            //  //send mailer
+            //   $mail = new MailController();
+            //   $userdata = $data;
+            //   $mail->xac_nhan_dat_lich($userdata);
+
+              
                 return response()->json([
                     'message' => 'Đặt lịch thành công', 
                     'success' => true,
@@ -103,8 +100,9 @@ class BookingApi extends Controller
         ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
         ->leftJoin('bill', 'bill.id_booking', '=', 'booking.id')
         ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount')
-        ->where('booking.phone', '=', $user_id)
+        ->where('booking.user_id', '=', $user_id)
         ->get();
+        return response()->json($bookings);
         $result = [];
         foreach ($bookings as $booking) {
             $bookingId = $booking->id_booking;
@@ -145,4 +143,59 @@ class BookingApi extends Controller
             array_values($result)
         ]);
     }
-}
+    public function getBookingPaymentPhone(Request $request){
+        $user_id = $request->input('user_id');
+        $bookings = DB::table('bill')
+        ->leftJoin('booking', 'bill.id_booking', 'booking.id')
+        ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
+        ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
+        ->leftJoin('users', 'users.id', '=', 'staff.id')
+        ->leftJoin('booking_detail', 'booking_detail.id_booking', '=', 'booking.id')
+        ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
+        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount', 'bill.status_payment')
+        ->where('booking.user_id', '=', $user_id)
+        ->get();
+        return response()->json($bookings);
+        $result = [];
+        foreach ($bookings as $booking) {
+            $bookingId = $booking->id_booking;
+            // Nếu booking chưa tồn tại trong mảng $result, tạo mới
+            if (!isset($result[$bookingId])) {
+                $result[$bookingId] = [
+                    'booking' => [
+                        'id' => $booking->id_booking,
+                        'name' => $booking->name,
+                        'phone' => $booking->phone,
+                        'email' => $booking->email,
+                        'service_name' => $booking->service_name,
+                        'total_amount' => $booking->total_amount ? $booking->total_amount : "Chưa hoàn thành" ,
+                        'target_date' => $booking->target_date,
+                        'target_time' => $booking->target_time,
+                        'note' => $booking->note,
+                        'model_car' => $booking->model_car,
+                        'mileage' => $booking->mileage,
+                        'status' => $booking->booking_status,
+                        'status_payment' => $booking->status_payment,
+                        'created_at' => $booking->created_at
+                    ],
+                    'jobs' => [],
+                ];
+            }
+            // Thêm thông tin job vào booking tương ứng
+            $result[$bookingId]['jobs'][] = [
+                'id' => $booking->id,
+                'item_name' => $booking->item_name,
+                'item_price' => $booking->item_price,
+                'target_time_done' => $booking->target_time_done,
+                'images_done' => $booking->images_done,
+                'price' => $booking->price,
+                'status' => $booking->job_status,
+                "staff_name" =>  $booking->staff_name ? $booking->staff_name : 'Chưa nhận việc'
+            ];
+        }
+        return response()->json([
+            array_values($result)
+        ]);
+    }
+    }
+

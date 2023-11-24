@@ -32,16 +32,18 @@
         <tr>
             <th>Số điện thoại</th>
             <th>Ngày đặt</th>
-            <th>Note</th>
+            <th>Tổng tiền</th>
             <th>Model Car</th>
             <th>Mileage</th>
+            <th>Note</th>
         </tr>
         <tr>
             <td>{{$phone}}</td>
             <td>{{$target_date}}</td>
-            <td>{{$note}}</td>
+            <th>{{$total_price}}</th>
             <td>{{$model_car}}</td>
             <td>{{$mileage}}</td>
+            <td>{{$note}}</td>
         </tr>
     </table>
 </body>

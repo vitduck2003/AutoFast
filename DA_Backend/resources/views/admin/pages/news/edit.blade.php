@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ảnh new</strong>
-                <td ><img style="width:50px" src="{{asset('storage/'.$new->image)}}" alt=""></td>
+                <td ><img style="width:50px" src="{{asset('storage/images/'.$new->image)}}" alt=""></td>
                 <input type="file" name="image" class="form-control" placeholder="new Email">
                 @error('image_new')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

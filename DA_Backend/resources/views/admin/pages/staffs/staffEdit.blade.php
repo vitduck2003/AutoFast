@@ -41,7 +41,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" name="status" value="{{ $staff->status }}">
+                            <select class="form-control" name="status" aria-label="Default  select example">
+                                <option value="Đang chờ việc">Đang chờ việc</option>
+                                <option value="Nghỉ">Nghỉ</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 col-sm-4 control-label">Ảnh đại diện</label>

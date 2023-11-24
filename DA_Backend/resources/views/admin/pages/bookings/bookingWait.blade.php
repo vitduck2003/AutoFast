@@ -18,8 +18,6 @@
                                 <th>Số KM</th>
                                 <th>Ngày giờ đến</th>
                                 <th>Trạng thái</th>
-                                <th>Người xác nhận</th>
-                                <th>Thời gian xác nhận</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -33,14 +31,6 @@
                                 <td>{{ $booking->mileage }}Km</td>
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                 <td class="text-danger">{{ $booking->status }}</td>
-                                @foreach ($booking->logs as $log)
-                                <td>
-                                    Admin:{{$log->admin_name}}
-                                </td>
-                                <td>
-                                Đã xác nhận lúc: {{ $log->confirmed_at}}
-                                </td>
-                                @endforeach
                                 <td>
                                     <form action="{{ route('booking.startJob', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
@@ -81,6 +71,10 @@
                 <p><strong>Giá tiền:</strong> <span id="prices"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
                 <p><strong>Ghi chú:</strong> <span id="note"></span></p>
+                <p><strong>Người xác nhận:</strong> <span id="admin_name"></span></p>
+                <p><strong>Thời gian xác nhận:</strong> <span id="confirmed_at"></span></p>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -115,7 +109,9 @@
                     modal.find('#prices').text(data[0].item_prices + ' VNĐ');
                     modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
                     modal.find('#note').text(data[0].note);
-    
+                    modal.find('#admin_name').text(data[0].logs[0].admin_name);    
+                    modal.find('#confirmed_at').text(data[0].logs[0].confirmed_at); 
+
                     // Update the data-booking-id attribute for Confirm and Cancel buttons
                     modal.find('.btn-confirm').attr('data-booking-id', bookingId);
                     modal.find('.btn-cancel').attr('data-booking-id', bookingId);

@@ -52,11 +52,13 @@ class ServiceController extends Controller
     
         $model->fill($request->except('image_service'));
         if($request->has('image_service')){
-           $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
-           $file = str_replace('images/','',$model->image_service ); 
+            $name = $request->file('image_service')->getClientOriginalName();
+           $model->image_service = Storage::disk('public')->putFileAs('images', $request->file('image_service'), $name);
+           $model->image_service  = str_replace('images/','',$model->image_service ); 
            $define = new DefineController();
-           $define->save_file_path($file);
+           $define->save_file_path($model->image_service );
         }
+    
         $model->save();
         return redirect()->route('service.index');
     }
@@ -97,10 +99,11 @@ class ServiceController extends Controller
 
         $model->fill($request->except('image_service'));
         if($request->has('image_service')){
-           $model->image_service = Storage::disk('public')->put('images',$request->file('image_service'));  
-           $file = str_replace('images/','',$model->image_service ); 
-           $define = new DefineController();
-           $define->save_file_path($file);
+            $name = $request->file('image_service')->getClientOriginalName();
+            $model->image_service = Storage::disk('public')->putFileAs('images', $request->file('image_service'), $name);
+             $model->image_service  = str_replace('images/','',$model->image_service ); 
+             $define = new DefineController();
+             $define->save_file_path($model->image_service );
         }
         $model->save();
 
