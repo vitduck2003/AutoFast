@@ -4,6 +4,8 @@ import { getUserById, uploadAvatar, updateProfile } from "../../../api/user";
 
 const AccountSetting = () => {
   const [avatar, setAvatar] = useState<string>("");
+  console.log(avatar);
+  
   const [uploadImg, setUploadImg] = useState<string>();
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
