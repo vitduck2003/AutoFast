@@ -74,14 +74,12 @@ class BookingApi extends Controller
                         ]);
                     }
                 }
-                $content = [
-                    'name' => $data['name'],
-                    'phone' => $data['phone'],
-                    'email' => $data['email'],
-                ];
-                $subject = 'Đặt lịch thành công';
-                $mail = new MailController;
-                $mail->html_email($content, $subject);
+            //  //send mailer
+            //   $mail = new MailController();
+            //   $userdata = $data;
+            //   $mail->xac_nhan_dat_lich($userdata);
+
+              
                 return response()->json([
                     'message' => 'Đặt lịch thành công', 
                     'success' => true,
