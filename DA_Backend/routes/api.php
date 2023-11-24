@@ -85,6 +85,7 @@ Route::prefix('admin')->group(function () {
 Route::prefix('client')->group(function () {
     // booking manager 
     Route::post('bookings', [BookingApi::class, 'getBookingPhone']);
+    Route::post('bookings-payment', [BookingApi::class, 'getBookingPaymentPhone']);
     // News API
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
@@ -159,4 +160,4 @@ Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser'
 Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser');
 Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview');
 
-Route::get('booking-stats', [StatisticalApi::class, 'getBookingStats']);
+Route::get('revenue/{option}', [StatisticalApi::class, 'getRevenue']);
