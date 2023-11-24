@@ -309,8 +309,7 @@
 
                         <li>
                             <a href="{{ route('admin.home') }}" class="waves-effect">
-                                {{-- <i class="bx bx-home-circle"></i><span
-                                    class="badge badge-pill badge-info float-right">03</span> --}}
+                                <i class="bx bx-home-circle"></i>
                                 <span>Trang chủ</span>
                             </a>
                            
