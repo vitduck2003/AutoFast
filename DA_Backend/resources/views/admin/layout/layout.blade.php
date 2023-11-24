@@ -372,7 +372,7 @@
                                 <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('service.index') }}">Tất cả phụ tùng</a></li>
+                                <li><a href="{{ route('service.index') }}">Tất cả dich vu</a></li>
 
                             </ul>
                         </li>

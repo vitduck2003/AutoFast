@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('total_price');
             $table->timestamp('canceled_at')->nullable();
             $table->timestamp('confirmed_at')->nullable();
-            $table->string('admin_name');
+            $table->string('admin_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
