@@ -308,30 +308,13 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
-                                <i class="bx bx-home-circle"></i><span
-                                    class="badge badge-pill badge-info float-right">03</span>
-                                <span>Dashboards</span>
+                            <a href="{{ route('admin.home') }}" class="waves-effect">
+                                {{-- <i class="bx bx-home-circle"></i><span
+                                    class="badge badge-pill badge-info float-right">03</span> --}}
+                                <span>Trang chủ</span>
                             </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="index.html">Default</a></li>
-                                <li><a href="dashboard-saas.html">Saas</a></li>
-                                <li><a href="dashboard-crypto.html">Crypto</a></li>
-                            </ul>
+                           
                         </li>
-
-                        <li class="menu-title">Thống kê</li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-list-ul"></i>
-                                <span>Thống kê</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ url('admin/statistic') }}">Tất cả thống kê</a></li>
-                            </ul>
-                        </li>
-
-                        
                         <li class="menu-title">Đặt lịch</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
