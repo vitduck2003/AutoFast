@@ -14,12 +14,12 @@ class BookingController extends Controller
             ->join('booking_detail', 'booking.id', '=', 'booking_detail.id_booking')
             ->join('jobs', 'booking_detail.id', '=', 'jobs.id_booking_detail')
             ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'), DB::raw('sum(jobs.item_price) as total_prices'))
-            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')      
+            ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Chờ xác nhận')
             ->get();
-            // return response()->json($bookings);
+        // return response()->json($bookings);
         return view('admin/pages/bookings/bookings', compact('bookings'));
-       
+
     }
     public function getBooking($id)
     {
@@ -30,7 +30,7 @@ class BookingController extends Controller
             ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Chờ xác nhận')
             ->where('booking.id', '=', $id)
-            ->get();        
+            ->get();
         if ($booking) {
             // Trả về thông tin booking
             return response()->json($booking);
@@ -41,31 +41,59 @@ class BookingController extends Controller
 
     public function confirm($id)
     {
+        $userId = session('id');
+        $confirmedAt = now();
         $status = 'Đang đợi khách đến';
-        DB::table('booking')->where('id', $id)->update(['status' => $status,'admin_name' => session('user_name'),'confirmed_at' => now()]);
-        return redirect()->back()->with('message','Xác nhận lịch thành công');
+        $logId = DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insertGetId([
+                'user_id' => $userId,
+                'confirmed_at' => $confirmedAt,
+            ]);
+        DB::table('booking')->where('id', $id)->update(['log_id' => $logId,'status' => $status]);
+
+        return redirect()->back()->with('message', 'Xác nhận lịch thành công');
     }
     public function restore($id)
     {
         $status = 'Chờ xác nhận';
-        DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back()->with('message','Khôi phục lịch thành công');
+        $status = 'Chờ xác nhận';
+        $logId = DB::table('booking')->where('id', $id)->value('log_id');
+        DB::table('log')->where('id', $logId)->delete();
+        DB::table('booking')->where('id', $id)->update(['log_id' => null,'status' => $status]);
+        return redirect()->back()->with('message', 'Khôi phục lịch thành công');
     }
     public function revoke($id)
     {
         $status = 'Đã được hủy';
-        DB::table('booking')->where('id', $id)->update(['status' => $status ,'admin_name' => session('user_name'),'canceled_at' => now()]);
-        return redirect()->back()->with('error','Hủy lịch thành công');
+        $userId = session('id');
+        $CanceledAt = now();
+        $logId = DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insertGetId([
+                'user_id' => $userId,
+                'canceled_at' => $CanceledAt,
+            ]);
+        DB::table('booking')->where('id', $id)->update(['log_id' => $logId,'status' => $status]);
+        return redirect()->back()->with('error', 'Hủy lịch thành công');
     }
     public function bookingWait()
     {
 
         $bookings = DB::table('booking')
             ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-            ->select('confirmed_at','admin_name','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'), DB::raw('sum(jobs.item_price) as total_prices'))
-            ->groupBy('confirmed_at','admin_name','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->select('log_id','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'), DB::raw('sum(jobs.item_price) as total_prices'))
+            ->groupBy('log_id','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Đang đợi khách đến')
             ->get();
+
+            foreach ($bookings as $booking) {
+                $booking->logs = DB::table('log')
+                ->join('users', 'users.id','=','log.user_id')
+                ->where('log.id', $booking->log_id)
+                ->select('users.name as admin_name','confirmed_at')
+                ->get();
+            }
         return view('admin/pages/bookings/bookingWait', compact('bookings'));
     }
     public function getBookingWait($id)
@@ -77,17 +105,24 @@ class BookingController extends Controller
             ->where('booking.status', 'LIKE', 'Đang đợi khách đến')
             ->where('booking.id', '=', $id)
             ->get();
-                return response()->json($bookings);
-            }
+        return response()->json($bookings);
+    }
     public function bookingCancel()
     {
-            $bookings = DB::table('booking')
+        $bookings = DB::table('booking')
             ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-            ->select('canceled_at','admin_name','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'), DB::raw('sum(jobs.item_price) as total_prices'))
-            ->groupBy('canceled_at','admin_name','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+            ->select('log_id','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('GROUP_CONCAT(jobs.item_name) as item_names'), DB::raw('GROUP_CONCAT(jobs.item_price) as item_prices'), DB::raw('sum(jobs.item_price) as total_prices'))
+            ->groupBy('log_id','booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Đã được hủy')
             ->get();
-            return view('admin/pages/bookings/bookingCancel', compact('bookings'));
+            foreach ($bookings as $booking) {
+                $booking->logs = DB::table('log')
+                ->join('users', 'users.id','=','log.user_id')
+                ->where('log.id', $booking->log_id)
+                ->select('users.name as admin_name','canceled_at')
+                ->get();
+            }
+        return view('admin/pages/bookings/bookingCancel', compact('bookings'));
     }
     public function getBookingCancel($id)
     {
@@ -98,13 +133,13 @@ class BookingController extends Controller
             ->where('booking.status', 'LIKE', 'Đã được hủy')
             ->where('booking.id', '=', $id)
             ->get();
-      
-            if ($bookings) {
-                // Trả về thông tin booking
-                return response()->json($bookings);
-            } else {
-                return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
-            }
+
+        if ($bookings) {
+            // Trả về thông tin booking
+            return response()->json($bookings);
+        } else {
+            return response()->json(['message' => 'Không tìm thấy đặt lịch'], 404);
+        }
     }
     public function bookingComplete()
     {
@@ -114,7 +149,7 @@ class BookingController extends Controller
             ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
             ->where('booking.status', 'LIKE', 'Đã hoàn thành')
             ->get();
-    //   dd($bookings);
+        //   dd($bookings);
         return view('admin/pages/bookings/bookingComplete', compact('bookings'));
     }
     public function getBookingComplete($id)
@@ -126,7 +161,7 @@ class BookingController extends Controller
             ->where('booking.status', 'LIKE', 'Đã hoàn thành')
             ->where('booking.id', '=', $id)
             ->get();
-                return response()->json($bookings);
-            }
+        return response()->json($bookings);
+    }
 }
 

@@ -33,12 +33,14 @@
                                 <td>{{ $booking->mileage }}Km</td>
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                 <td class="text-danger">{{ $booking->status }}</td>
+                                @foreach ($booking->logs as $log)
                                 <td>
-                                    Admin:{{$booking->admin_name}}
+                                    Admin:{{$log->admin_name}}
                                 </td>
                                 <td>
-                                Đã xác nhận lúc: {{ $booking->confirmed_at}}
+                                Đã xác nhận lúc: {{ $log->confirmed_at}}
                                 </td>
+                                @endforeach
                                 <td>
                                     <form action="{{ route('booking.startJob', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
