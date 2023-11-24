@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->service_name }}</td>
-                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image_service)}}" alt=""></td>
+                                <td ><img style="width:50px" src="{{asset('storage/images/'.$row->image_service)}}" alt=""></td>
                                 <td>{{ $row->content }}</td>
                                 <td>{{ $row->updated_at }}</td>
                           

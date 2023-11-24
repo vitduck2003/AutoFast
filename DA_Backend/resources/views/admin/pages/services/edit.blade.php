@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ảnh dịch vụ</strong>
-                <img style="width:50px" src="{{asset('storage/'.$service->image_service)}}" alt="">
+                <img style="width:50px" src="{{asset('storage/images/'.$service->image_service)}}" alt="">
                 <input type="file" name="image_service" class="form-control" placeholder="Company Email"
                     value="{{ $service->image_service }}">
                 @error('image_service')

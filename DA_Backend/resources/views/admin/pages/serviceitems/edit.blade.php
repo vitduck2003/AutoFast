@@ -48,7 +48,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ảnh phụ tùng</strong>
-                <img style="width:50px" src="{{asset('storage/'.$serviceitem->image)}}" alt="">
+                <img style="width:50px" src="{{asset('storage/images/'.$serviceitem->image)}}" alt="">
                 <input type="file" name="image" class="form-control" placeholder="">
                 @error('image')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

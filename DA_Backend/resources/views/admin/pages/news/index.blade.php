@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->title }}</td>
-                                <td ><img style="width:50px" src="{{asset('storage/'.$row->image)}}" alt=""></td>
+                                <td ><img style="width:50px" src="{{asset('storage/images/'.$row->image)}}" alt=""></td>
                                 <td>{{ $row->des }}</td>
                                 <td>{{ $row->content }}</td>
                                 {{-- <td>{{ $row->user_id }}</td> --}}

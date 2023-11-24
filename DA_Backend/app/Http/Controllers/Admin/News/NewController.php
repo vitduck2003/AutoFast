@@ -41,11 +41,12 @@ class NewController extends Controller
     {
         $model = new News();
         $model->fill($request->except('image'));
-        if($request->has('image')){
+        if($request->has('image')){    
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
-            $file = str_replace('images/','',$model->image ); 
+            $model->image  = str_replace('images/','',$model->image ); 
             $define = new DefineController();
-            $define->save_file_path($file);
+            $define->save_file_path($  $model->image );
+
         }
         $model->save();
         return redirect()->route('new.index');
@@ -85,10 +86,10 @@ class NewController extends Controller
         $model = News::findOrFail($id);
         $model->fill($request->except('image'));
         if($request->has('image')){
-           $model->image = Storage::disk('public')->put('images',$request->file('image'));  
-           $file = str_replace('images/','',$model->image ); 
-           $define = new DefineController();
-           $define->save_file_path($file);
+            $model->image = Storage::disk('public')->put('images',$request->file('image'));
+            $model->image  = str_replace('images/','',$model->image ); 
+            $define = new DefineController();
+            $define->save_file_path($  $model->image );
         }
         $model->save();
         return back();
