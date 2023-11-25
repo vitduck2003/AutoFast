@@ -43,6 +43,11 @@ class StaffJobController extends Controller
         $job->status = 'Đang làm';
         $job->save();
     }
+    $statusStaff = Staff::find($job->id_staff);
+    if($statusStaff){
+        $statusStaff->status = "Đang làm";
+        $statusStaff->save();
+    }
     return redirect()->back();
 }
     public function jobDone(Request $request)
@@ -53,6 +58,11 @@ class StaffJobController extends Controller
     if ($job) {
         $job->status = 'Đã hoàn thành';
         $job->save();
+    }
+    $statusStaff = Staff::find($job->id_staff);
+    if($statusStaff){
+        $statusStaff->status = "Đang đợi việc";
+        $statusStaff->save();
     }
     return redirect()->back();
 }

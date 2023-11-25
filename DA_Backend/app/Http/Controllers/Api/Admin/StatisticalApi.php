@@ -2,37 +2,38 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class StatisticalApi extends Controller
 {
-    public function getBookingStats()
-{
-    $dailyStats = DB::table('booking')
-    ->select(DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('DAY(created_at) as day'), DB::raw('COUNT(*) as count'))
-    ->groupBy('year', 'month', 'day')
-    ->get();
-    $weeklyStats = DB::table('booking')
-        ->select(DB::raw('YEAR(created_at) as year'), DB::raw('WEEK(created_at) as week'), DB::raw('COUNT(*) as count'))
-        ->groupBy('year', 'week')
-        ->get();
-
-    $monthlyStats = DB::table('booking')
-        ->select(DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
-        ->groupBy('year', 'month')
-        ->get();
-        $yearlyStats = DB::table('booking')
-        ->select(DB::raw('YEAR(created_at) as year'), DB::raw('COUNT(*) as count'))
-        ->groupBy('year')
-        ->get()
-        ->toArray();
-        return response()->json([
-            'weeklyStats' => $weeklyStats,
-            'monthlyStats' => $monthlyStats,
-            'dailyStats' => $dailyStats,
-            'yearlyStats' => $yearlyStats
-        ]);
-}
+    public function getRevenue(Request $request, $option)
+    {
+        $revenue = 0;
+        if ($option === 'today') {
+            $revenue = DB::table('bill')
+            ->whereDate('created_at', Carbon::today())
+            ->where('status_payment', 'Đã thanh toán')
+            ->sum('total_amount');
+        } elseif ($option === 'week') {
+            $revenue = DB::table('bill')
+            ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->where('status_payment', 'Đã thanh toán')
+            ->sum('total_amount');
+        } elseif ($option === 'month') {
+            $revenue = DB::table('bill')
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->where('status_payment', 'Đã thanh toán')
+            ->sum('total_amount');
+        } elseif ($option === 'year') {
+            $revenue = DB::table('bill')
+            ->whereYear('created_at', Carbon::now()->year)
+            ->where('status_payment', 'Đã thanh toán')
+            ->sum('total_amount');
+        }
+        return response()->json(['revenue' => $revenue]);
+    }
+    
 }

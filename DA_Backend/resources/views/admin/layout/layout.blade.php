@@ -115,19 +115,19 @@
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo.svg') }}" alt="" height="22">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo-dark.png') }} " alt="" height="17">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}"  height="100%" width="100%">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{asset('assets\images\logo-light.svg')}}" alt="" height="22">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt=""  height="100%" width="100%">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo-light.png') }}" alt="" height="19">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt=""  height="100%" width="100%">
                             </span>
                         </a>
                     </div>
@@ -440,14 +440,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Saas</h4>
-
-                                <div class="page-title-right">
+                                <h4 class="mb-0 font-size-18">ADMIN</h4>
+                                {{-- <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
                                         <li class="breadcrumb-item active">Saas</li>
                                     </ol>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -461,11 +460,11 @@
                         <div class="col-sm-6">
                             <script>
                             document.write(new Date().getFullYear())
-                            </script> © Skote.
+                            </script> DINH ViT DUCK
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-right d-none d-sm-block">
-                                Design & Develop by Themesbrand
+                                Design & Develop by DINH VIET DUC
                             </div>
                         </div>
                     </div>
