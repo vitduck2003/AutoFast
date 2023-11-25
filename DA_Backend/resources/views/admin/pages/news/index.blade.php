@@ -12,10 +12,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>tên new</th>
-                                <th>image_new</th>
-                                <th>mô tả</th>
-                                <th>nội dung</th>
+                                <th>Tên new</th>
+                                <th>ẢNH new</th>
+                                <th>Mô tả</th>
+                                <th>Nội dung</th>
                                 {{-- <th>người đăng</th> --}}
                                 <th>Chức năng</th>
                             </tr>
@@ -30,16 +30,20 @@
                                 <td>{{ $row->content }}</td>
                                 {{-- <td>{{ $row->user_id }}</td> --}}
                                 <td>
-                                  
+                                    <div style="display:flex">
+                                        <div >
                                         <a href="{{route('new.edit',$row)}}" class="btn btn-success">  
                                          Sửa
                                         </a>
-                               
+                                    </div>
+                                    <div>
                                         <form action="{{route('new.destroy',$row)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">xoas</button>
                                         </form>
+                                    </div>
+                                </div>
                                 </td>
                             </tr>
                             @endforeach

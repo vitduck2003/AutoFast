@@ -16,6 +16,7 @@ class PaymentController extends Controller
         $vnp_TxnRef = $request->input('vnp_TxnRef');
         if ($vnp_ResponseCode == '00') {
             $update_status = DB::table('bill')->where('id_booking', '=', $vnp_TxnRef)->update(['status_payment' => "Đã thanh toán"]);
+           //
             return view('client.payments.success', compact('data'));
         } else {  
             return view('client.payments.error');

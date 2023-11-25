@@ -10,7 +10,7 @@
             <div class="form-group">
                 <strong>Tên dịch vụ</strong>
                 <input type="text" name="service_name" value="" class="form-control"
-                    placeholder="Company name">
+                    placeholder="tên dịch vụ"  required>
                 @error('service_name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <strong>Nội dung</strong>
                 <input type="text" name="content" value="" class="form-control"
-                    placeholder="Company Address">
+                    placeholder="nội dung"  required>
                 @error('content')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

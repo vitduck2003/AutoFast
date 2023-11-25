@@ -12,10 +12,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>tên service</th>
-                                <th>image_service</th>
-                                <th>content</th>
-                                <th>chỉnh sửa gần nhất</th>
+                                <th>Tên dịch vụ</th>
+                                <th>Ảnh dịch vụ</th>
+                                <th>Nội dụng</th>
+                                <th>Chỉnh sửa gần nhất</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -29,16 +29,20 @@
                                 <td>{{ $row->updated_at }}</td>
                           
                                 <td>
-                                  
+                                    <div style="display:flex">
+                                        <div >
                                         <a href="{{route('service.edit',$row)}}" class="btn btn-success">  
                                          Sửa
                                         </a>
-                               
+                                        </div>
+                                        <div>
                                         <form action="{{route('service.destroy',$row)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">xoas</button>
                                         </form>
+                                     </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
