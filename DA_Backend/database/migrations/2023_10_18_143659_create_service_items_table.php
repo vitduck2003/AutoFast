@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('id_service')->nullable();
             $table->string('item_name');
             $table->string('time_done');
-            $table->float('price');
+            $table->float('price',255);
             $table->timestamps();
             $table->softDeletes();
         });

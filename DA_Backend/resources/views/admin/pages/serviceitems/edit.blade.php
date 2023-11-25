@@ -8,7 +8,7 @@
             <div class="form-group">
                 <strong>Tên phụ tùng</strong>
                 <input type="text" name="item_name" value="{{$serviceitem->item_name}}" class="form-control"
-                    placeholder="phụ tùng name">
+                    placeholder="phụ tùng name" required>
                 @error('item_name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -29,7 +29,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>thời gian hoàn thành</strong>
-                <input type="text" name="time_done" value="{{$serviceitem->time_done}}" class="form-control" placeholder="chọn gian hoành thành">
+                <input type="text" name="time_done" value="{{$serviceitem->time_done}}" class="form-control" required placeholder="chọn gian hoành thành">
                     
                 @error('time_done')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -39,7 +39,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>nhập giá</strong>
-                <input type="text" name="price" value="{{$serviceitem->price}}" class="form-control" placeholder="nhập giá sản phẩm">
+                <input type="text" name="price" value="{{$serviceitem->price}}" class="form-control" required placeholder="nhập giá sản phẩm">
                 @error('price')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
