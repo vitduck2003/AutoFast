@@ -51,7 +51,7 @@ class BookingController extends Controller
                 'confirmed_at' => $confirmedAt,
             ]);
         DB::table('booking')->where('id', $id)->update(['log_id' => $logId,'status' => $status]);
-
+            //mail
         return redirect()->back()->with('message', 'Xác nhận lịch thành công');
     }
     public function restore($id)

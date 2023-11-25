@@ -26,8 +26,8 @@
     </style>
 </head>
 <body>
-    <h3>Chào {{$name}}</h3>
-    <p>Lịch của bạn đã đặt thành công.</p>
+    <h3>Chào khách hàng {{$name}}</h3>
+    <p>Lịch của bạn đã đặt tại AutoFast thành công.</p>
     <table>
         <tr>
             <th>Số điện thoại</th>
@@ -45,20 +45,25 @@
         </tr>
     </table>
     <br>
-     <p>Dịch vụ bạn đã đặt</p><h3> {{$service_name}}</h3>
+     <span>Dịch vụ bạn đã đặt</span> <h3> {{$service_name}}</h3>
     <table>
      <tr>
         
-            <th>Tên dịch vụ </th>
-            <th>giá</th>
+            <th>Các hạng mục bảo dưỡng </th>
+            <th>Giá</th>
       </tr>
     @foreach ($serice_item as $item)
     <tr>
         
         <td>{{$item ->item_name}} </td>
-        <td>{{$item->item_price}}</td>
+        <td>{{ number_format($item->item_price) }} VNĐ</td>
     </tr>
     @endforeach
+    <tr>
+        
+        <td><h3>Tổng tiền</h3>   </td>
+        <td><h2 style="color:red">{{number_format($item->item_price)}} VNĐ</h2></td>
+    </tr>
 </table>
 
 </body>
