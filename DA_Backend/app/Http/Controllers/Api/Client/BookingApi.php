@@ -117,7 +117,7 @@ class BookingApi extends Controller
             return response()->json(['message' => 'Lỗi khi tạo đặt lịch',   'success' => false,], 500);
         }
     }
-    public function getBookingPhone(Request $request){
+    public function getBookingUser(Request $request){
         $user_id = $request->input('user_id');
         $bookings = DB::table('booking')
         ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
@@ -129,11 +129,9 @@ class BookingApi extends Controller
         ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount')
         ->where('booking.user_id', '=', $user_id)
         ->get();
-        return response()->json($bookings);
         $result = [];
         foreach ($bookings as $booking) {
             $bookingId = $booking->id_booking;
-            // Nếu booking chưa tồn tại trong mảng $result, tạo mới
             if (!isset($result[$bookingId])) {
                 $result[$bookingId] = [
                     'booking' => [
@@ -154,7 +152,6 @@ class BookingApi extends Controller
                     'jobs' => [],
                 ];
             }
-            // Thêm thông tin job vào booking tương ứng
             $result[$bookingId]['jobs'][] = [
                 'id' => $booking->id,
                 'item_name' => $booking->item_name,
@@ -182,11 +179,9 @@ class BookingApi extends Controller
         ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount', 'bill.status_payment')
         ->where('booking.user_id', '=', $user_id)
         ->get();
-        return response()->json($bookings);
         $result = [];
         foreach ($bookings as $booking) {
             $bookingId = $booking->id_booking;
-            // Nếu booking chưa tồn tại trong mảng $result, tạo mới
             if (!isset($result[$bookingId])) {
                 $result[$bookingId] = [
                     'booking' => [
@@ -208,7 +203,6 @@ class BookingApi extends Controller
                     'jobs' => [],
                 ];
             }
-            // Thêm thông tin job vào booking tương ứng
             $result[$bookingId]['jobs'][] = [
                 'id' => $booking->id,
                 'item_name' => $booking->item_name,
