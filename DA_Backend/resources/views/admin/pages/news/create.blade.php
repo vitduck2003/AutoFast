@@ -9,7 +9,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tên new</strong>
-                <input type="text" name="title" value="" class="form-control"
+                <input type="text" name="title" required value="" class="form-control"
                     placeholder="new name">
                 @error('title')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <strong>Mô tả</strong>
          
-                <input type="text" name="des" value="" class="form-control"
+                <input type="text" name="des" required value="" class="form-control"
                     placeholder="new mô tả">
                 @error('des')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <strong>nội dung</strong>
                 <br>
-                <textarea id="" name="content" rows="4" cols="50">
+                <textarea id="" name="content" rows="4" cols="50" required>
              
                     </textarea>
                 @error('content')

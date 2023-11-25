@@ -10,7 +10,7 @@
             <div class="form-group">
                 <strong>Tên dịch vụ</strong>
                 <input type="text" name="service_name" value="{{ $service->service_name }}" class="form-control"
-                    placeholder="Company name">
+                    placeholder="Dịch vụ name" required >
                 @error('service_name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -20,7 +20,7 @@
             <div class="form-group">
                 <strong>ảnh dịch vụ</strong>
                 <img style="width:50px" src="{{asset('storage/images/'.$service->image_service)}}" alt="">
-                <input type="file" name="image_service" class="form-control" placeholder="Company Email"
+                <input type="file" name="image_service" class="form-control" 
                     value="{{ $service->image_service }}">
                 @error('image_service')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <strong>Nội dung</strong>
                 <input type="text" name="content" value="{{ $service->content }}" class="form-control"
-                    placeholder="Company Address">
+                    placeholder="Nội dung" required>
                 @error('content')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

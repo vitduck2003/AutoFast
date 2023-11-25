@@ -12,11 +12,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>dịch vụ</th>
-                                <th>tên phụ tùng</th>
-                                <th>content</th>
-                                <th>giá</th>
-                                <th>ảnh</th>
+                                <th>Dịch vụ</th>
+                                <th>Tên phụ tùng</th>
+                                <th>Thời gian hoàn thành</th>
+                                <th>Giá</th>
+                                <th>Ảnh</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -26,25 +26,27 @@
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->servicename}}</td>
                                 <td>{{ $row->item_name }}</td>
-                                <td>{{ $row->time_done }}</td>
+                                <td>{{ $row->time_done }} phút</td>
                                 <td>{{ $row->price }}</td>
                                 <td ><img style="width:50px" src="{{asset('storage/images/'.$row->image)}}" alt=""></td>
                            
                            
                           
                                 <td>
-                                  
+                                    <div style="display:flex">
+                                        <div >
                                         <a href="{{route('serviceitem.edit',$row)}}" class="btn btn-success">
                                                 Sửa
                                         </a>
-                               
-                                   
+                                        </div>
+                                        <div>
                                         <form action="{{route('serviceitem.destroy',$row)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">xoas</button>
                                         </form>
-                                    
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
