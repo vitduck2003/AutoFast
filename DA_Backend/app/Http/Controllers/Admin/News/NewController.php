@@ -45,7 +45,7 @@ class NewController extends Controller
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
             $model->image  = str_replace('images/','',$model->image ); 
             $define = new DefineController();
-            $define->save_file_path($  $model->image );
+            $define->save_file_path( $model->image );
 
         }
         $model->save();
@@ -89,7 +89,7 @@ class NewController extends Controller
             $model->image = Storage::disk('public')->put('images',$request->file('image'));
             $model->image  = str_replace('images/','',$model->image ); 
             $define = new DefineController();
-            $define->save_file_path($  $model->image );
+            $define->save_file_path( $model->image );
         }
         $model->save();
         return back();

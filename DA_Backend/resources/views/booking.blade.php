@@ -31,20 +31,35 @@
     <table>
         <tr>
             <th>Số điện thoại</th>
-            <th>Ngày đặt</th>
-            <th>Tổng tiền</th>
+            <th>Ngày đặt</th>   
             <th>Model Car</th>
             <th>Mileage</th>
             <th>Note</th>
         </tr>
         <tr>
             <td>{{$phone}}</td>
-            <td>{{$target_date}}</td>
-            <th>{{$total_price}}</th>
+            <td>{{$target_date}} {{$target_time }}</td>    
             <td>{{$model_car}}</td>
             <td>{{$mileage}}</td>
             <td>{{$note}}</td>
         </tr>
     </table>
+    <br>
+     <p>Dịch vụ bạn đã đặt</p><h3> {{$service_name}}</h3>
+    <table>
+     <tr>
+        
+            <th>Tên dịch vụ </th>
+            <th>giá</th>
+      </tr>
+    @foreach ($serice_item as $item)
+    <tr>
+        
+        <td>{{$item ->item_name}} </td>
+        <td>{{$item->item_price}}</td>
+    </tr>
+    @endforeach
+</table>
+
 </body>
 </html>

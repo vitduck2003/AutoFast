@@ -73,15 +73,42 @@ class BookingApi extends Controller
                         ]);
                     }
                 }
-            //  //send mailer
-            //   $mail = new MailController();
-            //   $userdata = $data;
-            //   $mail->xac_nhan_dat_lich($userdata);
+             //send mailer
+            
+              $mail = new MailController();
 
+              $data_service = DB::table('jobs')->select('item_name','item_price')->where('id_booking',$bookingId)->get();
+           
+              $nameservice = DB::table('booking_detail')
+              ->join('services','services.id','=','booking_detail.id_service')
+              ->where('booking_detail.id_service','=',$data['service'])
+              ->select('services.service_name')->first();
+
+
+              $userdata = [
+                'name' => $data['full_name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'user_id' => $data['user_id'] ? $data['user_id'] : null,
+                'target_date' => $data['target_date'],
+                'target_time' => $data['target_time'],
+                'model_car' => $data['model_car'],
+                'mileage' => $data['mileage'],
+                'note' => $data['note'] ? $data['note'] : null,
+                'total_price' => $data['TotalPrice'],
+                'status' => $data['status'],
+                'serice_item'=>$data_service,
+                'service_name'=>$nameservice->service_name
+              ];
+           
+          
+              $mail->xac_nhan_dat_lich($userdata);
+            
               
                 return response()->json([
                     'message' => 'Đặt lịch thành công', 
                     'success' => true,
+                    
                 ], 200);
             } else {
                 return response()->json(['message' => 'Lỗi khi thêm chi tiết đặt lịch',   'success' => false,], 500);
