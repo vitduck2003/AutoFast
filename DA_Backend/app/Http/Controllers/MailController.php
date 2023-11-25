@@ -16,8 +16,8 @@ class MailController extends Controller {
    $data = $userdata;
    Mail::send('booking', $data, function($message) use($userdata) {
       $message->to($userdata['email'], $userdata['name'])->subject
-         ('Lịch của bạn đã được đặt');
-      $message->from('trongdua2098@gmail.com','khong quan trong');
+         ('Đặt thành công dịch vụ '.$userdata['service_name']);
+      $message->from('baoduongautofast@gmail.com','Gara Autofast');
    });
 
 }
