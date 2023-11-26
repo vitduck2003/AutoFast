@@ -28,6 +28,7 @@ class LoginController extends Controller
                 session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar]);
                 return redirect()->to('staff/staffIndex');
             }
+            
         }
     
         // Đăng nhập thất bại
