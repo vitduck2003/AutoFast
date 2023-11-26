@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Statistic\StatisticController;
+use App\Http\Controllers\Staff\Home\DashboardStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +40,9 @@ use App\Http\Controllers\Admin\Statistic\StatisticController;
 Route::get('/', function () {
   return view('admin/pages/auth/login');
 });
-Route::get('/staff/home', function () {
-  return view('staff.pages.index');
-})->name('staff.home');
+
+Route::get('staff/staffIndex', [DashboardStaffController::class, 'staffIndex'])->name('staff.staffIndex');
+
 // api này để ngoài cho đức
 Route::get('/api/bookings/{id}', [BookingController::class, 'getBooking']);
 Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait']);
