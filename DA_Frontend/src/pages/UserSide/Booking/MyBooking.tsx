@@ -53,7 +53,7 @@ const MyBooking = () => {
     if (storedUser) {
       try {
         const userData = JSON.parse(storedUser);
-        setPhone(userData.phone);
+        setPhone(userData.id);
         setUser(userData);
       } catch (e) {
         console.error("Failed to parse user data from session storage", e);
