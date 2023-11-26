@@ -80,7 +80,6 @@ class InvoiceController extends Controller
         ->select('item_name', 'item_price')
         ->where('id_booking', '=', $invoice->id_booking)
         ->get();
-        // dd($invoice, $jobs);
         return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs'));
     }
     public function updatePayment($id){

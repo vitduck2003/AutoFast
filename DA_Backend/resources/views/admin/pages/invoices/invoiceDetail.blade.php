@@ -1,3 +1,4 @@
+
 @extends('admin/layout/layout')
 @section('content')
     <div class="row">
@@ -19,7 +20,9 @@
                                 <strong>Số điện thoại</strong><br>
                                 <strong>Email:</strong><br>
                                 <strong>Tên xe:</strong><br> 
-                                <strong>Số km đã đi:</strong><br> 
+                                <strong>Số km đã đi:</strong><br>
+                                <strong>Trạng thái thanh toán:</strong><br>
+
                             </address>
                         </div>
                         <div class="col-sm-6 text-sm-right">
@@ -30,6 +33,7 @@
                                 {{ $invoice->email }}<br>
                                 {{ $invoice->model_car }}<br>
                                 {{ $invoice->mileage }} Km<br>
+                                {{ $invoice->status_payment }}<br>
                             </address>
                         </div>
                     </div>
@@ -37,8 +41,8 @@
                         <div class="col-sm-6 mt-3">
                             <address>
                                 <strong>Kiểu thanh toán</strong><br>
-                                Visa ending **** 4242<br>
-                                jsmith@email.com
+                                ATM<br>
+                                Thanh toán qua VNPAY
                             </address>
                         </div>
                         <div class="col-sm-6 mt-3 text-sm-right">

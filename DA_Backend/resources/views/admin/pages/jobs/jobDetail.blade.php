@@ -6,7 +6,9 @@
                 <div class="card-body">
                     <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
                     <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
-
+                    <a href="{{ route('view.add.job', ['id'=>$idBooking]) }}">
+                        <button type="button" class="btn btn-success">Thêm công việc</button>
+                    </a>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -22,7 +24,6 @@
                         </thead>
                         <tbody>
                             @foreach ($jobDetail as $job)
-                                :
                                 <tr>
                                 <tr>
                                     <td>{{ $job->id }}</td>
@@ -54,7 +55,12 @@
                                     @if($job->status == "Đã hoàn thành")
                                     <td class="text-success">{{ $job->status }}</td>
                                     @endif
-                                    <td><button type="submit" class="btn btn-primary">Lưu</button></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                        <a href="{{ route('delete.job.detail', ['id'=>$job->id]) }}">
+                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                        </a>
+                                    </td>
                                     </form>
                                 </tr>
                                 </tr>
@@ -67,4 +73,37 @@
     </div> <!-- end row -->
     <!-- Modal -->
     </div>
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+    
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+    
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
 @endsection
