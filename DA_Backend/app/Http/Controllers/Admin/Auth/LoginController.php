@@ -26,8 +26,9 @@ class LoginController extends Controller
                 return redirect()->route('admin.home');
             } elseif ($user->role_id == 2) {
                 session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar]);
-                return redirect()->to('staff/home');
+                return redirect()->to('staff/staffIndex');
             }
+            
         }
     
         // Đăng nhập thất bại

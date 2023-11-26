@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Client\TimKiemBookingApi;
 use App\Http\Controllers\Admin\Reviews\ReviewController;
 use App\Http\Controllers\Api\Client\NewsApi as ClientNewsApi;
 use App\Http\Controllers\Api\Client\ServiceApi as ClientServiceApi;
+use App\Http\Controllers\Api\Client\CouponApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,3 +162,8 @@ Route::get('/search', [StaffController::class, 'searchUser'])->name('searchUser'
 Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview');
 
 Route::get('revenue/{option}', [StatisticalApi::class, 'getRevenue']);
+
+// api coupon
+Route::prefix('coupon')->group(function () {
+    Route::get('/coupon', [CouponApi::class, 'index']);
+});
