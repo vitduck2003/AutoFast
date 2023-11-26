@@ -17,7 +17,7 @@ const AccountSetting = () => {
   const [address, setAddress] = useState<string>("");
   // const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState<any>();
   const getUser = async (id: number) => {
     await getUserById(id)
       .then((res) => {
@@ -88,7 +88,7 @@ const AccountSetting = () => {
     };
 
     if (formData) {
-      console.log(formData.avatar);
+      console.log(formData);
 
       await uploadAvatar(user.id, formData)
         .then((res) => {
@@ -202,7 +202,7 @@ const AccountSetting = () => {
                       height: "200px",
                       borderRadius: "99%",
                     }}
-                    src={`${ uploadImg? uploadImg: `http://localhost:8000/storage/${avatar}`}`}
+                    src={`${ uploadImg? uploadImg: `http://localhost:8000/storag/${avatar}`}`}
                   
                   />
                   <input
