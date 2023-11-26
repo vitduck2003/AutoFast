@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Statistic\StatisticController;
+use App\Http\Controllers\Staff\Home\DashboardStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +40,9 @@ use App\Http\Controllers\Admin\Statistic\StatisticController;
 Route::get('/', function () {
   return view('admin/pages/auth/login');
 });
-Route::get('/staff/home', function () {
-  return view('staff.pages.index');
-})->name('staff.home');
+
+Route::get('staff/staffIndex', [DashboardStaffController::class, 'staffIndex'])->name('staff.staffIndex');
+
 // api này để ngoài cho đức
 Route::get('/api/bookings/{id}', [BookingController::class, 'getBooking']);
 Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait']);
@@ -61,8 +62,11 @@ Route::prefix('admin')->group(function () {
   Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
 
   Route::get('jobs', [JobController::class, 'index']);
-  Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
+  Route::get('job-detail/{id}', [JobController::class, 'jobDetail'])->name('jobs.detail');
   Route::post('job-save-staff', [JobController::class, 'saveStaff'])->name('save.staff');
+  Route::get('add/job/{id}', [JobController::class, 'viewAddJob'])->name('view.add.job');
+  Route::post('add/job', [JobController::class, 'addJob'])->name('add.job');
+  Route::get('delete/job/{id}', [JobController::class, 'deleteJob'])->name('delete.job.detail');
 
 
   Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');

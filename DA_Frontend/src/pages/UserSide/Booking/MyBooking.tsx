@@ -10,11 +10,12 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 const MyBooking = () => {
   const [user_id, setPhone] = useState("");
   const [bookings, setBookings] = useState([]);
+  const[bookingsneedpay,setBookingsneedpay] = useState([]);
   const [selectedJobDetails, setSelectedJobDetails] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [showBill, setShowBill] = useState(false);
-  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm", "Khác"];
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm","Chờ xác nhận"];
   const [selectedStatus, setSelectedStatus] = useState("Tất cả");
   const [user,setUser]=useState();
   const [selectBooking,setSelectedBooking]=useState();
@@ -53,7 +54,7 @@ const MyBooking = () => {
     if (storedUser) {
       try {
         const userData = JSON.parse(storedUser);
-        setPhone(userData.phone);
+        setPhone(userData.id);
         setUser(userData);
       } catch (e) {
         console.error("Failed to parse user data from session storage", e);
@@ -88,6 +89,22 @@ const MyBooking = () => {
           console.log(response);
           const allBookings = response.data.flatMap(innerArray => innerArray);
           setBookings(allBookings);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      postPhone();
+    }
+  }, [user_id]);
+  useEffect(() => {
+    if (user_id) {
+      const postPhone = async () => {
+        try {
+          const response = await instance.post("/client/bookings-payment", { user_id });
+          console.log(response);
+          const allBookings = response.data.flatMap(innerArray => innerArray);
+         setBookingsneedpay(allBookings);
         } catch (error) {
           console.error("Error:", error);
         }
@@ -288,6 +305,7 @@ const MyBooking = () => {
       {status}
     </Button>
   ))}
+
 </div>
   
   
@@ -382,7 +400,7 @@ const MyBooking = () => {
               {selectedJobDetails.map((job) => (
                 <tr key={job.id}>
                   <td style={tdStyle}>{job.item_name}</td>
-                  <td style={tdStyle}>{job.target_time_done}</td>
+                  <td style={tdStyle}>{job.target_time_done} phút</td>
                   <td style={tdStyle}>{job.status}</td>
                 
                   <td style={tdStyle}>{job.staff_name}</td>
@@ -439,17 +457,6 @@ const MyBooking = () => {
                     Xem chi tiết
                     </Button>
 
-                    {booking.booking.status === 'Đã hoàn thành' && (
-  <Button
-  name="redirect"
-  style={buttonStyle}
-  onClick={() =>{ toggleBill( booking.booking)
-    showJob(booking.jobs)
-  }}
->
-  Xem hóa đơn
-</Button>
-)}
                 </td>
              
               </tr>

@@ -75,7 +75,7 @@ import ServiceItemEdit from "./pages/Admin/Service/ServiceItem/ServiceItemEdit";
 import MyBooking from "./pages/UserSide/Booking/MyBooking";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
-
+import MyBill from "./pages/UserSide/Bill/MyBill";
 import AccountSetting from "./pages/UserSide/Account/AccountSetting";
 import BillDetail from "./pages/UserSide/Bill/BillDetail";
 import BookingCancelAdmin from "./pages/Admin/BookingAdmin/BookingCancelAdmin";
@@ -313,7 +313,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               element={<SearchBooking searchBK={searchBK} />}
             />
           </Route>
-
+          <Route path="/mybill" element={<MyBill />} />
           </Route>
           {/* End User Side */}
           {/* Not Found Page */}
@@ -519,6 +519,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
             />
           </Route>
+        
           
           
         </Routes>

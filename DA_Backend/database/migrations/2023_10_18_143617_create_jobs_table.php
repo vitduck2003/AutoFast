@@ -16,15 +16,16 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->integer('id_service')->nullable();
-            $table->integer('id_booking_detail');
+            $table->integer('id_booking_detail')->nullable();
             $table->integer('id_booking');
             $table->integer('id_staff')->nullable();
             $table->string('item_name');
             $table->float('item_price');
             $table->string('target_time_done');
             $table->string('images_done')->nullable();
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->string('status');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

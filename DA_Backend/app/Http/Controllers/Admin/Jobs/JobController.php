@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Jobs;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -30,7 +31,7 @@ class JobController extends Controller
                     ->update(['status' => 'Đã xong']);
             }
         }
-
+        
         return view('admin/pages/jobs/jobs', compact('jobs'));
     }
     public function jobDetail($id)
@@ -43,7 +44,8 @@ class JobController extends Controller
         $jobDetail = DB::table('jobs')
             ->where('id_booking', '=', $id)
             ->get();
-        return view('admin/pages/jobs/jobDetail', compact('jobDetail', 'staffs_free_time'));
+        $idBooking = $id;
+        return view('admin/pages/jobs/jobDetail', compact('jobDetail', 'staffs_free_time', 'idBooking'));
     }
     public function startJob($id)
     {
@@ -73,11 +75,42 @@ class JobController extends Controller
         DB::table('jobs')
             ->where('id', '=', $jobId)
             ->update(['status' => $status]);
-    //    if($addStaff){
-    //     DB::table('staff')
-    //     ->where('id', $staffId)
-    //     ->update(['status' => 'Đang làm']);
-    //    }
         return redirect()->back()->with('message', 'Cập nhật nhân viên thành công');
     }
+    public function viewAddJob($id){
+        $jobs = DB::table('service_items')
+        ->get();
+        return view('admin/pages/jobs/addJob', compact('jobs', 'id'));
+    }
+    public function addJob(Request $request){
+        $data = $request->validate([
+            'service_item' => 'required',
+            'note' => 'required',
+            'id' => 'required'
+        ]);
+    
+        $id = $data['id'];
+        $infoService = DB::table('service_items')
+        ->select('item_name', 'time_done', 'price')
+        ->where('id', $data['service_item'])
+        ->first();
+        $addJob = DB::table('jobs')
+        ->insert(
+            [
+                'id_booking' => $data['id'],
+                'item_name' => $infoService->item_name,
+                'target_time_done' => $infoService->time_done,
+                'item_price' => $infoService->price,
+                'price' => $infoService->price,
+                'note' => $data['note'],
+                'status' => "Chưa phân công việc"
+            ]
+            );
+            return redirect()->route('jobs.detail', ['id' => $id])->with('message', 'Thêm thành công dịch vụ');
+    }
+    public function deleteJob($id){
+        $job = DB::table('jobs')->where('id',$id)->delete();
+        return redirect()->back()->with('error', 'Xóa thành công dịch vụ');
+    }
 }
+

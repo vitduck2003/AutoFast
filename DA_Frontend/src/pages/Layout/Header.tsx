@@ -282,8 +282,8 @@ const Header = (props: Props) => {
             className="px-5"
             style={userTextStyle}
             onClick={toggleDropdown}
-            onMouseOver={toggleDropdown}
-            onMouseOut={toggleDropdown}
+            // onMouseOver={toggleDropdown}
+            // onMouseOut={toggleDropdown}
           >
             Xin chào,<img style={avatarUser} src={
                       img ? `http://localhost:8000/storage/${img}` : ""
