@@ -64,6 +64,8 @@ Route::prefix('admin')->group(function () {
   Route::get('jobs', [JobController::class, 'index']);
   Route::get('job-detail/{id}', [JobController::class, 'jobDetail']);
   Route::post('job-save-staff', [JobController::class, 'saveStaff'])->name('save.staff');
+  Route::get('add/job/{id}', [JobController::class, 'viewAddJob'])->name('view.add.job');
+  Route::post('add/job', [JobController::class, 'addJob'])->name('add.job');
 
 
   Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');
