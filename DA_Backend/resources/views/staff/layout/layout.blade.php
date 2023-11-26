@@ -13,8 +13,7 @@
     <link rel="shortcut icon" href={{ asset('assets\images\favicon.ico') }}>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
-        alpha/css/bootstrap.css"
-        rel="stylesheet">
+        alpha/css/bootstrap.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -41,65 +40,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
         integrity="sha384-KEK5TbkdQW1XGmT0cNz4Z/6bH/2Cx5Hr0k2g8h7WkM0I6jbf8uaDn5jI6vSgjgTZ" crossorigin="anonymous">
     <style>
-        .drop-container {
-            position: relative;
-            display: flex;
-            gap: 10px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed #555;
-            color: #444;
-            cursor: pointer;
-            transition: background .2s ease-in-out, border .2s ease-in-out;
-        }
+    .drop-container {
+        position: relative;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px dashed #555;
+        color: #444;
+        cursor: pointer;
+        transition: background .2s ease-in-out, border .2s ease-in-out;
+    }
 
-        .drop-container:hover,
-        .drop-container.drag-active {
-            background: #eee;
-            border-color: #111;
-        }
+    .drop-container:hover,
+    .drop-container.drag-active {
+        background: #eee;
+        border-color: #111;
+    }
 
-        .drop-container:hover .drop-title,
-        .drop-container.drag-active .drop-title {
-            color: #222;
-        }
+    .drop-container:hover .drop-title,
+    .drop-container.drag-active .drop-title {
+        color: #222;
+    }
 
-        .drop-title {
-            color: #444;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            transition: color .2s ease-in-out;
-        }
+    .drop-title {
+        color: #444;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        transition: color .2s ease-in-out;
+    }
 
-        input[type=file] {
-            width: 350px;
-            max-width: 100%;
-            color: #444;
-            padding: 5px;
-            background: #fff;
-            border-radius: 10px;
-            border: 1px solid #555;
-        }
+    input[type=file] {
+        width: 350px;
+        max-width: 100%;
+        color: #444;
+        padding: 5px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #555;
+    }
 
-        input[type=file]::file-selector-button {
-            margin-right: 20px;
-            border: none;
-            background: #084cdf;
-            padding: 10px 20px;
-            border-radius: 10px;
-            color: #fff;
-            cursor: pointer;
-            transition: background .2s ease-in-out;
-        }
+    input[type=file]::file-selector-button {
+        margin-right: 20px;
+        border: none;
+        background: #084cdf;
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+    }
 
-        input[type=file]::file-selector-button:hover {
-            background: #0d45a5;
-        }
+    input[type=file]::file-selector-button:hover {
+        background: #0d45a5;
+    }
     </style>
 </head>
 
@@ -188,8 +187,8 @@
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src={{ asset('assets\images\flags\germany.jpg') }} alt="user-image"
-                                    class="mr-1" height="12"> <span class="align-middle">German</span>
+                                <img src={{ asset('assets\images\flags\germany.jpg') }} alt="user-image" class="mr-1"
+                                    height="12"> <span class="align-middle">German</span>
                             </a>
 
                             <!-- item-->
@@ -200,8 +199,8 @@
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src={{ asset('assets\images\flags\russia.jpg') }} alt="user-image"
-                                    class="mr-1" height="12"> <span class="align-middle">Russian</span>
+                                <img src={{ asset('assets\images\flags\russia.jpg') }} alt="user-image" class="mr-1"
+                                    height="12"> <span class="align-middle">Russian</span>
                             </a>
                         </div>
                     </div>
@@ -222,8 +221,7 @@
                                     </div>
                                     <div class="col">
                                         <a class="dropdown-icon-item" href="#">
-                                            <img src={{ asset('assets\images\brands\bitbucket.png') }}
-                                                alt="bitbucket">
+                                            <img src={{ asset('assets\images\brands\bitbucket.png') }} alt="bitbucket">
                                             <span>Bitbucket</span>
                                         </a>
                                     </div>
@@ -261,8 +259,7 @@
                     </div>
 
                     <div class="dropdown d-none d-lg-inline-block ml-1">
-                        <button type="button" class="btn header-item noti-icon waves-effect"
-                            data-toggle="fullscreen">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
@@ -363,11 +360,11 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user"
-                            src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}">
+                                src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}">
                             @if (!empty(session('user_name')))
-                                <span class="d-none d-xl-inline-block ml-1">{{ session('user_name') }}</span>
+                            <span class="d-none d-xl-inline-block ml-1">{{ session('user_name') }}</span>
                             @else
-                                <span class="d-none d-xl-inline-block ml-1">Dinh Viet Duc</span>
+                            <span class="d-none d-xl-inline-block ml-1">Dinh Viet Duc</span>
                             @endif
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
@@ -408,17 +405,13 @@
                     <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title">Menu</li>
-
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
-                                <i class="bx bx-home-circle"></i><span
-                                    class="badge badge-pill badge-info float-right">03</span>
-                                <span>Dashboards</span>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Trang chủ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="index.html">Default</a></li>
-                                <li><a href="dashboard-saas.html">Saas</a></li>
-                                <li><a href="dashboard-crypto.html">Crypto</a></li>
+                                <li><a href="{{ url('staff/staffIndex') }}">Thống kê</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Công việc</li>
@@ -475,7 +468,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <script>
-                                document.write(new Date().getFullYear())
+                            document.write(new Date().getFullYear())
                             </script> © Skote.
                         </div>
                         <div class="col-sm-6">

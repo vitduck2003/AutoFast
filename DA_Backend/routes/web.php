@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Statistic\StatisticController;
+use App\Http\Controllers\Staff\Home\DashboardStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +40,7 @@ use App\Http\Controllers\Admin\Statistic\StatisticController;
 Route::get('/', function () {
   return view('admin/pages/auth/login');
 });
-Route::get('/staff/home', function () {
-  return view('staff.pages.index');
-})->name('staff.home');
+
 // api này để ngoài cho đức
 Route::get('/api/bookings/{id}', [BookingController::class, 'getBooking']);
 Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait']);
@@ -82,8 +81,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('staff', [StaffController::class, 'index'])->name('staff');
         Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
-        // Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
-        // Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+        Route::get('staff/form/add', [StaffController::class,'formAdd'])->name('show.form.add');
+        Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
         Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
         Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
         Route::get('/search', [StaffController::class,'search'])->name('search');
@@ -128,6 +127,10 @@ Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff
 
     });
 
+    
+      Route::get('staff/staffIndex', [DashboardStaffController::class, 'staffIndex'])->name('staff.staffIndex');
+    
+      
     Route::prefix('admin')->group(function () {
       Route::get('user', [AccountController::class, 'index'])->name('user.index');
       Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
@@ -195,3 +198,5 @@ Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
   Route::prefix('admin')->group(function () {
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
 });
+
+

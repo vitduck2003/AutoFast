@@ -45,6 +45,9 @@
                                 @endif
                             </td>
                             <td>
+                                @if($user->role_id == 1)
+                                
+                                @else
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
                                     data-target="#exampleModal" data-user-id="{{ $user->id }}">
                                     Chi tiết
@@ -55,6 +58,7 @@
                                     ui-toggle-class="">
                                     Xóa
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

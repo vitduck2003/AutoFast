@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Staff\Job;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Staff;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class StaffJobController extends Controller
 {
+    // public function index(){
+    //     $total_staff = Staff::where('status', 'LIKE', 'Đã xong');
+    //     return view('staff.pages.index', compact('total_staff'));
+    // }
     public function currentJob(){
         $phone = session('phone');
         $user = User::where('phone', $phone)->first();
@@ -32,7 +37,21 @@ class StaffJobController extends Controller
                 $job->model_car = $model_car;
             }
         }
-        return view('staff/pages/jobs/currentJob', compact('jobs'));
+
+        $total = DB::table('jobs')
+        ->where('status', 'LIKE', 'Đang chờ nhận việc')->count();
+
+        $total1 = DB::table('jobs')
+        ->where('status', 'LIKE', 'Đang làm')->count();
+
+        $total2 = DB::table('jobs')
+        ->where('status', 'LIKE', 'Đã hoàn thành')->count();
+
+        $total3 = DB::table('jobs')
+        ->sum('price');
+        return view('staff/pages/jobs/currentJob', compact('jobs', 'total', 'total1', 'total2', 'total3'));
+
+
     }
     public function startJob(Request $request)
 {
