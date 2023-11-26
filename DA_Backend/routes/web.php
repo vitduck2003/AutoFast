@@ -198,5 +198,3 @@ Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
   Route::prefix('admin')->group(function () {
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
 });
-
-
