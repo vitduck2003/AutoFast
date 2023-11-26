@@ -7,6 +7,8 @@ const AccountSetting = () => {
   console.log(avatar);
   
   const [uploadImg, setUploadImg] = useState<string>();
+  console.log(uploadImg);
+  
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -179,6 +181,7 @@ const AccountSetting = () => {
       getUser(userData.id);
     }
   }, []);
+  
   return (
     <div>
       <div className="container mt-5">
@@ -192,18 +195,15 @@ const AccountSetting = () => {
                   className="author-card-avatar"
                   style={{ textAlign: "center" }}
                 >
+                
                   <img
                     style={{
                       width: "200px",
                       height: "200px",
                       borderRadius: "99%",
                     }}
-                    src={`${
-                      uploadImg
-                        ? uploadImg
-                        : `http://localhost:8000/storage/${avatar}`
-                    }`}
-                    alt="Daniel Adams"
+                    src={`${ uploadImg? uploadImg: `http://localhost:8000/storage/${avatar}`}`}
+                  
                   />
                   <input
                     className="form-control"
@@ -248,7 +248,7 @@ const AccountSetting = () => {
                     id="account-email"
                     value={email}
                     onChange={(e) => setLastName(e.target.value)}
-                    disabled
+                    
                   />
                 </div>
               </div>
@@ -262,6 +262,18 @@ const AccountSetting = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label htmlFor="account-confirm-pass">Address</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    id="account-address"
                   />
                 </div>
               </div>
@@ -289,18 +301,7 @@ const AccountSetting = () => {
                   />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label htmlFor="account-confirm-pass">Address</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    id="account-address"
-                  />
-                </div>
-              </div>
+             
               <div className="col-12">
                 <hr className="mt-2 mb-3" />
                 <div className="d-flex flex-wrap justify-content-between align-items-center">
@@ -322,3 +323,7 @@ const AccountSetting = () => {
 };
 
 export default AccountSetting;
+function setShowNotification(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+

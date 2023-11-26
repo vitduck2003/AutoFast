@@ -410,15 +410,12 @@
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
-                                <i class="bx bx-home-circle"></i><span
-                                    class="badge badge-pill badge-info float-right">03</span>
-                                <span>Dashboards</span>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Trang chủ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="index.html">Default</a></li>
-                                <li><a href="dashboard-saas.html">Saas</a></li>
-                                <li><a href="dashboard-crypto.html">Crypto</a></li>
+                                <li><a href="{{ url('staff/staffIndex') }}">Thống kê</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Công việc</li>
