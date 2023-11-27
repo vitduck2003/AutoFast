@@ -27,8 +27,7 @@ const ContactPage = () => {
                     // Email //
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-        marginRight: '0.5rem',}}></i>autofast@gara.com
+                  ✉ autofast@gara.com
                   </p>
                 </div>
               </div>
@@ -38,8 +37,7 @@ const ContactPage = () => {
                     // Số điện thoại //
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-        marginRight: '0.5rem',}}></i>+84 988 678 999
+                  ☎ +84 988 678 999
 
 
 
@@ -53,8 +51,7 @@ const ContactPage = () => {
                     // Fax //
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-    marginRight: '0.5rem',}}></i>+84 988 678 999
+                  ✉ +84 988 678 999
 
                   </p>
                 </div>
