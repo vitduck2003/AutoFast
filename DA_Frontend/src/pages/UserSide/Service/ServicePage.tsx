@@ -27,7 +27,7 @@ const ServicePage = (props:any) => {
         </div>
       </nav>
       <div className="container">
-        <h1 className="heading-primary text-center" style={slideStyle2}><span>Bảo Dưỡng &amp; Sửa Chữa Ô Tô</span> </h1>
+        <h1 className=" text-center" style={slideStyle2}><span>Bảo Dưỡng &amp; Sửa Chữa Ô Tô</span> </h1>
         <div className="row row-cols-lg-3 row-cols-sm-2 row-cols-1">
               {props.servicePage.map((item: any)=>{
                 return <div key={item.id} className="col mb-5">

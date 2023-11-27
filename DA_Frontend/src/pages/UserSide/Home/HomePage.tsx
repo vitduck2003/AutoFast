@@ -239,8 +239,8 @@ const slideStyle2 ={
           <div className="service-item">
             <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
               <span className="img img-cover auto-scale img-effect zoom-in-1">
-                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></span>
-              <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></a>
+                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="" /></span>
+              <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="" /></a>
             <h4 className="title text-center text-uppercase fw-700">
               <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
             </h4>
@@ -250,18 +250,19 @@ const slideStyle2 ={
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src="" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></span>
+                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title=""></a>
               </h4>
             </div>
-          </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
+          </div>
+          <div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
                   <img className=" ls-is-cached lazyloaded" src={`./src/assets/img/${item.image_service}`} alt="" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
+                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title="">{item.service_name}</a>
 
