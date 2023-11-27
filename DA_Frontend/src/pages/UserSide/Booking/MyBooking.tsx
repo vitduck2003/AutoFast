@@ -6,6 +6,7 @@ import type { InputRef } from 'antd';
 import { Button, Input, Space, Table } from 'antd';
 import type { ColumnType, ColumnsType } from 'antd/es/table';
 import type { FilterConfirmProps } from 'antd/es/table/interface';
+import { notification } from "antd";
 
 const MyBooking = () => {
   const [user_id, setPhone] = useState("");
@@ -20,7 +21,24 @@ const MyBooking = () => {
   const [user,setUser]=useState();
   const [selectBooking,setSelectedBooking]=useState();
   const [selectJob,setSelectJob]=useState();
+  const [showNotification, setShowNotification] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
 
+  const openNotification = (mess, text_color, bg_color, title) => {
+    setShowNotification(true);
+    api.open({
+      message: title,
+      description: mess,
+      duration: 3,
+      style: {
+        backgroundColor: bg_color,
+        color: text_color,
+      },
+      onClose: () => {
+        setShowNotification(false);
+      },
+    });
+  };
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -49,6 +67,12 @@ const MyBooking = () => {
     instance.post(`/client/cancel-booking`, { id: bookingId, status: 'Đã được hủy' })
       .then(response => {
         // Handle success, update the state to reflect the updated status
+        if(response.data.success === true){
+          showSuccessNotification(response.data.message);
+          
+        }else if (response.data.success === false) {
+          showSuccessNotification(response.data.message);        }
+      //  console.log(response.data)
         const updatedBookings = bookings.map(booking => {
           if (booking.booking.id === bookingId) {
             // Update the status for the specific booking
@@ -74,6 +98,19 @@ const MyBooking = () => {
   const showJob = (jobs) => {
     setSelectJob(jobs);
     console.log(selectJob);
+  };
+  const showSuccessNotification = (text) => {
+    notification.success({
+      message: 'Thành công',
+      description: text,
+    });
+  };
+
+  const showErrorNotification = () => {
+    notification.error({
+      message: 'Error',
+      description: 'An error occurred while canceling the booking.',
+    });
   };
   // Define the selected booking status
   useEffect(() => {
