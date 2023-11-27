@@ -218,5 +218,14 @@ class BookingApi extends Controller
             array_values($result)
         ]);
     }
+    public function cancelBooking(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
+        DB::table('booking')->where('id', $id)->update(['status' => $status]);
+       return response()->json([
+        'message' => 'Hủy lịch thành công', 
+        'success' => true,
+       ], 200);
+    }
     }
 

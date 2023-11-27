@@ -87,6 +87,7 @@ Route::prefix('client')->group(function () {
     // booking manager 
     Route::post('bookings', [BookingApi::class, 'getBookingUser']);
     Route::post('bookings-payment', [BookingApi::class, 'getBookingPaymentPhone']);
+    Route::post('cancel-booking', [BookingApi::class, 'cancelBooking']);
     // News API
     Route::prefix('news')->group(function () {
         Route::get('/', [ClientNewsApi::class, 'index']);
