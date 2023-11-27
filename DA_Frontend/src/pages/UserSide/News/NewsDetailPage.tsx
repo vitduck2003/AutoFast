@@ -12,34 +12,34 @@ const NewsDetailPage = (props: any) => {
     setNews(props.news.find(New => New.id == id))
 })
 const containerStyle = {
-  maxWidth: '1600px',
-  margin: '0 auto',
-  padding: '20px',
+  width: "100%",
+  height: "auto",
+  display: "block",
+  margin: "20px auto"
 };
 
 const headerStyle = {
-  textAlign: 'center',
-  backgroundColor: '#333',
-  color: '#fff',
-  padding: '10px',
+  backgroundColor: "rgba(251, 251, 251, 0.15)"
 };
 const headerStyle2 = {
-  textAlign: 'center',
-  backgroundColor: '#333',
-  color: '#fff',
-  padding: '10px',
+  width: "800px",
+  height: "700px",
+  display: "block",
+  margin: "20px auto"
 };
 const headerStyle3 = {
   textAlign: 'center',
-  backgroundColor: '#333',
-  color: '#fff',
-  padding: '10px',
+  color: 'DodgerBlue',
+  padding: '20px',
+  fontSize: '34px',
+  fontWeight: 'bold',
 };
 const headerStyle4 = {
   textAlign: 'center',
-  backgroundColor: '#333',
-  color: '#fff',
-  padding: '10px',
+  color: 'black',
+  padding: '5px',
+  fontSize: '24px',
+  fontWeight: 'bold',
 };
 const headerStyle5 = {
   textAlign: 'center',
@@ -120,23 +120,30 @@ const dateAuthorStyle = {
   fontSize: '14px',
 };
 
-const contentStyle = {
-  lineHeight: '1.6',
-};
+
     return (
-      <div style={containerStyle}>
-          <header >
-              <h1>{New?.title}</h1>
-          </header>
-    
-          <article style={articleStyle}>
-              <img src={New?.image} alt="Hình ảnh tin tức" style={imageStyle} />
-              <p style={dateAuthorStyle}>Ngày Đăng: 16 tháng 11, 2023</p>
-              <p style={contentStyle}>
-                 {New?.content}
-              </p>
-          </article>
-      </div>
+      
+      <div className="card px-3 pt-3" style={containerStyle}>
+ 
+  <div>
+   
+    <div className="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+    <h5 style={headerStyle3}>{New?.title}</h5>
+      <img src={New?.image} className="" style={headerStyle2} />
+      <a href="#!">
+        <div className="mask" style={headerStyle}></div>
+      </a>
+    </div>
+   
+    <a href="" style={headerStyle4} >
+      <p>
+        {New?.des}
+      </p>
+    </a>
+
+    <hr />
+    </div>
+    </div>
     );
   
 }
