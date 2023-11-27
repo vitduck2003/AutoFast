@@ -16,6 +16,8 @@ const ServiceDetailV = (props: any) => {
     // Lọc chỉ những phần có id bằng giá trị id từ useParams()
     const filteredItems = props.serviceItem.filter((item: any) => item.id_service === numericId);
 
+    console.log(filteredItems);
+    
     return (
         <div className="container">
             <h1 className="heading-primary text-center" style={slideStyle}><span>Chi Tiết Các Dịch Vụ Sửa Chữa</span> </h1>
@@ -25,7 +27,7 @@ const ServiceDetailV = (props: any) => {
                     <div key={item.id} className="col sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
                         <div className="accessory-item">
                             <a title={item.item_name} className="img auto-scale img-scaledown img-effect zoom-in-1">
-                                <img src={imageabc} className=" ls-is-cached lazyloaded" alt={item.item_name} />
+                                <img src={`./src/assets/img/${item.image}`} className=" ls-is-cached lazyloaded" alt={item.item_name} />
                             </a>
                             <h3 className="title text-center mb-3">
                                 <a title={item.item_name}>{item.item_name}</a>

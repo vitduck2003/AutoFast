@@ -13,17 +13,6 @@ const ServicePage = (props:any) => {
     <main className="product-category" style={slideStyle}>
       <nav aria-label="breadcrumb" className="main-breadcrumb mb-5">
         <div className="container text-center">
-          <ol className="breadcrumb mb-0">
-            <li className="breadcrumb-item">
-              <a href="" title="Trang chủ">Trang chủ</a>
-            </li>
-            <li className="breadcrumb-item ">
-              <a href="" title="Dịch Vụ">Dịch Vụ</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              <a href="" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
-            </li>
-          </ol>
         </div>
       </nav>
       <div className="container">
