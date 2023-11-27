@@ -260,7 +260,7 @@ const slideStyle2 ={
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src={item.image_service} alt="" loading="lazy" /></span>
+                  <img className=" ls-is-cached lazyloaded" src={`./src/assets/img/${item.image_service}`} alt="" loading="lazy" /></span>
                 <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title="">{item.service_name}</a>
