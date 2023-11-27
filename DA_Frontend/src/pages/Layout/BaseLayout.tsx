@@ -138,7 +138,7 @@ const BaseLayout = () => {
           className="navbar-brand d-flex align-items-center px-4 px-lg-5"
         >
           <h2 className="m-0 text-primary">
-            <i className="fa fa-car me-3"></i>Auto Fast
+            Auto Fast
           </h2>
         </a>
         <button
@@ -280,7 +280,7 @@ const BaseLayout = () => {
             </div>
           </div>
         </div>
-        <div className="container">
+        {/* <div className="container">
           <div className="copyright">
             <div className="row">
               <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
@@ -311,7 +311,7 @@ const BaseLayout = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
