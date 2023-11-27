@@ -8,12 +8,19 @@ const NewsPage = ( props: any) => {
   
   const news = props.news
   console.log(news);
-  
+  const slideStyle1 ={
+    background: "DodgerBlue",
+    color: "white"
+  }
+    const slideStyle ={
+   
+    color: "DodgerBlue"
+  }
   return (
     <div>
       <div className="row px-lg-5 g-4 mb-5">
                     <div className="col-12">
-                        <h2 className="heading-primary mb-4 text-start"><a href="kinh-nghiem-cham-soc-xe.aspx">Chuyên Mục Chăm Sóc Xe</a></h2>
+                        <h2 className=" mb-4 text-start"><a href="kinh-nghiem-cham-soc-xe.aspx">Chuyên Mục Chăm Sóc Xe</a></h2>
 
                     </div>
                         <div className="col-lg-8 col-12" data-sal-duration="1600">
@@ -24,8 +31,8 @@ const NewsPage = ( props: any) => {
                                 <a href={`/news/${item.id}`} title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="img img-cover img-effect zoom-in-1 auto-scale">
                                     <img className=" lazyloaded" src={item.image} alt="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" />
                                 </a>
-                                <time className="d-inline-flex align-items-center" dateTime="2020-08-13"><i className="me-1 fa-solid fa-calendar-days"></i> 13-08-2020</time>
-                                <h4 className="title fw-700 mb-2"><a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?">{item.title}</a>
+                                <time style={slideStyle1} className="d-inline-flex align-items-center "><i className="me-1 fa-solid "></i> 11/11/2023</time>
+                                <h4 className="title fw-700 " ><a  style={slideStyle} href={`/news/${item.id}`} >{item.title}</a>
                                 </h4>
                                 <p className="description">{item.content}<a href="noi-dung-tai-vi-sao-dong-co-xe-o-to-cua-ban-lai-qua-nong-3143.aspx" title="Tại vì sao động cơ xe ô tô của bạn lại quá nóng?" className="read-more"><i className="fa-solid fa-angles-right"></i></a></p>
                             </div>
@@ -41,7 +48,7 @@ const NewsPage = ( props: any) => {
                                     <div className="info">
                                         <h4 className="title fw-700 mb-2"><a href="noi-dung-uu-diem-va-nhuoc-diem-cac-loai-chat-lieu-boc-ghe-xe-hoi-2120.aspx" title="Ưu điểm và nhược điểm các loại chất liệu bọc ghế xe hơi">Ưu điểm và nhược điểm các loại chất liệu bọc ghế xe hơi</a>
                                         </h4>
-                                        <time className="d-inline-flex align-items-center" dateTime="2020-08-13"><i className="me-1 fa-solid fa-calendar-days"></i> 13-08-2020                                        </time>
+                                      
                                     </div>
 
                                 </div>
