@@ -44,6 +44,33 @@ const MyBooking = () => {
     // console.log(booking);
   
   };
+  const deleteBooking = (bookingId) => {
+    // Make an API request to update the status to "Đã được hủy" with id in the request body
+    instance.post(`/client/cancel-booking`, { id: bookingId, status: 'Đã được hủy' })
+      .then(response => {
+        // Handle success, update the state to reflect the updated status
+        const updatedBookings = bookings.map(booking => {
+          if (booking.booking.id === bookingId) {
+            // Update the status for the specific booking
+            return {
+              ...booking,
+              booking: {
+                ...booking.booking,
+                status: 'Đã được hủy'
+              }
+            };
+          }
+          return booking;
+        });
+
+        setBookings(updatedBookings);
+        console.log("Booking canceled successfully");
+      })
+      .catch(error => {
+        // Handle error
+        console.error("Error canceling booking:", error);
+      });
+  }
   const showJob = (jobs) => {
     setSelectJob(jobs);
     console.log(selectJob);
@@ -451,13 +478,18 @@ const MyBooking = () => {
               
               
                 <td style={tdStyle}>
-                 
-               
-                    <Button onClick={() => showJobDetails(booking.jobs)}>
-                    Xem chi tiết
-                    </Button>
-
-                </td>
+  <Button onClick={() => showJobDetails(booking.jobs)}>
+    Xem chi tiết
+  </Button>
+  {booking.booking.status === "Chờ xác nhận" ? (
+    <Button
+      onClick={() =>  deleteBooking(booking.booking.id)}
+      style={{ marginLeft: '10px', marginRight: '10px', background: 'blue', color: 'white' /* add other styles as needed */ }}
+    >
+      Hủy
+    </Button>
+  ) : null}
+</td>
              
               </tr>
             ))}
