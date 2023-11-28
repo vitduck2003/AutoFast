@@ -23,9 +23,9 @@ class DefineController extends Controller
         $fontend_path =  $path_goc.'AutoFast/DA_Frontend/src/assets/img/img_item/'.$file;
        }
        if($check ==3){
-        $fontend_path =  $path_goc.'AutoFast/DA_Frontend/src/assets/img/img_new'.$file;
+        $fontend_path =  $path_goc.'AutoFast/DA_Frontend/src/assets/img/img_new/'.$file;
        }
-       
+
        
         if(file_exists($backend_path)){
             copy($backend_path, $fontend_path);
