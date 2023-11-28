@@ -169,5 +169,6 @@ Route::get('revenue/{option}', [StatisticalApi::class, 'getRevenue']);
 
 // api coupon
 Route::prefix('client')->group(function () {
-    Route::get('/coupon', [CouponApi::class, 'index']);
+    Route::get('coupons', [CouponApi::class, 'show']);
+    Route::post('applyCoupons', [CouponApi::class, 'applyCoupon']);
 });
