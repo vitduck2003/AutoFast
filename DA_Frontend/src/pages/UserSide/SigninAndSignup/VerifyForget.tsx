@@ -112,7 +112,7 @@ const VerifyForget = () => {
         if (response.data.success === true) {
           openNotification(response.data.message, "black", "green", "Thành Công");
           sessionStorage.setItem("phone", values.phone);
-          sessionStorage.setItem("verificationCode", values.verificationCode);
+          sessionStorage.setItem("verificationCode", values.verification_code);
           // Use a nested .then block to navigate after handling the success case
           return new Promise<void>((resolve) => {
             setTimeout(() => {
@@ -163,10 +163,12 @@ const VerifyForget = () => {
         //   console.log(response)
         //   return openNotification(response?.data?.message, "white", "red", "Failed");
         // }
+       
         return response;
       })
       .then(() => {
-        console.log(phone, values);
+        console.log( values);
+        
       })
       .catch((error) => {
         // Handle any errors here if needed

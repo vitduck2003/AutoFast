@@ -118,15 +118,15 @@ $(document).ready(function() {
                     $('#' + key).html(data[key])
                 })
                 // Thiết lập dữ liệu user vào modal
-                // var modal = $('#exampleModal');
-                // modal.find('.modal-title').text('Chi tiết tài khoản');
-                // // Đổ dữ liệu user vào các phần tử trong modal
-                // modal.find('#name').text(data[0].name);
-                // modal.find('#phone').text(data[0].phone);
-                // modal.find('#email').text(data[0].email);
-                // modal.find('#description').text(data[0].description);
-                // modal.find('#password').text(data[0].password);
-                // modal.find('#role_id').text(data[0].role_id);
+                var modal = $('#exampleModal');
+                modal.find('.modal-title').text('Chi tiết tài khoản');
+                // Đổ dữ liệu user vào các phần tử trong modal
+                modal.find('#name').text(data[0].name);
+                modal.find('#phone').text(data[0].phone);
+                modal.find('#email').text(data[0].email);
+                modal.find('#description').text(data[0].description);
+                modal.find('#password').text(data[0].password);
+                modal.find('#role_id').text(data[0].role_id);
 
                 // Update the data-user-id attribute for Confirm and Cancel buttons
                 modal.find('.btn-confirm').attr('data-user-id', userId);

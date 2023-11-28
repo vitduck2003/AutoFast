@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Notification extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $table="notification";
+    protected $fillable = [
+        'title','content','user_id'
+    ];
 }

@@ -9,18 +9,16 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author"> <!-- App favicon -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
-    <link rel="shortcut icon" href="{{asset('assets\images\favicon.ico')}}">
-    <link rel="shortcut icon" href="{{
-    asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets\images\favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
         alpha/css/bootstrap.css" rel="stylesheet">
-        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/fdb36d9438.js" crossorigin="anonymous"></script>
     <link rel=" stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- DataTables -->
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css">
@@ -43,65 +41,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
         integrity="sha384-KEK5TbkdQW1XGmT0cNz4Z/6bH/2Cx5Hr0k2g8h7WkM0I6jbf8uaDn5jI6vSgjgTZ" crossorigin="anonymous">
     <style>
-    .drop-container {
-        position: relative;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        padding: 20px;
-        border-radius: 10px;
-        border: 2px dashed #555;
-        color: #444;
-        cursor: pointer;
-        transition: background .2s ease-in-out, border .2s ease-in-out;
-    }
+        .drop-container {
+            position: relative;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #555;
+            color: #444;
+            cursor: pointer;
+            transition: background .2s ease-in-out, border .2s ease-in-out;
+        }
 
-    .drop-container:hover,
-    .drop-container.drag-active {
-        background: #eee;
-        border-color: #111;
-    }
+        .drop-container:hover,
+        .drop-container.drag-active {
+            background: #eee;
+            border-color: #111;
+        }
 
-    .drop-container:hover .drop-title,
-    .drop-container.drag-active .drop-title {
-        color: #222;
-    }
+        .drop-container:hover .drop-title,
+        .drop-container.drag-active .drop-title {
+            color: #222;
+        }
 
-    .drop-title {
-        color: #444;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-        transition: color .2s ease-in-out;
-    }
+        .drop-title {
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            transition: color .2s ease-in-out;
+        }
 
-    input[type=file] {
-        width: 350px;
-        max-width: 100%;
-        color: #444;
-        padding: 5px;
-        background: #fff;
-        border-radius: 10px;
-        border: 1px solid #555;
-    }
+        input[type=file] {
+            width: 350px;
+            max-width: 100%;
+            color: #444;
+            padding: 5px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #555;
+        }
 
-    input[type=file]::file-selector-button {
-        margin-right: 20px;
-        border: none;
-        background: #084cdf;
-        padding: 10px 20px;
-        border-radius: 10px;
-        color: #fff;
-        cursor: pointer;
-        transition: background .2s ease-in-out;
-    }
+        input[type=file]::file-selector-button {
+            margin-right: 20px;
+            border: none;
+            background: #084cdf;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+        }
 
-    input[type=file]::file-selector-button:hover {
-        background: #0d45a5;
-    }
+        input[type=file]::file-selector-button:hover {
+            background: #0d45a5;
+        }
     </style>
 </head>
 
@@ -118,16 +116,16 @@
                                 <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}"  height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" height="100%" width="100%">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt=""  height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt=""  height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
                             </span>
                         </a>
                     </div>
@@ -186,109 +184,32 @@
                             id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <i class="bx bx-bell bx-tada"></i>
-                            <span class="badge badge-danger badge-pill">3</span>
+                            <span class="badge badge-danger badge-pill"></span>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" id="show_noti"
                             aria-labelledby="page-header-notifications-dropdown">
-                            <div class="p-3">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0"> Notifications </h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#!" class="small"> View All</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-simplebar="" style="max-height: 230px;">
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <div class="avatar-xs mr-3">
-                                            <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                <i class="bx bx-cart"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src={{ asset('assets\images\users\avatar-3.jpg') }}
-                                            class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">James Lemire</h6>
-                                            <div class="font-size-12 text-muted">
-                                                <p class="mb-1">It will seem like simplified English.</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <div class="avatar-xs mr-3">
-                                            <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                <i class="bx bx-badge-check"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Your item is shipped</h6>
-                                            <div class="font-size-12 text-muted">
-                                                <p class="mb-1">If several languages coalesce the grammar</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                                </div>
 
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="assets\images\users\avatar-4.jpg"
-                                            class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Salena Layfield</h6>
-                                            <div class="font-size-12 text-muted">
-                                                <p class="mb-1">As a skeptical Cambridge friend of mine occidental.
-                                                </p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="p-2 border-top">
-                                <a class="btn btn-sm btn-link font-size-14 btn-block text-center"
-                                    href="javascript:void(0)">
-                                    <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
-                                </a>
-                            </div>
-                        </div>
                     </div>
-
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user"
                                 src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}">
-                            <span class="d-none d-xl-inline-block ml-1">{{session('user_name')}}</span>
+                            <span class="d-none d-xl-inline-block ml-1">{{ session('user_name') }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <!-- item-->
                             <a class="dropdown-item" href="{{ url('admin/profile', ['id' => session('id')]) }}"><i
-                                    class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
-                            <a class="dropdown-item" href="#"><i
-                                    class="bx bx-wallet font-size-16 align-middle mr-1"></i> My Wallet</a>
-                            <a class="dropdown-item d-block" href="#"><span
-                                    class="badge badge-success float-right">11</span><i
-                                    class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
+                                    class="bx bx-user font-size-16 align-middle mr-1"></i> Thông tin cá nhân</a>
                             <a class="dropdown-item"
                                 href="{{ url('admin/profile/show/password', ['id' => session('id')]) }}"><i
-                                    class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Change password</a>
+                                    class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Đổi mật khẩu</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="{{ route('logout') }}"><i
-                                    class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>Logout</a>
+                                    class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>Đăng
+                                xuất</a>
                         </div>
                     </div>
 
@@ -312,7 +233,7 @@
                                 <i class="bx bx-home-circle"></i>
                                 <span>Trang chủ</span>
                             </a>
-                           
+
                         </li>
                         <li class="menu-title">Đặt lịch</li>
                         <li>
@@ -424,8 +345,8 @@
                                 <span>Quản lí tin tức</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{route('new.index')}}">Tất cả tin tức</a></li>
-                                <li><a href="{{route('new.create')}}">Tạo tin tức</a></li>
+                                <li><a href="{{ route('new.index') }}">Tất cả tin tức</a></li>
+                                <li><a href="{{ route('new.create') }}">Tạo tin tức</a></li>
                             </ul>
                     </ul>
                 </div>
@@ -459,7 +380,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <script>
-                            document.write(new Date().getFullYear())
+                                document.write(new Date().getFullYear())
                             </script> DINH ViT DUCK
                         </div>
                         <div class="col-sm-6">
@@ -476,48 +397,65 @@
     </div>
 
     <script>
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-        var newNotificationHtml = `
-                <a href="${data.url}" style="background:#f8f9fa;" class="dropdown-item">
-                    <div class="media">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                            ${data.title}
-                              
-                            </h3>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 1 giây trước
-                            <span class="float-right text-sm text-primary"><i class="fa fa-circle" aria-hidden="true"></i></span>   
-                        </p>
+        const show_noti = document.getElementById('show_noti');
+        fetch('http://127.0.0.1:8000/api/admin/notifications')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Lỗi khi gọi API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const recentNotifications = data.slice(0, 3);
+                var content = recentNotifications.map(function (data) {
+                    return `
+                <div data-simplebar="" style="max-height: 230px;">
+                
+                <a href="" class="text-reset notification-item">
+                <div class="media">
+                <div class="media-body">
+                <h6 class="mt-0 mb-1"> ${data.title}</h6>
+                <div class="font-size-12 text-muted">
+                <p class="mb-1"> ${data.content} của ${data.name}</p>
+                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}
+                </p>
+                </div>
+                </div>
+                </div>
+                </a>
+                
+                </div>
+                `;
+                }).join('')
+                show_noti.innerHTML = `
+                <div class="p-3">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="m-0"> Thông báo </h6>
+                        </div>
+                        <div class="col-auto">
+                            <a href="#!" class="small"> View All</a>
                         </div>
                     </div>
-                </a>
-        `;
-        $('#dropdown-notification').prepend(newNotificationHtml);
-        document.getElementById('NotificationBadge').innerHTML = parseInt(document.getElementById(
-            'NotificationBadge').innerHTML) + 1;
-        matches = document.title.match(/\d+/);
-        matches = parseInt(matches);
-        one = parseInt(1);
-        add = matches + one;
-
-        var pattern = /\d+/;
-        if (pattern.test(document.title)) {
-            // update the counter
-            document.title = document.title.replace(pattern, add);
-        } else {
-            // prepend the counter
-            document.title = "(" + one + ")" + " Thông báo mới";
-        }
-    });
-
+                </div>
+                `+ content +`
+                
+                <div class="p-2 border-top">
+                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                        <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                    </a>
+                </div>
+            `;
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
 
     <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -550,6 +488,8 @@
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     @yield('script');
 
 </body>

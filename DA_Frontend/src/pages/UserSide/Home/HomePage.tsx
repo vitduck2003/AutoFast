@@ -224,7 +224,7 @@ const slideStyle2 ={
       <div className="container">
       <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="text-primary text-uppercase">
-              // Dịch vụ //
+               Dịch vụ 
             </h6>
             <h1 className="mb-5">Dịch vụ của chúng tôi</h1>
           </div>
@@ -308,7 +308,7 @@ const slideStyle2 ={
         <div className="container">
           <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="text-primary text-uppercase">
-              // Các kỹ sư của chúng tôi //
+              Các kỹ sư của chúng tôi
             </h6>
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>

@@ -123,5 +123,20 @@
       "name": "Sửa Chữa Hộp Số Tự Động",
       "img": "https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-ha-noi.jpg"
     }
+   ],
+   "menu": [
+    {
+      "id": 1,
+      "logo_name": "Auto Fast",
+      "home": "Trang Chủ",
+      "about": "Về Chúng Tôi",
+      "dv": "Dịch Vụ",
+      "page": "Pages",
+      "dl": "Đặt Lịch",
+      "nv": "Kỹ Thuật Viên",
+      "contact": "Liên Hệ",
+      "new": "Tin Tức",
+      "bok": "Đặt Lịch Ngay"
+    }
    ]
 }

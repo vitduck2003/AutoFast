@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Statistic\StatisticController;
 use App\Http\Controllers\Staff\Home\DashboardStaffController;
+use App\Http\Controllers\Admin\Notification\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,9 @@ Route::prefix('admin')->group(function () {
   Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
 
   Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
+
+
+  Route::get('notifications', [NotificationController::class, 'index'])->name('notifications-view');
 });
 route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
 route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
