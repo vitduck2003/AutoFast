@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\Notification\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\NewsApi;
@@ -67,6 +68,8 @@ Route::prefix('admin')->group(function () {
         Route::put('/{id}', [ReviewApi::class, 'update']);
         Route::delete('/{id}', [ReviewApi::class, 'destroy']);
     });
+    // api notification
+    Route::get('/notifications',[NotificationController::class, 'home']);
 
     //api quan ly tin tuc  http://127.0.0.1:8000/api/admin/user
     Route::resource('users', UserApi::class);
