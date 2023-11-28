@@ -89,6 +89,7 @@ import ServiceClientNew from "./pages/UserSide/Service/ServiceClineNew";
 import { getServiceHome, getServicePage } from "./api/Client/servicecl";
 import ServiceDetailV from "./pages/UserSide/Service/ServiceDetailV";
 import AboutDetail from "./pages/UserSide/AboutUs/AboutDetail";
+import { getMenu } from "./api/Client/menu";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -103,6 +104,7 @@ function App() {
   const [about, setAbout] = useState<any>([]);
   const [abouts, setAbouts] = useState<any>([]);
   const [aboutz, setAboutz] = useState<any>([]);
+  const [menu, setMenu] = useState<any>([]);
   // const [serviceHome, setServiceHome] = useState<any>([]);
   // const [servicePage, setServicePage] = useState<any>([]);
 
@@ -118,8 +120,10 @@ function App() {
     getAbout().then(({data}) => setAbout(data));
     getAbouts().then(({data}) => setAbouts(data));
     getAboutz().then(({data}) => setAboutz(data));
-    getServiceHome().then(({data}) => setServiceHome(data));
-    getServicePage().then(({data}) => setServicePage(data));
+    getMenu().then(({data}) => setMenu(data));
+    // getServiceHome().then(({data}) => setServiceHome(data));
+    // getServicePage().then(({data}) => setServicePage(data));
+
   }, []);
 
   const onHandleAddStaff = (staff: IStaff) => {
@@ -238,7 +242,7 @@ const onHandleRemoveServiceItem = (id: number) => {
       <BrowserRouter>
         <Routes>
           {/* User Side */}
-          <Route path="/" element={<BaseLayout />}>
+          <Route path="/" element={<BaseLayout menu={menu} />}>
             <Route index element={<HomePage serviceHome={services} technicians={technicians} about={about} abouts={abouts} aboutz={aboutz} />} />
             {/* Booking Page */}
             <Route path="booking">
