@@ -58,12 +58,14 @@ const ForgotPassword = () => {
             }, 1000); // Delay for 3 seconds
           });
         } else if (response.success === false) {
-          return openNotification(response.message, "white", "red", "Gửi mã thất bại");
+          // return openNotification(response.message, "white", "red", "Gửi mã thất bại");
+          console.log(response);
         }
       })
       .catch((error) => {
         // Handle any errors here if needed
         console.error("Error:", error);
+        openNotification(error.response.data.message, "white", "red", "Gửi mã thất bại");
 
         throw error; // Rethrow the error for further handling in your component
       });
