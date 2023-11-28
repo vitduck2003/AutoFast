@@ -74,7 +74,8 @@ class BookingApi extends Controller
                     }
                 }
              //send mailer
-            
+             DB::table('notification')->insert(['booking_id'=>$bookingId,'title' => 'Công việc','content' => 'Có lịch bảo dưỡng ','created_at' =>now()]);
+
               $mail = new MailController();
 
               $data_service = DB::table('jobs')->select('item_name','item_price')->where('id_booking',$bookingId)->get();

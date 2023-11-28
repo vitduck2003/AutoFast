@@ -56,7 +56,7 @@ class ServiceController extends Controller
            $model->image_service = Storage::disk('public')->putFileAs('images', $request->file('image_service'), $name);
            $model->image_service  = str_replace('images/','',$model->image_service ); 
            $define = new DefineController();
-           $define->save_file_path($model->image_service );
+           $define->save_file_path($model->image_service ,1);
         }
     
         $model->save();
@@ -103,7 +103,7 @@ class ServiceController extends Controller
             $model->image_service = Storage::disk('public')->putFileAs('images', $request->file('image_service'), $name);
              $model->image_service  = str_replace('images/','',$model->image_service ); 
              $define = new DefineController();
-             $define->save_file_path($model->image_service );
+             $define->save_file_path($model->image_service ,1);
         }
         $model->save();
 

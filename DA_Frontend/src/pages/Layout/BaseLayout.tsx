@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./Header";
-const BaseLayout = () => {
+const BaseLayout = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName,setUserName] =useState(); //
   const [img,setImg]=useState(); //
@@ -138,7 +138,7 @@ const BaseLayout = () => {
           className="navbar-brand d-flex align-items-center px-4 px-lg-5"
         >
           <h2 className="m-0 text-primary">
-            <i className="fa fa-car me-3"></i>Auto Fast
+            Auto Fast
           </h2>
         </a>
         <button
@@ -150,16 +150,19 @@ const BaseLayout = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <div className="navbar-nav ms-auto p-4 p-lg-0">
+          {props.menu.map((item:any)=>{
+
+          
+          return <div key={item.id} className="navbar-nav ms-auto p-4 p-lg-0">
             <a href="/" className="nav-item nav-link ">
-              Trang Chủ
+              {item.home}
             </a>
 
             <a href="/about" className="nav-item nav-link">
-              Về chúng tôi
+              {item.about}
             </a>
             <a href="/service" className="nav-item nav-link">
-              Dịch vụ
+              {item.dv}
             </a>
             <div className="nav-item dropdown">
               <a
@@ -167,35 +170,39 @@ const BaseLayout = () => {
                 className="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
               >
-                Pages
+                {item.page}
               </a>
               <div className="dropdown-menu fade-up m-0">
                 <a href="booking" className="dropdown-item">
-                  Đặt lịch
+                 {item.dl}
                 </a>
 
                 <a href="technicians" className="dropdown-item">
-                  Kỹ thuật viên
+                  {item.nv}
                 </a>
               </div>
             </div>
             <a href="contact" className="nav-item nav-link">
-              Liên hệ
+              {item.contact}
             </a>
             <a href="news" className="nav-item nav-link">
-              Tin Tức
+              {item.new}
             </a>
           </div>
+          })}
           <a
             href="booking"
             className="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
           >
             Đặt lịch ngay
           </a>
+          
         </div>
+        
       </nav> 
+      
       <div>
-        <Header></Header>
+       
       </div>
 
       
@@ -280,7 +287,7 @@ const BaseLayout = () => {
             </div>
           </div>
         </div>
-        <div className="container">
+        {/* <div className="container">
           <div className="copyright">
             <div className="row">
               <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
@@ -311,7 +318,7 @@ const BaseLayout = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

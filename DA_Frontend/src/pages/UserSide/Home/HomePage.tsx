@@ -90,7 +90,7 @@ const slideStyle2 ={
             {about.map((item:any)=>{
               return <div key={item.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
               <div className="d-flex py-5 px-4">
-                <i className="fa fa-certificate fa-3x text-primary flex-shrink-0"></i>
+              ☑️
                 <div className="ps-4">
                   <h5 className="mb-3">{item.name}</h5>
                   <p>
@@ -136,12 +136,9 @@ const slideStyle2 ={
               })}
             </div>
             <div className="col-lg-6">
-              <div>
+              <div style={{marginTop: "30px"}}>
                 {aboutz.map((item: any) =>{
                   return <div>
-                <h6 className="text-primary text-uppercase">
-                // Về chúng tôi //
-              </h6>
               <h1 className="mb-4">
                 <span className="text-primary">{item.name}</span> 
               </h1>
@@ -197,7 +194,7 @@ const slideStyle2 ={
                 </div>
               </div>
               <a href="/about/chitiet" className="btn btn-primary py-3 px-5">
-                Xem thêm<i className="fa fa-arrow-right ms-3"></i>
+                Xem thêm <ion-icon name="add-circle-outline"></ion-icon>
               </a>
             </div>
           </div>
@@ -213,7 +210,7 @@ const slideStyle2 ={
               className="col-md-6 col-lg-3 text-center wow fadeIn"
               data-wow-delay="0.1s"
             >
-              <i className="fa fa-check fa-2x text-white mb-3"></i>
+              
               <h2 className="text-white mb-2" data-toggle="counter-up">
                 {item.soluong}
               </h2>
@@ -227,7 +224,7 @@ const slideStyle2 ={
       <div className="container">
       <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="text-primary text-uppercase">
-              // Dịch vụ //
+               Dịch vụ 
             </h6>
             <h1 className="mb-5">Dịch vụ của chúng tôi</h1>
           </div>
@@ -239,8 +236,8 @@ const slideStyle2 ={
           <div className="service-item">
             <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
               <span className="img img-cover auto-scale img-effect zoom-in-1">
-                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></span>
-              <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" loading="lazy" /></a>
+                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="" /></span>
+              <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="" /></a>
             <h4 className="title text-center text-uppercase fw-700">
               <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
             </h4>
@@ -250,18 +247,19 @@ const slideStyle2 ={
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src="" alt="Chăm Sóc &amp; Làm Đẹp Ô Tô" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></span>
+                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title=""></a>
               </h4>
             </div>
-          </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
+          </div>
+          <div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
                 <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src={item.image_service} alt="" loading="lazy" /></span>
-                <img className="icon-dv d-none d-lg-block ls-is-cached lazyloaded" src="" alt="Sơn Phục Hồi &amp; Nâng Cấp Thân Vỏ" loading="lazy" /></a>
+                  <img className=" ls-is-cached lazyloaded" src={`./src/assets/img/${item.image_service}`} alt="" loading="lazy" /></span>
+                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
               <h4 className="title text-center text-uppercase fw-700">
                 <a href="service" title="">{item.service_name}</a>
 
@@ -310,7 +308,7 @@ const slideStyle2 ={
         <div className="container">
           <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="text-primary text-uppercase">
-              // Các kỹ sư của chúng tôi //
+              Các kỹ sư của chúng tôi
             </h6>
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>

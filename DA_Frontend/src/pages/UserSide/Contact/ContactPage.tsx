@@ -12,7 +12,7 @@ const ContactPage = () => {
       <div className="container">
         <div className="text-center wow fadeInUp" data-wow-delay="0.1s" style={{textAlign: 'center',}}>
           <h6 className="text-primary text-uppercase">
-            // Contact Us //
+             Contact Us 
           </h6>
           <h1 className="mb-5" style={{marginBottom: '5rem',}}>
             Gửi câu hỏi cho chúng tôi
@@ -24,22 +24,20 @@ const ContactPage = () => {
               <div className="col-md-4" style={{flex: '1',padding: '1rem',}}>
                 <div className="bg-light d-flex flex-column justify-content-center p-4" style={{backgroundColor: 'light',}}>
                   <h5 className="text-uppercase">
-                    // Email //
+                     Email 
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-        marginRight: '0.5rem',}}></i>autofast@gara.com
+                  ✉ autofast@gara.com
                   </p>
                 </div>
               </div>
               <div className="col-md-4" style={{flex: '1',padding: '1rem',}}>
                 <div className="bg-light d-flex flex-column justify-content-center p-4" style={{backgroundColor: 'light',}}>
                   <h5 className="text-uppercase">
-                    // Số điện thoại //
+                     Số điện thoại 
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-        marginRight: '0.5rem',}}></i>+84 988 678 999
+                  ☎ +84 988 678 999
 
 
 
@@ -50,11 +48,10 @@ const ContactPage = () => {
     padding: '1rem',}}>
                 <div className="bg-light d-flex flex-column justify-content-center p-4" style={{backgroundColor: 'light',}}>
                   <h5 className="text-uppercase">
-                    // Fax //
+                     Fax 
                   </h5>
                   <p className="m-0">
-                    <i className="fa fa-envelope-open text-primary me-2" style={{color: 'primary',
-    marginRight: '0.5rem',}}></i>+84 988 678 999
+                  ✉ +84 988 678 999
 
                   </p>
                 </div>

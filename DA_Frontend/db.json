@@ -31,20 +31,17 @@
     {
       "id": 1,
       "name": "Dịch vụ chất lượng",
-      "content": "Chúng tôi hân hạnh là một trong những Gara đầu tiên đạt 1 sao Michelin tại Việt Nam"
-
+      "content": "Chúng tôi tự hào là một trong những Gara ô tô đầu tiên sở hữu chứng nhận 'ISO 9001' tại Việt Nam"
     },
     {
       "id": 2,
       "name": "Kỹ thuật chuyên nghiệp",
-      "content": "Đội ngũ kỹ thuật viên người Việt nhưng kỹ năng hơn người Châu Phi"
-
+      "content": "Đội ngũ kỹ thuật viên giàu kinh nghiệm và đã từng tham gia các dự án quốc tế"
     },
     {
       "id": 3,
       "name": "Thiết bị hiện đại",
-      "content": "Thiết bị hiện đại bậc nhất của chúng tôi được nhập khẩu từ Châu Nam Mỹ, bạn có thể hoàn toàn yên tâm"
-
+      "content": "Trang thiết bị hiện đại nhập khẩu trực tiếp từ một trong những công ty hàng đầu về bảo dưỡng ô tô Bosch "
     }
   ],
   "aboutz": [
@@ -125,6 +122,21 @@
       "id": 6,
       "name": "Sửa Chữa Hộp Số Tự Động",
       "img": "https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-ha-noi.jpg"
+    }
+   ],
+   "menu": [
+    {
+      "id": 1,
+      "logo_name": "Auto Fast",
+      "home": "Trang Chủ",
+      "about": "Về Chúng Tôi",
+      "dv": "Dịch Vụ",
+      "page": "Pages",
+      "dl": "Đặt Lịch",
+      "nv": "Kỹ Thuật Viên",
+      "contact": "Liên Hệ",
+      "new": "Tin Tức",
+      "bok": "Đặt Lịch Ngay"
     }
    ]
 }

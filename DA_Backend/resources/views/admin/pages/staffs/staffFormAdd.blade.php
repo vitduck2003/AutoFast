@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <div class="col-xs-6" style="text-align:center">
                                         <img id="anh_preview"
-                                            src=""
+                                            src="https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg"
                                             alt="your avatar"
                                             style="width: 200px; height:200px; margin-bottom: 10px;border-radius:70%"
                                             class="img-fluid" />

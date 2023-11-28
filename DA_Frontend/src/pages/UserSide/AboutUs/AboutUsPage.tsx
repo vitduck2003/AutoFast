@@ -21,7 +21,8 @@ console.log(technicians);
         {about.map((item: any)=>{
           return <div key={item.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" id=''>
                 <div className="d-flex py-5 px-4" id='' >
-              <i className="fa fa-certificate fa-3x text-primary flex-shrink-0" id=''></i>
+                ☑️
+              <i className=" text-primary flex-shrink-0" id=''></i>
               <div className="ps-4" id=''>
                 <h5 className="mb-3" id=''>{item.name}</h5>
                 <p>{item.content}</p>
@@ -52,7 +53,7 @@ console.log(technicians);
             <div>
             {aboutz.map((item:any)=>{
            return <div key={item.id}>
-            <h6 className="text-primary text-uppercase" id=''>// Về chúng tôi //</h6>
+            <h6 className="text-primary text-uppercase" id=''> Về chúng tôi </h6>
             <h1 className="mb-4"><span className="text-primary" id=''>{item.name}</span></h1>
             <p id='' className="mb-4">{item.content}</p>
             </div>

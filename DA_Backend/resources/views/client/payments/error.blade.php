@@ -69,11 +69,11 @@
             <p class="p-2"><strong>Mã giao dịch:</strong></p>
             <p class="p-2"><strong>Số tiền:</strong></p>
           </div>
-          <div>
-            <p class="text-right p-2">VISA</p>
-            <p class="text-right p-2">ĐINH VIỆT ĐỨC</p>
-            <p class="text-right p-2">H85YG7HU</p>
-            <p class="text-right p-2"><strong>450.000VNĐ</strong></p>
+            <div>
+            <p class="text-right p-2">{{ $data['vnp_CardType'] }}</p>
+            <p class="text-right p-2">{{ $name->name }}</p>
+            <p class="text-right p-2">{{ $data['vnp_TmnCode'] }}</p>
+            <p class="text-right p-2"><strong>{{ number_format($data['vnp_Amount'] / 100, 0, ',', '.') }} VNĐ</strong></p>
             
           </div>
         </div>

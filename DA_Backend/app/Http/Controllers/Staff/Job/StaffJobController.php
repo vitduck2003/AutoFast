@@ -64,6 +64,7 @@ class StaffJobController extends Controller
         $statusStaff->status = "Đang đợi việc";
         $statusStaff->save();
     }
+    DB::table('notification')->insert(['booking_id'=>$job->id_booking,'title' => 'Công việc','content' => 'Đã hoàn thành ','created_at' =>now()]);
     return redirect()->back();
 }
 public function jobComplete(){
