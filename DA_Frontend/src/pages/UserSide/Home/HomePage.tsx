@@ -32,12 +32,12 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
   //   }
   // };
   const slideStyle = {
-    transitionDuration: '0ms',
-    transform: "translate3d(-657.333px, 0px, 0px)"
+    borderBottom: '1px solid #ececec',
+    paddingBottom: "20px"
 };
 const slideStyle2 ={
-    width: "278.667px",
-    marginRight: "50px"
+  color: "DodgerBlue",
+  margin: "60px 0"
 }
   return (
     <div>
@@ -221,60 +221,27 @@ const slideStyle2 ={
         </div>
       </div>
       {/* Service Start */}
-      <div className="container">
-      <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 className="text-primary text-uppercase">
-               Dịch vụ 
-            </h6>
-            <h1 className="mb-5">Dịch vụ của chúng tôi</h1>
-          </div>
-    <div className="swiper slide-service swiper-initialized swiper-horizontal swiper-pointer-events" style={{ zIndex: 0}}>
-      <div  className="swiper-wrapper" style={slideStyle}>
-      {serviceHome.map((item:any)=>(
-         <>
-         <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
-          <div className="service-item">
-            <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
-              <span className="img img-cover auto-scale img-effect zoom-in-1">
-                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="" /></span>
-              <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="" /></a>
-            <h4 className="title text-center text-uppercase fw-700">
-              <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
-            </h4>
-          </div>
+      <main className="product-category" style={slideStyle}>
+      <nav aria-label="breadcrumb" className="main-breadcrumb mb-5">
+        <div className="container text-center">
         </div>
-        <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
-            <div className="service-item">
-              <a href="service" title="" className="img-wrap">
-                <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></span>
-                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
-              <h4 className="title text-center text-uppercase fw-700">
-                <a href="service" title=""></a>
-              </h4>
+      </nav>
+      <div className="container">
+        <h1 className=" text-center" style={slideStyle2}>Dịch Vụ </h1>
+        <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
+              {serviceHome.map((item: any)=>{
+                return <div key={item.id} className="col mb-5">
+            <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
+              <a href={`/service/${item.id}`} title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
+                <img className=" lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt="" />
+              </a>
+              <h4 className="title fw-600"><a href="" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.service_name}</a></h4>
             </div>
           </div>
-          <div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="2" style={slideStyle2}>
-            <div className="service-item">
-              <a href="service" title="" className="img-wrap">
-                <span className="img img-cover auto-scale img-effect zoom-in-1">
-                  <img className=" ls-is-cached lazyloaded" src={`./src/assets/img/${item.image_service}`} alt="" loading="lazy" /></span>
-                <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="" alt="" loading="lazy" /></a>
-              <h4 className="title text-center text-uppercase fw-700">
-                <a href="service" title="">{item.service_name}</a>
-
-              </h4>
-            </div>
-          </div></>
-      ))}
-         
-                </div>
-
-        <div className="swiper-button-next"></div>
-        <div className="swiper-button-prev"></div>
-        
-    </div>
-</div>
+})}
+        </div>
+      </div>
+    </main>
 
       {/* Booking */}
 

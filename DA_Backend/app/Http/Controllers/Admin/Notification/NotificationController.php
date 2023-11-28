@@ -15,10 +15,9 @@ class NotificationController extends Controller
     {
         $user_id = session('id');
         $notifications = DB::table('notification')
-            ->join('users', 'users.id', '=', 'notification.user_id')
-            ->where('users.id', '=', $user_id)
-            ->select('notification.*', 'users.name')
-            ->orderBy('notification.created_at', 'desc')
+            ->join('booking', 'booking.id', '=', 'notification.booking_id')
+            ->select('notification.*', 'booking.name')
+            ->orderBy('notification.created_at', 'desc')    
             ->paginate(10);
         return view('admin/pages/notification/index', compact('notifications'));
     }
