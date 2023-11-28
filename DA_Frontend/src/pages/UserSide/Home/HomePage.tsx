@@ -232,17 +232,7 @@ const slideStyle2 ={
       <div  className="swiper-wrapper" style={slideStyle}>
       {serviceHome.map((item:any)=>(
          <>
-         <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style={slideStyle2}>
-          <div className="service-item">
-            <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô" className="img-wrap">
-              <span className="img img-cover auto-scale img-effect zoom-in-1">
-                <img className=" ls-is-cached lazyloaded" src="https://otohathanh.com/upload/images/dich-vu-bao-duong-o-to-uy-tin.jpg" alt="" /></span>
-              <img className=" d-none d-lg-block ls-is-cached lazyloaded" src="template/frontend/otoht/images/layout/index/icon-dv-1.png" alt="" /></a>
-            <h4 className="title text-center text-uppercase fw-700">
-              <a href="service" title="Bảo Dưỡng &amp; Sửa Chữa Ô Tô">Bảo Dưỡng &amp; Sửa Chữa Ô Tô</a>
-            </h4>
-          </div>
-        </div>
+        
         <div className="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style={slideStyle2}>
             <div className="service-item">
               <a href="service" title="" className="img-wrap">
