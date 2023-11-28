@@ -165,6 +165,6 @@ Route::get('/preview/{id}', [StaffController::class, 'preview'])->name('preview'
 Route::get('revenue/{option}', [StatisticalApi::class, 'getRevenue']);
 
 // api coupon
-Route::prefix('coupon')->group(function () {
+Route::prefix('client')->group(function () {
     Route::get('/coupon', [CouponApi::class, 'index']);
 });
