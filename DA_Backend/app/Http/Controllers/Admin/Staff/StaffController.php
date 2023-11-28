@@ -110,7 +110,7 @@ class StaffController extends Controller
             $staff=Staff::Create([
                 'salary'=>$validatedData['salary'],
                 'review' => '',
-                'status' =>'Đang chờ việc',
+                'status' =>'Đang đợi việc',
                 'id_user' => $user->id,
             ]);
             return redirect()->route('staff')->with('message', 'Thêm thành công');
