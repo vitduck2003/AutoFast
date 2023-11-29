@@ -8,7 +8,6 @@ const AccountSetting = () => {
   
   const [uploadImg, setUploadImg] = useState<string>();
   console.log(uploadImg);
-  
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -202,7 +201,7 @@ const AccountSetting = () => {
                       height: "200px",
                       borderRadius: "99%",
                     }}
-                    src={`${ uploadImg? uploadImg: `http://localhost:8000/storag/${avatar}`}`}
+                    src={`${ uploadImg? uploadImg: `http://localhost:8000/storage/${avatar}`}`}
                   
                   />
                   <input
