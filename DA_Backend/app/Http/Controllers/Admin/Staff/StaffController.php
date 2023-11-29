@@ -191,7 +191,7 @@ class StaffController extends Controller
                 'users.description',
                 'users.address'
             )
-            ->first();
+            ->get();
         return response()->json($staff);
     }
     public function register(Request $request)
