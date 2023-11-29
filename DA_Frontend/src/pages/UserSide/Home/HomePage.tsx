@@ -311,7 +311,7 @@ const slideStyle3 ={
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>
           <div className="row g-4">
-            {technicians.map((item:any) =>{
+            {staffData.map((item:any) =>{
               return  <div
               key={item.id}
               className="col-lg-3 col-md-6 wow fadeInUp"
@@ -322,7 +322,7 @@ const slideStyle3 ={
                   <img
                     style={{ width: "500px" }}
                     className="img-fluid"
-                    src={item.image}
+                    src={`http://localhost:8000/storage/`+item.avatar}
                     alt=""
                   />
                   {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
@@ -339,7 +339,7 @@ const slideStyle3 ={
                 </div>
                 <div className="bg-light text-center p-4">
                   <h5 className="fw-bold mb-0">{item.name}</h5>
-                  <small>{item.information}</small>
+                  <small>{item.description}</small>
                 </div>
               </div>
             </div>
