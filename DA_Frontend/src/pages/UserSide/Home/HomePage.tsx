@@ -233,7 +233,7 @@ const slideStyle2 ={
             >
               
               <h2 className="text-white mb-2" data-toggle="counter-up">
-               
+              {item.soluong}
               </h2>
               <p className="text-white mb-0">{item.name}</p>
             </div>
