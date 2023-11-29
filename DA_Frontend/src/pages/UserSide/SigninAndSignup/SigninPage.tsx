@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import instance from "../../../api/instance";
 import { useState } from "react";
+import imageM from "../../../assets/img/signup.png"
 
 const SigninPage = (props) => {
   type FieldType = {
@@ -190,7 +191,7 @@ const SigninPage = (props) => {
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <img
-                      src="https://img.freepik.com/premium-vector/concept-car-service-mechanic-working-hood-car-vector-illustration_357257-1153.jpg"
+                      src={imageM}
                       className="img-fluid"
                       alt="Sample image"
                     />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Pagination } from 'antd';
+import serviceItemClone from "../../../assets/img/img_item/ServiceItemClone.png"
 
 const itemsPerPage = 8;
 
@@ -20,6 +21,12 @@ const ServiceDetailV = (props) => {
     const slideStyle3 ={
         borderBottom: "none"
       }
+
+      const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        const imgElement = e.target as HTMLImageElement;
+        imgElement.onerror = null;
+        imgElement.src = serviceItemClone;
+      };
     return (
         <div className="container">
             <h1 className="text-center"  style={{ margin: "60px 0", borderBottom: "none"  }}>
@@ -31,7 +38,7 @@ const ServiceDetailV = (props) => {
                     <div key={item.id} className="col sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
                         <div className="accessory-item">
                             <a title={item.item_name} className="img auto-scale img-scaledown img-effect zoom-in-1">
-                                <img src={`/src/assets/img/img_item/${item.image}`} className=" ls-is-cached lazyloaded" alt={item.item_name} />
+                                <img src={`/src/assets/img/img_item/${item.image}`} className=" ls-is-cached lazyloaded" alt={item.item_name} onError={handleImageError} />
                             </a>
                             <h3 className="title text-center mb-3">
                                 <a title={item.item_name}>{item.item_name}</a>

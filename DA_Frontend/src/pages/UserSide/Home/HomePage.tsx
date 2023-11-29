@@ -7,12 +7,10 @@ import carouselbg2img from "../../../assets/img/carousel-bg-2.jpg";
 import service1img from "../../../assets/img/service-1.jpg";
 
 import instance from "../../../api/instance";
-import khabanhimg from "../../../assets/img/ngobakha.jpg";
-import khanhskyimg from "../../../assets/img/khanhsky.jpg";
-import huanhoahongimg from "../../../assets/img/huanhoahong.jpg";
-import traizanimeimg from "../../../assets/img/boizanime.jpg";
 import { useNavigate } from "react-router-dom";
 import { useForm} from "react-hook-form";
+
+import serviceClone from "../../../assets/img/img_service/serviceClone.png"
 
 import { Link } from "react-router-dom";
 const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
@@ -63,6 +61,12 @@ const slideStyle2 ={
 const slideStyle3 ={
   borderBottom: "none"
 }
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const imgElement = e.target as HTMLImageElement;
+  imgElement.onerror = null;
+  imgElement.src = serviceClone;
+};
+
   return (
     <div>
       {/* Carousel Start */}
@@ -258,7 +262,7 @@ const slideStyle3 ={
       <div key={item.id} className="col mb-5">
         <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" style={slideStyle3} data-sal-duration="1600" data-sal-delay="0">
           <a href={`/service/${item.id}`} title={item.service_name} className="img img-cover img-effect zoom-in-1 auto-scale">
-            <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} />
+            <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} onError={handleImageError} />
           </a>
           <h4 className="title fw-600"><a href="" title={item.service_name}>{item.service_name}</a></h4>
         </div>
