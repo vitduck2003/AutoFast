@@ -199,26 +199,26 @@ const BaseLayout = (props: any) => {
             <div className="col-lg-3 col-md-6">
               <h4 className="text-light mb-4">Địa chỉ</h4>
               <p className="mb-2">
-                <i className="fa fa-map-marker-alt me-3"></i>Số 88 Đường Quang
+              📍Số 88 Đường Quang
                 Trung, Hà Đông, Hà Nội
               </p>
               <p className="mb-2">
-                <i className="fa fa-phone-alt me-3"></i>+84 988 678 999
+              ☎ +84 988 678 999
               </p>
               <p className="mb-2">
-                <i className="fa fa-envelope me-3"></i>autofast@gara.com
+              ✉ autofast@gara.com
               </p>
               <div className="d-flex pt-2">
-                <a className="btn btn-outline-light btn-social" href="">
+                <a className="btn btn-outline-light btn-social" href="https://twitter.com/AutoFastt">
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a className="btn btn-outline-light btn-social" href="">
+                <a className="btn btn-outline-light btn-social" href="https://facebook.com/AutoFastt">
                   <i className="fab fa-facebook-f"></i>
                 </a>
-                <a className="btn btn-outline-light btn-social" href="">
+                <a className="btn btn-outline-light btn-social" href="https://www.youtube.com/channel/AutoFast">
                   <i className="fab fa-youtube"></i>
                 </a>
-                <a className="btn btn-outline-light btn-social" href="">
+                <a className="btn btn-outline-light btn-social" href="https://www.linkedin.com/AutoFast">
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>

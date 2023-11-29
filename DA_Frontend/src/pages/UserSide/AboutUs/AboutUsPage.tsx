@@ -104,7 +104,7 @@ console.log(technicians);
             <div className="row g-4" id=''>
               {abouts.map((item:any)=>{
                 return <div id='' className="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                <i id='' className="fa fa-check fa-2x text-white mb-3"></i>
+                
                 <h2 id='' className="text-white mb-2" data-toggle="counter-up">{item.soluong}</h2>
                 <p id='' className="text-white mb-0">{item.name}</p>
             </div>
