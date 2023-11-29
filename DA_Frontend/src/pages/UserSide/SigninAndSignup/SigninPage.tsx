@@ -45,36 +45,50 @@ const SigninPage = (props) => {
   };
   const onFinish = (values) => {
     console.log(values);
-  
+
     logIn(values)
       .then((response) => {
         console.log(response);
-  
+
         if (response.success === true) {
-          openNotification(response.message, "black", "green", "Đăng Nhập Thành Công");
-  
-         
-      
-  
-            if (response.success === true) {
-        
-  
-              // Use a nested .then block to navigate after handling the success case
-              sessionStorage.setItem('user', JSON.stringify(response.user));
-              return new Promise<void>((resolve) => {
-                setTimeout(() => {
-                  navigate(`/`); // Navigate to the verification page with the phone number
-                  resolve();
-                }, 3000); // Delay for 3 seconds
-              });
-            } else if (response.success === false) {
-              openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
-            }
-          
-        }else if (response.success === false) {
-          openNotification(response.message, "white", "red", "Đăng Nhập Thất Bại");
-        }else if(response.phone_verified ) {
-          openNotification(response.message, "white", "red","Vui lòng xác thực tài khoản");
+          openNotification(
+            response.message,
+            "black",
+            "green",
+            "Đăng Nhập Thành Công"
+          );
+
+          if (response.success === true) {
+            // Use a nested .then block to navigate after handling the success case
+            sessionStorage.setItem("user", JSON.stringify(response.user));
+            return new Promise<void>((resolve) => {
+              setTimeout(() => {
+                navigate(`/`); // Navigate to the verification page with the phone number
+                resolve();
+              }, 3000); // Delay for 3 seconds
+            });
+          } else if (response.success === false) {
+            openNotification(
+              response.message,
+              "white",
+              "red",
+              "Đăng Nhập Thất Bại"
+            );
+          }
+        } else if (response.success === false) {
+          openNotification(
+            response.message,
+            "white",
+            "red",
+            "Đăng Nhập Thất Bại"
+          );
+        } else if (response.phone_verified) {
+          openNotification(
+            response.message,
+            "white",
+            "red",
+            "Vui lòng xác thực tài khoản"
+          );
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/verify/${response.phone_verified}`); // Navigate to the verification page with the phone number
@@ -82,12 +96,11 @@ const SigninPage = (props) => {
             }, 3000); // Delay for 3 seconds
           });
         }
-
       })
       .catch((error) => {
         // Handle any errors here if needed
         console.error("Error:", error);
-  
+
         // Rethrow the error for further handling in your component
         throw error;
       });
@@ -123,7 +136,7 @@ const SigninPage = (props) => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                       >
-                         <Form.Item
+                        <Form.Item
                           label="Phone"
                           name="phone"
                           rules={[
@@ -151,23 +164,24 @@ const SigninPage = (props) => {
                           ]}
                         >
                           <Input.Password />
-
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to="/forgotpw"
+                          >
+                            Quên mật khẩu ?
+                          </Link>
                         </Form.Item>
-                        <Link style={{ textDecoration: "none" }} to="/forgotpw">Quên mật khẩu ?</Link>
-
-               
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">
                             Đăng nhập
                           </Button>
-                          
                         </Form.Item>
                       </Form>
-                      
-                      <span style={{ paddingLeft: "50px" }}>
+
+                      <span style={{ paddingLeft: "100px" }}>
                         Bạn chưa có tài khoản?{" "}
-                        <Link style={{ textDecoration: "none" }} to="/signup">
+                        <Link style={{ textDecoration: "none"}} to="/signup">
                           Đăng ký
                         </Link>
                       </span>
@@ -175,7 +189,7 @@ const SigninPage = (props) => {
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                      src="https://img.freepik.com/premium-vector/concept-car-service-mechanic-working-hood-car-vector-illustration_357257-1153.jpg"
                       className="img-fluid"
                       alt="Sample image"
                     />
