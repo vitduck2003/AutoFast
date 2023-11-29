@@ -6,7 +6,7 @@ import carouselbg1img from "../../../assets/img/carousel-bg-1.jpg";
 import carouselbg2img from "../../../assets/img/carousel-bg-2.jpg";
 import service1img from "../../../assets/img/service-1.jpg";
 
-
+import instance from "../../../api/instance";
 import khabanhimg from "../../../assets/img/ngobakha.jpg";
 import khanhskyimg from "../../../assets/img/khanhsky.jpg";
 import huanhoahongimg from "../../../assets/img/huanhoahong.jpg";
@@ -22,7 +22,24 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const getStaffData = async () => {
+    try {
+      const response = await instance.get('/client/staff');
+      
+      // Assuming the API response has a data property that contains the actual data
+      const staffData = response.data;
+  
+      // Handle the data as needed
+      console.log('Staff Data:', staffData);
+  
+      return staffData;
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching staff data:', error);
+      throw error; // You may choose to handle errors differently based on your application's needs
+    }
+  };
+  getStaffData()
   // const onHandleSubmit: SubmitHandler<any> = (data) => {
   //   // Check if there are errors before submitting
   //   if (Object.keys(errors).length === 0) {

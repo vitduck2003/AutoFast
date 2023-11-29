@@ -10,6 +10,8 @@ import {
 import { Button, Divider, Space } from "antd";
 import type { NotificationPlacement } from "antd/es/notification/interface";
 import { notification } from "antd";
+import { useNavigate } from "react-router-dom";
+
 
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
@@ -19,20 +21,8 @@ const BookingPage = (props: any) => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
-  const handleCheckboxChange1 = (e, item) => {
-    setIsCheckboxChecked(e.target.checked);
-  };
-
-
+  const [currentPage1, setCurrentPage1] = useState(1);
+  const itemsPerPage1 = 5;
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -40,6 +30,25 @@ const BookingPage = (props: any) => {
   const getUserFromSession = () => {
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
+  };
+  const navigate = useNavigate();
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+  const handleNextPage1 = () => {
+    setCurrentPage1((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage1 = () => {
+    setCurrentPage1((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleCheckboxChange1 = (e, item) => {
+    setIsCheckboxChecked(e.target.checked);
   };
 
   useEffect(() => {
@@ -315,7 +324,27 @@ const BookingPage = (props: any) => {
 
       console.log(updatedFormData);
 
-      props.onAddBooking(updatedFormData);
+      // props.onAddBooking(updatedFormData)
+      instance.post("/booking",updatedFormData).then((res) => {
+        console.log(res);
+        if (res.success===true) {
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/`); // Navigate to the verification page with the phone number
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
+      
+    }});
+    setTimeout(() => {
+      if(user_id===""
+
+      ){
+      navigate(`/`); }else{
+        navigate(`/mybooking`);
+      }
+     
+    }, 3000);
       notification.success({
         message: "Đặt lịch thành công",
         description: "",
@@ -463,123 +492,159 @@ const BookingPage = (props: any) => {
                   className="form-control"
                   id="exampleTextarea"
                 ></textarea>
-                 <b>
-                        <p style={{ marginTop: "20px" }}>
-                          Dịch vụ khác :
-      <input
-        type="checkbox"
-        value={isCheckboxChecked}
-        onChange={(e) => handleCheckboxChange1(e)}
-        style={{
-          width: "20px",
-          height: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "3px",
-          cursor: "pointer",
-          verticalAlign: "middle",
-          marginLeft: "10px",
-          paddingLeft: "10px",
-        }}
-      />
-      <button onClick={handlePrevPage} disabled={currentPage === 1}>
-        Previous
-      </button>
-      <button
-        onClick={handleNextPage}
-        disabled={
-          currentPage * itemsPerPage >=
-          dataServiceItem.filter((item) => item.id_service === null).length
-        }
-      >
-        Next
-      </button>
-      {isCheckboxChecked && (
-        <table
+                <b>
+                  <p style={{ marginTop: "20px" }}>
+                    Dịch vụ khác :
+                    <input
+                      type="checkbox"
+                      value={isCheckboxChecked}
+                      onChange={(e) => handleCheckboxChange1(e)}
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        border: "1px solid #ccc",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        verticalAlign: "middle",
+                        marginLeft: "10px",
+                        paddingLeft: "10px",
+                      }}
+                    />
+                    {isCheckboxChecked && (
+                      <div>
+                        {" "}
+                        <table
+                          style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            border: "1px solid #ddd",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Action
+                              </th>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Service
+                              </th>
+                              <th
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  textAlign: "left",
+                                  padding: "8px",
+                                }}
+                              >
+                                Price
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {dataServiceItem
+                              .filter((item) => item.id_service === null)
+                              .slice(
+                                (currentPage - 1) * itemsPerPage,
+                                currentPage * itemsPerPage
+                              ) 
+                              .map((item, index) => (
+                                <tr key={item.id}>
+                                  <td style={{ borderRight: "1px solid #ddd" }}>
+                                    <input
+                                      type="checkbox"
+                                      value={item.price}
+                                      onChange={(e) =>
+                                        handleCheckboxChange(e, item)
+                                      }
+                                      style={{
+                                        width: "20px",
+                                        height: "20px",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "3px",
+                                        cursor: "pointer",
+                                        verticalAlign: "middle",
+                                        marginLeft: "10px",
+                                        paddingLeft: "10px",
+                                      }}
+                                    />
+                                  </td>
+                                  <td
+                                    style={{
+                                      borderRight: "1px solid #ddd",
+                                      marginLeft: "10px",
+                                      paddingLeft: "10px",
+                                    }}
+                                  >
+                                    {item.item_name}
+                                  </td>
+                                  <td style={{ padding: "8px" }}>
+                                    <b>
+                                      {item.price.toLocaleString("vi-VN")} VND
+                                    </b>
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                   <div   style={{
+    marginRight: "10px", // Adjust the margin as needed
+    padding: "5px 10px", // Adjust the padding as needed
+ 
+  }}>    <button
+  type="button"
+  onClick={handlePrevPage}
+  disabled={currentPage === 1}
   style={{
-    width: "100%",
-    borderCollapse: "collapse",
-    border: "1px solid #ddd",
-    marginTop: "20px",
+    marginRight: "10px", // Adjust the margin as needed
+    padding: "5px 10px", // Adjust the padding as needed
+    backgroundColor: currentPage === 1 ? "#ccc" : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
   }}
 >
-  <thead>
-    <tr>
-      <th
-        style={{
-          backgroundColor: "#f2f2f2",
-          textAlign: "left",
-          padding: "8px",
-        }}
-      >
-        Action
-      </th>
-      <th
-        style={{
-          backgroundColor: "#f2f2f2",
-          textAlign: "left",
-          padding: "8px",
-        }}
-      >
-        Service
-      </th>
-      <th
-        style={{
-          backgroundColor: "#f2f2f2",
-          textAlign: "left",
-          padding: "8px",
-        }}
-      >
-        Price
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {dataServiceItem
-            .filter((item) => item.id_service === null)
-            .slice(
-              (currentPage - 1) * itemsPerPage,
-              currentPage * itemsPerPage
-            ) // Display only the first two items
-      .map((item, index) => (
-        <tr key={item.id}>
-          <td style={{ borderRight: "1px solid #ddd" }}>
-            <input
-              type="checkbox"
-              value={item.price}
-              onChange={(e) => handleCheckboxChange(e, item)}
-              style={{
-                width: "20px",
-                height: "20px",
-                border: "1px solid #ccc",
-                borderRadius: "3px",
-                cursor: "pointer",
-                verticalAlign: "middle",
-                marginLeft: "10px",
-                paddingLeft: "10px",
-              }}
-            />
-          </td>
-          <td
-            style={{
-              borderRight: "1px solid #ddd",
-              marginLeft: "10px",
-              paddingLeft: "10px",
-            }}
-          >
-            {item.item_name}
-          </td>
-          <td style={{ padding: "8px" }}>
-            <b>{item.price.toLocaleString("vi-VN")} VND</b>
-          </td>
-        </tr>
-      ))}
-  </tbody>
-</table>
-      )}
-    
-
-                        </p>
-                      </b>
+ Trước
+</button>
+<button
+type="button"
+  onClick={handleNextPage}
+  disabled={
+    currentPage * itemsPerPage >=
+    dataServiceItem.filter((item) => item.id_service === null).length
+  }
+  style={{
+    padding: "5px 10px", // Adjust the padding as needed
+    backgroundColor:
+      currentPage * itemsPerPage >=
+      dataServiceItem.filter((item) => item.id_service === null).length
+        ? "#ccc"
+        : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+Tiếp theo
+</button>
+</div> 
+                      </div>
+                    )}
+                  </p>
+                </b>
               </div>
               <div className="col-md-6">
                 <h2 style={{}}>Dịch vụ và thời gian</h2>
@@ -733,7 +798,11 @@ const BookingPage = (props: any) => {
                           </tr>
                         </thead>
                         <tbody>
-                          {selectedServiceItems.map((item, index) => (
+                          {selectedServiceItems
+                              .slice(
+                                (currentPage1 - 1) * itemsPerPage1,
+                                currentPage1 * itemsPerPage1
+                              ).map((item, index) => (
                             <tr key={item.item_name}>
                               <td style={{ borderRight: "1px solid #ddd" }}>
                                 <input
@@ -770,17 +839,61 @@ const BookingPage = (props: any) => {
                           ))}
                         </tbody>
                       </table>
-                    
+                      <div
+                        style={{
+                          marginRight: "10px",
+                          padding: "5px 10px",
+                         
+                        }}>
+                      <button
+  type="button"
+  onClick={handlePrevPage1}
+  disabled={currentPage1 === 1}
+  style={{
+    marginRight: "10px",
+    padding: "5px 10px",
+    backgroundColor: currentPage1 === 1 ? "#ccc" : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+  Trước
+</button>
+<button
+  type="button"
+  onClick={handleNextPage1}
+  disabled={
+    currentPage1 * itemsPerPage1 >=
+    selectedServiceItems.filter((item) => item.id_service != null).length
+  }
+  style={{
+    padding: "5px 10px",
+    backgroundColor:
+      currentPage1 * itemsPerPage1 >=
+      selectedServiceItems.filter((item) => item.id_service != null).length
+        ? "#ccc"
+        : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+  Tiếp theo
+</button>
+</div>
+
                     </>
                   ) : (
                     <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
                   )}
-                   
 
                   <b>
+                    <br></br>
                     <label style={{ marginTop: "10px" }} htmlFor="">
                       Tổng giá tiền:
-                     
                     </label>{" "}
                   </b>
                   <span style={{ color: "red" }}>

@@ -16,7 +16,7 @@ const MyBooking = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [showBill, setShowBill] = useState(false);
-  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm","Chờ xác nhận"];
+  const bookingStatuses = ["Tất cả", "Đã hoàn thành", "Đang làm","Chờ xác nhận","Đã được hủy"];
   const [selectedStatus, setSelectedStatus] = useState("Tất cả");
   const [user,setUser]=useState();
   const [selectBooking,setSelectedBooking]=useState();
@@ -279,8 +279,7 @@ const MyBooking = () => {
   };
 
   const tableStyle = {
-    margin: "0 auto",
-    textAlign: "center",
+  
   };
   
   // Styles for the modal header, if you have one
@@ -352,7 +351,7 @@ const MyBooking = () => {
     <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
             onChange={handleSearch}/>
   </div>
-  <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
+  <div style={{ margin: "20px", display: "flex", gap: "10px" ,marginLeft:"150px"}}>
   {bookingStatuses.map((status) => (
     <Button
       key={status}
