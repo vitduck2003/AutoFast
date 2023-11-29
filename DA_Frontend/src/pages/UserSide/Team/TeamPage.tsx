@@ -1,9 +1,5 @@
 import React from 'react'
 
-import khabanhimg from '../../../assets/img/ngobakha.jpg';
-import khanhskyimg from '../../../assets/img/khanhsky.jpg';
-import huanhoahongimg from '../../../assets/img/huanhoahong.jpg';
-import traizanimeimg from '../../../assets/img/boizanime.jpg';
 import instance from '../../../api/instance';
 import reactSelect from 'react-select';
 import axios from 'axios';
