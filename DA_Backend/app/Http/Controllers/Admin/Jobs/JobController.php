@@ -61,20 +61,32 @@ class JobController extends Controller
     }
     public function saveStaff(Request $request)
     {
-        $jobId = $request->input('job_id');
-        $staffId = $request->input('staff_id');
-        $addStaff = DB::table('jobs')
-            ->where('id', '=', $jobId)
-            ->update(['id_staff' => $staffId]);
-        $checkstaff = DB::table('jobs')->where('id', '=', $jobId)->first();
-        if ($checkstaff->id_staff == NULL) {
-            $status = "Chưa phân công việc";
-        } else {
-            $status = "Đang chờ nhận việc";
+        $jobIds = $request->input('job_id', []); // Sử dụng mảng rỗng làm giá trị mặc định nếu không có giá trị được chọn
+        
+        $staffIds = $request->input('staff_id', []);
+        
+        foreach ($jobIds as $jobId) {
+            $staffId = $staffIds[$jobId] ?? null; // Sử dụng toán tử null coalescing để gán giá trị mặc định là null nếu không tồn tại $staffIds[$jobId]
+        
+            DB::table('jobs')
+                ->where('id', $jobId)
+                ->update(['id_staff' => $staffId]);
+        
+            $checkstaff = DB::table('jobs')
+                ->where('id', $jobId)
+                ->first();
+        
+            if ($checkstaff->id_staff == NULL) {
+                $status = "Chưa phân công việc";
+            } else {
+                $status = "Đang chờ nhận việc";
+            }
+        
+            DB::table('jobs')
+                ->where('id', $jobId)
+                ->update(['status' => $status]);
         }
-        DB::table('jobs')
-            ->where('id', '=', $jobId)
-            ->update(['status' => $status]);
+        
         return redirect()->back()->with('message', 'Cập nhật nhân viên thành công');
     }
     public function viewAddJob($id){

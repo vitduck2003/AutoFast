@@ -573,8 +573,8 @@
         labels: <?php echo json_encode($labels); ?>,
         datasets: [{
             data: <?php echo json_encode($data); ?>,
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], 
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00FF00'], 
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00FF00']
         }]
     };
 
