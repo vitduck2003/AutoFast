@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState,useEffect } from "react";
 import aboutimg from "../../../assets/img/about.jpg";
 import carousel1img from "../../../assets/img/carousel-1.png";
 import carousel2img from "../../../assets/img/carousel-2.png";
@@ -43,8 +43,7 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
   useEffect(() => {
     // Fetch data when the component mounts
     getStaffData();
-  }, []); 
-  // getStaffData()
+  }, []);
   // const onHandleSubmit: SubmitHandler<any> = (data) => {
   //   // Check if there are errors before submitting
   //   if (Object.keys(errors).length === 0) {
@@ -53,7 +52,6 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
   //     navigate("/");
   //   }
   // };
-  console.log(staffData);
   const slideStyle = {
     borderBottom: '1px solid #ececec',
     paddingBottom: "20px"
