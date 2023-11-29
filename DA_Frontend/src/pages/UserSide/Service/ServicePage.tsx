@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pagination } from 'antd';
+import serviceClone from "../../../assets/img/img_service/serviceClone.png"
 
 const ServicePage = (props: any) => {
   const slideStyle = {
@@ -30,7 +31,7 @@ const ServicePage = (props: any) => {
       <div key={item.id} className="col mb-5">
         <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" style={slideStyle3} data-sal-duration="1600" data-sal-delay="0">
           <a href={`/service/${item.id}`} title={item.service_name} className="img img-cover img-effect zoom-in-1 auto-scale">
-            <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} />
+            <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} onError={handleImageError} />
           </a>
           <h4 className="title fw-600"><a href={`/service/${item.id}`} title={item.service_name}>{item.service_name}</a></h4>
         </div>
@@ -38,6 +39,11 @@ const ServicePage = (props: any) => {
     ));
   };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const imgElement = e.target as HTMLImageElement;
+    imgElement.onerror = null;
+    imgElement.src = serviceClone;
+  };
   return (
     <main className="product-category" style={slideStyle}>
       <div className="container">
