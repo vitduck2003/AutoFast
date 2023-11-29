@@ -76,11 +76,11 @@ const BaseLayout = (props: any) => {
       setIsMobile(window.innerWidth >= 767);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Làm sạch sự kiện khi component bị hủy
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -209,20 +209,22 @@ const BaseLayout = (props: any) => {
               <Link to="news" className="nav-item nav-link">
                 {item.new}
               </Link>
+              {!isLoggedIn && (
               <Link
                 to="/signup"
                 className="nav-item nav-link"
                 style={isMobile ? { display: "none" } : {}}
               >
                 Đăng ký
-              </Link>
+              </Link>)}
+              {!isLoggedIn && (
               <Link
                 to="/signin"
                 className="nav-item nav-link"
                 style={isMobile ? { display: "none" } : {}}
               >
                 Đăng nhập
-              </Link>
+              </Link>)}
               <Link
                 to="/booking"
                 className="nav-item nav-link"
@@ -230,6 +232,32 @@ const BaseLayout = (props: any) => {
               >
                 Đặt lịch
               </Link>
+              {isLoggedIn && (
+                <Link  to="/mybooking"   className="nav-item nav-link"
+                style={isMobile ? { display: "none" } : {}}>
+                  Quản lý lịch của tôi
+                </Link>
+              )}
+              {isLoggedIn && (
+                <Link  to={`/account`}   className="nav-item nav-link"
+                style={isMobile ? { display: "none" } : {}}>
+                  Quản lý tài khoản
+                </Link>
+              )}
+              {isLoggedIn && (
+                <Link to={`/mybill`}   className="nav-item nav-link"
+                style={isMobile ? { display: "none" } : {}}>
+                  Quản lý Hóa đơn{" "}
+                </Link>
+              )}
+              {isLoggedIn&&
+                <a
+                href="/"
+                style={isMobile ? { display: "none" } : {}}
+                onClick={clearSession}
+              >
+                Logout
+              </a>}
             </div>
           ))}
           <Link
