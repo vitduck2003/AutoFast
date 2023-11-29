@@ -17,10 +17,12 @@ const ServiceDetailV = (props) => {
     const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-
+    const slideStyle3 ={
+        borderBottom: "none"
+      }
     return (
         <div className="container">
-            <h1 className="heading-primary text-center" style={{ margin: "60px 0" }}>
+            <h1 className="text-center"  style={{ margin: "60px 0", borderBottom: "none"  }}>
                 <span>Chi Tiết Các Dịch Vụ Sửa Chữa</span>
             </h1>
 

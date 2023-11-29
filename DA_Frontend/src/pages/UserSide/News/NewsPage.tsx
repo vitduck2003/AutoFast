@@ -45,7 +45,7 @@ const NewsPage = ( props: any) => {
                     {news.map((item:any)=>{
                                                                           
                                return <div className="blog-item-horizontal d-flex mb-3" data-sal-duration="1600" data-sal-delay="0">
-                                    <a href="noi-dung-uu-diem-va-nhuoc-diem-cac-loai-chat-lieu-boc-ghe-xe-hoi-2120.aspx" title="Ưu điểm và nhược điểm các loại chất liệu bọc ghế xe hơi" className="img img-cover img-effect zoom-in-1 auto-scale">
+                                    <a href={`/news/${item.id}`} title="Ưu điểm và nhược điểm các loại chất liệu bọc ghế xe hơi" className="img img-cover img-effect zoom-in-1 auto-scale">
                                         <img className=" lazyloaded" src={item.image} alt="Ưu điểm và nhược điểm các loại chất liệu bọc ghế xe hơi" />
                                     </a>
                                     <div className="info">

@@ -60,6 +60,9 @@ const slideStyle2 ={
   color: "DodgerBlue",
   margin: "60px 0"
 }
+const slideStyle3 ={
+  borderBottom: "none"
+}
   return (
     <div>
       {/* Carousel Start */}
@@ -253,7 +256,7 @@ const slideStyle2 ={
   {serviceHome.slice().reverse().map((item: any) => {
     return (
       <div key={item.id} className="col mb-5">
-        <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
+        <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" style={slideStyle3} data-sal-duration="1600" data-sal-delay="0">
           <a href={`/service/${item.id}`} title={item.service_name} className="img img-cover img-effect zoom-in-1 auto-scale">
             <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} />
           </a>
@@ -308,7 +311,7 @@ const slideStyle2 ={
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>
           <div className="row g-4">
-            {staffData.map((item:any) =>{
+            {technicians.map((item:any) =>{
               return  <div
               key={item.id}
               className="col-lg-3 col-md-6 wow fadeInUp"
@@ -319,7 +322,7 @@ const slideStyle2 ={
                   <img
                     style={{ width: "500px" }}
                     className="img-fluid"
-                    src={`http://localhost:8000/storage/`+item.avatar}
+                    src={item.image}
                     alt=""
                   />
                   {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
@@ -336,7 +339,7 @@ const slideStyle2 ={
                 </div>
                 <div className="bg-light text-center p-4">
                   <h5 className="fw-bold mb-0">{item.name}</h5>
-                  <small>{item.description}</small>
+                  <small>{item.information}</small>
                 </div>
               </div>
             </div>
