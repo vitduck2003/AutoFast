@@ -17,9 +17,13 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
-            return response()->json('bạn chưa hehe đăng nhập');  
+        // if(Auth::check()){
+        //     return response()->json('bạn chưa hehe đăng nhập');  
+        // }
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
         return $next($request);
+        
     }
 }
