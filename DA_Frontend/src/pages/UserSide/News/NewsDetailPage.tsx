@@ -7,31 +7,33 @@ const NewsDetailPage = (props: any) => {
   console.log(id);
   
   const [New, setNews] = useState<any>([]);
+  console.log(New);
   
   useEffect(() => {
-    setNews(props.news.find(New => New.id == id))
+    setNews(props.news.find((New: { id: string | undefined; }) => New.id == id))
 })
 const containerStyle = {
-  width: "100%",
-  height: "auto",
-  display: "block",
-  margin: "20px auto"
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  
 };
 
 const headerStyle = {
   backgroundColor: "rgba(251, 251, 251, 0.15)"
 };
 const headerStyle2 = {
+  padding: "10px",
   width: "800px",
-  height: "700px",
-  display: "block",
-  margin: "20px auto"
+  height: "500px",
+  fontSize: '19px',
+
 };
 const headerStyle3 = {
-  textAlign: 'center',
+ 
   color: 'DodgerBlue',
-  padding: '20px',
-  fontSize: '34px',
+  padding: '10px',
+  fontSize: '30px',
   fontWeight: 'bold',
 };
 const headerStyle4 = {
@@ -116,34 +118,27 @@ const imageStyle = {
 };
 
 const dateAuthorStyle = {
-  color: '#888',
-  fontSize: '14px',
-};
+  textAlight: "center",
+  color: 'Black',
+}
 
 
     return (
-      
-      <div className="card px-3 pt-3" style={containerStyle}>
- 
-  <div>
-   
-    <div className="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
-    <h5 style={headerStyle3}>{New?.title}</h5>
-      <img src={New?.image} className="" style={headerStyle2} />
-      <a href="#!">
-        <div className="mask" style={headerStyle}></div>
-      </a>
+      <>
+      <h1 style={{textAlign: "center", marginTop: "20px"}}>Chi tiết Tin Tức</h1>
+      <div className="container " style={containerStyle}>
+        
+  <div className="row">
+    <div className="col">
+      <h2 style={headerStyle3}>{New?.title}</h2>
+  
+      <img style={headerStyle2} src={New?.image} alt="Hình ảnh tin tức" className="img-fluid" />
+      <p style={headerStyle2}>{New?.des}</p>
     </div>
-   
-    <a href="" style={headerStyle4} >
-      <p>
-        {New?.des}
-      </p>
-    </a>
-
-    <hr />
-    </div>
-    </div>
+    
+  </div>
+</div>
+</>
     );
   
 }

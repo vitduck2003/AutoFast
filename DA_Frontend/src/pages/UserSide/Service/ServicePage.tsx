@@ -3,7 +3,7 @@ import { Pagination } from 'antd';
 
 const ServicePage = (props: any) => {
   const slideStyle = {
-    borderBottom: '1px solid #ececec',
+    
     paddingBottom: "20px"
   };
 
