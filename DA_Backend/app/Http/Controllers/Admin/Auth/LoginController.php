@@ -20,19 +20,26 @@ class LoginController extends Controller
         
         // Thay đổi mã ở đây
         $user = User::where('phone', $credentials['phone'])->first();
-        if ($user && Hash::check($credentials['password'], $user->password)) {
-            if ($user->role_id == 1) {
-                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar,]);
-                return redirect()->route('admin.home');
-            } elseif ($user->role_id == 2) {
-                session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar]);
-                return redirect()->to('staff/staffIndex');
+
+        
+            if($request->isMethod('POST')){
+                if(Auth::attempt(['phone'=>$request->phone,'password'=>$request->password])){
+                    if ($user && Hash::check($credentials['password'], $user->password)) {
+                        if ($user->role_id == 1) {
+                            session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar,]);
+                            return redirect()->route('admin.home');
+                        } elseif ($user->role_id == 2) {
+                            session(['user_name' => $user->name,'id' => $user->id, 'phone' => $user->phone,'avatar' => $user->avatar]);
+                            return redirect()->to('staff/staffIndex');
+                        }
+                        
+                }else{
+                    return redirect()->back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác']);
+                }
             }
-            
+            return view('auth.login');
         }
-    
-        // Đăng nhập thất bại
-        return redirect()->back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác']);
+        
     }
 
     public function logout()
@@ -40,4 +47,12 @@ class LoginController extends Controller
         Auth::logout();
         return view('admin/pages/auth/login');
     }
+    public function attemptLogin(Request $request)
+{
+    $remember = $request->filled('remember');
+    
+    return $this->guard()->attempt(
+        $this->credentials($request), $remember
+    );
+}
 }

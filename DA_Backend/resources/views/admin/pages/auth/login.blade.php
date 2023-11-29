@@ -61,7 +61,7 @@
                                     </div>
                             </div>
                             <div class="p-2">
-                                <form class="form-horizontal" action="{{ route('login') }}" method="POST">
+                                <form class="form-horizontal" action="{{ route('login.submit') }}" method="POST">
                                     <div class="form-group">
                                         <label for="username">Số điện thoại</label>
                                         <input type="text" name="phone" class="form-control" id="phone"
@@ -75,7 +75,7 @@
                                     </div>
 
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                        <input type="checkbox" class="custom-control-input" id="customControlInline" {{ old('remember') ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="customControlInline">Remember
                                             me</label>
                                     </div>
