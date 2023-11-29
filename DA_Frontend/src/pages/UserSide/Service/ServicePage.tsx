@@ -3,7 +3,7 @@ const ServicePage = (props:any) => {
   console.log(props);
   
   const slideStyle = {
-    borderBottom: '1px solid #ececec',
+    
     paddingBottom: "20px"
   };
   const slideStyle2 = {
