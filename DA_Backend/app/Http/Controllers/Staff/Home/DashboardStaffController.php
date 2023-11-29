@@ -16,14 +16,17 @@ class DashboardStaffController extends Controller
 
         $currentDate = date('Y-m-d');
         $waitingJobs = DB::table('jobs')
+        ->whereDate('created_at', $currentDate)
         ->where('status', 'LIKE', 'Đang chờ nhận việc')
         ->count();
 
         $doingJobs = DB::table('jobs')
+        ->whereDate('created_at', $currentDate)
         ->where('status', 'LIKE', 'Đang làm')
         ->count();
 
         $completeJobs = DB::table('jobs')
+        ->whereDate('created_at', $currentDate)
         ->where('status', 'LIKE', 'Đã hoàn thành')
         ->count();
 
