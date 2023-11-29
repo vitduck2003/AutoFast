@@ -164,13 +164,14 @@ const SigninPage = (props) => {
                           ]}
                         >
                           <Input.Password />
-                          <Link
+                        
+                        </Form.Item>
+                        <Link
                             style={{ textDecoration: "none" }}
                             to="/forgotpw"
                           >
                             Quên mật khẩu ?
                           </Link>
-                        </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                           <Button type="primary" htmlType="submit">

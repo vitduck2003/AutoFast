@@ -251,33 +251,6 @@ const onHandleRemoveServiceItem = (id: number) => {
                 element={<BookingPage serviceItem={serviceItem} service={services} onAddBooking={onHandleBooking} />}
               />
             </Route>
-                {/* Signin Page */}
-          <Route path="signin">
-            <Route index element={<SigninPage onSignin={logIn} />} />
-          </Route>
-          {/* Verify Page */}
-          <Route  path="verify/:phone">
-            <Route index element={<VerifyPage />} />
-          </Route>
-          <Route path="forgotpw">
-            <Route index element={<ForgotPassword />} />
-            
-          </Route>
-          <Route path="verifyforget/:phone">
-            <Route index element={<VerifyForget />} />
-          </Route>
-          <Route path="changepw/:phone">
-            <Route index element={<ChangePassWord />} />
-          </Route>
-        
-
-          {/* Signup Page */}
-          <Route path="signup">
-            <Route
-              index
-              element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
-            />
-          </Route>
                 <Route path="home" >
                   <Route index element={<Home/>}/>
                 </Route>
@@ -523,7 +496,33 @@ const onHandleRemoveServiceItem = (id: number) => {
           <Route path="/loginadmin" element={<LoginAdmin />} />
           {/* End Admin Side */}
 
-      
+          {/* Signin Page */}
+          <Route path="signin">
+            <Route index element={<SigninPage onSignin={logIn} />} />
+          </Route>
+          {/* Verify Page */}
+          <Route  path="verify/:phone">
+            <Route index element={<VerifyPage />} />
+          </Route>
+          <Route path="forgotpw">
+            <Route index element={<ForgotPassword />} />
+            
+          </Route>
+          <Route path="verifyforget/:phone">
+            <Route index element={<VerifyForget />} />
+          </Route>
+          <Route path="changepw/:phone">
+            <Route index element={<ChangePassWord />} />
+          </Route>
+        
+
+          {/* Signup Page */}
+          <Route path="signup">
+            <Route
+              index
+              element={<SignupPage onAddUsers={onHandleAddUsers} mess={mess} />}
+            />
+          </Route>
         
           
           
