@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Client;
 
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use App\Http\Controllers\MailController;
 
 class CouponApi extends Controller
 {
-    public function show(Request $request, $coupon_id)
+    public function show()
     {
         try {
             $coupon = DB::table('coupon')->get();
@@ -30,7 +31,7 @@ class CouponApi extends Controller
             ->where('created_at', '>', now())
             ->first();
 
-        if (!$discount) {
+        if ($discount) {
             return response()->json(['message' => 'Mã giảm giá không hợp lệ'], 404);
         }
 

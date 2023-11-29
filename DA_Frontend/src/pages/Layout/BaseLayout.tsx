@@ -115,15 +115,15 @@ const BaseLayout = (props: any) => {
     ) : (
       <div className="h-100 d-inline-flex align-items-center">
         <b style={{ color: "blue" }}>
-          <a style={{ paddingRight: '20px' }} href="/signup" className="nav-item nav-link">
+          <Link style={{ paddingRight: '20px' }} to="/signup" className="nav-item nav-link">
             Đăng Ký
-          </a>{" "}
+          </Link>{" "}
         </b>
 
         <b style={{ color: "blue" }}>
-          <a href="/signin" className="nav-item nav-link">
+          <Link to="/signin" className="nav-item nav-link">
             Đăng Nhập
-          </a>
+          </Link>
         </b>
       </div>
     )}
@@ -133,14 +133,14 @@ const BaseLayout = (props: any) => {
       </div> 
  
       <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style={{ zIndex: 1 }}>
-        <a
-          href="/"
+        <Link
+          to="/"
           className="navbar-brand d-flex align-items-center px-4 px-lg-5"
         >
           <h2 className="m-0 text-primary">
             Auto Fast
           </h2>
-        </a>
+        </Link>
         <button
           type="button"
           className="navbar-toggler me-4"
@@ -154,48 +154,31 @@ const BaseLayout = (props: any) => {
 
           
           return <div key={item.id} className="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="/" className="nav-item nav-link ">
+            <Link to="/" className="nav-item nav-link ">
               {item.home}
-            </a>
+            </Link>
 
-            <a href="/about" className="nav-item nav-link">
+            <Link to="/about" className="nav-item nav-link">
               {item.about}
-            </a>
-            <a href="/service" className="nav-item nav-link">
+            </Link>
+            <Link to="/service" className="nav-item nav-link">
               {item.dv}
-            </a>
-            <div className="nav-item dropdown">
-              <a
-                href="#"
-                className="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-              >
-                {item.page}
-              </a>
-              <div className="dropdown-menu fade-up m-0">
-                <a href="booking" className="dropdown-item">
-                 {item.dl}
-                </a>
-
-                <a href="technicians" className="dropdown-item">
-                  {item.nv}
-                </a>
-              </div>
-            </div>
-            <a href="contact" className="nav-item nav-link">
+            </Link>
+          
+            <Link to="contact" className="nav-item nav-link">
               {item.contact}
-            </a>
-            <a href="news" className="nav-item nav-link">
+            </Link>
+            <Link to="news" className="nav-item nav-link">
               {item.new}
-            </a>
+            </Link>
           </div>
           })}
-          <a
-            href="booking"
+          <Link
+            to="booking"
             className="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
           >
             Đặt lịch ngay
-          </a>
+          </Link>
           
         </div>
         

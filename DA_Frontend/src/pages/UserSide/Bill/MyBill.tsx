@@ -523,7 +523,7 @@ const MyBill = () => {
             </tbody>
           </table>
         ) : (
-          <p>Loading...</p>
+          <p>Bạn chưa có hóa đơn</p>
         )}
       </div>
     </div>

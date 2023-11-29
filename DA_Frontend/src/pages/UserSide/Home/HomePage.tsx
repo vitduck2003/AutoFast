@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import aboutimg from "../../../assets/img/about.jpg";
 import carousel1img from "../../../assets/img/carousel-1.png";
 import carousel2img from "../../../assets/img/carousel-2.png";
@@ -6,7 +6,7 @@ import carouselbg1img from "../../../assets/img/carousel-bg-1.jpg";
 import carouselbg2img from "../../../assets/img/carousel-bg-2.jpg";
 import service1img from "../../../assets/img/service-1.jpg";
 
-
+import instance from "../../../api/instance";
 import khabanhimg from "../../../assets/img/ngobakha.jpg";
 import khanhskyimg from "../../../assets/img/khanhsky.jpg";
 import huanhoahongimg from "../../../assets/img/huanhoahong.jpg";
@@ -16,13 +16,34 @@ import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
 const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
+  const [staffData,setStaffData]=useState([]);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const getStaffData = async () => {
+    try {
+      const response = await instance.get('/client/staff');
+      
+      // Assuming the API response has a data property that contains the actual data
+      setStaffData(response.data)
+  
+      // Handle the data as needed
+      console.log('Staff Data:', staffData);
+  
+      return staffData;
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching staff data:', error);
+      throw error; // You may choose to handle errors differently based on your application's needs
+    }
+  };
+  useEffect(() => {
+    // Fetch data when the component mounts
+    getStaffData();
+  }, []);
   // const onHandleSubmit: SubmitHandler<any> = (data) => {
   //   // Check if there are errors before submitting
   //   if (Object.keys(errors).length === 0) {
@@ -294,7 +315,7 @@ const slideStyle2 ={
                     src={item.image}
                     alt=""
                   />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
+                  {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-facebook-f"></i>
                     </a>
@@ -304,7 +325,7 @@ const slideStyle2 ={
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-instagram"></i>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="bg-light text-center p-4">
                   <h5 className="fw-bold mb-0">{item.name}</h5>
