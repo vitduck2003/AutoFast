@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import aboutimg from "../../../assets/img/about.jpg";
 import carousel1img from "../../../assets/img/carousel-1.png";
 import carousel2img from "../../../assets/img/carousel-2.png";
@@ -16,6 +16,7 @@ import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
 const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
+  const [staffData,setStaffData]=useState([]);
   const navigate = useNavigate();
   const {
     register,
@@ -27,7 +28,7 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
       const response = await instance.get('/client/staff');
       
       // Assuming the API response has a data property that contains the actual data
-      const staffData = response.data;
+      setStaffData(response.data)
   
       // Handle the data as needed
       console.log('Staff Data:', staffData);
@@ -39,7 +40,11 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
       throw error; // You may choose to handle errors differently based on your application's needs
     }
   };
-  getStaffData()
+  useEffect(() => {
+    // Fetch data when the component mounts
+    getStaffData();
+  }, []); 
+  // getStaffData()
   // const onHandleSubmit: SubmitHandler<any> = (data) => {
   //   // Check if there are errors before submitting
   //   if (Object.keys(errors).length === 0) {
@@ -48,6 +53,7 @@ const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
   //     navigate("/");
   //   }
   // };
+  console.log(staffData);
   const slideStyle = {
     borderBottom: '1px solid #ececec',
     paddingBottom: "20px"
@@ -311,7 +317,7 @@ const slideStyle2 ={
                     src={item.image}
                     alt=""
                   />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
+                  {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-facebook-f"></i>
                     </a>
@@ -321,7 +327,7 @@ const slideStyle2 ={
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-instagram"></i>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="bg-light text-center p-4">
                   <h5 className="fw-bold mb-0">{item.name}</h5>
