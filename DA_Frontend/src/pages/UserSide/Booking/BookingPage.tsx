@@ -1,5 +1,4 @@
-
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BorderBottomOutlined,
   BorderTopOutlined,
@@ -7,61 +6,84 @@ import {
   RadiusBottomrightOutlined,
   RadiusUpleftOutlined,
   RadiusUprightOutlined,
-} from '@ant-design/icons';
-import { Button, Divider, Space } from 'antd';
-import type { NotificationPlacement } from 'antd/es/notification/interface';
-import { notification } from 'antd';
+} from "@ant-design/icons";
+import { Button, Divider, Space } from "antd";
+import type { NotificationPlacement } from "antd/es/notification/interface";
+import { notification } from "antd";
+import { useNavigate } from "react-router-dom";
+
 
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
 
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
-
- 
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+  const [currentPage1, setCurrentPage1] = useState(1);
+  const itemsPerPage1 = 5;
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [user_id,setUserId]=useState("");
+  const [user_id, setUserId] = useState("");
   const getUserFromSession = () => {
     const storedUser = sessionStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   };
-  
- 
+  const navigate = useNavigate();
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+  const handleNextPage1 = () => {
+    setCurrentPage1((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage1 = () => {
+    setCurrentPage1((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleCheckboxChange1 = (e, item) => {
+    setIsCheckboxChecked(e.target.checked);
+  };
+
   useEffect(() => {
     // Lấy dữ liệu người dùng từ session khi chạy
     const userFromSession = getUserFromSession();
-  
+
     if (userFromSession) {
       setPhone(userFromSession.phone);
       setEmail(userFromSession.email);
       setName(userFromSession.name);
-      setUserId(userFromSession.id)
+      setUserId(userFromSession.id);
     }
   }, []);
 
   const maintenanceIntervals = {
-    'Bảo dưỡng cấp 1': [5000, 15000, 25000],
-    'Bảo dưỡng cấp 2': [10000, 30000, 50000],
-    'Bảo dưỡng cấp 3': [20000, 60000, 100000],
-    'Bảo dưỡng cấp 4': [40000, 80000, 120000],
+    "Bảo dưỡng cấp 1": [5000, 15000, 25000],
+    "Bảo dưỡng cấp 2": [10000, 30000, 50000],
+    "Bảo dưỡng cấp 3": [20000, 60000, 100000],
+    "Bảo dưỡng cấp 4": [40000, 80000, 120000],
   };
-  console.log(user_id)
+  console.log(user_id);
   const styles = {
     table: {
-      width: '100%',
-      borderCollapse: 'collapse',
+      width: "100%",
+      borderCollapse: "collapse",
     },
     th: {
-      border: '1px solid #ddd',
-      padding: '8px',
-      textAlign: 'left',
-      backgroundColor: '#f2f2f2',
+      border: "1px solid #ddd",
+      padding: "8px",
+      textAlign: "left",
+      backgroundColor: "#f2f2f2",
     },
     td: {
-      border: '1px solid #ddd',
-      padding: '8px',
+      border: "1px solid #ddd",
+      padding: "8px",
     },
   };
   const validateForm = () => {
@@ -119,10 +141,7 @@ const BookingPage = (props: any) => {
     }>
   >([]);
 
-
-
   const [kmMessage, setKmMessage] = useState<string>("");
-
 
   const [selectedService, setSelectedService] = useState<{
     service_name: string;
@@ -130,10 +149,8 @@ const BookingPage = (props: any) => {
     detail: string;
   } | null>(null);
 
-
-
   type FormData = {
-    user_id:string,
+    user_id: string;
     full_name: string;
     phone: string;
     email: string;
@@ -147,9 +164,6 @@ const BookingPage = (props: any) => {
     service_item_other: [];
   };
 
-  
-
-  
   const [formData, setFormData] = useState<FormData>({
     user_id: "",
     full_name: "",
@@ -166,13 +180,13 @@ const BookingPage = (props: any) => {
   });
 
   useEffect(() => {
-    if (phone!="") {
+    if (phone != "") {
       // Điện thoại không được trống, Set dữ liệu theo tên, phone, email
       setFormData({
         user_id: user_id,
         full_name: name, // Thay đổi dữ liệu theo trường
         phone: phone,
-        email:email, // Thay đổi dữ liệu theo trường
+        email: email, // Thay đổi dữ liệu theo trường
         note: "",
         model_car: "",
         status: "Chờ xác nhận",
@@ -242,7 +256,6 @@ const BookingPage = (props: any) => {
       const kmValue = parseInt(value, 10);
       let recommendedServiceId = null;
 
- 
       if (recommendedServiceId !== null) {
         const chosenService = dataService.find(
           (item) => item.id === recommendedServiceId
@@ -306,15 +319,35 @@ const BookingPage = (props: any) => {
     if (isFormValid) {
       const updatedFormData = {
         ...formData,
-         TotalPrice: totalCost + selectedTotal,
+        TotalPrice: totalCost + selectedTotal,
       };
 
       console.log(updatedFormData);
 
-      props.onAddBooking(updatedFormData);
+      // props.onAddBooking(updatedFormData)
+      instance.post("/booking",updatedFormData).then((res) => {
+        console.log(res);
+        if (res.success===true) {
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              navigate(`/`); // Navigate to the verification page with the phone number
+              resolve();
+            }, 3000); // Delay for 3 seconds
+          });
+      
+    }});
+    setTimeout(() => {
+      if(user_id===""
+
+      ){
+      navigate(`/`); }else{
+        navigate(`/mybooking`);
+      }
+     
+    }, 3000);
       notification.success({
-        message: 'Đặt lịch thành công',
-        description: '',
+        message: "Đặt lịch thành công",
+        description: "",
       });
     }
   };
@@ -326,28 +359,29 @@ const BookingPage = (props: any) => {
   const [selectedTotal, setSelectedTotal] = useState(0);
 
   return (
-   <div>
-    <div className="text-center wow fadeInUp" data-wow-delay="0.1s" style={{textAlign: 'center', marginTop: '80px'}}>
-          <h6 className="text-primary text-uppercase">
-            // Booking //
-          </h6>
-          <h1 className="mb-5" style={{marginBottom: '5rem',}}>
-            Đặt lịch
-          </h1>
-        </div>
+    <div>
+      <div
+        className="text-center wow fadeInUp"
+        data-wow-delay="0.1s"
+        style={{ textAlign: "center", marginTop: "80px" }}
+      >
+        <h6 className="text-primary text-uppercase">// Booking //</h6>
+        <h1 className="mb-5" style={{ marginBottom: "5rem" }}>
+          Đặt lịch
+        </h1>
+      </div>
 
-    <div style={{ marginLeft: "50px", marginRight: "50px" }}>
-      <form onSubmit={handleSubmit} style={{ marginTop: "80px" }}>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <h2 style={{ marginBottom: "30px" }}>Thông tin khách hàng</h2>
-              <label style={{ marginTop: "20px" }} htmlFor="">
-                Họ và tên *
-              </label>
+      <div style={{ marginLeft: "50px", marginRight: "50px" }}>
+        <form onSubmit={handleSubmit} style={{ marginTop: "80px" }}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <h2 style={{ marginBottom: "30px" }}>Thông tin khách hàng</h2>
+                <label style={{ marginTop: "20px" }} htmlFor="">
+                  Họ và tên *
+                </label>
 
-             
-              {/* <input
+                {/* <input
 
   onChange={name === "" ? handleInputChange : undefined}
   name="full_name"
@@ -358,287 +392,127 @@ const BookingPage = (props: any) => {
   disabled={name !== ""}
 /> */}
 
-{name ===""? <input
-
-onChange={handleInputChange}
-name="full_name"
-type="text" // Sửa type thành "text" thay vì "string"
-className="form-control"
-placeholder="Nhập họ và tên"
-
-/> :  <input
-onChange={handleInputChange}
-name="phone"
-type="text" // Sửa type thành "text" thay vì "string"
-className="form-control"
-placeholder="Tối thiểu 10 số"
-value={name} 
-disabled
-/>}
-
-              {formErrors.full_name && (
-                <p style={{ color: "red" }}>{formErrors.full_name}</p>
-              )}
-
-
-<label style={{ marginTop: "20px" }} htmlFor="">
-        Số điện thoại *
-      </label>
-   
-
-      {phone ===""? <input
-
-        onChange={handleInputChange}
-        name="phone"
-        type="text" // Sửa type thành "text" thay vì "string"
-        className="form-control"
-        placeholder="Tối thiểu 10 số"
-      
-      /> :  <input
-      onChange={handleInputChange}
-      name="phone"
-      type="text" // Sửa type thành "text" thay vì "string"
-      className="form-control"
-      placeholder="Tối thiểu 10 số"
-      value={phone} 
-      disabled
-    />}
-              {formErrors.phone && (
-                <p style={{ color: "red" }}>{formErrors.phone}</p>
-              )}
-<label>
-         
-  Email *
-</label>
-<input
-  onChange={handleInputChange}
-  name="email"
-  type="string"
-  className="form-control"
-  placeholder="vidu@gmail.com"
-  value={email === "" ? undefined : email}
-  disabled={email !== ""}
-/>
-
-              {formErrors.email && (
-                <p style={{ color: "red" }}>{formErrors.email}</p>
-              )}
-              <b>
-                <label style={{ marginTop: "50px" }} htmlFor="">
-                  Loại xe
-                </label>
-              </b>
-              <select
-                name="model_car"
-                onChange={handleInputChange}
-                className="form-select"
-                aria-label="Default select example"
-              >
-                <option selected>Lựa chọn loại xe của bạn</option>
-                <option value="Sedan">Sedan</option>
-                <option value="HatchBack">HatchBack</option>
-                <option value="SUV">SUV</option>
-                <option value="Crossover">Crossover (CUV)</option>
-                <option value="MPV">MPV</option>
-                <option value="Coupe">Coupe</option>
-                <option value="Convertible">Convertible</option>
-                <option value="Pickup"> Pickup</option>
-                <option value="Limousine">Limousine</option>
-              </select>
-              {formErrors.model_car && (
-                <p style={{ color: "red" }}>{formErrors.model_car}</p>
-              )}
-              <b>
-                <label style={{ marginTop: "50px" }} htmlFor="">
-                  Ghi chú
-                </label>
-              </b>
-              <textarea
-                onChange={handleInputChange}
-                name="note"
-                className="form-control"
-                id="exampleTextarea"
-              ></textarea>
-            </div>
-            <div className="col-md-6">
-              <h2 style={{}}>Dịch vụ và thời gian</h2>
-              <label style={{ marginTop: "42px" }} htmlFor="">
-                Thời gian đến *
-              </label>
-              <div className="form-row">
-                <div className="col">
+                {name === "" ? (
                   <input
                     onChange={handleInputChange}
-                    name="target_date"
-                    type="date"
-                    lang="vi"
+                    name="full_name"
+                    type="text" // Sửa type thành "text" thay vì "string"
                     className="form-control"
-                    placeholder="Ngày và Thời gian Đến"
+                    placeholder="Nhập họ và tên"
                   />
-                </div>
-                <div className="col">
+                ) : (
                   <input
                     onChange={handleInputChange}
-                    name="target_time"
-                    type="time"
-                    lang="vi"
+                    name="phone"
+                    type="text" // Sửa type thành "text" thay vì "string"
                     className="form-control"
-                    placeholder="Ngày và Thời gian Đến"
+                    placeholder="Tối thiểu 10 số"
+                    value={name}
+                    disabled
                   />
-                </div>
-                {formErrors.target_date && (
-                  <p style={{ color: "red" }}>{formErrors.target_date}</p>
                 )}
-              </div>
 
-              <div style={{ marginTop: "20px" }} className="form-group">
-                <label htmlFor="">Số KM của xe</label>
+                {formErrors.full_name && (
+                  <p style={{ color: "red" }}>{formErrors.full_name}</p>
+                )}
+
+                <label style={{ marginTop: "20px" }} htmlFor="">
+                  Số điện thoại *
+                </label>
+
+                {phone === "" ? (
+                  <input
+                    onChange={handleInputChange}
+                    name="phone"
+                    type="text" // Sửa type thành "text" thay vì "string"
+                    className="form-control"
+                    placeholder="Tối thiểu 10 số"
+                  />
+                ) : (
+                  <input
+                    onChange={handleInputChange}
+                    name="phone"
+                    type="text" // Sửa type thành "text" thay vì "string"
+                    className="form-control"
+                    placeholder="Tối thiểu 10 số"
+                    value={phone}
+                    disabled
+                  />
+                )}
+                {formErrors.phone && (
+                  <p style={{ color: "red" }}>{formErrors.phone}</p>
+                )}
+                <label>Email *</label>
                 <input
                   onChange={handleInputChange}
-                  name="mileage"
-                  type="text"
+                  name="email"
+                  type="string"
                   className="form-control"
-                  placeholder="Nhập số Km của bạn"
-                  min={0}
+                  placeholder="vidu@gmail.com"
+                  value={email === "" ? undefined : email}
+                  disabled={email !== ""}
                 />
-              </div>
-              <div>
-                
-              </div>
 
-              {formErrors.mileage && (
-                <p style={{ color: "red" }}>{formErrors.mileage}</p>
-              )}
-              <table style={styles.table}>
-      <thead>
-        <tr>
-          <th style={styles.th}>Cấp Bảo dưỡng</th>
-          <th style={{ ...styles.th, textAlign: 'center' }} colSpan="4">Số km theo mỗi cấp bảo dưỡng </th>
-          {/* Add more <th> elements if you have more columns */}
-        </tr>
-      </thead>
-      <tbody>
-        {Object.entries(maintenanceIntervals).map(([level, distances]) => (
-          <tr key={level}>
-            <td style={styles.td}>{level}</td>
-            {distances.map((distance, index) => (
-              <td key={index} style={styles.td}>{distance.toLocaleString()} km</td>
-            ))}<td style={styles.td}>...</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-              <div className="form-group">
-                <label htmlFor="">Gói Bảo dưỡng</label>
+                {formErrors.email && (
+                  <p style={{ color: "red" }}>{formErrors.email}</p>
+                )}
+                <b>
+                  <label style={{ marginTop: "50px" }} htmlFor="">
+                    Loại xe
+                  </label>
+                </b>
                 <select
+                  name="model_car"
                   onChange={handleInputChange}
-                  name="service"
-                  className="form-control"
-                  id="service"
-                  value={formData.service}
+                  className="form-select"
+                  aria-label="Default select example"
                 >
-                  <option value="" disabled>
-                    Vui lòng chọn gói bảo dưỡng
-                  </option>
-                  {dataService.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      <label> {item.service_name}</label>
-                    </option>
-                  ))}
+                  <option selected>Lựa chọn loại xe của bạn</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="HatchBack">HatchBack</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Crossover">Crossover (CUV)</option>
+                  <option value="MPV">MPV</option>
+                  <option value="Coupe">Coupe</option>
+                  <option value="Convertible">Convertible</option>
+                  <option value="Pickup"> Pickup</option>
+                  <option value="Limousine">Limousine</option>
                 </select>
-                <p
-                  style={{
-                    paddingLeft: "10px",
-                    paddingTop: "20px",
-                    color: "blue",
-                  }}
-                >
-                  {kmMessage}
-                </p>
-
+                {formErrors.model_car && (
+                  <p style={{ color: "red" }}>{formErrors.model_car}</p>
+                )}
+                <b>
+                  <label style={{ marginTop: "50px" }} htmlFor="">
+                    Ghi chú
+                  </label>
+                </b>
+                <textarea
+                  onChange={handleInputChange}
+                  name="note"
+                  className="form-control"
+                  id="exampleTextarea"
+                ></textarea>
                 <b>
                   <p style={{ marginTop: "20px" }}>
-                    Gói bảo dưỡng hiện tại gồm:
-                  </p>
-                </b>
-                {selectedServiceItems.length > 0 ? (
-                  <>
-                    {" "}
-                    <table
+                    Dịch vụ khác :
+                    <input
+                      type="checkbox"
+                      value={isCheckboxChecked}
+                      onChange={(e) => handleCheckboxChange1(e)}
                       style={{
-                        width: "100%",
-                        borderCollapse: "collapse",
-                        border: "1px solid #ddd",
-                        marginTop: "20px",
+                        width: "20px",
+                        height: "20px",
+                        border: "1px solid #ccc",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        verticalAlign: "middle",
+                        marginLeft: "10px",
+                        paddingLeft: "10px",
                       }}
-                    >
-                      <thead>
-                        <tr>
-                          <th
-                            style={{
-                              backgroundColor: "#f2f2f2",
-                              textAlign: "left",
-                              padding: "8px",
-                            }}
-                          >
-                            Action
-                          </th>
-                          <th
-                            style={{
-                              backgroundColor: "#f2f2f2",
-                              textAlign: "left",
-                              padding: "8px",
-                            }}
-                          >
-                            Service
-                          </th>
-                          <th
-                            style={{
-                              backgroundColor: "#f2f2f2",
-                              textAlign: "left",
-                              padding: "8px",
-                            }}
-                          >
-                            Price
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {selectedServiceItems.map((item, index) => (
-                          <tr key={item.item_name}>
-                            <td style={{ borderRight: "1px solid #ddd" }}>
-                              <input
-                                type="checkbox"
-                                value={item.item_name}
-                                disabled
-                                defaultChecked
-                                style={{
-                                  width: "20px",
-                                  height: "20px",
-                                  border: "1px solid #ccc",
-                                  borderRadius: "3px",
-                                  cursor: "pointer",
-                                  verticalAlign: "middle",
-                                  // margin: '0 10px 0 0',
-                                  marginLeft: "10px",
-                                  paddingLeft: "10px",
-                                }}
-                              />
-                            </td>
-                            <td style={{ borderRight: "1px solid #ddd" ,   marginLeft: "10px",
-                                  paddingLeft: "10px", }}>
-                              <b>{item.item_name}</b>
-                            </td>
-                            <td style={{ padding: "8px" }}>
-  <b>{item.price.toLocaleString("vi-VN")} VND</b>
-</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <b>
-                      <p style={{ marginTop: "20px" }}>
-                        Dịch vụ khác :
+                    />
+                    {isCheckboxChecked && (
+                      <div>
+                        {" "}
                         <table
                           style={{
                             width: "100%",
@@ -681,6 +555,10 @@ disabled
                           <tbody>
                             {dataServiceItem
                               .filter((item) => item.id_service === null)
+                              .slice(
+                                (currentPage - 1) * itemsPerPage,
+                                currentPage * itemsPerPage
+                              ) 
                               .map((item, index) => (
                                 <tr key={item.id}>
                                   <td style={{ borderRight: "1px solid #ddd" }}>
@@ -697,55 +575,347 @@ disabled
                                         borderRadius: "3px",
                                         cursor: "pointer",
                                         verticalAlign: "middle",
-                                        // margin: '0 10px 0 0',
                                         marginLeft: "10px",
                                         paddingLeft: "10px",
                                       }}
                                     />
                                   </td>
-                                  <td style={{ borderRight: "1px solid #ddd" ,   marginLeft: "10px",
-                                  paddingLeft: "10px", }}>
+                                  <td
+                                    style={{
+                                      borderRight: "1px solid #ddd",
+                                      marginLeft: "10px",
+                                      paddingLeft: "10px",
+                                    }}
+                                  >
                                     {item.item_name}
                                   </td>
                                   <td style={{ padding: "8px" }}>
-  <b>{item.price.toLocaleString("vi-VN")} VND</b>
-</td>
+                                    <b>
+                                      {item.price.toLocaleString("vi-VN")} VND
+                                    </b>
+                                  </td>
                                 </tr>
                               ))}
                           </tbody>
                         </table>
-                      </p>
-                    </b>
-                  </>
-                ) : (
-                  <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
-                )}
-
-                <b>
-                  <label style={{ marginTop: "10px" }} htmlFor="">
-                    Tổng giá tiền:
-                  </label>{" "}
+                   <div   style={{
+    marginRight: "10px", // Adjust the margin as needed
+    padding: "5px 10px", // Adjust the padding as needed
+ 
+  }}>    <button
+  type="button"
+  onClick={handlePrevPage}
+  disabled={currentPage === 1}
+  style={{
+    marginRight: "10px", // Adjust the margin as needed
+    padding: "5px 10px", // Adjust the padding as needed
+    backgroundColor: currentPage === 1 ? "#ccc" : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+ Trước
+</button>
+<button
+type="button"
+  onClick={handleNextPage}
+  disabled={
+    currentPage * itemsPerPage >=
+    dataServiceItem.filter((item) => item.id_service === null).length
+  }
+  style={{
+    padding: "5px 10px", // Adjust the padding as needed
+    backgroundColor:
+      currentPage * itemsPerPage >=
+      dataServiceItem.filter((item) => item.id_service === null).length
+        ? "#ccc"
+        : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+Tiếp theo
+</button>
+</div> 
+                      </div>
+                    )}
+                  </p>
                 </b>
-                <span style={{ color: "red" }}>
-  {(totalCost + selectedTotal).toLocaleString("vn-VN")} VND
-</span>
+              </div>
+              <div className="col-md-6">
+                <h2 style={{}}>Dịch vụ và thời gian</h2>
+                <label style={{ marginTop: "42px" }} htmlFor="">
+                  Thời gian đến *
+                </label>
+                <div className="form-row">
+                  <div className="col">
+                    <input
+                      onChange={handleInputChange}
+                      name="target_date"
+                      type="date"
+                      lang="vi"
+                      className="form-control"
+                      placeholder="Ngày và Thời gian Đến"
+                    />
+                  </div>
+                  <div className="col">
+                    <input
+                      onChange={handleInputChange}
+                      name="target_time"
+                      type="time"
+                      lang="vi"
+                      className="form-control"
+                      placeholder="Ngày và Thời gian Đến"
+                    />
+                  </div>
+                  {formErrors.target_date && (
+                    <p style={{ color: "red" }}>{formErrors.target_date}</p>
+                  )}
+                </div>
+
+                <div style={{ marginTop: "20px" }} className="form-group">
+                  <label htmlFor="">Số KM của xe</label>
+                  <input
+                    onChange={handleInputChange}
+                    name="mileage"
+                    type="text"
+                    className="form-control"
+                    placeholder="Nhập số Km của bạn"
+                    min={0}
+                  />
+                </div>
+                <div></div>
+
+                {formErrors.mileage && (
+                  <p style={{ color: "red" }}>{formErrors.mileage}</p>
+                )}
+                <table style={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={styles.th}>Cấp Bảo dưỡng</th>
+                      <th
+                        style={{ ...styles.th, textAlign: "center" }}
+                        colSpan="4"
+                      >
+                        Số km theo mỗi cấp bảo dưỡng{" "}
+                      </th>
+                      {/* Add more <th> elements if you have more columns */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(maintenanceIntervals).map(
+                      ([level, distances]) => (
+                        <tr key={level}>
+                          <td style={styles.td}>{level}</td>
+                          {distances.map((distance, index) => (
+                            <td key={index} style={styles.td}>
+                              {distance.toLocaleString()} km
+                            </td>
+                          ))}
+                          <td style={styles.td}>...</td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+                <div className="form-group">
+                  <label htmlFor="">Gói Bảo dưỡng</label>
+                  <select
+                    onChange={handleInputChange}
+                    name="service"
+                    className="form-control"
+                    id="service"
+                    value={formData.service}
+                  >
+                    <option value="" disabled>
+                      Vui lòng chọn gói bảo dưỡng
+                    </option>
+                    {dataService.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        <label> {item.service_name}</label>
+                      </option>
+                    ))}
+                  </select>
+                  <p
+                    style={{
+                      paddingLeft: "10px",
+                      paddingTop: "20px",
+                      color: "blue",
+                    }}
+                  >
+                    {kmMessage}
+                  </p>
+
+                  <b>
+                    <p style={{ marginTop: "20px" }}>
+                      Gói bảo dưỡng hiện tại gồm:
+                    </p>
+                  </b>
+                  {selectedServiceItems.length > 0 ? (
+                    <>
+                      {" "}
+                      <table
+                        style={{
+                          width: "100%",
+                          borderCollapse: "collapse",
+                          border: "1px solid #ddd",
+                          marginTop: "20px",
+                        }}
+                      >
+                        <thead>
+                          <tr>
+                            <th
+                              style={{
+                                backgroundColor: "#f2f2f2",
+                                textAlign: "left",
+                                padding: "8px",
+                              }}
+                            >
+                              Action
+                            </th>
+                            <th
+                              style={{
+                                backgroundColor: "#f2f2f2",
+                                textAlign: "left",
+                                padding: "8px",
+                              }}
+                            >
+                              Service
+                            </th>
+                            <th
+                              style={{
+                                backgroundColor: "#f2f2f2",
+                                textAlign: "left",
+                                padding: "8px",
+                              }}
+                            >
+                              Price
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {selectedServiceItems
+                              .slice(
+                                (currentPage1 - 1) * itemsPerPage1,
+                                currentPage1 * itemsPerPage1
+                              ).map((item, index) => (
+                            <tr key={item.item_name}>
+                              <td style={{ borderRight: "1px solid #ddd" }}>
+                                <input
+                                  type="checkbox"
+                                  value={item.item_name}
+                                  disabled
+                                  defaultChecked
+                                  style={{
+                                    width: "20px",
+                                    height: "20px",
+                                    border: "1px solid #ccc",
+                                    borderRadius: "3px",
+                                    cursor: "pointer",
+                                    verticalAlign: "middle",
+                                    // margin: '0 10px 0 0',
+                                    marginLeft: "10px",
+                                    paddingLeft: "10px",
+                                  }}
+                                />
+                              </td>
+                              <td
+                                style={{
+                                  borderRight: "1px solid #ddd",
+                                  marginLeft: "10px",
+                                  paddingLeft: "10px",
+                                }}
+                              >
+                                <b>{item.item_name}</b>
+                              </td>
+                              <td style={{ padding: "8px" }}>
+                                <b>{item.price.toLocaleString("vi-VN")} VND</b>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div
+                        style={{
+                          marginRight: "10px",
+                          padding: "5px 10px",
+                         
+                        }}>
+                      <button
+  type="button"
+  onClick={handlePrevPage1}
+  disabled={currentPage1 === 1}
+  style={{
+    marginRight: "10px",
+    padding: "5px 10px",
+    backgroundColor: currentPage1 === 1 ? "#ccc" : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+  Trước
+</button>
+<button
+  type="button"
+  onClick={handleNextPage1}
+  disabled={
+    currentPage1 * itemsPerPage1 >=
+    selectedServiceItems.filter((item) => item.id_service != null).length
+  }
+  style={{
+    padding: "5px 10px",
+    backgroundColor:
+      currentPage1 * itemsPerPage1 >=
+      selectedServiceItems.filter((item) => item.id_service != null).length
+        ? "#ccc"
+        : "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  }}
+>
+  Tiếp theo
+</button>
+</div>
+
+                    </>
+                  ) : (
+                    <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
+                  )}
+
+                  <b>
+                    <br></br>
+                    <label style={{ marginTop: "10px" }} htmlFor="">
+                      Tổng giá tiền:
+                    </label>{" "}
+                  </b>
+                  <span style={{ color: "red" }}>
+                    {(totalCost + selectedTotal).toLocaleString("vn-VN")} VND
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="d-flex justify-content-center mt-4">
-            <button
-              style={{ width: "500px" }}
-              type="submit"
-              className="btn btn-primary btn-lg"
-              disabled={!selectedService}
-            >
-              Đặt lịch
-            </button>
+            <div className="d-flex justify-content-center mt-4">
+              <button
+                style={{ width: "500px" }}
+                type="submit"
+                className="btn btn-primary btn-lg"
+                disabled={!selectedService}
+              >
+                Đặt lịch
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
     </div>
   );
 };

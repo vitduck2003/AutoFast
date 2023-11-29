@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import aboutimg from "../../../assets/img/about.jpg";
 import carousel1img from "../../../assets/img/carousel-1.png";
 import carousel2img from "../../../assets/img/carousel-2.png";
@@ -6,7 +6,7 @@ import carouselbg1img from "../../../assets/img/carousel-bg-1.jpg";
 import carouselbg2img from "../../../assets/img/carousel-bg-2.jpg";
 import service1img from "../../../assets/img/service-1.jpg";
 
-
+import instance from "../../../api/instance";
 import khabanhimg from "../../../assets/img/ngobakha.jpg";
 import khanhskyimg from "../../../assets/img/khanhsky.jpg";
 import huanhoahongimg from "../../../assets/img/huanhoahong.jpg";
@@ -16,13 +16,34 @@ import { useForm} from "react-hook-form";
 
 import { Link } from "react-router-dom";
 const HomePage = ({about, technicians, abouts, aboutz, serviceHome}) => {
+  const [staffData,setStaffData]=useState([]);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const getStaffData = async () => {
+    try {
+      const response = await instance.get('/client/staff');
+      
+      // Assuming the API response has a data property that contains the actual data
+      setStaffData(response.data)
+  
+      // Handle the data as needed
+      console.log('Staff Data:', staffData);
+  
+      return staffData;
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching staff data:', error);
+      throw error; // You may choose to handle errors differently based on your application's needs
+    }
+  };
+  useEffect(() => {
+    // Fetch data when the component mounts
+    getStaffData();
+  }, []);
   // const onHandleSubmit: SubmitHandler<any> = (data) => {
   //   // Check if there are errors before submitting
   //   if (Object.keys(errors).length === 0) {
@@ -212,7 +233,7 @@ const slideStyle2 ={
             >
               
               <h2 className="text-white mb-2" data-toggle="counter-up">
-                {item.soluong}
+              {item.soluong}
               </h2>
               <p className="text-white mb-0">{item.name}</p>
             </div>
@@ -229,17 +250,19 @@ const slideStyle2 ={
       <div className="container">
         <h1 className=" text-center" style={slideStyle2}>Dịch Vụ </h1>
         <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
-              {serviceHome.map((item: any)=>{
-                return <div key={item.id} className="col mb-5">
-            <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
-              <a href={`/service/${item.id}`} title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi" className="img img-cover img-effect zoom-in-1 auto-scale">
-                <img className=" lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt="" />
-              </a>
-              <h4 className="title fw-600"><a href="" title="Vệ Sinh Điều Hòa Ô Tô - Công Nghệ Nội Soi">{item.service_name}</a></h4>
-            </div>
-          </div>
-})}
+  {serviceHome.slice().reverse().map((item: any) => {
+    return (
+      <div key={item.id} className="col mb-5">
+        <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" data-sal-duration="1600" data-sal-delay="0">
+          <a href={`/service/${item.id}`} title={item.service_name} className="img img-cover img-effect zoom-in-1 auto-scale">
+            <img className="lazyloaded" src={`./src/assets/img/img_service/${item.image_service}`} alt={item.service_name} />
+          </a>
+          <h4 className="title fw-600"><a href="" title={item.service_name}>{item.service_name}</a></h4>
         </div>
+      </div>
+    );
+  })}
+</div>
       </div>
     </main>
 
@@ -254,16 +277,21 @@ const slideStyle2 ={
             <div className=" py-5">
               <div className="py-5">
                 <h1 className="text-white mb-4">
-                  Một trong những Gara ô tô từng được đề cử và đạt giải thưởng
-                  Nobel Hòa Bình{" "}
+                Auto Fast - Chăm sóc tận tâm, đẳng cấp vượt trội!{" "}
                 </h1>
                 
                 <p className="text-white mb-0">
-                  Sóng bắt đầu từ gió, gió bắt đầu từ đâu, em cũng không biết
-                  nữa, khi nào ta yêu nhau!
+                Auto Fast - Nơi chúng tôi biến giấc mơ của bạn về một chiếc xe luôn hoạt động mạnh mẽ và ổn 
+                định thành hiện thực! Chúng tôi tự hào là địa chỉ đáng tin cậy cho việc bảo dưỡng và sửa chữa ô tô 
+                tại Việt Nam. Với đội ngũ kỹ thuật viên chuyên nghiệp và đầy kinh nghiệm, chúng tôi cam kết 
+                mang lại dịch vụ bảo dưỡng và sửa chữa ô tô hàng đầu, vượt trội về chất lượng và tốc độ. 
+                Không chỉ làm cho xe của bạn hoạt động tốt hơn, chúng tôi còn đảm bảo sự an toàn và tin cậy trên mọi hành trình. 
+                Tại Auto Fast, chúng tôi không chỉ làm việc trên xe hơi, chúng tôi tạo nên những mối quan hệ lâu dài với khách hàng. 
+                Chúng tôi luôn lắng nghe và hiểu rõ nhu cầu của bạn để đảm bảo rằng dịch vụ của chúng tôi luôn đáp ứng mọi mong muốn. Nếu bạn đang tìm kiếm một địa điểm đáng tin cậy để bảo dưỡng và sửa chữa ô tô của mình, 
+                hãy đặt niềm tin vào Auto Fast. 
+                Chúng tôi sẽ giữ cho chiếc xe của bạn luôn chạy mạnh mẽ và đẳng cấp!
                 </p>
-                <br />
-                <p className="text-white mb-0">Nhà thơ Xuân Quỳnh</p>
+                
               </div>
             </div>
           </div>
@@ -280,7 +308,7 @@ const slideStyle2 ={
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>
           <div className="row g-4">
-            {technicians.map((item:any) =>{
+            {staffData.map((item:any) =>{
               return  <div
               key={item.id}
               className="col-lg-3 col-md-6 wow fadeInUp"
@@ -291,10 +319,10 @@ const slideStyle2 ={
                   <img
                     style={{ width: "500px" }}
                     className="img-fluid"
-                    src={item.image}
+                    src={`http://localhost:8000/storage/`+item.avatar}
                     alt=""
                   />
-                  <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
+                  {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-facebook-f"></i>
                     </a>
@@ -304,11 +332,11 @@ const slideStyle2 ={
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-instagram"></i>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="bg-light text-center p-4">
                   <h5 className="fw-bold mb-0">{item.name}</h5>
-                  <small>{item.information}</small>
+                  <small>{item.description}</small>
                 </div>
               </div>
             </div>
