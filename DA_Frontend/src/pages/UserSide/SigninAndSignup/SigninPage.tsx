@@ -17,6 +17,14 @@ const SigninPage = (props) => {
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const handleButtonClick = () => {
+    setIsButtonDisabled(true);
+  
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 120000);
+  };
   const logIn = (users: IUser) => {
     return instance
       .post("/login", users)
@@ -44,6 +52,8 @@ const SigninPage = (props) => {
       },
     });
   };
+
+
   const onFinish = (values) => {
     console.log(values);
 
@@ -58,10 +68,12 @@ const SigninPage = (props) => {
             "green",
             "Đăng Nhập Thành Công"
           );
+          handleButtonClick(); 
 
           if (response.success === true) {
             // Use a nested .then block to navigate after handling the success case
             sessionStorage.setItem("user", JSON.stringify(response.user));
+            handleButtonClick(); 
             return new Promise<void>((resolve) => {
               setTimeout(() => {
                 navigate(`/`); // Navigate to the verification page with the phone number
@@ -175,7 +187,7 @@ const SigninPage = (props) => {
                           </Link>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button type="primary" htmlType="submit">
+                          <Button type="primary" htmlType="submit"  disabled={isButtonDisabled}>
                             Đăng nhập
                           </Button>
                         </Form.Item>

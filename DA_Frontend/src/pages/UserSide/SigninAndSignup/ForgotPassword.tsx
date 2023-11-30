@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import instance from "../../../api/instance";
 import { useState } from "react";
+import imageM from "../../../assets/img/signup.png"
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -126,8 +127,8 @@ const ForgotPassword = () => {
                     </div>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                    <img
-                      src="../../../../public/_9b9f39f1-b8b2-402d-8657-9614d8f7044a.jpg"
+                  <img
+                      src={imageM}
                       className="img-fluid"
                       alt="Sample image"
                     />
