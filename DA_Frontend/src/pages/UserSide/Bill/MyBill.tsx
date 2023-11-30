@@ -22,7 +22,15 @@ const MyBill = () => {
   const [user, setUser] = useState();
   const [selectBooking, setSelectedBooking] = useState();
   const [selectJob, setSelectJob] = useState();
-
+  const [discountCode, setDiscountCode] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const applyDiscount = () => {
+    // Implement logic to apply the discount based on the entered code
+    // You can update the state variable `discountApplied` accordingly
+    // setDiscountApplied(true);
+    instance.post('/client/coupons',{coupon_code:discountCode}).then((res)=>
+    console.log(res))
+  };
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -418,6 +426,28 @@ const MyBill = () => {
                   </table>
                 </div>
               </div>
+              <div style={{ marginBottom: '10px' }}>
+        <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
+        <input
+          type="text"
+          value={discountCode}
+          onChange={(e) => setDiscountCode(e.target.value)}
+          style={{ marginRight: '10px', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+        />
+        <button
+          onClick={applyDiscount}
+          style={{
+            padding: '8px 12px',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Xác nhận
+        </button>
+      </div>
 
               {/* You can display the bill details here */}
               <Button onClick={() => goToPayment(selectBooking)}>
