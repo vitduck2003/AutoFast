@@ -3,8 +3,6 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./Header";
-import imageUserClone from "../../assets/img/userClone.png"
-
 const BaseLayout = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName, setUserName] = useState(); //
@@ -78,18 +76,13 @@ const BaseLayout = (props: any) => {
       setIsMobile(window.innerWidth >= 767);
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     // Làm sạch sự kiện khi component bị hủy
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const imgElement = e.target as HTMLImageElement;
-    imgElement.onerror = null;
-    imgElement.src = imageUserClone;
-  };
 
   return (
     <div>
@@ -122,12 +115,10 @@ const BaseLayout = (props: any) => {
                       <img
                         style={avatarUser}
                         src={img ? `http://localhost:8000/storage/${img}` : ""}
-                        onError={handleImageError}
                       />
-                      
                       {userName}
                     </small>
-                    <div>
+                    <div style={dropdownContentStyle}>
                       <Link style={dropdownContentLinkStyle} to="/mybooking">
                         Quản lý lịch của tôi
                       </Link>
@@ -242,15 +233,15 @@ const BaseLayout = (props: any) => {
                 Đặt lịch
               </Link>
               {isLoggedIn && (
-                <Link  to="/mybooking"   className="nav-item nav-link"
-                style={isMobile ? { display: "none" } : {}}>
-                  Quản lý lịch của tôi
-                </Link>
-              )}
-              {isLoggedIn && (
                 <Link  to={`/account`}   className="nav-item nav-link"
                 style={isMobile ? { display: "none" } : {}}>
                   Quản lý tài khoản
+                </Link>
+              )}
+                {isLoggedIn && (
+                <Link  to="/mybooking"   className="nav-item nav-link"
+                style={isMobile ? { display: "none" } : {}}>
+                  Quản lý lịch của tôi
                 </Link>
               )}
               {isLoggedIn && (
