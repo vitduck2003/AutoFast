@@ -90,6 +90,7 @@ import { getServiceHome, getServicePage } from "./api/Client/servicecl";
 import ServiceDetailV from "./pages/UserSide/Service/ServiceDetailV";
 import AboutDetail from "./pages/UserSide/AboutUs/AboutDetail";
 import { getMenu } from "./api/Client/menu";
+import Review from "./pages/UserSide/Review/Review";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -261,6 +262,9 @@ const onHandleRemoveServiceItem = (id: number) => {
             {/* Contact Page */}
             <Route path="contact">
               <Route index element={<ContactPage />} />
+            </Route>
+            <Route path="review">
+              <Route index element={<Review />} />
             </Route>
             <Route path="mybooking">
           <Route index element={<MyBooking />} />
