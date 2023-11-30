@@ -35,12 +35,12 @@
                                     <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                        <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn Xác nhận hóa đơn không?')">Xác nhận</button>
                                     </form>
                                     <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-danger">Hủy</button>
+                                        <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có muốn hủy hóa đơn không?')">Hủy</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết

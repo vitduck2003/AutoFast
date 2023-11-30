@@ -43,7 +43,7 @@
                                         <input type="text" name="id_booking" hidden value="{{ $booking->id }}">
                                         <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
                                     </form>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn tạo hóa đơn không?')">Tạo hóa đơn</button>
                                         Chi tiết
                                     </button>
                                 </td>

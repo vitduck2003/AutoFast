@@ -35,7 +35,7 @@
                                     <form action="{{ route('booking.startJob', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-primary">Bắt đầu làm</button>
+                                        <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn chuyển sang bắt đầu làm ?')">Bắt đầu làm</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết
