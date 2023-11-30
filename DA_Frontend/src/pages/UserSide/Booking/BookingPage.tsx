@@ -658,6 +658,7 @@ Tiếp theo
                       name="target_date"
                       type="date"
                       lang="vi"
+                      min={new Date().toISOString().slice(0, 10)}
                       className="form-control"
                       placeholder="Ngày và Thời gian Đến"
                     />
