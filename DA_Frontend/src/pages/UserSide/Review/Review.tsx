@@ -50,7 +50,6 @@ const Review = ({bookingdetail, service}) => {
         <label htmlFor="productName">Tên Dịch Vụ</label>
         <input type="text" className="form-control" id="productName" value={serviceName} disabled placeholder="Nhập tên sản phẩm" />
       </div>
-      <input type="hidden" className="form-control" id="productName" value={idService} disabled placeholder="Nhập tên sản phẩm" />
       <div className="form-group">
         <label htmlFor="review">Đánh Giá:</label>
         <textarea className="form-control" id="review" rows="4" placeholder="Nhập đánh giá của bạn"></textarea>
