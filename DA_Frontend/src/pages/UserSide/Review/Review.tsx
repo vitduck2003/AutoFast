@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useParams } from 'react-router';
 
+import { Rate } from 'antd';
 
 const Review = ({bookingdetail, service}) => {
   console.log(bookingdetail);
@@ -13,9 +14,9 @@ const Review = ({bookingdetail, service}) => {
   const [review, setNews] = useState<any>([]);
   console.log(review);
   
-  useEffect(() => {
-    setNews(props.booking.find((review: { id: string | undefined; }) => review.id == id))
-})
+//   useEffect(() => {
+//     setNews(props.booking.find((review: { id: string | undefined; }) => review.id == id))
+// })
   return (
     <div><div className="container mt-5">
     <h2 className="text-center mb-4">Đánh Giá Sản Phẩm</h2>
@@ -31,14 +32,8 @@ const Review = ({bookingdetail, service}) => {
         <textarea className="form-control" id="review" rows="4" placeholder="Nhập đánh giá của bạn"></textarea>
       </div>
       <div className="form-group">
-        <label htmlFor="rating">Điểm Đánh Giá:</label>
-        <select className="form-control" id="rating">
-          <option value="5">5 sao</option>
-          <option value="4">4 sao</option>
-          <option value="3">3 sao</option>
-          <option value="2">2 sao</option>
-          <option value="1">1 sao</option>
-        </select>
+        <label htmlFor="rating">Điểm Đánh Giá </label>
+        <Rate allowHalf value={2.5} />
       </div>
       <button type="submit" className="btn btn-primary">Gửi Đánh Giá</button>
     </form>

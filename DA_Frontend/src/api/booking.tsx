@@ -4,7 +4,7 @@ const getBooking = () => {
   return instance.get("/admin/bookings");
 };
 const getBookingdetail = () =>{
-  return instance.get("");
+  return instance.get("/bookingDetail");
 }
 const addBooking = (booking: any) => {
   return instance.post("/booking", booking);
