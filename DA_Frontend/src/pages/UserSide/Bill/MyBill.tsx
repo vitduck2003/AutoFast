@@ -6,6 +6,7 @@ import type { InputRef } from "antd";
 import { Button, Input, Space, Table } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -539,13 +540,14 @@ const MyBill = () => {
                     </Button>
 
                     {booking.booking.status_payment === "Đã thanh toán" && (
-                      <Button
+                      <Link to={`/mybill/${booking.booking.id}/review`}>  <Button
                       name="redirect"
                       style={buttonStyle}
                      
                     >
                       Đánh giá
-                    </Button>
+                    </Button></Link>
+                    
                     )}
                      {booking.booking.status_payment != "Đã thanh toán" &&
                     <Button
