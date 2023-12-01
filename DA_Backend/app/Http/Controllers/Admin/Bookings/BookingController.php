@@ -162,5 +162,13 @@ class BookingController extends Controller
             ->get();
         return response()->json($bookings);
     }
+    public function getBookingDetail(){
+        $bookingDetail = DB::table('booking_detail')
+        // ->join('booking', 'booking.id', '=', 'booking_detail.id_booking')
+        // ->join('services', 'services.id', '=', 'booking_detail.id_service')
+        // ->select('booking_detail.id','booking.*','services.*')
+        ->get();
+        return response()->json($bookingDetail);
+    }
 }
 
