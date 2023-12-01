@@ -3,7 +3,9 @@ import { IBooking } from "../interface/booking";
 const getBooking = () => {
   return instance.get("/admin/bookings");
 };
-
+const getBookingdetail = () =>{
+  return instance.get("");
+}
 const addBooking = (booking: any) => {
   return instance.post("/booking", booking);
 };
@@ -17,4 +19,4 @@ const deleteBooking = (id: any) => {
   return instance.delete("/booking/" + id);
 };
 
-export { getBooking, addBooking, updateBooking, deleteBooking, cancelBooking };
+export { getBooking, addBooking, updateBooking, deleteBooking, cancelBooking, getBookingdetail };

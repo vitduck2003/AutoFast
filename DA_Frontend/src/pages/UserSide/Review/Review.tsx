@@ -1,8 +1,21 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
+import { useParams } from 'react-router';
 
-type Props = {}
 
-const Review = (props: Props) => {
+const Review = ({bookingdetail, service}) => {
+  console.log(bookingdetail);
+  console.log(service);
+  
+  
+  const { id } = useParams()
+  console.log(id);
+  
+  const [review, setNews] = useState<any>([]);
+  console.log(review);
+  
+  useEffect(() => {
+    setNews(props.booking.find((review: { id: string | undefined; }) => review.id == id))
+})
   return (
     <div><div className="container mt-5">
     <h2 className="text-center mb-4">Đánh Giá Sản Phẩm</h2>
@@ -10,7 +23,7 @@ const Review = (props: Props) => {
    
     <form>
       <div className="form-group">
-        <label htmlFor="productName">Tên Sản Phẩm:</label>
+        <label htmlFor="productName">Tên Dịch Vụ</label>
         <input type="text" className="form-control" id="productName" placeholder="Nhập tên sản phẩm" />
       </div>
       <div className="form-group">

@@ -48,6 +48,7 @@ import {
   cancelBooking,
   deleteBooking,
   getBooking,
+  getBookingdetail,
   updateBooking,
 } from "./api/booking";
 import { IBooking } from "./interface/booking";
@@ -106,6 +107,7 @@ function App() {
   const [abouts, setAbouts] = useState<any>([]);
   const [aboutz, setAboutz] = useState<any>([]);
   const [menu, setMenu] = useState<any>([]);
+  const [bookingdetail, setBookingDetail] = useState<any>([]);
   // const [serviceHome, setServiceHome] = useState<any>([]);
   // const [servicePage, setServicePage] = useState<any>([]);
 
@@ -122,6 +124,7 @@ function App() {
     getAbouts().then(({data}) => setAbouts(data));
     getAboutz().then(({data}) => setAboutz(data));
     getMenu().then(({data}) => setMenu(data));
+    getBookingdetail().then(({data})=>setBookingDetail((data)));
     // getServiceHome().then(({data}) => setServiceHome(data));
     // getServicePage().then(({data}) => setServicePage(data));
 
@@ -316,12 +319,13 @@ const onHandleRemoveServiceItem = (id: number) => {
           </Route>
           Search Booking
           <Route path="search-booking">
-            <Route
-              index
-              element={<SearchBooking searchBK={searchBK} />}
-            />
+            <Route index element={<SearchBooking searchBK={searchBK} />}/>
           </Route>
-          <Route path="/mybill" element={<MyBill />} />
+          <Route path="mybill"  >
+            <Route index element={<MyBill />}/>
+            <Route path=":id/review"  element={<Review bookingdetail={bookingdetail} service={services}/>}/>
+            </Route>
+
           </Route>
           {/* End User Side */}
           {/* Not Found Page */}
