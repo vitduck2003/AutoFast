@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Notification\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -172,3 +173,4 @@ Route::prefix('client')->group(function () {
     Route::get('coupons', [CouponApi::class, 'show']);
     Route::post('applyCoupons', [CouponApi::class, 'applyCoupon']);
 });
+Route::get('/bookingDetail',[BookingController::class, 'getBookingDetail']);
