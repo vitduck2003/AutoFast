@@ -37,7 +37,7 @@ class LoginController extends Controller
                     return redirect()->back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác']);
                 }
             }
-            return view('admin.pages.auth.login');
+            return redirect()->back()->withErrors(['login' => 'Thông tin đăng nhập không chính xác']);
         }
         
     }
