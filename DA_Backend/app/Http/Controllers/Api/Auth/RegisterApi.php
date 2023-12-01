@@ -57,9 +57,9 @@ class RegisterApi extends Controller
 
     private function sendVerificationCode($user, $verificationCode, $phoneNumber)
     {
-        $sid = 'AC4cc4328ba6d84329ca6f72e09b18d6c4';
-        $token = '11dc1f6aa2c2738de00fe37fc88f1f30';
-        $twilioNumber = '+12055259845';
+        $sid = 'ACe975d1af2b90735849ccbf27360021b6';
+        $token = '13a21aaf9b52db2027850f1c68e09c11';
+        $twilioNumber = '+16515043684';
 
         $client = new Client($sid, $token);
 

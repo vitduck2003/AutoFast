@@ -13,6 +13,15 @@ const SignupPage = (props) => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const handleButtonClick = () => {
+    setIsButtonDisabled(true);
+  
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 120000);
+  };
+  
   const [tt, setTt] = useState(String);
   const addUsers = (users: IUser) => {
     return instance.post("/register", users).then((response) => {
@@ -45,38 +54,39 @@ const SignupPage = (props) => {
   const onFinish = (values) => {
     addUsers(values)
       .then((response) => {
-        if (response.success == true) {
+        if (response.success === true) {
           openNotification(
             response.message,
             "black",
             "green",
             "Đăng Ký Thành Công"
           );
+          handleButtonClick(); // Call the function to disable the button
           setTt("Success");
-          // Extract the phone number from the form values
+  
           const phoneNumber = values.phone;
-          // Use a nested .then block to navigate after handling the success case
+  
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/verify/${phoneNumber}`);
               resolve();
             }, 3000);
           });
-        } else if (response?.success == false) {
-          return openNotification(
+        } else if (response?.success === false) {
+          openNotification(
             response.message,
             "white",
             "red",
             "Đăng Ký Thất Bại"
           );
+          // handleButtonClick(); 
         }
       })
       .catch((error) => {
-        // Handle any errors here if needed
-        console.error(error.response.data.message);
+        console.error(error.response?.data?.message);
         if (
-          error.response.data.message ===
-          "[HTTP 400] Unable to create record: The number +84036615XXXX is unverified. Trial accounts cannot send messages to unverified numbers; verify +84036615XXXX at twilio.com/user/account/phone-numbers/verified, or purchase a Twilio number to send messages to unverified numbers"
+          error.response?.data?.message ===
+          "[HTTP 401] Unable to create record: Authenticate"
         ) {
           openNotification(
             "Đăng Ký Thành Công",
@@ -84,18 +94,19 @@ const SignupPage = (props) => {
             "green",
             "Đăng Ký Thành Công"
           );
-          const phoneNumber = values.phone;
+          handleButtonClick(); 
+  
           return new Promise<void>((resolve) => {
+            const phoneNumber = values.phone;
             setTimeout(() => {
               navigate(`/verify/${phoneNumber}`);
               resolve();
             }, 3000);
           });
         }
-        throw error; // Rethrow the error for further handling in your component
+        throw error;
       });
   };
-
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -227,9 +238,9 @@ const SignupPage = (props) => {
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button type="primary" htmlType="submit">
-                            Đăng ký
-                          </Button>
+                        <Button type="primary" htmlType="submit"   disabled={isButtonDisabled}>
+      Đăng ký
+    </Button>
                         </Form.Item>
                       </Form>
                       <span style={{ paddingLeft: "100px" }}>

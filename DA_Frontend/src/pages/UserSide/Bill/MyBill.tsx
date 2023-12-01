@@ -425,8 +425,9 @@ const MyBill = () => {
                     </tfoot>
                   </table>
                 </div>
-              </div>
+              </div> {bookings.booking?.status_payment != "Chưa thanh toán" &&
               <div style={{ marginBottom: '10px' }}>
+               
         <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
         <input
           type="text"
@@ -447,12 +448,14 @@ const MyBill = () => {
         >
           Xác nhận
         </button>
-      </div>
+      </div>}
 
               {/* You can display the bill details here */}
+              {bookings.booking?.status_payment != "Chưa thanh toán" &&
               <Button onClick={() => goToPayment(selectBooking)}>
                 Thanh toán
               </Button>
+              }
               <button style={closeBillButtonStyle} onClick={toggleBill}>
                 Đóng hóa đơn
               </button>
@@ -507,7 +510,7 @@ const MyBill = () => {
                 <th style={thStyle}>ID</th>
                 <th style={thStyle}>Ngày đến</th>
                 <th style={thStyle}>Giờ đến</th>
-                <th style={thStyle}>Ghi chú</th>
+                
                 <th style={thStyle}>Loại xe</th>
                 <th style={thStyle}>Dịch vụ </th>
 
@@ -524,7 +527,7 @@ const MyBill = () => {
 
                   <td style={tdStyle}>{booking.booking.target_date}</td>
                   <td style={tdStyle}>{booking.booking.target_time}</td>
-                  <td style={tdStyle}>{booking.booking.note}</td>
+                 
                   <td style={tdStyle}>{booking.booking.model_car}</td>
                   <td style={tdStyle}>{booking.booking.service_name}</td>
                   <td style={tdStyle}>{booking.booking.status}</td>
@@ -535,8 +538,17 @@ const MyBill = () => {
                       Xem chi tiết
                     </Button>
 
-                    {booking.booking.status === "Đã hoàn thành" && (
+                    {booking.booking.status_payment === "Đã thanh toán" && (
                       <Button
+                      name="redirect"
+                      style={buttonStyle}
+                     
+                    >
+                      Đánh giá
+                    </Button>
+                    )}
+                     {booking.booking.status_payment != "Đã thanh toán" &&
+                    <Button
                         name="redirect"
                         style={buttonStyle}
                         onClick={() => {
@@ -546,7 +558,7 @@ const MyBill = () => {
                       >
                         Xem hóa đơn
                       </Button>
-                    )}
+}
                   </td>
                 </tr>
               ))}

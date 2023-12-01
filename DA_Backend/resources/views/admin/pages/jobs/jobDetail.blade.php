@@ -34,7 +34,7 @@
                                     </td>
                                     <td>{{ $job->id }}</td>
                                     <td>{{ $job->item_name }}</td>
-                                    <td>{{ $job->target_time_done }}</td>
+                                    <td>{{ $job->target_time_done }} phút</td>
                                     <td>{{ number_format($job->price, 0, ',', '.') }} VND</td>
                                     <td>
                                         <select name="staff_id[{{ $job->id }}]">
