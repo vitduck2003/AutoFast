@@ -17,6 +17,7 @@
                                 <th>Loại xe</th>
                                 <th>Số KM</th>
                                 <th>Ngày giờ đến</th>
+                                <th>Thời gian hoàn thành dự kiến</th>
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -30,6 +31,7 @@
                                 <td>{{ $job->model_car }}</td>
                                 <td>{{ $job->mileage }}Km</td>
                                 <td>{{ $job->target_date }}: {{ $job->target_time }}</td>
+                                <td>{{ $job->time_target }}</td>
                                 <td class="text-success">{{ $job->status }}</td>
                                 <td>
                                     @if( $job-> status == "Đã xong")

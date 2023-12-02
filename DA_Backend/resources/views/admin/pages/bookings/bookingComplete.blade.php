@@ -74,7 +74,6 @@
                 <p><strong>Loại xe:</strong> <span id="model_car"></span></p>
                 <p><strong>Số KM:</strong> <span id="mileage"></span></p>
                 <p><strong>Công việc:</strong> <span id="tasks"></span></p>
-                <p><strong>Giá tiền:</strong> <span id="prices"></span></p>
                 <p><strong>Tổng tiền:</strong> <span id="total_prices"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
                 <p><strong>Ghi chú:</strong> <span id="note"></span></p>

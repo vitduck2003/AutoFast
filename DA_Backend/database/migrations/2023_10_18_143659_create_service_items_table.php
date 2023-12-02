@@ -35,4 +35,4 @@ return new class extends Migration
     }
 };
 
-INSERT INTO `service_items` (`id`, `id_service`, `item_name`, `time_done`, `price`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES(NULL, '1', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL), (NULL, '2', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL),(NULL, '3', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL),(NULL, '4', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL);
+// INSERT INTO `service_items` (`id`, `id_service`, `item_name`, `time_done`, `price`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES(NULL, '1', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL), (NULL, '2', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL),(NULL, '3', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL),(NULL, '4', 'Kiêm tra hệ thống phanh còi', '10', '56000', NULL, NULL, NULL, NULL);

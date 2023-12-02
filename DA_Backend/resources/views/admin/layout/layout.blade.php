@@ -255,7 +255,7 @@
                                 <span>Quản lí công việc</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ url('admin/jobs') }}">Công việc đang làm</a></li>
+                                <li><a href="{{ url('admin/jobs') }}">Lịch đang làm</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Hóa đơn</li>
