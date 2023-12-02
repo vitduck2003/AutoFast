@@ -76,6 +76,8 @@ class ReviewController extends Controller
             'content' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'service_id' => 'required|exists:services,id',
+            'service_name' => 'required|string',
+
         ]);
         $review = new Review();
 
@@ -83,6 +85,7 @@ class ReviewController extends Controller
         $review->content = $validatedData['content'];
         $review->user_id = $validatedData['user_id'];
         $review->service_id = $validatedData['service_id'];
+        $review->service_name = $validatedData['service_name'];
         $review->save();
         return response()->json(['message' => 'Đánh giá đã được thêm thành công'], 201);
     }
