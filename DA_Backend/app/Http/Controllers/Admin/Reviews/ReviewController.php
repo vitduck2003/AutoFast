@@ -90,7 +90,7 @@ class ReviewController extends Controller
         $reviews=Review::join('users', 'users.id','=','review.user_id')->join('services','services.id','=','review.service_id')->get([
             'users.name',
             'review.*',
-            'services.service_name'
+            'services.service_name as serviceName'
         ]);
         return response()->json(['message' => 'đây là danh sách đánh giá','reviews'=> $reviews], 201);
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('content');
             $table->integer('user_id');
             $table->integer('service_id');
+            $table->string('service_name');
             $table->integer('rating');
             $table->SoftDeletes();
             $table->timestamps();
