@@ -9,7 +9,7 @@ const Review = ({bookingdetail, service}) => {
   
   
   const { id } = useParams()
-  // console.log(id);
+  console.log(id);
   
   const [review, setNews] = useState<any>([]);
   // console.log(review);
@@ -46,10 +46,15 @@ const Review = ({bookingdetail, service}) => {
     
    
     <form>
+    <div className="form-group">
+        <label htmlFor="productName">User Id</label>
+        <input type="text" className="form-control" id="productName" value={id} disabled placeholder="Nhập tên sản phẩm" />
+      </div>
       <div className="form-group">
         <label htmlFor="productName">Tên Dịch Vụ</label>
         <input type="text" className="form-control" id="productName" value={serviceName} disabled placeholder="Nhập tên sản phẩm" />
       </div>
+      <input type="hidden" className="form-control" id="productName" value={idService} disabled placeholder="Nhập tên sản phẩm" />
       <div className="form-group">
         <label htmlFor="review">Đánh Giá:</label>
         <textarea className="form-control" id="review" rows="4" placeholder="Nhập đánh giá của bạn"></textarea>
