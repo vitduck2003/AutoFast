@@ -67,12 +67,17 @@ const Review = ({bookingdetail, service}) => {
     </form>
   
   
-    <div className="mt-4">
-      <h3>Đánh Giá Gần Đây</h3>
-      <ul className="list-group">
-      
+    <ul className="list-group">
+       
+          <li  className="list-group-item">
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1"></h5>
+              {/* Thêm các phần khác của đánh giá nếu cần */}
+            </div>
+            <p className="mb-1"></p>
+          </li>
+       
       </ul>
-    </div>
   </div></div>
   )
 }

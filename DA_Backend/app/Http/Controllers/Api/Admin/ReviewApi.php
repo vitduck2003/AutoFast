@@ -39,11 +39,13 @@ class ReviewApi extends Controller
             $userId = $request->input('user_id');
             $serviceId = $request->input('service_id');
             $content = $request->input('content');
+            $serviceName = $request->input('service_name');
             
             $review = new Review();
             $review->user_id = $userId;
             $review->service_id = $serviceId;
             $review->content = $content;
+            $review->service_name = $serviceName;
             $review->save();
             
             return response()->json(['message' => 'Đánh giá đã được lưu.']);
