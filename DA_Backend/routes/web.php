@@ -146,6 +146,16 @@ Route::middleware(['checkauth'])->group(function () {
 
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications-view');
+
+    Route::get('staff-job/{id}', [StaffController::class, 'showJobByStaff'])->name('jobByStaff');
+    Route::get('staff', [StaffController::class, 'index'])->name('staff');
+    Route::get('staffJob', [StaffController::class, 'showJobStaff'])->name('staff.job');
+    Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
+    Route::get('staffDetail/{id}', [StaffController::class, 'staffDetail'])->name('staffDetail');
+    Route::get('staff/form/add', [StaffController::class, 'formAdd'])->name('show.form.add');
+    Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
+    Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
+    Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
   });
   route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
   route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
@@ -155,12 +165,6 @@ Route::middleware(['checkauth'])->group(function () {
 
 
 
-  Route::get('staff', [StaffController::class, 'index'])->name('staff');
-  Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
-  Route::get('staff/form/add', [StaffController::class, 'formAdd'])->name('show.form.add');
-  Route::post('/staff', [StaffController::class, 'create'])->name('staff.create');
-  Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
-  Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
   Route::get('/search', [StaffController::class, 'search'])->name('search');
 
   Route::resource('service', ServiceController::class);
