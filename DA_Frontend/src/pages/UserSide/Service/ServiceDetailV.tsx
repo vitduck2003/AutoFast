@@ -84,10 +84,10 @@ const ServiceDetailV = (props) => {
         <li className="list-group-item">
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1"></h5>
-            {item.user_id}
+            {item.name}
           </div>
           <p className="mb-1">{item.content}</p>
-          <Rate allowHalf  value={item.rating} />
+          <Rate allowHalf disabled  value={item.rating} />
         </li>
 
       </ul>

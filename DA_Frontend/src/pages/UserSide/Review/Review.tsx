@@ -71,8 +71,8 @@ const Review = ({ bookingdetail, service }) => {
 
       <form onSubmit={onCreateHandle}>
         <div className="form-group">
-          <label htmlFor="productName">User Id</label>
-          <input type="text" className="form-control" id="productName" value={id} disabled placeholder="Nhập tên sản phẩm" />
+         
+          <input type="hidden" className="form-control" id="productName" value={id} disabled placeholder="Nhập tên sản phẩm" />
         </div>
         <div className="form-group">
           <label htmlFor="productName">Tên Dịch Vụ</label>
