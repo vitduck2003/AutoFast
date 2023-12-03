@@ -7,6 +7,17 @@ import { getReview, getReviewItem } from '../../../api/review';
 const itemsPerPage = 8;
 
 const ServiceDetailV = (props) => {
+  const slideStyle = {
+    width: "100%",
+    maxWidth: "600px", /* Điều chỉnh chiều rộng tối đa của danh sách */
+    margin: "0 auto"
+  }
+  const slideStyle2 = {
+    marginBottom: "20px",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "15px"
+  }
     const { id } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [review,setReview] = useState([])
@@ -80,14 +91,21 @@ const ServiceDetailV = (props) => {
             <div>
                 {review.map((item:any)=>{
                     return <div key={item.id}>
-            <ul className="list-group">
-        <li className="list-group-item">
-          <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1"></h5>
-            {item.name}
-          </div>
-          <p className="mb-1">{item.content}</p>
+            <ul className="list-group"style={slideStyle}>
+        <li className="list-group-item" style={slideStyle2}>
+          
+            <h5 className="mb-1" style={{ marginBottom: "30px", fontWeight: 'bold',
+  color: "#333"}}>Khách Hàng: {item.name}</h5>
+            
+            <div style={{paddingTop: "20px"}}>
+            <label htmlFor= "" style={{ color: "#333", fontWeight: 'bold'}}>Mô Tả:</label>
+          <p className="mb-1" >{item.content}</p>
+            </div>
+
+            <div style={{paddingTop: "20px"}}>
+              <label htmlFor="" style={{ color: "#333", fontWeight: 'bold', marginRight: "20px"}}>Đánh Giá: </label>
           <Rate allowHalf disabled  value={item.rating} />
+          </div>
         </li>
 
       </ul>
