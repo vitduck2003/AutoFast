@@ -35,7 +35,7 @@
                                     <form action="{{ route('booking.restore', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có muốn khôi phục hóa đơn không?')">Khôi phục</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn khôi phục hóa đơn không?')">Khôi phục</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết
@@ -68,7 +68,6 @@
                 <p><strong>Loại xe:</strong> <span id="model_car"></span></p>
                 <p><strong>Số KM:</strong> <span id="mileage"></span></p>
                 <p><strong>Công việc:</strong> <span id="tasks"></span></p>
-                <p><strong>Giá tiền:</strong> <span id="prices"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
                 <p><strong>Ghi chú:</strong> <span id="note"></span></p>
                 <p><strong>Người hủy:</strong> <span id="admin_name"></span></p>

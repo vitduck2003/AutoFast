@@ -41,6 +41,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
         integrity="sha384-KEK5TbkdQW1XGmT0cNz4Z/6bH/2Cx5Hr0k2g8h7WkM0I6jbf8uaDn5jI6vSgjgTZ" crossorigin="anonymous">
     <style>
+        .employee-details {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .employee-details h2 {
+            text-align: center;
+        }
+
+        .employee-details p {
+            margin-bottom: 10px;
+        }
+
+        .employee-details img {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+        }
+
         .drop-container {
             position: relative;
             display: flex;
@@ -188,7 +212,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" id="show_noti"
                             aria-labelledby="page-header-notifications-dropdown">
-                                                </div>
+                        </div>
 
                     </div>
                     <div class="dropdown d-inline-block">
@@ -255,7 +279,8 @@
                                 <span>Quản lí công việc</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ url('admin/jobs') }}">Công việc đang làm</a></li>
+                                <li><a href="{{ url('admin/jobs') }}">Lịch đang làm</a></li>
+                                <li><a href="{{ url('admin/staffJob') }}">Nhân viên và công việc</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Hóa đơn</li>
@@ -438,7 +463,7 @@
                         </div>
                     </div>
                 </div>
-                `+ content +`
+                `+ content + `
                 
                 <div class="p-2 border-top">
                     <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="">
