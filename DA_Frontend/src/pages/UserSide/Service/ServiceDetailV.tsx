@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Pagination } from 'antd';
+import { Pagination, Rate } from 'antd';
 import serviceItemClone from "../../../assets/img/img_item/ServiceItemClone.png"
+import { getReview, getReviewItem } from '../../../api/review';
 
 const itemsPerPage = 8;
 
 const ServiceDetailV = (props) => {
     const { id } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
-
+    const [review,setReview] = useState([])
+    
+    
+    useEffect(() => {
+        // Assuming getReview is a function that fetches reviews, replace it with your actual implementation
+      
+    
+        const fetchReviews = async () => {
+          const reviews = await getReview();
+          console.log({reviews});
+          const filteredReviews = reviews.data.reviews.filter((item) => item.service_id == id);
+         
+          
+          setReview(filteredReviews);
+        };
+    
+        fetchReviews();
+      }, [id]);
+     
     const numericId = parseInt(id, 10);
 
     const filteredItems = props.serviceItem.filter((item) => item.id_service === numericId);
@@ -58,6 +77,23 @@ const ServiceDetailV = (props) => {
                     onChange={handlePageChange}
                 />
             </div>
+            <div>
+                {review.map((item:any)=>{
+                    return <div key={item.id}>
+            <ul className="list-group">
+        <li className="list-group-item">
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1"></h5>
+            {item.user_id}
+          </div>
+          <p className="mb-1">{item.content}</p>
+          <Rate allowHalf  value={item.rating} />
+        </li>
+
+      </ul>
+      </div>
+       })}
+      </div>
         </div>
     );
 }
