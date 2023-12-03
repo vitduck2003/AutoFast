@@ -47,8 +47,11 @@ Route::get('staff/staffIndex', [DashboardStaffController::class, 'staffIndex'])-
 // api này để ngoài cho đức
 Route::get('/api/bookings/{id}', [BookingController::class, 'getBooking']);
 Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait']);
+Route::get('/api/bookings-priority/{id}', [BookingController::class, 'getBookingPriority']);
 Route::get('/api/bookings-cancel/{id}', [BookingController::class, 'getBookingCancel']);
 Route::get('/api/bookings-complete/{id}', [BookingController::class, 'getBookingComplete']);
+Route::get('api/room', [BookingController::class, 'getRoom']);
+Route::get('api/staff', [BookingController::class, 'getStaff']);
 
 Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
@@ -66,19 +69,21 @@ Route::middleware(['checkauth'])->group(function () {
     Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
     Route::post('/bookings/{id}/revoke', [BookingController::class, 'revoke'])->name('booking.revoke');
     Route::post('/bookings/{id}/restore', [BookingController::class, 'restore'])->name('booking.restore');
+    Route::post('/bookings/{id}/priority', [BookingController::class, 'priority'])->name('booking.priority');
     Route::get('bookings-wait', [BookingController::class, 'bookingWait'])->name('booking.wait');
+    Route::get('bookings-priority', [BookingController::class, 'bookingPriority'])->name('booking.view.priority');
     Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
     Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
 
     Route::get('jobs', [JobController::class, 'index']);
     Route::get('job-detail/{id}', [JobController::class, 'jobDetail'])->name('jobs.detail');
-    Route::post('job-save-staff', [JobController::class, 'saveStaff'])->name('save.staff');
+
     Route::get('add/job/{id}', [JobController::class, 'viewAddJob'])->name('view.add.job');
     Route::post('add/job', [JobController::class, 'addJob'])->name('add.job');
-    Route::get('delete/job/{id}', [JobController::class, 'deleteJob'])->name('delete.job.detail');
+    Route::post('delete/job/', [JobController::class, 'deleteJob'])->name('delete.job.detail');
 
 
-    Route::post('start-job/{id}', [JobController::class, 'startJob'])->name('booking.startJob');
+    Route::post('start-job', [JobController::class, 'startJob'])->name('booking.startJob');
     Route::get('confirm-complete/{id}', [JobController::class, 'confirmComplete'])->name('job.confirm.complete');
 
     Route::get('invoice', function () {
@@ -126,7 +131,7 @@ Route::middleware(['checkauth'])->group(function () {
     Route::get('current-jobs', [StaffJobController::class, 'currentJob'])->name('staff.currentJob');
     Route::get('jobs-complete', [StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
     Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
-    Route::post('job-complete', [StaffJobController::class, 'jobDone'])->name('staff.job.complete');
+    Route::get('job-done/{id}', [StaffJobController::class, 'jobDone'])->name('staff.job.done');
     Route::get('profile/{id}', [ProfileController::class, 'showDetail'])->name('profile');
     Route::put('profile/update/{id}', [ProfileController::class, 'update'])->name('update-profile');
     Route::put('profile/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('update-avatar');

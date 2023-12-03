@@ -9,7 +9,7 @@
                 <a href="{{ route('view.add.job', ['id' => $idBooking]) }}">
                     <button type="button" class="btn btn-success">Thêm công việc</button>
                 </a>
-                <form action="{{ route('save.staff') }}" method="POST">
+                <form action="{{ route('delete.job.detail') }}" method="POST">
                     @csrf
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -22,7 +22,6 @@
                                 <th>Giá</th>
                                 <th>Nhân viên phụ trách</th>
                                 <th>Trạng thái</th>
-                                <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,31 +35,15 @@
                                     <td>{{ $job->item_name }}</td>
                                     <td>{{ $job->target_time_done }} phút</td>
                                     <td>{{ number_format($job->price, 0, ',', '.') }} VND</td>
-                                    <td>
-                                        <select name="staff_id[{{ $job->id }}]">
-                                            <option value="">Chọn nhân viên</option>
-                                            @foreach ($staffs_free_time as $staff)
-                                                <option value="{{ $staff->id }}"
-                                                    {{ $staff->id == $job->id_staff ? 'selected' : '' }}>
-                                                    {{ $staff->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    @if ($job->status == 'Chưa phân công việc')
-                                        <td class="text-danger">{{ $job->status }}</td>
-                                    @elseif ($job->status == 'Đang chờ nhận việc')
+                                    <td>{{ $nameStaff->name }}</td>
+                                    @if ($job->status == 'Đang chờ nhận việc')
                                         <td class="text-danger">{{ $job->status }}</td>
                                     @elseif ($job->status == 'Đang làm')
                                         <td class="text-danger">{{ $job->status }}</td>
                                     @elseif ($job->status == 'Đã hoàn thành')
                                         <td class="text-success">{{ $job->status }}</td>
                                     @endif
-                                    <td>
-                                        <a href="{{ route('delete.job.detail', ['id' => $job->id]) }}">
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </a>
-                                    </td>
+                                        
                                 </tr>
                             @endforeach
                         </tbody>
@@ -68,7 +51,7 @@
                     <div class="text-center">
                         <button type="button" class="btn btn-primary" id="check-all-btn">Chọn tất cả</button>
                         <button type="button" class="btn btn-primary" id="uncheck-all-btn">Bỏ chọn tất cả</button>
-                        <button type="submit" class="btn btn-primary" id="save-all-btn">Lưu tất cả</button>
+                        <button type="submit" class="btn btn-primary" id="save-all-btn">Xóa tất cả</button>
                     </div>
                 </form>
             </div>

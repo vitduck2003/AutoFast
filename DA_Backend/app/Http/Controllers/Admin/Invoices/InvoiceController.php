@@ -61,12 +61,14 @@ class InvoiceController extends Controller
     public function createInvoice(Request $request)
     {
         $data = $request->except('_token');
+        $id = $data['id_booking'];
         DB::table('bill')->insert([
             'id_booking' => $data['id_booking'],
             'total_amount' => $data['total_amount'],
             'status_payment' => "Chưa thanh toán",
             'created_at' => now()->toDateTimeString()
         ]);
+        DB::table('booking')->where('id', $id)->update(['status_bill' => 'Đã tạo hóa đơn']);
         return redirect()->back()->with('message','Tạo hóa đơn thành công');
     }
     public function detailInvoice($id){

@@ -33,14 +33,6 @@
                                     <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                     <td class="text-danger">{{ $booking->status }}</td>
                                     <td>
-                                       @if($checkRoom < 1 || $checkStaff < 1)
-                                       <form action="{{ route('booking.priority', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="text" hidden name="idBooking" value="{{ $booking->id }}" >
-                                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn chuyển sang ưu tiên?')">Chuyển sang ưu tiên</button>
-                                    </form>
-                                       @endIf
                                         <button type="button" class="btn btn-primary"
                                             onclick="openStartJobModal({{ $booking->id }})">Bắt đầu làm
                                         </button>
@@ -129,9 +121,10 @@
         $(document).ready(function() {
             $('#exampleModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget); 
-                var bookingId = button.data('booking-id'); 
-                $.get('/api/bookings-wait/' + bookingId, function(data) {
-        
+                var bookingId = button.data(
+                'booking-id'); 
+                console.log(bookingId);
+                $.get('/api/bookings-priority/' + bookingId, function(data) {
                         var modal = $('#exampleModal');
                         modal.find('.modal-title').text('Chi tiết đặt lịch');
                         modal.find('#name').text(data[0].name);

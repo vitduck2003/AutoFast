@@ -11,22 +11,25 @@ use App\Http\Controllers\Controller;
 
 class StaffJobController extends Controller
 {
-    public function currentJob(){
+    public function currentJob()
+    {
         $phone = session('phone');
         $user = User::where('phone', $phone)->first();
         $staff = Staff::where('id_user', $user->id)->first();
         $jobs = DB::table('jobs')
-            ->where('id_staff', $staff->id)
-            ->where('status', 'LIKE', 'Đang chờ nhận việc')
-            ->orWhere('status', 'LIKE', 'Đang làm')
-            ->orWhere('status', 'LIKE', 'Đã xong')
+            ->join('booking', 'booking.id', 'jobs.id_booking')
+            ->select('booking.name', 'jobs.*')
+            ->where('jobs.id_staff', $staff->id)
+            ->where('jobs.status', 'LIKE', 'Đang chờ nhận việc')
+            ->orWhere('jobs.status', 'LIKE', 'Đang làm')
+            ->orWhere('jobs.status', 'LIKE', 'Đã xong')
             ->get();
-        
+
         foreach ($jobs as $job) {
             $booking = DB::table('booking')
                 ->where('id', $job->id_booking)
                 ->first();
-        
+
             if ($booking) {
                 $model_car = $booking->model_car;
                 $job->model_car = $model_car;
@@ -35,57 +38,57 @@ class StaffJobController extends Controller
         return view('staff/pages/jobs/currentJob', compact('jobs'));
     }
     public function startJob(Request $request)
-{
-    $jobId = $request->input('job_id');
-    $job = Job::find($jobId);
+    {
+        $jobIds = $request->input('job_ids');
 
-    if ($job) {
-        $job->status = 'Đang làm';
-        $job->save();
+        foreach ($jobIds as $jobId) {
+            $job = Job::find($jobId);
+
+            if ($job) {
+                $job->status = 'Đang làm';
+                $job->save();
+            }
+            $statusStaff = Staff::find($job->id_staff);
+            if ($statusStaff) {
+                $statusStaff->status = "Đang làm";
+                $statusStaff->save();
+            }
+        }
+
+        return redirect()->back();
     }
-    $statusStaff = Staff::find($job->id_staff);
-    if($statusStaff){
-        $statusStaff->status = "Đang làm";
-        $statusStaff->save();
-    }
-    return redirect()->back();
-}
-    public function jobDone(Request $request)
+   public function jobDone($id)
 {
-    $jobId = $request->input('job_id');
-    $job = Job::find($jobId);
+    $job = Job::find($id);
 
     if ($job) {
         $job->status = 'Đã hoàn thành';
         $job->save();
     }
-    $statusStaff = Staff::find($job->id_staff);
-    if($statusStaff){
-        $statusStaff->status = "Đang đợi việc";
-        $statusStaff->save();
-    }
-    DB::table('notification')->insert(['booking_id'=>$job->id_booking,'title' => 'Công việc','content' => 'Đã hoàn thành ','created_at' =>now()]);
     return redirect()->back();
 }
-public function jobComplete(){
-    $phone = session('phone');
-    $user = User::where('phone', $phone)->first();
-    $staff = Staff::where('id_user', $user->id)->first();
-    $jobs = DB::table('jobs')
-        ->where('id_staff', $staff->id)
-        ->where('status', 'LIKE', 'Đã hoàn thành')
-        ->get();
-    
-    foreach ($jobs as $job) {
-        $booking = DB::table('booking')
-            ->where('id', $job->id_booking)
-            ->first();
-    
-        if ($booking) {
-            $model_car = $booking->model_car;
-            $job->model_car = $model_car;
+    public function jobComplete()
+    {
+        $phone = session('phone');
+        $user = User::where('phone', $phone)->first();
+        $staff = Staff::where('id_user', $user->id)->first();
+        $jobs = DB::table('jobs')
+        ->join('booking', 'booking.id', 'jobs.id_booking')
+        ->select('booking.name', 'jobs.*')
+            ->where('jobs.id_staff', $staff->id)
+            ->where('jobs.status', 'LIKE', 'Đã hoàn thành')
+            ->get();
+
+        foreach ($jobs as $job) {
+            $booking = DB::table('booking')
+                ->where('id', $job->id_booking)
+                ->first();
+
+            if ($booking) {
+                $model_car = $booking->model_car;
+                $job->model_car = $model_car;
+            }
         }
+        return view('staff/pages/jobs/jobComplete', compact('jobs'));
     }
-    return view('staff/pages/jobs/jobComplete', compact('jobs'));
-}
 }

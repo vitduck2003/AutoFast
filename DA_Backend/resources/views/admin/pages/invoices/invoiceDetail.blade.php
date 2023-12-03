@@ -73,17 +73,14 @@
                                 </tr>
                             @endforeach
                                 <tr>
-                                    <td colspan="2" class="text-right">Sub Total</td>
+                                    <td colspan="2" class="text-right">Giảm giá</td>
                                     <td class="text-right">0</td>
                                 </tr>
                                 <tr>
-                                    {{-- <td colspan="2" class="border-0 text-right">
-                                        <strong>Shipping</strong></td>
-                                    <td class="border-0 text-right">$13.00</td> --}}
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="border-0 text-right">
-                                        <strong>Total</strong></td>
+                                        <strong>Tổng tiền</strong></td>
                                     <td class="border-0 text-right"><h4 class="m-0">{{ number_format($invoice->total_amount, 0, ',', '.') }}VNĐ</h4></td>
                                 </tr>
                             </tbody>

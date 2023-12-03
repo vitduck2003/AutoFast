@@ -12,10 +12,11 @@ class JobController extends Controller
 {
     public function index()
     {
-        $jobs = DB::table('booking')
+    $jobs = DB::table('booking')
     ->join('jobs', 'booking.id', '=', 'jobs.id_booking')
-    ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', DB::raw('sum(target_time_done) as time_target'))
-    ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note')
+    ->join('room', 'booking.id_room', '=', 'room.id')
+    ->select('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', 'room.name as room_name', DB::raw('sum(target_time_done) as time_target'))
+    ->groupBy('booking.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'booking.target_date', 'booking.target_time', 'booking.status', 'booking.note', 'room.name')
     ->where(function ($query) {
         $query->where('booking.status', 'LIKE', 'Đang làm')
               ->orWhere('booking.status', 'LIKE', 'Đã xong');
@@ -43,58 +44,55 @@ foreach ($jobs as $job) {
     }
     public function jobDetail($id)
     {
-        $staffs_free_time = DB::table('staff')
-            ->join('users', 'users.id', '=', 'staff.id_user')
-            ->select('staff.id', 'staff.status', 'users.name')
-            ->where('status', 'LIKE', 'Đang đợi việc')
-            ->get();
+
         $jobDetail = DB::table('jobs')
             ->where('id_booking', '=', $id)
             ->get();
+        $nameStaff = DB::table('booking')
+        ->join('staff', 'booking.id_staff', 'staff.id')
+        ->join('users', 'users.id', 'staff.id_user')
+        ->select('users.name')
+        ->where('booking.id', $id)
+        ->first();
         $idBooking = $id;
-        return view('admin/pages/jobs/jobDetail', compact('jobDetail', 'staffs_free_time', 'idBooking'));
+        return view('admin/pages/jobs/jobDetail', compact('jobDetail','idBooking', 'nameStaff'));
     }
-    public function startJob($id)
+    public function startJob(Request $request)
     {
-        $status = 'Đang làm';
-        DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        return redirect()->back()->with('message', 'Lịch đã bắt đầu làm');
+       
+        $bookingId = $request->input('bookingId');
+        $staffId = $request->input('staffId');
+        $roomId = $request->input('room');
+       $saveStaffAndRoom =  DB::table('booking')
+            ->where('id', $bookingId)
+            ->update([
+                'id_staff' => $staffId,
+                'id_room' => $roomId,
+                'status' => 'Đang làm',
+            ]);
+        if($saveStaffAndRoom){
+            DB::table('room')
+            ->where('id', $roomId)
+            ->update(['status' => 'Đang làm']);
+            DB::table('staff')
+            ->where('id', $staffId)
+            ->update(['status' => 'Đang làm']);
+            DB::table('jobs')
+            ->where('id_booking', $bookingId)
+            ->update(['id_staff' => $staffId]);
+        }
+        
+            session()->flash('message', 'Lịch đã bắt đầu làm');
     }
     public function confirmComplete($id)
     {
         $status = 'Đã hoàn thành';
+        $booking = DB::table('booking')->where('id', $id)->first();
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
+        DB::table('staff')->where('id', $booking->id_staff)->update(['status' => 'Đang đợi việc']);
+        DB::table('room')->where('id', $booking->id_room)->update(['status' => 'Đang trống']);
+        DB::table('booking')->where('id', $id)->update(['status_bill' => 'Chưa tạo hóa đơn']);
         return redirect()->back()->with('message', 'Xác nhận lịch đã hoàn thành');
-    }
-    public function saveStaff(Request $request)
-    {
-        $jobIds = $request->input('job_id', []); // Sử dụng mảng rỗng làm giá trị mặc định nếu không có giá trị được chọn
-
-        $staffIds = $request->input('staff_id', []);
-
-        foreach ($jobIds as $jobId) {
-            $staffId = $staffIds[$jobId] ?? null; // Sử dụng toán tử null coalescing để gán giá trị mặc định là null nếu không tồn tại $staffIds[$jobId]
-
-            DB::table('jobs')
-                ->where('id', $jobId)
-                ->update(['id_staff' => $staffId]);
-
-            $checkstaff = DB::table('jobs')
-                ->where('id', $jobId)
-                ->first();
-
-            if ($checkstaff->id_staff == NULL) {
-                $status = "Chưa phân công việc";
-            } else {
-                $status = "Đang chờ nhận việc";
-            }
-
-            DB::table('jobs')
-                ->where('id', $jobId)
-                ->update(['status' => $status]);
-        }
-
-        return redirect()->back()->with('message', 'Cập nhật nhân viên thành công');
     }
     public function viewAddJob($id)
     {
@@ -111,6 +109,10 @@ foreach ($jobs as $job) {
         ]);
 
         $id = $data['id'];
+        $idStaff = DB::table('booking')
+        ->select('id_staff')
+        ->where('id_staff', $id)
+        ->first();
         $infoService = DB::table('service_items')
             ->select('item_name', 'time_done', 'price')
             ->where('id', $data['service_item'])
@@ -124,14 +126,19 @@ foreach ($jobs as $job) {
                     'item_price' => $infoService->price,
                     'price' => $infoService->price,
                     'note' => $data['note'],
-                    'status' => "Chưa phân công việc"
+                    'id_staff' => $idStaff->id_staff,
+                    'status' => "Đang chờ nhận việc"
                 ]
             );
         return redirect()->route('jobs.detail', ['id' => $id])->with('message', 'Thêm thành công dịch vụ');
     }
-    public function deleteJob($id)
+    public function deleteJob(Request $request)
     {
-        $job = DB::table('jobs')->where('id', $id)->delete();
-        return redirect()->back()->with('error', 'Xóa thành công dịch vụ');
+            $jobIds = $request->input('job_id', []); 
+            DB::table('jobs')
+                ->whereIn('id', $jobIds)
+                ->delete();
+        
+            return redirect()->back()->with('message', 'Xóa công việc thành công');
+        }
     }
-}

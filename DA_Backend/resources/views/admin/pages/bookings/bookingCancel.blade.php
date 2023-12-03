@@ -67,6 +67,7 @@
                 <p><strong>Email:</strong> <span id="email"></span></p>
                 <p><strong>Loại xe:</strong> <span id="model_car"></span></p>
                 <p><strong>Số KM:</strong> <span id="mileage"></span></p>
+                <p><strong>Dịch vụ:</strong> <span id="service"></span></p>
                 <p><strong>Công việc:</strong> <span id="tasks"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
                 <p><strong>Ghi chú:</strong> <span id="note"></span></p>
@@ -102,6 +103,7 @@
                     modal.find('#email').text(data[0].email);
                     modal.find('#model_car').text(data[0].model_car);
                     modal.find('#mileage').text(data[0].mileage + ' Km');
+                    modal.find('#service').text(data[0].service_name);
                     modal.find('#tasks').text(data[0].item_names);
                     modal.find('#prices').text(data[0].item_prices + ' VNĐ');
                     modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
