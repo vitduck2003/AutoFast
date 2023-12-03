@@ -398,59 +398,59 @@
     </div>
 
     <script>
-        // const show_noti = document.getElementById('show_noti');
-        // fetch('/api/admin/notifications')
-        //     .then(response => {
-        //         if (!response.ok) {
-        //             throw new Error('Lỗi khi gọi API');
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(data => {
-        //         const recentNotifications = data.slice(0, 3);
-        //         var content = recentNotifications.map(function (data) {
-        //             return `
-        //         <div data-simplebar="" style="max-height: 230px;">
+        const show_noti = document.getElementById('show_noti');
+        fetch('/api/admin/notifications')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Lỗi khi gọi API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const recentNotifications = data.slice(0, 3);
+                var content = recentNotifications.map(function (data) {
+                    return `
+                <div data-simplebar="" style="max-height: 230px;">
                 
-        //         <a href="" class="text-reset notification-item">
-        //         <div class="media">
-        //         <div class="media-body">
-        //         <h6 class="mt-0 mb-1"> ${data.title}</h6>
-        //         <div class="font-size-12 text-muted">
-        //         <p class="mb-1"> ${data.content} của ${data.name}</p>
-        //         <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}
-        //         </p>
-        //         </div>
-        //         </div>
-        //         </div>
-        //         </a>
+                <a href="" class="text-reset notification-item">
+                <div class="media">
+                <div class="media-body">
+                <h6 class="mt-0 mb-1"> ${data.title}</h6>
+                <div class="font-size-12 text-muted">
+                <p class="mb-1"> ${data.content} của ${data.name}</p>
+                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}
+                </p>
+                </div>
+                </div>
+                </div>
+                </a>
                 
-        //         </div>
-        //         `;
-        //         }).join('')
-        //         show_noti.innerHTML = `
-        //         <div class="p-3">
-        //             <div class="row align-items-center">
-        //                 <div class="col">
-        //                     <h6 class="m-0"> Thông báo </h6>
-        //                 </div>
-        //                 <div class="col-auto">
-        //                     <a href="{{route('notifications-view')}}" class="small"> View All</a>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         `+ content +`
+                </div>
+                `;
+                }).join('')
+                show_noti.innerHTML = `
+                <div class="p-3">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="m-0"> Thông báo </h6>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{route('notifications-view')}}" class="small"> View All</a>
+                        </div>
+                    </div>
+                </div>
+                `+ content +`
                 
-        //         <div class="p-2 border-top">
-        //             <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="">
-        //                 <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
-        //             </a>
-        //         </div>
-        //     `;
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
+                <div class="p-2 border-top">
+                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="">
+                        <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                    </a>
+                </div>
+            `;
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>

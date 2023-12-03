@@ -275,4 +275,51 @@ class StaffController extends Controller
     public function showRegister(){
         return view('admin/pages/auth/register');
     }
+    public function showJobStaff(){
+        $staffs=DB::table('staff')
+        ->join('users', 'users.id','=','staff.id_user')
+        ->select('staff.*','users.name','users.avatar','users.description')
+        ->get();
+        return view('admin/pages/staffs/staffjob',compact('staffs'));
+    }
+    public function showJobByStaff($id){
+
+        $jobs = DB::table('jobs')
+        ->join('booking', 'booking.id','=','jobs.id_booking')
+        ->where('id_staff', $id)
+        ->select('jobs.*','booking.name')
+        ->get();
+        foreach ($jobs as $job) {
+            $booking = DB::table('booking')
+                ->where('id', $job->id_booking)
+                ->first();
+        
+            if ($booking) {
+                $model_car = $booking->model_car;
+                $job->model_car = $model_car;
+            }
+        }
+        return view('admin/pages/staffs/jobBystaff',compact('jobs'));
+    }
+    public function staffDetail($id)
+    {
+        $staff = DB::table('users')
+            ->join('staff', 'users.id', '=', 'staff.id_user')
+            ->where([
+                ['users.role_id', '=', 2],
+                ['staff.id', '=', $id]
+            ])
+            ->select(
+                'staff.*',
+                'users.name',
+                'users.password',
+                'users.avatar',
+                'users.email',
+                'users.phone',
+                'users.description',
+                'users.address'
+            )
+            ->first();
+        return view('admin/pages/staffs/detailStaff', compact('staff'));
+    }
 }
