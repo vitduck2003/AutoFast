@@ -490,7 +490,7 @@ const MyBooking = () => {
               {/* <th style={thStyle}>Ghi chú</th> */}
               <th style={thStyle}>Loại xe</th>
               <th style={thStyle}>Dịch vụ </th>
-
+<th style={thStyle}>Phòng </th>
               <th style={thStyle}>Trạng Thái </th>
               {/* <th style={thStyle}>Các công việc</th> */}
               <th style={thStyle}>Hành động</th>
@@ -505,9 +505,12 @@ const MyBooking = () => {
               
                 <td style={tdStyle}>{booking.booking.target_date}</td>
                 <td style={tdStyle}>{booking.booking.target_time}</td>
-                {/* <td style={tdStyle}>{booking.booking.note}</td> */}
+            
                 <td style={tdStyle}>{booking.booking.model_car}</td>
                 <td style={tdStyle}>{booking.booking.service_name}</td>
+                <td style={tdStyle}>{booking.booking.room}</td>
+
+                
 
                 <td style={tdStyle}>{booking.booking.status}</td>
              
