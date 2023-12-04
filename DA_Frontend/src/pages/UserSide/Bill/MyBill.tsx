@@ -426,7 +426,8 @@ const MyBill = () => {
                     </tfoot>
                   </table>
                 </div>
-              </div> {bookings.booking?.status_payment != "Chưa thanh toán" &&
+              </div>
+               {/* {bookings.booking?.status_payment != "Chưa thanh toán" &&
               <div style={{ marginBottom: '10px' }}>
                
         <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
@@ -449,7 +450,7 @@ const MyBill = () => {
         >
           Xác nhận
         </button>
-      </div>}
+      </div>} */}
 
               {/* You can display the bill details here */}
               {bookings.booking?.status_payment != "Chưa thanh toán" &&
