@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Client;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -24,6 +25,7 @@ class BookingApi extends Controller
             'note' => $data['note'] ? $data['note'] : null,
             'total_price' => $data['TotalPrice'],
             'status' => $data['status'],
+            'created_at' => Carbon::now()
         ]);
 
         if ($bookingId) {

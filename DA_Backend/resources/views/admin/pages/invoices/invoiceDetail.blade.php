@@ -8,7 +8,7 @@
                     <div class="invoice-title">
                         <h4 class="float-right font-size-16">Hóa đơn # {{ $invoice->id }}</h4>
                         <div class="mb-4">
-                            <img src="{{ asset('assets\images\logo-dark.png') }}" alt="logo" height="20">
+                            <img src="{{ asset('assets\images\logo\logo.png') }}" alt="logo" height="50px" width="100px">
                         </div>
                     </div>
                     <hr>

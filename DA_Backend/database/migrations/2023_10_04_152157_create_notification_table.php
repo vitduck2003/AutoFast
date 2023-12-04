@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->integer('bookinf_id');
+            $table->integer('booking_id');
             $table->timestamps();
             $table->softDeletes();
         });
