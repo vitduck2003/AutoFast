@@ -251,6 +251,15 @@ const BookingPage = (props: any) => {
       ...prevData,
       [name]: value,
     }));
+    if(name ==="phone"){
+      setPhone(value);
+    }
+    if(name==="full_name"){
+      setName(value);
+    }
+    if(name==="email"){
+      setEmail(value);
+    }
 
     if (name === "mileage") {
       const kmValue = parseInt(value, 10);
@@ -403,12 +412,12 @@ const BookingPage = (props: any) => {
                 ) : (
                   <input
                     onChange={handleInputChange}
-                    name="phone"
+                    name="full_name"
                     type="text" // Sửa type thành "text" thay vì "string"
                     className="form-control"
-                    placeholder="Tối thiểu 10 số"
+                    placeholder="Nhập họ và tên"
                     value={name}
-                    disabled
+                    // disabled
                   />
                 )}
 
@@ -436,7 +445,7 @@ const BookingPage = (props: any) => {
                     className="form-control"
                     placeholder="Tối thiểu 10 số"
                     value={phone}
-                    disabled
+                    // disabled
                   />
                 )}
                 {formErrors.phone && (
@@ -450,7 +459,7 @@ const BookingPage = (props: any) => {
                   className="form-control"
                   placeholder="vidu@gmail.com"
                   value={email === "" ? undefined : email}
-                  disabled={email !== ""}
+                  // disabled={email !== ""}
                 />
 
                 {formErrors.email && (

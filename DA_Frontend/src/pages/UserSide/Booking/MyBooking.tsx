@@ -501,7 +501,7 @@ const MyBooking = () => {
           <tbody>
           {filteredBookings.map((booking) => (
               <tr key={booking.booking.id}>
-                <td style={tdStyle}>{booking.booking.id}</td>
+                <td style={tdStyle}>{booking.booking?.id}</td>
               
                 <td style={tdStyle}>{booking.booking.target_date}</td>
                 <td style={tdStyle}>{booking.booking.target_time}</td>
