@@ -336,10 +336,7 @@ const BookingPage = (props: any) => {
       instance.post("/booking", updatedFormData).then((res) => {
         console.log(res);
         if (res.success === true) {
-          notification.success({
-            message:"Đặt lịch thành công",
-            description: "",
-          });
+        
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/`); // Navigate to the verification page with the phone number
@@ -353,6 +350,10 @@ const BookingPage = (props: any) => {
           description: "",
         });
        
+      });
+      notification.success({
+        message:"Đặt lịch thành công",
+        description: "",
       });
       setTimeout(() => {
         if (user_id === "") {
