@@ -40,7 +40,7 @@
                                     <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy hóa đơn không?')">Hủy</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
                                     </form>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết

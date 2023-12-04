@@ -38,12 +38,17 @@
                                         @csrf
                                         @method('POST')
                                         <input type="text" hidden name="idBooking" value="{{ $booking->id }}" >
-                                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn chuyển sang ưu tiên?')">Chuyển sang ưu tiên</button>
+                                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn chuyển sang ưu tiên?')">Chuyển ưu tiên</button>
                                     </form>
                                        @endIf
                                         <button type="button" class="btn btn-primary"
                                             onclick="openStartJobModal({{ $booking->id }})">Bắt đầu làm
                                         </button>
+                                        <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
+                                        </form>
                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                             data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                             Chi tiết
