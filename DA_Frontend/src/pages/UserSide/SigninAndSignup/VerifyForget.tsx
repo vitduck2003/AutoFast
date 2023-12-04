@@ -15,34 +15,22 @@ const VerifyForget = () => {
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const [showNotification, setShowNotification] = useState(false);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  // const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  // const [countdown, setCountdown] = useState(0);
   const startCountdown = () => {
     // Start the countdown for 3 minutes (180 seconds)
-    const initialCountdown = 180;
+    const initialCountdown = 10;
 
     // Store the countdown start time and value in localStorage
-    const countdownStartTime = new Date().getTime();
-    localStorage.setItem("countdownStartTime", countdownStartTime.toString());
-    localStorage.setItem("countdownValue", countdown.toString());
+
 
     setCountdown(initialCountdown);
-    setButtonDisabled(true);
+    setIsButtonDisabled(true);
 
     // Start the countdown timer
-    const countdownInterval = setInterval(() => {
-      const elapsedTime = new Date().getTime() - countdownStartTime;
-      const remainingTime = initialCountdown - Math.floor(elapsedTime / 1000);
-
-      if (remainingTime <= 0) {
-        clearInterval(countdownInterval);
-        setButtonDisabled(false);
-        localStorage.removeItem("countdownStartTime");
-        localStorage.removeItem("countdownValue");
-      } else {
-        setCountdown(remainingTime);
-      }
-    }, 1000);
+  
   };
 
   useEffect(() => {
@@ -50,42 +38,12 @@ const VerifyForget = () => {
     const storedCountdown = localStorage.getItem("countdown");
     if (storedCountdown) {
       setCountdown(parseInt(storedCountdown, 10)); // Chuyển đổi thành số nguyên
-      setButtonDisabled(true); // Và tắt nút
+      setIsButtonDisabled(true); // Và tắt nút
     }
   }, []);
 
-  const resumeCountdown = () => {
-    // Retrieve countdown start time and value from localStorage
-    const countdownStartTime = parseInt(
-      localStorage.getItem("countdownStartTime")
-    );
-    const initialCountdown = parseInt(localStorage.getItem("countdownValue"));
-
-    if (!isNaN(countdownStartTime) && !isNaN(initialCountdown)) {
-      // Calculate the remaining time
-      const elapsedTime = new Date().getTime() - countdownStartTime;
-      let remainingTime = initialCountdown - Math.floor(elapsedTime / 1000);
-
-      if (remainingTime > 0) {
-        setCountdown(remainingTime);
-        setButtonDisabled(true);
-
-        // Start the countdown timer
-        const countdownInterval = setInterval(() => {
-          if (remainingTime <= 0) {
-            clearInterval(countdownInterval);
-            setButtonDisabled(false);
-            localStorage.removeItem("countdownStartTime");
-            localStorage.removeItem("countdownValue");
-          } else {
-            setCountdown(remainingTime);
-            remainingTime--;
-          }
-        }, 1000);
-      }
-    }
-  };
-  // resumeCountdown()
+ 
+ 
 
   const resend = (phone) => {
     console.log(phone);
@@ -101,11 +59,31 @@ const VerifyForget = () => {
       .post("register/resend-verification-code", data)
       .then((response) => {
         console.log(response);
+        openNotification(response.data.message,"black","green","Thanh cong")
       })
       .catch((error) => {
         console.error("Error:", error);
+        return openNotification(error?.response.data?.message, "white", "red", "Thất bại");
       });
   };
+  
+  useEffect(() => {
+    if (countdown > 0) {
+      // If countdown is greater than 0, set up a timer to decrease the countdown
+      const timer = setInterval(() => {
+        setCountdown((prevCountdown) => Math.max(0, prevCountdown - 1));
+      }, 1000);
+
+      // Disable the button during the countdown
+      setIsButtonDisabled(true);
+
+      // Clear the timer when the countdown becomes 0
+      return () => {
+        clearInterval(timer);
+        setIsButtonDisabled(false); // Enable the button when countdown is over
+      };
+    }
+  }, [countdown]);
   const verify = (values) => {
     return instance
       .post("verify-code", values)

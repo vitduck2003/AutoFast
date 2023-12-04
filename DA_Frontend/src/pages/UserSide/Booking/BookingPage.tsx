@@ -12,7 +12,6 @@ import type { NotificationPlacement } from "antd/es/notification/interface";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
-
 // import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
 
@@ -251,13 +250,13 @@ const BookingPage = (props: any) => {
       ...prevData,
       [name]: value,
     }));
-    if(name ==="phone"){
+    if (name === "phone") {
       setPhone(value);
     }
-    if(name==="full_name"){
+    if (name === "full_name") {
       setName(value);
     }
-    if(name==="email"){
+    if (name === "email") {
       setEmail(value);
     }
 
@@ -334,30 +333,34 @@ const BookingPage = (props: any) => {
       console.log(updatedFormData);
 
       // props.onAddBooking(updatedFormData)
-      instance.post("/booking",updatedFormData).then((res) => {
+      instance.post("/booking", updatedFormData).then((res) => {
         console.log(res);
-        if (res.success===true) {
+        if (res.success === true) {
+          notification.success({
+            message:"Đặt lịch thành công",
+            description: "",
+          });
           return new Promise<void>((resolve) => {
             setTimeout(() => {
               navigate(`/`); // Navigate to the verification page with the phone number
               resolve();
             }, 3000); // Delay for 3 seconds
           });
-      
-    }});
-    setTimeout(() => {
-      if(user_id===""
-
-      ){
-      navigate(`/`); }else{
-        navigate(`/mybooking`);
-      }
-     
-    }, 3000);
-      notification.success({
-        message: "Đặt lịch thành công",
-        description: "",
+        }
+      }).catch((error) => {
+        notification.error({
+          message:   error.response?.data?.message,
+          description: "",
+        });
+       
       });
+      setTimeout(() => {
+        if (user_id === "") {
+          navigate(`/`);
+        } else {
+          navigate(`/mybooking`);
+        }
+      }, 3000);
     }
   };
   const totalCost = selectedServiceItems.reduce(
@@ -567,7 +570,7 @@ const BookingPage = (props: any) => {
                               .slice(
                                 (currentPage - 1) * itemsPerPage,
                                 currentPage * itemsPerPage
-                              ) 
+                              )
                               .map((item, index) => (
                                 <tr key={item.id}>
                                   <td style={{ borderRight: "1px solid #ddd" }}>
@@ -607,49 +610,57 @@ const BookingPage = (props: any) => {
                               ))}
                           </tbody>
                         </table>
-                   <div   style={{
-    marginRight: "10px", // Adjust the margin as needed
-    padding: "5px 10px", // Adjust the padding as needed
- 
-  }}>    <button
-  type="button"
-  onClick={handlePrevPage}
-  disabled={currentPage === 1}
-  style={{
-    marginRight: "10px", // Adjust the margin as needed
-    padding: "5px 10px", // Adjust the padding as needed
-    backgroundColor: currentPage === 1 ? "#ccc" : "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }}
->
- Trước
-</button>
-<button
-type="button"
-  onClick={handleNextPage}
-  disabled={
-    currentPage * itemsPerPage >=
-    dataServiceItem.filter((item) => item.id_service === null).length
-  }
-  style={{
-    padding: "5px 10px", // Adjust the padding as needed
-    backgroundColor:
-      currentPage * itemsPerPage >=
-      dataServiceItem.filter((item) => item.id_service === null).length
-        ? "#ccc"
-        : "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }}
->
-Tiếp theo
-</button>
-</div> 
+                        <div
+                          style={{
+                            marginRight: "10px", // Adjust the margin as needed
+                            padding: "5px 10px", // Adjust the padding as needed
+                          }}
+                        >
+                          {" "}
+                          <button
+                            type="button"
+                            onClick={handlePrevPage}
+                            disabled={currentPage === 1}
+                            style={{
+                              marginRight: "10px", // Adjust the margin as needed
+                              padding: "5px 10px", // Adjust the padding as needed
+                              backgroundColor:
+                                currentPage === 1 ? "#ccc" : "#007bff",
+                              color: "#fff",
+                              border: "none",
+                              borderRadius: "5px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Trước
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleNextPage}
+                            disabled={
+                              currentPage * itemsPerPage >=
+                              dataServiceItem.filter(
+                                (item) => item.id_service === null
+                              ).length
+                            }
+                            style={{
+                              padding: "5px 10px", // Adjust the padding as needed
+                              backgroundColor:
+                                currentPage * itemsPerPage >=
+                                dataServiceItem.filter(
+                                  (item) => item.id_service === null
+                                ).length
+                                  ? "#ccc"
+                                  : "#007bff",
+                              color: "#fff",
+                              border: "none",
+                              borderRadius: "5px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Tiếp theo
+                          </button>
+                        </div>
                       </div>
                     )}
                   </p>
@@ -809,92 +820,99 @@ Tiếp theo
                         </thead>
                         <tbody>
                           {selectedServiceItems
-                              .slice(
-                                (currentPage1 - 1) * itemsPerPage1,
-                                currentPage1 * itemsPerPage1
-                              ).map((item, index) => (
-                            <tr key={item.item_name}>
-                              <td style={{ borderRight: "1px solid #ddd" }}>
-                                <input
-                                  type="checkbox"
-                                  value={item.item_name}
-                                  disabled
-                                  defaultChecked
+                            .slice(
+                              (currentPage1 - 1) * itemsPerPage1,
+                              currentPage1 * itemsPerPage1
+                            )
+                            .map((item, index) => (
+                              <tr key={item.item_name}>
+                                <td style={{ borderRight: "1px solid #ddd" }}>
+                                  <input
+                                    type="checkbox"
+                                    value={item.item_name}
+                                    disabled
+                                    defaultChecked
+                                    style={{
+                                      width: "20px",
+                                      height: "20px",
+                                      border: "1px solid #ccc",
+                                      borderRadius: "3px",
+                                      cursor: "pointer",
+                                      verticalAlign: "middle",
+                                      // margin: '0 10px 0 0',
+                                      marginLeft: "10px",
+                                      paddingLeft: "10px",
+                                    }}
+                                  />
+                                </td>
+                                <td
                                   style={{
-                                    width: "20px",
-                                    height: "20px",
-                                    border: "1px solid #ccc",
-                                    borderRadius: "3px",
-                                    cursor: "pointer",
-                                    verticalAlign: "middle",
-                                    // margin: '0 10px 0 0',
+                                    borderRight: "1px solid #ddd",
                                     marginLeft: "10px",
                                     paddingLeft: "10px",
                                   }}
-                                />
-                              </td>
-                              <td
-                                style={{
-                                  borderRight: "1px solid #ddd",
-                                  marginLeft: "10px",
-                                  paddingLeft: "10px",
-                                }}
-                              >
-                                <b>{item.item_name}</b>
-                              </td>
-                              <td style={{ padding: "8px" }}>
-                                <b>{item.price.toLocaleString("vi-VN")} VND</b>
-                              </td>
-                            </tr>
-                          ))}
+                                >
+                                  <b>{item.item_name}</b>
+                                </td>
+                                <td style={{ padding: "8px" }}>
+                                  <b>
+                                    {item.price.toLocaleString("vi-VN")} VND
+                                  </b>
+                                </td>
+                              </tr>
+                            ))}
                         </tbody>
                       </table>
                       <div
                         style={{
                           marginRight: "10px",
                           padding: "5px 10px",
-                         
-                        }}>
-                      <button
-  type="button"
-  onClick={handlePrevPage1}
-  disabled={currentPage1 === 1}
-  style={{
-    marginRight: "10px",
-    padding: "5px 10px",
-    backgroundColor: currentPage1 === 1 ? "#ccc" : "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }}
->
-  Trước
-</button>
-<button
-  type="button"
-  onClick={handleNextPage1}
-  disabled={
-    currentPage1 * itemsPerPage1 >=
-    selectedServiceItems.filter((item) => item.id_service != null).length
-  }
-  style={{
-    padding: "5px 10px",
-    backgroundColor:
-      currentPage1 * itemsPerPage1 >=
-      selectedServiceItems.filter((item) => item.id_service != null).length
-        ? "#ccc"
-        : "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  }}
->
-  Tiếp theo
-</button>
-</div>
-
+                        }}
+                      >
+                        <button
+                          type="button"
+                          onClick={handlePrevPage1}
+                          disabled={currentPage1 === 1}
+                          style={{
+                            marginRight: "10px",
+                            padding: "5px 10px",
+                            backgroundColor:
+                              currentPage1 === 1 ? "#ccc" : "#007bff",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Trước
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleNextPage1}
+                          disabled={
+                            currentPage1 * itemsPerPage1 >=
+                            selectedServiceItems.filter(
+                              (item) => item.id_service != null
+                            ).length
+                          }
+                          style={{
+                            padding: "5px 10px",
+                            backgroundColor:
+                              currentPage1 * itemsPerPage1 >=
+                              selectedServiceItems.filter(
+                                (item) => item.id_service != null
+                              ).length
+                                ? "#ccc"
+                                : "#007bff",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Tiếp theo
+                        </button>
+                      </div>
                     </>
                   ) : (
                     <p>Chưa có thông tin chi tiết cho gói dịch vụ này.</p>
