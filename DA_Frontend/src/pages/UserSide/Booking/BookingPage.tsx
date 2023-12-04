@@ -392,15 +392,7 @@ const BookingPage = (props: any) => {
   disabled={name !== ""}
 /> */}
 
-                {name === "" ? (
-                  <input
-                    onChange={handleInputChange}
-                    name="full_name"
-                    type="text" // Sửa type thành "text" thay vì "string"
-                    className="form-control"
-                    placeholder="Nhập họ và tên"
-                  />
-                ) : (
+              
                   <input
                     onChange={handleInputChange}
                     name="phone"
@@ -408,9 +400,9 @@ const BookingPage = (props: any) => {
                     className="form-control"
                     placeholder="Tối thiểu 10 số"
                     value={name}
-                    disabled
+               
                   />
-                )}
+            
 
                 {formErrors.full_name && (
                   <p style={{ color: "red" }}>{formErrors.full_name}</p>
@@ -420,15 +412,7 @@ const BookingPage = (props: any) => {
                   Số điện thoại *
                 </label>
 
-                {phone === "" ? (
-                  <input
-                    onChange={handleInputChange}
-                    name="phone"
-                    type="text" // Sửa type thành "text" thay vì "string"
-                    className="form-control"
-                    placeholder="Tối thiểu 10 số"
-                  />
-                ) : (
+              
                   <input
                     onChange={handleInputChange}
                     name="phone"
@@ -436,9 +420,9 @@ const BookingPage = (props: any) => {
                     className="form-control"
                     placeholder="Tối thiểu 10 số"
                     value={phone}
-                    disabled
+                
                   />
-                )}
+               
                 {formErrors.phone && (
                   <p style={{ color: "red" }}>{formErrors.phone}</p>
                 )}
@@ -449,8 +433,8 @@ const BookingPage = (props: any) => {
                   type="string"
                   className="form-control"
                   placeholder="vidu@gmail.com"
-                  value={email === "" ? undefined : email}
-                  disabled={email !== ""}
+                  value={email}
+               
                 />
 
                 {formErrors.email && (
