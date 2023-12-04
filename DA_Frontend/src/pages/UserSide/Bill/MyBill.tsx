@@ -289,7 +289,7 @@ const MyBill = () => {
   return (
     <div>
       <div style={containerStyle}>
-        <h1 style={{ textAlign: "center" }}>Lịch của tôi</h1>
+        <h1 style={{ textAlign: "center" }}>Hóa đơn của tôi</h1>
         {/* Phần tìm kiếm và filter */}
         <div className="form-group row">
           <div className=" timkiem">
@@ -426,7 +426,8 @@ const MyBill = () => {
                     </tfoot>
                   </table>
                 </div>
-              </div> {bookings.booking?.status_payment != "Chưa thanh toán" &&
+              </div>
+               {/* {bookings.booking?.status_payment != "Chưa thanh toán" &&
               <div style={{ marginBottom: '10px' }}>
                
         <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
@@ -449,7 +450,7 @@ const MyBill = () => {
         >
           Xác nhận
         </button>
-      </div>}
+      </div>} */}
 
               {/* You can display the bill details here */}
               {bookings.booking?.status_payment != "Chưa thanh toán" &&

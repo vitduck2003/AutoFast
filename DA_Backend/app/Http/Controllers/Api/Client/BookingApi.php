@@ -45,11 +45,10 @@ class BookingApi extends Controller
                         'id_service' => $itemService->id_service,
                         'item_name' => $itemService->item_name,
                         'item_price' => $itemService->price,
-                        'id_staff' => null,
                         'target_time_done' => $itemService->time_done,
                         'images_done' => null,
                         'price' => $itemService->price,
-                        'status' => 'Chưa phân công việc',
+                        'status' => 'Đang chờ nhận việc',
                     ]);
                 }
 
@@ -65,11 +64,10 @@ class BookingApi extends Controller
                             'id_service' => null,
                             'item_name' => $itemServiceOther->item_name,
                             'item_price' => $itemServiceOther->price,
-                            'id_staff' => null,
                             'target_time_done' => $itemServiceOther->time_done,
                             'images_done' => null,
                             'price' => $itemServiceOther->price,
-                            'status' => 'Chưa phân công việc',
+                            'status' => 'Đang chờ nhận việc',
                         ]);
                     }
                 }
@@ -123,11 +121,12 @@ class BookingApi extends Controller
         $bookings = DB::table('booking')
         ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
         ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
-        ->leftJoin('users', 'users.id', '=', 'staff.id')
+        ->leftJoin('users', 'users.id', '=', 'staff.id_user')
         ->leftJoin('booking_detail', 'booking_detail.id_booking', '=', 'booking.id')
         ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
         ->leftJoin('bill', 'bill.id_booking', '=', 'booking.id')
-        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount')
+        ->leftJoin('room', 'room.id', 'booking.id_room')
+        ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount', 'room.name as room_name')
         ->where('booking.user_id', '=', $user_id)
         ->get();
         $result = [];
@@ -148,6 +147,7 @@ class BookingApi extends Controller
                         'model_car' => $booking->model_car,
                         'mileage' => $booking->mileage,
                         'status' => $booking->booking_status,
+                        'room' => $booking->room_name,
                         'created_at' => $booking->created_at,
                     ],
                     'jobs' => [],
@@ -174,7 +174,7 @@ class BookingApi extends Controller
         ->leftJoin('booking', 'bill.id_booking', 'booking.id')
         ->leftJoin('jobs', 'booking.id', '=', 'jobs.id_booking')
         ->leftJoin('staff', 'jobs.id_staff', '=', 'staff.id')
-        ->leftJoin('users', 'users.id', '=', 'staff.id')
+        ->leftJoin('users', 'users.id', '=', 'staff.id_user')
         ->leftJoin('booking_detail', 'booking_detail.id_booking', '=', 'booking.id')
         ->leftJoin('services', 'services.id', '=', 'booking_detail.id_service')
         ->select('booking.*', 'jobs.*', 'jobs.status as job_status', 'booking.status as booking_status', 'users.name as staff_name', 'services.service_name', 'bill.total_amount', 'bill.status_payment')

@@ -100,7 +100,7 @@ const ChangePassWord = () => {
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                     <p className="text-center h1 fw-bold mb-3 mx-1 mx-md-2 mt-4">
                       {" "}
-                      Đổi mật khẩ<ul></ul>
+                      Đổi mật khẩu<ul></ul>
                     </p>
 
                     <div>
@@ -132,7 +132,7 @@ const ChangePassWord = () => {
                         </Form.Item>
 
                         <Form.Item
-                          label="Nhập lại mật khẩu"
+                          label="Nhập lại"
                           name="password2"
                           dependencies={["password"]}
                           hasFeedback

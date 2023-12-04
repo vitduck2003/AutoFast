@@ -35,15 +35,22 @@
                                 <td>{{ $booking->model_car }}</td>
                                 <td>{{ $booking->mileage }}Km</td>
                                 <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
-                                <td class="text-success">{{ $booking->status }}</td>
+                                @if($booking->status_bill == "Chưa tạo hóa đơn")
+                                <td class="text-danger">{{ $booking->status_bill }}</td>
+                                @endif
+                                @if($booking->status_bill == "Đã tạo hóa đơn")
+                                <td class="text-success">{{ $booking->status_bill }}</td>
+                                @endif
                                 <td>
-                                    <form action="{{ route('create.invoice') }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <input type="text" name="total_amount" hidden value="{{ $booking->total_prices }}">
-                                        <input type="text" name="id_booking" hidden value="{{ $booking->id }}">
-                                        <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
-                                    </form>
+                                   @if($booking->status_bill == "Chưa tạo hóa đơn")
+                                   <form action="{{ route('create.invoice') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <input type="text" name="total_amount" hidden value="{{ $booking->total_prices }}">
+                                    <input type="text" name="id_booking" hidden value="{{ $booking->id }}">
                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn tạo hóa đơn không?')">Tạo hóa đơn</button>
+                                </form>
+                                   @endif
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
                                         Chi tiết
                                     </button>
                                 </td>
@@ -73,6 +80,7 @@
                 <p><strong>Email:</strong> <span id="email"></span></p>
                 <p><strong>Loại xe:</strong> <span id="model_car"></span></p>
                 <p><strong>Số KM:</strong> <span id="mileage"></span></p>
+                <p><strong>Dịch vụ:</strong> <span id="service"></span></p>
                 <p><strong>Công việc:</strong> <span id="tasks"></span></p>
                 <p><strong>Tổng tiền:</strong> <span id="total_prices"></span></p>
                 <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
@@ -107,6 +115,7 @@
                 modal.find('#email').text(data[0].email);
                 modal.find('#model_car').text(data[0].model_car);
                 modal.find('#mileage').text(data[0].mileage + ' Km');
+                modal.find('#service').text(data[0].service_name);
                 modal.find('#tasks').text(data[0].item_names);
                 modal.find('#prices').text(data[0].item_prices + ' VNĐ');
                 modal.find('#total_prices').text(data[0].total_prices + ' VNĐ');

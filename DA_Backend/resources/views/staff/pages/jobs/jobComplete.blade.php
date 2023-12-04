@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Tên khách</th>
                                 <th>Công việc</th>
                                 <th>Giá</th>
                                 <th>Xe</th>
@@ -21,9 +22,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jobs as $job):
+                            @foreach($jobs as $job)
                             <tr>
                                 <td>{{ $job->id }}</td>
+                                <td>{{ $job->name }}</td>
                                 <td>{{ $job->item_name }}</td>
                                 <td>{{ $job->item_price }}</td>
                                 <td>{{ $job->model_car }}</td>

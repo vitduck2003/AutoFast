@@ -25,7 +25,10 @@ return new class extends Migration
             $table->string('model_car');
             $table->integer('mileage');
             $table->string('status');
+            $table->string('status_bill')->nullable();
             $table->integer('total_price');
+            $table->integer('id_staff')->nullable();
+            $table->integer('id_room')->nullable();
             $table->integer('log_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

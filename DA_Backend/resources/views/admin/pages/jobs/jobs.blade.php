@@ -11,13 +11,13 @@
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Phòng</th>
                                 <th>Họ tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Loại xe</th>
                                 <th>Số KM</th>
                                 <th>Ngày giờ đến</th>
-                                <th>Thời gian hoàn thành dự kiến</th>
+                                <th>Hoàn thành dự kiến</th>
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach($jobs as $job):
                             <tr>
-                                <td>{{ $job->id }}</td>
+                                <td>{{ $job->room_name }}</td>
                                 <td>{{ $job->name }}</td>
                                 <td>{{ $job->phone }}</td>
                                 <td>{{ $job->model_car }}</td>

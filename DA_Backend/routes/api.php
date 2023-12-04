@@ -61,6 +61,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/booking-details/jobs', [ManagerBookingApi::class, 'getJobs']);
     Route::patch('/confirm-booking/{id}', [ManagerBookingApi::class, 'confirmBooking']);
     Route::patch('/cancel-booking/{id}', [ManagerBookingApi::class, 'cancelBooking']);
+    Route::get('room', [BookingApi::class, 'getRoom']);
     // Review APIs
     Route::prefix('review')->group(function () {
         Route::get('/', [ReviewApi::class, 'index']);
