@@ -289,7 +289,7 @@ const MyBill = () => {
   return (
     <div>
       <div style={containerStyle}>
-        <h1 style={{ textAlign: "center" }}>Lịch của tôi</h1>
+        <h1 style={{ textAlign: "center" }}>Hóa đơn của tôi</h1>
         {/* Phần tìm kiếm và filter */}
         <div className="form-group row">
           <div className=" timkiem">

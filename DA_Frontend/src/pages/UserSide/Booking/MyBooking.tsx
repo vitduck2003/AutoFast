@@ -351,7 +351,7 @@ const MyBooking = () => {
     <input className="form-control" placeholder="Tìm kiếm" type="text" value={searchTerm}
             onChange={handleSearch}/>
   </div>
-  <div style={{ margin: "20px", display: "flex", gap: "10px" ,marginLeft:"150px"}}>
+  <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
   {bookingStatuses.map((status) => (
     <Button
       key={status}
