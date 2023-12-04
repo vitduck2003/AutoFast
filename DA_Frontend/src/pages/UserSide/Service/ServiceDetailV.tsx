@@ -88,30 +88,27 @@ const ServiceDetailV = (props) => {
                     onChange={handlePageChange}
                 />
             </div>
-            <div>
-                {review.map((item:any)=>{
-                    return <div key={item.id}>
-            <ul className="list-group"style={slideStyle}>
-        <li className="list-group-item" style={slideStyle2}>
-          
-            <h5 className="mb-1" style={{ marginBottom: "30px", fontWeight: 'bold',
-  color: "#333"}}>Khách Hàng: {item.name}</h5>
-            
-            <div style={{paddingTop: "20px"}}>
-            <label htmlFor= "" style={{ color: "#333", fontWeight: 'bold'}}>Mô Tả:</label>
-          <p className="mb-1" >{item.content}</p>
+           <div style={{ columns: "2", columnGap: "20px" }}>
+    {review.map((item: any) => {
+        return (
+            <div key={item.id}>
+                <ul className="list-group" style={slideStyle}>
+                    <li className="list-group-item" style={slideStyle2}>
+                        <h5 className="mb-1" style={{ marginBottom: "30px", fontWeight: 'bold', color: "#333" }}>Khách Hàng: {item.name}</h5>
+                        <div style={{ paddingTop: "20px" }}>
+                            <label htmlFor="" style={{ color: "#333", fontWeight: 'bold' }}>Mô Tả:</label>
+                            <p className="mb-1">{item.content}</p>
+                        </div>
+                        <div style={{ paddingTop: "20px" }}>
+                            <label htmlFor="" style={{ color: "#333", fontWeight: 'bold', marginRight: "20px" }}>Đánh Giá: </label>
+                            <Rate allowHalf disabled value={item.rating} />
+                        </div>
+                    </li>
+                </ul>
             </div>
-
-            <div style={{paddingTop: "20px"}}>
-              <label htmlFor="" style={{ color: "#333", fontWeight: 'bold', marginRight: "20px"}}>Đánh Giá: </label>
-          <Rate allowHalf disabled  value={item.rating} />
-          </div>
-        </li>
-
-      </ul>
-      </div>
-       })}
-      </div>
+        );
+    })}
+</div>
         </div>
     );
 }
