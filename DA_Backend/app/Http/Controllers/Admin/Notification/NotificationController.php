@@ -18,7 +18,8 @@ class NotificationController extends Controller
             ->join('booking', 'booking.id', '=', 'notification.booking_id')
             ->select('notification.*', 'booking.name')
             ->orderBy('notification.created_at', 'desc')    
-            ->paginate(10);
+            ->paginate(5);
+            
         return view('admin/pages/notification/index', compact('notifications'));
     }
     public function home()
@@ -46,5 +47,16 @@ class NotificationController extends Controller
         }
         
         return response()->json($notifications);
+    }
+    public function showDetail($id)
+    {
+        $notifications = DB::table('notification')
+            ->join('booking', 'booking.id', '=', 'notification.booking_id')
+            ->where('notification.id', $id)
+            ->select('notification.*', 'booking.name','booking.target_time', 'booking.target_date', 'booking.phone')
+            ->orderBy('notification.created_at', 'desc')    
+            ->first();
+            
+        return view('admin/pages/notification/detail', compact('notifications'));
     }
 }

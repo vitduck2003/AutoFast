@@ -76,6 +76,7 @@ class BookingController extends Controller
                 'canceled_at' => $CanceledAt,
             ]);
         DB::table('booking')->where('id', $id)->update(['log_id' => $logId, 'status' => $status]);
+        DB::table('notification')->insert(['booking_id'=>$id,'title' => 'Công việc','content' => 'Đã hủy lịch bảo dưỡng của ','created_at' =>now()]);
         return redirect()->back()->with('error', 'Hủy lịch thành công');
     }
     public function bookingWait()
@@ -146,6 +147,7 @@ class BookingController extends Controller
         $id = $data['idBooking'];
         $status = 'Lịch ưu tiên';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
+        DB::table('notification')->insert(['booking_id'=>$id,'title' => 'Công việc','content' => 'Lịch bảo dưỡng đặc biệt ưu tiên cho khách hàng ','created_at' =>now()]);
         return redirect()->back()->with('message', 'Đã chuyển sang ưu tiên hoặc không có phòng');
     }
     public function bookingCancel()

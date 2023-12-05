@@ -89,6 +89,7 @@ class ProfileController extends Controller
                 Storage::delete($user->avatar);
             }
             $path = $request->file('avatar')->store('public/avatar');
+            $path=substr($path, 7);
             $user->avatar = $path;
             $user->save();
             if ($user) {

@@ -41,6 +41,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
         integrity="sha384-KEK5TbkdQW1XGmT0cNz4Z/6bH/2Cx5Hr0k2g8h7WkM0I6jbf8uaDn5jI6vSgjgTZ" crossorigin="anonymous">
     <style>
+        .employee-details {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .employee-details h2 {
+            text-align: center;
+        }
+        .employee-details p {
+            margin-bottom: 10px;
+        }
+        .employee-details img {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: auto;
+            border-radius: 50%;
+        }
         .drop-container {
             position: relative;
             display: flex;
@@ -418,7 +438,7 @@
                 <div class="media-body">
                 <h6 class="mt-0 mb-1"> ${data.title}</h6>
                 <div class="font-size-12 text-muted">
-                <p class="mb-1"> ${data.content} của ${data.name}</p>
+                <p class="mb-1"> ${data.content} ${data.name}</p>
                 <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}
                 </p>
                 </div>

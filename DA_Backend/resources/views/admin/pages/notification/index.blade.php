@@ -6,16 +6,16 @@
 <div class="row">
     <div class="col-12">
         <div class="staff">
-            <div data-simplebar="" style="max-height: 230px;">
 
                 @foreach ($notifications as $notification)
-                <a href="" class="text-reset notification-item">
+                <a href="{{ route('notifications-detail', ['id' => $notification->id]) }}" class="text-reset notification-item">
                     <div class="media">
                         <div class="media-body">
                             <h6 class="mt-0 mb-1">{{$notification->title}}</h6>
                             <div class="font-size-12 text-muted">
-                                <p class="mb-1">{{$notification->content}}</p>
-                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i>
+                                <p class="mb-1">{{$notification->content}} {{$notification->name}}</p>
+                                <p class="mb-0">
+                                    <i class="mdi mdi-clock-outline"></i>
                                     @php
                                     $currentTime = time();
                                     $createdTime = strtotime($notification->created_at);
@@ -38,10 +38,8 @@
                     </div>
                 </a>
                 @endforeach
-                <div class="pagination">
-                    {{ $notifications->links() }}
-                </div>
-            </div>
+                <div>{{ $notifications->links() }}</div>
+                    
         </div>
     </div>
 </div>
