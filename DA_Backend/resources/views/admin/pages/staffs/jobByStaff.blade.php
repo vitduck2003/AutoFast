@@ -17,6 +17,7 @@
                             <th>Giá</th>
                             <th>Xe</th>
                             <th>Người đặt</th>
+                            <th>Thời gian đặt</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
@@ -28,6 +29,7 @@
                             <td>{{ $job->item_price }}</td>
                             <td>{{ $job->model_car }}</td>
                             <td>{{ $job->name }}</td>
+                            <td>{{ $job->target_date}} {{$job->target_time}}</td>
                             <td class="text-success">{{ $job->status }}</td>
                         </tr>
                         @endforeach

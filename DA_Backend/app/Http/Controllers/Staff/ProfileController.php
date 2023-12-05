@@ -85,10 +85,9 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail($id);
         if ($request->hasFile('avatar')) {
-            // Xóa ảnh đại diện cũ
-            Storage::delete($user->avatar);
-
-            // Lưu trữ ảnh đại diện mới
+            if ($user->avatar) {
+                Storage::delete($user->avatar);
+            }
             $path = $request->file('avatar')->store('public/avatar');
             $user->avatar = $path;
             $user->save();

@@ -257,6 +257,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/jobs') }}">Lịch đang làm</a></li>
+                                <li><a href="{{ url('admin/staffJob') }}">Nhân viên và công việc</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Hóa đơn</li>

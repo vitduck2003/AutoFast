@@ -286,8 +286,8 @@ class StaffController extends Controller
 
         $jobs = DB::table('jobs')
         ->join('booking', 'booking.id','=','jobs.id_booking')
-        ->where('id_staff', $id)
-        ->select('jobs.*','booking.name')
+        ->where('jobs.id_staff', $id)
+        ->select('jobs.*','booking.name','booking.target_date','booking.target_time')
         ->get();
         foreach ($jobs as $job) {
             $booking = DB::table('booking')
