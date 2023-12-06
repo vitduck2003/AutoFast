@@ -27,15 +27,12 @@ class ProfileAdminController extends Controller
                 'name' => 'required|string|max:255',
                 'phone' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
-                'address' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
             ];
             $messages = [
                 'name.required' => 'Vui lòng nhập tên.',
                 'email.required' => 'Vui lòng nhập email.',
                 'email.email' => 'Vui lòng nhập đúng định dạng email.',
                 'phone.required' => 'Vui lòng nhập số điện thoại.',
-                'description.required' => 'Vui lòng nhập mô tả.',
             ];
 
             $validatedData = $request->validate($rules, $messages);

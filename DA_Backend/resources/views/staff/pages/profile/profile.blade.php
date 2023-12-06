@@ -14,7 +14,6 @@
                 <div class="staff-body">
                     <h4 class="staff-title">Thông tin người dùng</h4>
                     <form action="{{ route('update-profile', ['id' => $profile->id]) }}" method="POST" style="display: inline;">
-                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -37,12 +36,12 @@
                             <input type="text" class="form-control" name="description"
                                 value="{{ $profile->description }}">
                         </div>
-                        <div class="mb-3"> <label class="form-label">Lương</label>
-                            <input type="text" class="form-control" name="salary" value="{{ $profile->salary }}">
-                        </div>
                         <div class="mb-3">
                             <label class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" name="status" value="{{ $profile->status }}">
+                            <select class="form-control" name="status" aria-label="Default select example">
+                                <option value="Đang đợi việc" {{ $profile->status == 'Đang đợi việc' ? 'selected' : '' }}>Đang đợi việc</option>
+                                <option value="Nghỉ" {{ $profile->status == 'Nghỉ' ? 'selected' : '' }}>Nghỉ</option>
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Sửa</button>

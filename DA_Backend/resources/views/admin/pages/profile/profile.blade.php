@@ -28,15 +28,6 @@
                         <div class="mb-3"> <label class="form-label">Số điện thoại</label> <input type="text"
                                 class="form-control" name="phone" value="{{ $profile->phone }}">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" value="{{ $profile->address }}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Mô tả</label>
-                            <input type="text" class="form-control" name="description"
-                                value="{{ $profile->description }}">
-                        </div>
 
                         <button type="submit" class="btn btn-primary">Sửa</button>
 
