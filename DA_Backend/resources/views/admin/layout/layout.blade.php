@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -242,10 +243,15 @@
                                 <span>Quản lí đặt lịch</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
+                                <span class="badge badge-pill badge-danger float-right" id="bookingPen"></span>
                                 <li><a href="{{ url('admin/bookings') }}">Lịch đang chờ xác nhận</a></li>
+                                <span class="badge badge-pill badge-danger float-right" id="bookingWait"></span>
                                 <li><a href="{{ url('admin/bookings-wait') }}">Lịch đang chờ khách đến</a></li>
+                                <span class="badge badge-pill badge-danger float-right" id="bookingPrio"></span>
                                 <li><a href="{{ url('admin/bookings-priority') }}">Lịch ưu tiên & chưa có phòng</a></li>
+                                <span class="badge badge-pill badge-danger float-right" id="bookingCom"></span>
                                 <li><a href="{{ url('admin/bookings-complete') }}">Lịch đã hoàn thành</a></li>
+                                <span class="badge badge-pill badge-danger float-right" id="bookingCan"></span>
                                 <li><a href="{{ url('admin/bookings-cancel') }}">Lịch đã hủy</a></li>
                             </ul>
                         </li>
@@ -256,6 +262,7 @@
                                 <span>Quản lí công việc</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
+                                <span class="badge badge-pill badge-danger float-right" id="bookingDoing"></span>
                                 <li><a href="{{ url('admin/jobs') }}">Lịch đang làm</a></li>
                             </ul>
                         </li>
@@ -398,6 +405,42 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+        $.ajax({
+            url: '/api/booking-info',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#bookingPen').text(data.bookingPending);
+                $('#bookingWait').text(data.bookingWait);
+                $('#bookingPrio').text(data.bookingPrio);
+                $('#bookingCom').text(data.bookingComplete);
+                $('#bookingCan').text(data.bookingCancel);
+                $('#bookingDoing').text(data.bookingDoing);
+                if (data.bookingPending == 0) {
+                    $('#bookingPen').css('display', 'none');
+                }
+                if (data.bookingWait == 0) {
+                    $('#bookingWait').css('display', 'none');
+                }
+                if (data.bookingPrio == 0) {
+                    $('#bookingPrio').css('display', 'none');
+                }
+                if (data.bookingComplete == 0) {
+                    $('#bookingCom').css('display', 'none');
+                }
+                if (data.bookingCancel == 0) {
+                    $('#bookingCan').css('display', 'none');
+                }
+                if (data.bookingGoing == 0) {
+                    $('#bookingDoing').css('display', 'none');
+                }
+            },
+            error: function() {
+                console.log('Kết nối api thất bại rồi');
+            }
+        });
+    });
         const show_noti = document.getElementById('show_noti');
         fetch('/api/admin/notifications')
             .then(response => {

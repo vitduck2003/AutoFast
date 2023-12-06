@@ -1,13 +1,12 @@
 <?php
 
 
-use App\Http\Controllers\Admin\Log\LogController;
-
-use App\Http\Controllers\Admin\Reviews\ReviewController;
-use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Api\Client\ProfileApi;
+use App\Http\Controllers\Admin\Log\LogController;
 use App\Http\Controllers\Staff\ProfileController;
 use App\Http\Controllers\Admin\Jobs\JobController;
 use App\Http\Controllers\Admin\News\NewController;
@@ -16,15 +15,17 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\staff\StaffController;
 use App\Http\Controllers\Staff\Job\StaffJobController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
+use App\Http\Controllers\Admin\Layout\LayoutController;
 use App\Http\Controllers\Admin\Home\DashboardController;
+use App\Http\Controllers\Admin\Reviews\ReviewController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
 use App\Http\Controllers\Admin\Services\ServiceController;
-use App\Http\Controllers\Admin\Profile\ProfileAdminController;
-use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Statistic\StatisticController;
 use App\Http\Controllers\Staff\Home\DashboardStaffController;
+use App\Http\Controllers\Admin\Profile\ProfileAdminController;
+use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
 use App\Http\Controllers\Admin\Notification\NotificationController;
 
 /*
@@ -52,6 +53,8 @@ Route::get('/api/bookings-cancel/{id}', [BookingController::class, 'getBookingCa
 Route::get('/api/bookings-complete/{id}', [BookingController::class, 'getBookingComplete']);
 Route::get('api/room', [BookingController::class, 'getRoom']);
 Route::get('api/staff', [BookingController::class, 'getStaff']);
+Route::get('api/booking-info', [LayoutController::class, 'admin']);
+
 
 Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');

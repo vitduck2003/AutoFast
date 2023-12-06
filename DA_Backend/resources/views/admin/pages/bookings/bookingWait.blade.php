@@ -33,21 +33,26 @@
                                     <td>{{ $booking->target_date }}: {{ $booking->target_time }}</td>
                                     <td class="text-danger">{{ $booking->status }}</td>
                                     <td>
-                                       @if($checkRoom < 1 || $checkStaff < 1)
-                                       <form action="{{ route('booking.priority', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="text" hidden name="idBooking" value="{{ $booking->id }}" >
-                                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn chuyển sang ưu tiên?')">Chuyển ưu tiên</button>
-                                    </form>
-                                       @endIf
+                                        @if ($checkRoom < 1 || $checkStaff < 1)
+                                            <form action="{{ route('booking.priority', ['id' => $booking->id]) }}"
+                                                method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('POST')
+                                                <input type="text" hidden name="idBooking" value="{{ $booking->id }}">
+                                                <button type="submit" class="btn btn-warning"
+                                                    onclick="return confirm('Bạn có muốn chuyển sang ưu tiên?')">Chuyển ưu
+                                                    tiên</button>
+                                            </form>
+                                        @endIf
                                         <button type="button" class="btn btn-primary"
                                             onclick="openStartJobModal({{ $booking->id }})">Bắt đầu làm
                                         </button>
-                                        <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
+                                        <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST"
+                                            style="display: inline;">
                                             @csrf
                                             @method('POST')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
                                         </form>
                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                             data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
@@ -111,7 +116,10 @@
                             <label for="staffSelect">Chọn nhân viên:</label>
                             <select class="form-control" id="staffSelect" name="staff">
                                 <option value="">-- Chọn nhân viên --</option>
-                            </select>   
+                            </select>
+                          @if($checkStaff < 1)
+                          <p class="text-danger mt-2">Tất cả nhân viên đã bận, hãy chuyển sang ưu tiên</p>
+                          @endif
                             <span id="staffError" class="text-danger">
                         </div>
                         <div class="form-group">
@@ -119,9 +127,12 @@
                             <select class="form-control" id="roomSelect" name="room">
                                 <option value="">-- Chọn phòng --</option>
                             </select>
+                            @if($checkRoom < 1)
+                            <p class="text-danger mt-2">Tất cả phòng đã bận, hãy chuyển sang ưu tiên</p>
+                            @endif
                             <span id="roomError" class="text-danger">
                         </div>
-                        @csrf 
+                        @csrf
                         <button type="submit" class="btn btn-primary">Bắt đầu</button>
                     </form>
                 </div>
@@ -133,10 +144,10 @@
     <script>
         $(document).ready(function() {
             $('#exampleModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); 
-                var bookingId = button.data('booking-id'); 
+                var button = $(event.relatedTarget);
+                var bookingId = button.data('booking-id');
                 $.get('/api/bookings-wait/' + bookingId, function(data) {
-        
+
                         var modal = $('#exampleModal');
                         modal.find('.modal-title').text('Chi tiết đặt lịch');
                         modal.find('#name').text(data[0].name);
@@ -147,7 +158,8 @@
                         modal.find('#service').text(data[0].service_name);
                         modal.find('#tasks').text(data[0].item_names);
                         modal.find('#prices').text(data[0].item_prices + ' VNĐ');
-                        modal.find('#target_date').text(data[0].target_date + ': ' + data[0] .target_time);
+                        modal.find('#target_date').text(data[0].target_date + ': ' + data[0]
+                            .target_time);
                         modal.find('#note').text(data[0].note);
                         modal.find('#admin_name').text(data[0].logs[0].admin_name);
                         modal.find('#confirmed_at').text(data[0].logs[0].confirmed_at);
@@ -190,8 +202,13 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
+        var checkRoom = true;
+        var checkStaff = true;
         $(document).ready(function() {
             $.get('/api/staff', function(staffs) {
+                if(staffs == null){
+                    var checkStaff = false;
+                }
                 var staffSelect = $('#staffSelect');
                 $.each(staffs, function(index, staff) {
                     staffSelect.append('<option value="' + staff.id + '">' + staff.name +
@@ -199,6 +216,9 @@
                 });
             });
             $.get('/api/room', function(rooms) {
+                if(rooms == null){
+                    var checkRoom = false;
+                }
                 var roomSelect = $('#roomSelect');
                 $.each(rooms, function(index, room) {
                     roomSelect.append('<option value="' + room.id + '">' + room.name + '</option>');
@@ -211,52 +231,51 @@
             $('#startJobModal').modal('show');
         }
         $('#startJobForm').submit(function(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    var selectedStaff = $('#staffSelect').val();
-    var selectedRoom = $('#roomSelect').val();
+            var selectedStaff = $('#staffSelect').val();
+            var selectedRoom = $('#roomSelect').val();
 
-    // Xóa thông báo lỗi cũ
-    $('#staffError').text('');
-    $('#roomError').text('');
+            $('#staffError').text('');
+            $('#roomError').text('');
 
-    var isValid = true;
+            var isValid = true;
 
-    if (selectedStaff === '') {
-        $('#staffError').text('Vui lòng chọn nhân viên');
-        isValid = false;
-    }
+            if (selectedStaff === '') {
+                $('#staffError').text('Vui lòng chọn nhân viên');
+                isValid = false;
+            }
 
-    if (selectedRoom === '') {
-        $('#roomError').text('Vui lòng chọn phòng làm việc');
-        isValid = false;
-    }
+            if (selectedRoom === '') {
+                $('#roomError').text('Vui lòng chọn phòng làm việc');
+                isValid = false;
+            }
 
-    if (isValid) {
-        var bookingId = $('#startJobModal').data('booking-id');
-        var staffId = $('#staffSelect').val();
-        var roomId = $('#roomSelect').val();
+            if (isValid) {
+                var bookingId = $('#startJobModal').data('booking-id');
+                var staffId = $('#staffSelect').val();
+                var roomId = $('#roomSelect').val();
 
-        $('#startJobModal').modal('hide');
+                $('#startJobModal').modal('hide');
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("booking.startJob") }}',
-            data: {
-                _token: '{{ csrf_token() }}',
-                bookingId: bookingId,
-                staffId: staffId,
-                room: roomId,
-            },
-            success: function() {
-                location.reload();
-            },
-            error: function(error) {
-                console.log('Lỗi khi gửi yêu cầu API:', error);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('booking.startJob') }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        bookingId: bookingId,
+                        staffId: staffId,
+                        room: roomId,
+                    },
+                    success: function() {
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.log('Lỗi khi gửi yêu cầu API:', error);
+                    }
+                });
             }
         });
-    }
-});
     </script>
 @endsection
 @endsection
