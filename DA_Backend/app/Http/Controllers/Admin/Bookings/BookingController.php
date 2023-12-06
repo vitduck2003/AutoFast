@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Bookings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\MailController;
 class BookingController extends Controller
 {
     public function index()
@@ -56,7 +56,7 @@ class BookingController extends Controller
         //mail
         $databk = DB::table('booking')->where('id',$id)->get();
         $data = $databk[0]; 
-        
+
         $data_service = DB::table('jobs')
         ->select('item_name','item_price','service_name')
         ->join('services','services.id','=','jobs.id_service')
