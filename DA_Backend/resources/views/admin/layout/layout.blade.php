@@ -287,6 +287,18 @@
                                 <li><a href="{{ url('admin/staffJob') }}">Nhân viên và công việc</a></li>
                             </ul>
                         </li>
+                        <li class="menu-title">Phòng</li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span>Quản lí phòng</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <span class="badge badge-pill badge-danger float-right" id="bookingDoing"></span>
+                                <li><a href="{{ url('admin/room') }}">Danh sách phòng</a></li>
+                                <li><a href="{{ url('admin/room/formAdd') }}">Thêm phòng</a></li>
+                            </ul>
+                        </li>
                         <li class="menu-title">Hóa đơn</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">

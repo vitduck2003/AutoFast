@@ -12,48 +12,21 @@
         <div class="col-6">
             <div class="staff">
                 <div class="staff-body">
-                    <h4 class="staff-title">Đây là thêm nhân viên</h4>
-                    <form action="{{ route('staff.create') }}" method="POST" style="display: inline;"
+                    <h4 class="staff-title">Đây là thêm phòng</h4>
+                    <form action="{{route('room-create')}}" method="POST" style="display: inline;"
                         enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="mb-3">
-                            <label class="form-label">Họ và tên</label>
+                            <label class="form-label">Tên phòng</label>
                             <input type="text" class="form-control" name="name" >
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                        <div class="mb-3"> <label class="form-label">Số điện thoại</label> <input type="text"
-                                class="form-control" name="phone"">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Mô tả</label>
-                            <input type="text" class="form-control" name="description" >
-                        </div>
-                        <div class="mb-3"> <label class="form-label">Lương</label>
-                            <input type="text" class="form-control" name="salary" >
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 col-sm-4 control-label">Ảnh đại diện</label>
-                            <div class="col-md-9 col-sm-8">
-                                <div class="row">
-                                    <div class="col-xs-6" style="text-align:center">
-                                        <img id="anh_preview"
-                                            src="https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg"
-                                            alt="your avatar"
-                                            style="width: 200px; height:200px; margin-bottom: 10px;border-radius:70%"
-                                            class="img-fluid" />
-                                        <input type="file" name="avatar" accept="avatar/*"
-                                            class="form-control-file @error('avatar') is-invalid @enderror" id="cmt_anh">
-                                    </div>
-                                </div>
-                            </div>
+                            <label class="form-label">Trạng thái</label>
+                            <select class="form-control" name="status" aria-label="Default select example">
+                                <option value="Đang trống">Đang trống</option>
+                                <option value="Đang làm">Đang làm</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Thêm</button>
 
