@@ -7,7 +7,7 @@
                     <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
                     <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
 
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                    <table id="datatable" class="table table-bordered dt-responsive "
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -30,11 +30,11 @@
                                 <td>{{ $job->phone }}</td>
                                 <td>{{ $job->model_car }}</td>
                                 <td>{{ $job->mileage }}Km</td>
-                                <td>{{ $job->target_date }}: {{ $job->target_time }}</td>
+                                <td>{{ $job->target_date }}:{{ $job->target_time }}</td>
                                 <td>{{ $job->time_target }}</td>
                                 <td class="text-success">{{ $job->status }}</td>
-                                <td>
-                                    @if( $job-> status == "Đã xong")
+                                <td >
+                                    @if( $job->status == "Đã xong")
                                         <a href="{{ route('job.confirm.complete', ['id'=>$job->id]) }}">
                                             <button type="button" class="btn btn-success">
                                                Hoàn thành
@@ -43,7 +43,7 @@
                                     @endif
                                     <a href="{{ url('admin/job-detail', ['id'=>$job->id]) }}">
                                         <button type="button" class="btn btn-primary">
-                                            Xem công việc
+                                            Xem việc
                                         </button>
                                     </a>
                                 </td>

@@ -111,7 +111,7 @@ foreach ($jobs as $job) {
         $id = $data['id'];
         $idStaff = DB::table('booking')
         ->select('id_staff')
-        ->where('id_staff', $id)
+        ->where('id', $id)
         ->first();
         $infoService = DB::table('service_items')
             ->select('item_name', 'time_done', 'price')
