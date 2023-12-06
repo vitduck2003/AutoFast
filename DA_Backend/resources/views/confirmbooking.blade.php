@@ -27,7 +27,7 @@
 </head>
 <body>
     <h3>Chào khách hàng {{$name}}</h3>
-    <p>Lịch của bạn đã đặt tại AutoFast thành công.</p>
+    <p>Lịch của bạn đã đặt tại AutoFast đã được xác nhận.</p>
     <table>
         <tr>
             <th>Số điện thoại</th>

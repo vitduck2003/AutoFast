@@ -56,7 +56,9 @@ class ProfileAdminController extends Controller
     {
         $user = User::findOrFail($id);
         if ($request->hasFile('avatar')) {
-            Storage::delete($user->avatar);
+            if ($user->avatar) {
+                Storage::delete($user->avatar);
+            }
             $path = $request->file('avatar')->store('public/avatar');
             $user->avatar = $path;
 

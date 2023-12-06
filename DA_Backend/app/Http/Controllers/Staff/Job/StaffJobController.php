@@ -65,6 +65,7 @@ class StaffJobController extends Controller
         $job->status = 'Đã hoàn thành';
         $job->save();
     }
+    DB::table('notification')->insert(['booking_id'=>$job->id_booking,'title' => 'Công việc','content' => 'Đã hoàn thành lịch của','created_at' =>now()]);
     return redirect()->back();
 }
     public function jobComplete()

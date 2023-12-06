@@ -81,7 +81,7 @@ foreach ($jobs as $job) {
             ->where('id_booking', $bookingId)
             ->update(['id_staff' => $staffId]);
         }
-        
+        DB::table('notification')->insert(['booking_id'=>$bookingId,'title' => 'Công việc','content' => 'Đã bắt đầu làm lịch của ','created_at' =>now()]);
             session()->flash('message', 'Lịch đã bắt đầu làm');
     }
     public function confirmComplete($id)

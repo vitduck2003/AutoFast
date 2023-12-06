@@ -42,7 +42,7 @@
                         <div class="mb-3">
                             <label class="form-label">Trạng thái</label>
                             <select class="form-control" name="status" aria-label="Default select example">
-                                <option value="Đang chờ việc" {{ $staff->status == 'Đang đợi việc' ? 'selected' : '' }}>Đang đợi việc</option>
+                                <option value="Đang đợi việc" {{ $staff->status == 'Đang đợi việc' ? 'selected' : '' }}>Đang đợi việc</option>
                                 <option value="Nghỉ" {{ $staff->status == 'Nghỉ' ? 'selected' : '' }}>Nghỉ</option>
                             </select>
                         </div>

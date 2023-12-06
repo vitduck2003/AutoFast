@@ -23,10 +23,10 @@ class MailController extends Controller {
 }
 public function lich_dat_thanh_cong($userdata) {
    $data = $userdata;
-   Mail::send('booking', $data, function($message) use($userdata) {
-      $message->to($userdata['email'], $userdata['full_name'])->subject
-         ('Lịch của bạn đã được xác nhận');
-      $message->from('trongdua2098@gmail.com','khong quan trong');
+   Mail::send('confirmbooking', $data, function($message) use($userdata) {
+      $message->to($userdata['email'], $userdata['name'])->subject
+         ('Lịch '.$userdata['service_name']. ' của bạn đã được xác nhận');
+      $message->from('baoduongautofast@gmail.com','Gara Autofast');
    });
 
 }

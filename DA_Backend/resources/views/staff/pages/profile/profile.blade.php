@@ -13,7 +13,7 @@
             <div class="staff">
                 <div class="staff-body">
                     <h4 class="staff-title">Thông tin người dùng</h4>
-                    <form action="{{ route('update-profile', ['id' => $profile->id]) }}" method="POST" style="display: inline;"
+                    <form action="{{ route('update-profile', ['id' => $profile->id]) }}" method="POST" style="display: inline;">
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

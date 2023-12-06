@@ -149,11 +149,14 @@ Route::middleware(['checkauth'])->group(function () {
   Route::prefix('admin')->group(function () {
     Route::get('user', [AccountController::class, 'index'])->name('user.index');
     Route::get('layout', [AccountController::class, 'notifications'])->name('layout.notifications');
+    
 
     Route::get('remove/{id}', [AccountController::class, 'remove'])->name('user.remove');
 
 
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications-view');
+    Route::get('notifications/detail/{id}', [NotificationController::class, 'showDetail'])->name('notifications-detail');
+
 
     Route::get('staff-job/{id}', [StaffController::class, 'showJobByStaff'])->name('jobByStaff');
     Route::get('staff', [StaffController::class, 'index'])->name('staff');
