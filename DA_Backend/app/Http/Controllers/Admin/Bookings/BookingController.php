@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Bookings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Mail;
 class BookingController extends Controller
 {
     public function index()
@@ -54,6 +54,34 @@ class BookingController extends Controller
             ]);
         DB::table('booking')->where('id', $id)->update(['log_id' => $logId, 'status' => $status]);
         //mail
+        $databk = DB::table('booking')->where('id',$id)->get();
+        $data = $databk[0]; 
+        
+        $data_service = DB::table('jobs')
+        ->select('item_name','item_price','service_name')
+        ->join('services','services.id','=','jobs.id_service')
+        ->where('id_booking',$data->id)->get();    
+        $userdata = [
+            'name' => $data->name,
+            'email' => $data->email,
+            'phone' => $data->phone,      
+            'target_date' => $data->target_date ? $data->target_date : 'trống',
+            'target_time' => $data->target_time ?  $data->target_time : 'trống',
+            'model_car' => $data->model_car ? $data->model_car : 'trống',
+            'mileage' => $data->mileage ? $data->mileage : 'trống',
+            'note' => $data->note ? $data->note : 'trống',
+            'total_price' => $data->total_price,
+        
+            'serice_item'=>$data_service,
+            'service_name'=>$data_service[0]->service_name
+          ];
+        
+            try{
+                $mail = new MailController();
+                $mail ->lich_dat_thanh_cong($userdata);
+            }catch(\Exception $e){
+
+            }
         return redirect()->back()->with('message', 'Xác nhận lịch thành công');
     }
     public function restore($id)
