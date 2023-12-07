@@ -43,7 +43,7 @@
                                         <form action="{{route('serviceitem.destroy',$row)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">xoas</button>
+                                            <button type="submit" class="btn btn-danger">xoá</button>
                                         </form>
                                         </div>
                                     </div>
