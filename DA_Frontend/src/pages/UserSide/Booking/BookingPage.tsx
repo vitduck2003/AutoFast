@@ -61,6 +61,14 @@ const BookingPage = (props: any) => {
       setUserId(userFromSession.id);
     }
   }, []);
+  const DataTime = [
+    { hour: "6h-8h", formattedHour: "06:00:00" },
+    { hour: "8h-10h", formattedHour: "08:00:00" },
+    { hour: "10h-12h", formattedHour: "10:00:00" },
+    { hour: "13h-15h", formattedHour: "13:00:00" },
+    { hour: "15h-17h", formattedHour: "15:00:00" },
+    { hour: "17h-19h", formattedHour: "17:00:00" },
+  ];
 
   const maintenanceIntervals = {
     "Bảo dưỡng cấp 1": [5000, 15000, 25000],
@@ -333,26 +341,27 @@ const BookingPage = (props: any) => {
       console.log(updatedFormData);
 
       // props.onAddBooking(updatedFormData)
-      instance.post("/booking", updatedFormData).then((res) => {
-        console.log(res);
-        if (res.success === true) {
-        
-          return new Promise<void>((resolve) => {
-            setTimeout(() => {
-              navigate(`/`); // Navigate to the verification page with the phone number
-              resolve();
-            }, 3000); // Delay for 3 seconds
+      instance
+        .post("/booking", updatedFormData)
+        .then((res) => {
+          console.log(res);
+          if (res.success === true) {
+            return new Promise<void>((resolve) => {
+              setTimeout(() => {
+                navigate(`/`); // Navigate to the verification page with the phone number
+                resolve();
+              }, 3000); // Delay for 3 seconds
+            });
+          }
+        })
+        .catch((error) => {
+          notification.error({
+            message: error.response?.data?.message,
+            description: "",
           });
-        }
-      }).catch((error) => {
-        notification.error({
-          message:   error.response?.data?.message,
-          description: "",
         });
-       
-      });
       notification.success({
-        message:"Đặt lịch thành công",
+        message: "Đặt lịch thành công",
         description: "",
       });
       setTimeout(() => {
@@ -684,16 +693,28 @@ const BookingPage = (props: any) => {
                       placeholder="Ngày và Thời gian Đến"
                     />
                   </div>
+                
                   <div className="col">
-                    <input
+                    <select
                       onChange={handleInputChange}
                       name="target_time"
-                      type="time"
-                      lang="vi"
                       className="form-control"
                       placeholder="Ngày và Thời gian Đến"
-                    />
+                    >
+                      <option value="" disabled selected >
+                        Vui lòng chọn giờ đến
+                      </option>
+                      {DataTime.map((timeObj) => (
+                        <option
+                          key={timeObj.hour}
+                          value={timeObj.formattedHour}
+                        >
+                          {timeObj.hour}
+                        </option>
+                      ))}
+                    </select>
                   </div>
+
                   {formErrors.target_date && (
                     <p style={{ color: "red" }}>{formErrors.target_date}</p>
                   )}
