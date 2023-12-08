@@ -26,9 +26,6 @@ const MyBill = () => {
   const [discountCode, setDiscountCode] = useState('');
   const [discountApplied, setDiscountApplied] = useState(false);
   const applyDiscount = () => {
-    // Implement logic to apply the discount based on the entered code
-    // You can update the state variable `discountApplied` accordingly
-    // setDiscountApplied(true);
     instance.post('/client/coupons',{coupon_code:discountCode}).then((res)=>
     console.log(res))
   };
@@ -427,7 +424,7 @@ const MyBill = () => {
                   </table>
                 </div>
               </div>
-               {/* {bookings.booking?.status_payment != "Chưa thanh toán" &&
+               {bookings.booking?.status_payment != "Chưa thanh toán" &&
               <div style={{ marginBottom: '10px' }}>
                
         <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
@@ -450,7 +447,7 @@ const MyBill = () => {
         >
           Xác nhận
         </button>
-      </div>} */}
+      </div>}
 
               {/* You can display the bill details here */}
               {bookings.booking?.status_payment != "Chưa thanh toán" &&
