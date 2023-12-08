@@ -26,9 +26,17 @@ const MyBill = () => {
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
   const applyDiscount = () => {
-    instance
-      .post("/client/coupons", { coupon_code: discountCode })
-      .then((res) => console.log(res));
+    if (selectBooking && selectBooking.id) {
+      instance
+        .post("/client/coupons", {
+          coupon_code: discountCode,
+          booking_id: selectBooking.id
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
+    } else {
+      console.log("Lỗi");
+    }
   };
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
