@@ -19,7 +19,11 @@ class PaymentController extends Controller
         ->where('id',  $vnp_TxnRef)
         ->first();
         if ($vnp_ResponseCode == '00') {
-            $update_status = DB::table('bill')->where('id_booking', '=', $vnp_TxnRef)->update(['status_payment' => "Đã thanh toán"]);
+            $update_status = DB::table('bill')->where('id_booking', '=', $vnp_TxnRef)->update(
+                [
+                    'status_payment' => "Đã thanh toán",
+                    'method_payment' => 'VNPAY'
+                ]);
            //
             return view('client.payments.success', compact(['data', 'name']));
         } else {  

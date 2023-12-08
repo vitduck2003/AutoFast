@@ -456,6 +456,7 @@
                 if (data.bookingGoing == 0) {
                     $('#bookingDoing').css('display', 'none');
                 }
+
             },
             error: function() {
                 console.log('Kết nối api thất bại rồi');
