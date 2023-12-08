@@ -12,7 +12,7 @@
         <div class="col-6">
             <div class="staff">
                 <div class="staff-body">
-                    <h4 class="staff-title">Đây là sửa nhân viên</h4>
+                    <h4 class="staff-title">Đây là thêm nhân viên</h4>
                     <form action="{{ route('staff.create') }}" method="POST" style="display: inline;"
                         enctype="multipart/form-data">
                         @csrf

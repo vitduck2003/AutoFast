@@ -46,9 +46,6 @@ class ProfileController extends Controller
                 'name' => 'required|string|max:255',
                 'phone' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
-                'address' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
-                'salary' => 'required|integer',
                 'status' => 'required|string|max:255',
             ];
             $messages = [
@@ -56,8 +53,6 @@ class ProfileController extends Controller
                 'email.required' => 'Vui lòng nhập email.',
                 'email.email' => 'Vui lòng nhập đúng định dạng email.',
                 'phone.required' => 'Vui lòng nhập số điện thoại.',
-                'description.required' => 'Vui lòng nhập mô tả.',
-                'salary.required' => 'Vui lòng nhập Lương.',
                 'status.required' => 'Vui lòng nhập trạng thái.',
             ];
 

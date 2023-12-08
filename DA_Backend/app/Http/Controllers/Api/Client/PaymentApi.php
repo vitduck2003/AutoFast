@@ -71,6 +71,7 @@ class PaymentApi extends Controller
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
         if (isset($data['redirect']) && $data['redirect'] == true) {
+           
             $returnData = array(
                 'code' => '00',
                 'message' => 'success',

@@ -12,8 +12,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên new</th>
-                                <th>ẢNH new</th>
+                                <th>Tên </th>
+                                <th>Ảnh</th>
                                 <th>Mô tả</th>
                                 <th>Nội dung</th>
                                 {{-- <th>người đăng</th> --}}
@@ -21,14 +21,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                     
                             @foreach($data as $row):
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->title }}</td>
                                 <td ><img style="width:50px" src="{{asset('storage/images/'.$row->image)}}" alt=""></td>
-                                <td>{{ $row->des }}</td>
-                                <td>{{ $row->content }}</td>
-                                {{-- <td>{{ $row->user_id }}</td> --}}
+                                <td>{{ substr($row->des,0,10) }}...</td>
+                                <td>{{ substr($row->content,0,20) }}...</td>
+                               
                                 <td>
                                     <div style="display:flex">
                                         <div >
@@ -40,7 +41,7 @@
                                         <form action="{{route('new.destroy',$row)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">xoas</button>
+                                            <button type="submit" class="btn btn-danger">xóa</button>
                                         </form>
                                     </div>
                                 </div>
