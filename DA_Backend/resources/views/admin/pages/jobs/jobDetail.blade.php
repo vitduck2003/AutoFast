@@ -15,7 +15,7 @@
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th></th> <!-- Checkbox column -->
+                                <th></th>
                                 <th>ID Booking</th>
                                 <th>Tên công việc</th>
                                 <th>Thời gian dự kiến</th>
@@ -31,7 +31,7 @@
                                         <input type="checkbox" name="job_id[{{ $job->id }}]"
                                             value="{{ $job->id }}">
                                     </td>
-                                    <td>{{ $job->id }}</td>
+                                    <td>{{ $job->id_booking }}</td>
                                     <td>{{ $job->item_name }}</td>
                                     <td>{{ $job->target_time_done }} phút</td>
                                     <td>{{ number_format($job->price, 0, ',', '.') }} VND</td>

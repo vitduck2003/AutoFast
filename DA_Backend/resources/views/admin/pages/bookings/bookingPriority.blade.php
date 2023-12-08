@@ -36,10 +36,11 @@
                                         <button type="button" class="btn btn-primary"
                                             onclick="openStartJobModal({{ $booking->id }})">Bắt đầu làm
                                         </button>
-                                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                            data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
-                                            Chi tiết
-                                        </button>
+                                        <a href="{{ route('booking.detail', ['id'=> $booking->id]) }}">
+                                            <button type="button" class="btn btn-success">
+                                                Chi tiết
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -49,39 +50,6 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Chi tiết đặt lịch</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Nội dung chi tiết đặt lịch sẽ được đổ vào đây -->
-                    <p><strong>Họ tên:</strong> <span id="name"></span></p>
-                    <p><strong>Số điện thoại:</strong> <span id="phone"></span></p>
-                    <p><strong>Email:</strong> <span id="email"></span></p>
-                    <p><strong>Loại xe:</strong> <span id="model_car"></span></p>
-                    <p><strong>Số KM:</strong> <span id="mileage"></span></p>
-                    <p><strong>Dịch vụ:</strong> <span id="service"></span></p>
-                    <p><strong>Công việc:</strong> <span id="tasks"></span></p>
-                    <p><strong>Ngày giờ đến:</strong> <span id="target_date"></span></p>
-                    <p><strong>Ghi chú:</strong> <span id="note"></span></p>
-                    <p><strong>Người xác nhận:</strong> <span id="admin_name"></span></p>
-                    <p><strong>Thời gian xác nhận:</strong> <span id="confirmed_at"></span></p>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="startJobModal" tabindex="-1" role="dialog" aria-labelledby="startJobModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -117,36 +85,7 @@
     </div>
     </div>
 @section('script')
-    <script>
-        $(document).ready(function() {
-            $('#exampleModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); 
-                var bookingId = button.data(
-                'booking-id'); 
-                console.log(bookingId);
-                $.get('/api/bookings-priority/' + bookingId, function(data) {
-                        var modal = $('#exampleModal');
-                        modal.find('.modal-title').text('Chi tiết đặt lịch');
-                        modal.find('#name').text(data[0].name);
-                        modal.find('#phone').text(data[0].phone);
-                        modal.find('#email').text(data[0].email);
-                        modal.find('#model_car').text(data[0].model_car);
-                        modal.find('#mileage').text(data[0].mileage + ' Km');
-                        modal.find('#service').text(data[0].service_name);
-                        modal.find('#tasks').text(data[0].item_names);
-                        modal.find('#prices').text(data[0].item_prices + ' VNĐ');
-                        modal.find('#target_date').text(data[0].target_date + ': ' + data[0] .target_time);
-                        modal.find('#note').text(data[0].note);
-                        modal.find('#admin_name').text(data[0].logs[0].admin_name);
-                        modal.find('#confirmed_at').text(data[0].logs[0].confirmed_at);
-                        modal.find('.btn-confirm').attr('data-booking-id', bookingId);
-                        modal.find('.btn-cancel').attr('data-booking-id', bookingId);
-                    })
-                    .fail(function(error) {
-                        console.log('Lỗi khi gửi yêu cầu API:', error);
-                    });
-            });
-        });
+  <script>
         @if (Session::has('message'))
             toastr.options = {
                 "closeButton": true,

@@ -75,6 +75,7 @@ Route::middleware(['checkauth'])->group(function () {
     Route::get('bookings-priority', [BookingController::class, 'bookingPriority'])->name('booking.view.priority');
     Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
     Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
+    Route::get('booking-detail/{id}', [BookingController::class, 'bookingDetail'])->name('booking.detail');
 
     Route::get('jobs', [JobController::class, 'index']);
     Route::get('job-detail/{id}', [JobController::class, 'jobDetail'])->name('jobs.detail');

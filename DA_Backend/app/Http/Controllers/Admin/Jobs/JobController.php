@@ -21,6 +21,7 @@ class JobController extends Controller
         $query->where('booking.status', 'LIKE', 'Đang làm')
               ->orWhere('booking.status', 'LIKE', 'Đã xong');
     })
+    ->orderBy('booking.id', 'desc')
     ->get();
 
 foreach ($jobs as $job) {

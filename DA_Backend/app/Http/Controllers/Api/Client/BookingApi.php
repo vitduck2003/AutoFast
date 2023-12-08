@@ -70,6 +70,7 @@ class BookingApi extends Controller
                             'images_done' => null,
                             'price' => $itemServiceOther->price,
                             'status' => 'Đang chờ nhận việc',
+                            'note' => 'Dịch vụ thêm'
                         ]);
                     }
                 }

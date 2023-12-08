@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('bill', function (Blueprint $table) {
             $table->id();
             $table->integer('id_booking');
-            $table->float('total_amount', 50,2);
-            $table->float('total_discount', 50,2);
+            $table->float('total_amount', 10,2);
+            $table->float('total_discount', 10,2)->nullable();
             $table->string('status_payment')->default('Chưa thanh toán');
+            $table->string('method_payment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

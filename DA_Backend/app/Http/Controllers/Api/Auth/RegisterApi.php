@@ -28,10 +28,10 @@ class RegisterApi extends Controller
         // }
         $checkemail = User::where('email', $validatedData['email'])->exists();
         $checkphone = User::where('phone', $validatedData['phone'])->exists();
-        if($checkemail){
+        if ($checkemail) {
             return response()->json(['message' => 'Email đã tồn tại',  'success' => false], 200);
         }
-        if($checkphone){
+        if ($checkphone) {
             return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
         }
         $user = User::create([
@@ -43,7 +43,13 @@ class RegisterApi extends Controller
         ]);
 
         if ($user) {
-            $verificationCode = Str::random(6);
+            $verificationCode = '';
+            for ($i = 0; $i < 6; $i++) {
+                $verificationCode .= mt_rand(0, 9);
+            }
+            $verificationCode = implode('', array_map(function () {
+                return mt_rand(0, 9);
+            }, range(1, 6)));
             $user->verification_code = $verificationCode;
             $user->save();
 
@@ -64,16 +70,15 @@ class RegisterApi extends Controller
         $client = new Client($sid, $token);
 
         $message = $client->messages->create(
-            "+84".$phoneNumber,
+            "+84" . $phoneNumber,
             [
                 'from' => $twilioNumber,
-                'body' => 'Mã xác minh của bạn là: ' . $verificationCode
+                'body' => 'Mã xác thức tài khoản của bạn là: ' . $verificationCode
             ]
         );
-        if($message){
+        if ($message) {
             return response()->json(['message' => 'Gửi tin nhắn thành công', 'success' => true], 200);
-        }
-        else {
+        } else {
             return response()->json(['message' => 'Gửi tin nhắn thất bại', 'success' => false], 201);
         }
     }
@@ -89,13 +94,19 @@ class RegisterApi extends Controller
             return response()->json(['message' => 'Người dùng không tồn tại', 'success' => false], 404);
         }
 
-        $verificationCode = Str::random(6);
+        $verificationCode = '';
+        for ($i = 0; $i < 6; $i++) {
+            $verificationCode .= mt_rand(0, 9);
+        }
+        $verificationCode = implode('', array_map(function () {
+            return mt_rand(0, 9);
+        }, range(1, 6)));
         $user->verification_code = $verificationCode;
         $user->save();
 
         $this->sendVerificationCode($user, $verificationCode, $validatedData['phone']);
 
-        return response()->json(['message' => 'Gửi lại mã xác minh thành công', 'success' => true], 200);
+        return response()->json(['message' => 'Gửi lại mã xác thành công', 'success' => true], 200);
     }
 
     public function verifyCode(Request $request)

@@ -22,7 +22,13 @@ class ForgetPasswordApi extends Controller
             return response()->json(['message' => 'Người dùng không tồn tại',  'success' => false,], 404);
         }
 
-        $verificationCode = Str::random(6);
+        $verificationCode = '';
+        for ($i = 0; $i < 6; $i++) {
+            $verificationCode .= mt_rand(0, 9);
+        }
+        $verificationCode = implode('', array_map(function () {
+            return mt_rand(0, 9);
+        }, range(1, 6)));
         $user->verification_code = $verificationCode;
         $user->save();
 

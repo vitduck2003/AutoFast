@@ -75,20 +75,28 @@ class InvoiceController extends Controller
         $invoice = DB::table('bill')
         ->join('booking', 'booking.id', '=', 'bill.id_booking')
         ->join('jobs', 'jobs.id_booking', '=', 'booking.id')
-        ->select('bill.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'bill.created_at', 'bill.total_amount', 'booking.id as id_booking', 'bill.created_at', 'bill.status_payment')
+        ->select('bill.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'bill.created_at', 'bill.total_amount', 'booking.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
         ->where('bill.id', '=', $id)
         ->first();
+        $service = DB::table('booking_detail')
+        ->join('services', 'services.id', 'booking_detail.id_service')
+        ->select('services.service_name')
+        ->where('booking_detail.id_booking', '=', $invoice->id_booking)
+        ->first();
         $jobs = DB::table('jobs')
-        ->select('item_name', 'item_price')
+        ->select('item_name', 'item_price', 'note')
         ->where('id_booking', '=', $invoice->id_booking)
         ->get();
-        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs'));
+        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs', 'service'));
     }
     public function updatePayment($id){
         $status = "Đã thanh toán";
         DB::table('bill')
         ->where('id', $id)
-        ->update(['status_payment' => $status]);   
+        ->update([
+            'status_payment' => $status,
+            'method_payment' => "Tiền mặt"
+        ]);   
         return redirect()->back()->with('message','Cập nhật thành công');
     }
 }

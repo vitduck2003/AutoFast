@@ -1,5 +1,4 @@
 @extends('admin/layout/layout')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -7,7 +6,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="invoice-title">
-                            <h4 class="float-right font-size-16">Hóa đơn #{{ $invoice->id }}</h4>
+                            <h4 class="float-right font-size-16">Mã lịch #1</h4>
                             <div class="mb-4">
                                 <img src="{{ asset('assets/images/logo/logo.png') }}" alt="logo" height="50px"
                                     width="100px">
@@ -24,38 +23,31 @@
                                     <strong>Tên xe:</strong><br>
                                     <strong>Số km đã đi:</strong><br>
                                     <strong>Dịch vụ:</strong><br>
-                                    <strong>Trạng thái thanh toán:</strong><br>
-
                                 </address>
                             </div>
                             <div class="col-sm-6 text-sm-right">
                                 <address class="mt-2 mt-sm-0">
                                     <br>
-                                    {{ $invoice->name }}<br>
-                                    {{ $invoice->phone }}<br>
-                                    {{ $invoice->email }}<br>
-                                    {{ $invoice->model_car }}<br>
-                                    {{ $invoice->mileage }} Km<br>
+                                    {{ $booking->name }}<br>
+                                    {{ $booking->phone }}<br>
+                                    {{ $booking->email }}<br>
+                                    {{ $booking->model_car }}<br>
+                                    {{ $booking->mileage }} Km<br>
                                     {{ $service->service_name }}<br>
-                                    {{ $invoice->status_payment }}<br>
                                 </address>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6 mt-3">
                                 <address>
-                                    <strong>Kiểu thanh toán</strong><br>
-                                    @if ($invoice->method_payment == null)
-                                        Chưa thanh toán
-                                    @else
-                                        {{ $invoice->method_payment }}
-                                    @endif
+                                    <strong>Trạng thái</strong><br>
+                                    {{ $booking->status }}
                                 </address>
                             </div>
                             <div class="col-sm-6 mt-3 text-sm-right">
                                 <address>
-                                    <strong>Tạo vào ngày</strong><br>
-                                    {{ $invoice->created_at }}<br><br>
+                                    <strong>Thời gian đặt</strong><br>
+                                    {{ $booking->created_at }}
                                 </address>
                             </div>
                         </div>
@@ -73,42 +65,51 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($jobs as $job)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $job->item_name }} @if ($job->note !== null)
-                                                    ({{ $job->note }})
-                                                @endif
-                                            </td>
-                                            <td class="text-right">{{ number_format($job->item_price, 0, ',', '.') }} VND
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                     <tr>
-                                        <td colspan="2" class="text-right">Giảm giá</td>
-                                        <td class="text-right">0</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $job->item_name }} @if ($job->note !== null)
+                                            ({{ $job->note }})
+                                        @endif
+                                        <td class="text-right">{{ number_format($job->item_price, 0, ',', '.') }} VND</td>
                                     </tr>
-                                    <tr>
+                                    @endforeach
+                                     <tr>
                                         <td colspan="2" class="border-0 text-right">
                                             <strong>Tổng tiền</strong>
                                         </td>
                                         <td class="border-0 text-right">
-                                            <h4 class="m-0">{{ number_format($invoice->total_amount, 0, ',', '.') }}VNĐ
-                                            </h4>
+                                            <h4 class="m-0">{{ number_format($booking->total_price, 0, ',', '.') }} VND</h4>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-print-none mt-4">
-                            <div class="float-right">
-                                <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-2"><i
-                                        class="fa fa-print"></i> In Hóa đơn</a>
-                                <a href="#" class="btn btn-primary waves-effect waves-light mr-2">Gửi qua Email</a>
-                                @if ($invoice->status_payment == 'Chưa thanh toán')
-                                    <a href="{{ route('status.payment', ['id' => $invoice->id]) }}"
-                                        class="btn btn-success waves-effect waves-light">Đã thanh toán</a>
-                                @endif
-                            </div>
+                        <div class="py-2 mt-3">
+                            <h3 class="font-size-15 font-weight-bold">Lịch sử thay đổi</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Hoạt động</th>
+                                        <th>Người thực hiện</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Hủy</td>
+                                        <td>Người 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bắt đầu làm</td>
+                                        <td>Người 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hoàn thành</td>
+                                        <td>Người 3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

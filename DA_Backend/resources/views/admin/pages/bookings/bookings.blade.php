@@ -42,9 +42,11 @@
                                         @method('POST')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
                                     </form>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-booking-id="{{ $booking->id }}">
-                                        Chi tiết
-                                    </button>
+                                    <a href="{{ route('booking.detail', ['id'=> $booking->id]) }}">
+                                        <button type="button" class="btn btn-success">
+                                            Chi tiết
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -55,7 +57,7 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -83,7 +85,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
     </div>
 @section('script')
 <!-- Thư viện jQuery -->
@@ -91,37 +93,37 @@
 <!-- Thư viện Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-k9o4f/+cB8C0QV6eAlM7i0V0jKj+3tB4XqDyq5djBv8w/3eWt0YJ/6WfqK0IeFVy" crossorigin="anonymous"></script>
 <script>
-    $(document).ready(function () {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
-            var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
-            // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
-            $.get('/api/bookings/' + bookingId, function (data) {
-                // Thiết lập dữ liệu booking vào modal
-                var modal = $('#exampleModal');
-                modal.find('.modal-title').text('Chi tiết đặt lịch');
-                // Đổ dữ liệu booking vào các phần tử trong modal
-                modal.find('#name').text(data[0].name);
-                modal.find('#phone').text(data[0].phone);
-                modal.find('#email').text(data[0].email);
-                modal.find('#model_car').text(data[0].model_car);
-                modal.find('#mileage').text(data[0].mileage + ' Km');
-                modal.find('#service').text(data[0].service_name);
-                modal.find('#tasks').text(data[0].item_names);
-                modal.find('#prices').text(data[0].item_prices + ' VNĐ');
-                modal.find('#total_prices').text(data[0].total_prices + ' VNĐ');
-                modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
-                modal.find('#note').text(data[0].note);
+    // $(document).ready(function () {
+    //     $('#exampleModal').on('show.bs.modal', function (event) {
+    //         var button = $(event.relatedTarget); // Nút "Chi tiết" được nhấp
+    //         var bookingId = button.data('booking-id'); // Lấy giá trị booking ID từ thuộc tính data-booking-id
+    //         // Tạo yêu cầu GET tới API để lấy dữ liệu booking từ server
+    //         $.get('/api/bookings/' + bookingId, function (data) {
+    //             // Thiết lập dữ liệu booking vào modal
+    //             var modal = $('#exampleModal');
+    //             modal.find('.modal-title').text('Chi tiết đặt lịch');
+    //             // Đổ dữ liệu booking vào các phần tử trong modal
+    //             modal.find('#name').text(data[0].name);
+    //             modal.find('#phone').text(data[0].phone);
+    //             modal.find('#email').text(data[0].email);
+    //             modal.find('#model_car').text(data[0].model_car);
+    //             modal.find('#mileage').text(data[0].mileage + ' Km');
+    //             modal.find('#service').text(data[0].service_name);
+    //             modal.find('#tasks').text(data[0].item_names);
+    //             modal.find('#prices').text(data[0].item_prices + ' VNĐ');
+    //             modal.find('#total_prices').text(data[0].total_prices + ' VNĐ');
+    //             modal.find('#target_date').text(data[0].target_date + ': ' + data[0].target_time);
+    //             modal.find('#note').text(data[0].note);
 
-                // Update the data-booking-id attribute for Confirm and Cancel buttons
-                modal.find('.btn-confirm').attr('data-booking-id', bookingId);
-                modal.find('.btn-cancel').attr('data-booking-id', bookingId);
-            })
-                .fail(function (error) {
-                    console.log('Lỗi khi gửi yêu cầu API:', error);
-                });
-        });
-    });
+    //             // Update the data-booking-id attribute for Confirm and Cancel buttons
+    //             modal.find('.btn-confirm').attr('data-booking-id', bookingId);
+    //             modal.find('.btn-cancel').attr('data-booking-id', bookingId);
+    //         })
+    //             .fail(function (error) {
+    //                 console.log('Lỗi khi gửi yêu cầu API:', error);
+    //             });
+    //     });
+    // });
     @if (Session::has('message'))
         toastr.options = {
             "closeButton": true,
