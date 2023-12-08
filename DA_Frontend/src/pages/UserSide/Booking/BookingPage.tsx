@@ -62,12 +62,12 @@ const BookingPage = (props: any) => {
     }
   }, []);
   const DataTime = [
-    { hour: "6h-8h", formattedHour: "06:00:00" },
-    { hour: "8h-10h", formattedHour: "08:00:00" },
-    { hour: "10h-12h", formattedHour: "10:00:00" },
-    { hour: "13h-15h", formattedHour: "13:00:00" },
-    { hour: "15h-17h", formattedHour: "15:00:00" },
-    { hour: "17h-19h", formattedHour: "17:00:00" },
+    { hour: "6h", formattedHour: "06" },
+    { hour: "8h", formattedHour: "08" },
+    { hour: "10h", formattedHour: "10" },
+    { hour: "13h", formattedHour: "13" },
+    { hour: "15h", formattedHour: "15" },
+    { hour: "17h", formattedHour: "17" },
   ];
 
   const maintenanceIntervals = {
