@@ -23,11 +23,12 @@ const MyBill = () => {
   const [user, setUser] = useState();
   const [selectBooking, setSelectedBooking] = useState();
   const [selectJob, setSelectJob] = useState();
-  const [discountCode, setDiscountCode] = useState('');
+  const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
   const applyDiscount = () => {
-    instance.post('/client/coupons',{coupon_code:discountCode}).then((res)=>
-    console.log(res))
+    instance
+      .post("/client/coupons", { coupon_code: discountCode })
+      .then((res) => console.log(res));
   };
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -76,8 +77,7 @@ const MyBill = () => {
     } else {
       // Filter bookings based on the selected status
       const filtered = bookings.filter(
-        (booking) => booking.booking.status_payment
-        === selectedStatus
+        (booking) => booking.booking.status_payment === selectedStatus
       );
       setFilteredBookings(filtered);
     }
@@ -424,37 +424,42 @@ const MyBill = () => {
                   </table>
                 </div>
               </div>
-               {bookings.booking?.status_payment != "Chưa thanh toán" &&
-              <div style={{ marginBottom: '10px' }}>
-               
-        <b style={{ marginRight: '10px' }}>Mã giảm giá: </b>
-        <input
-          type="text"
-          value={discountCode}
-          onChange={(e) => setDiscountCode(e.target.value)}
-          style={{ marginRight: '10px', padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
-        />
-        <button
-          onClick={applyDiscount}
-          style={{
-            padding: '8px 12px',
-            backgroundColor: '#4CAF50',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          Xác nhận
-        </button>
-      </div>}
+              {bookings.booking?.status_payment != "Chưa thanh toán" && (
+                <div style={{ marginBottom: "10px" }}>
+                  <b style={{ marginRight: "10px" }}>Mã giảm giá: </b>
+                  <input
+                    type="text"
+                    value={discountCode}
+                    onChange={(e) => setDiscountCode(e.target.value)}
+                    style={{
+                      marginRight: "10px",
+                      padding: "5px",
+                      borderRadius: "4px",
+                      border: "1px solid #ccc",
+                    }}
+                  />
+                  <button
+                    onClick={applyDiscount}
+                    style={{
+                      padding: "8px 12px",
+                      backgroundColor: "#4CAF50",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Xác nhận
+                  </button>
+                </div>
+              )}
 
               {/* You can display the bill details here */}
-              {bookings.booking?.status_payment != "Chưa thanh toán" &&
-              <Button onClick={() => goToPayment(selectBooking)}>
-                Thanh toán
-              </Button>
-              }
+              {bookings.booking?.status_payment != "Chưa thanh toán" && (
+                <Button onClick={() => goToPayment(selectBooking)}>
+                  Thanh toán
+                </Button>
+              )}
               <button style={closeBillButtonStyle} onClick={toggleBill}>
                 Đóng hóa đơn
               </button>
@@ -509,7 +514,7 @@ const MyBill = () => {
                 <th style={thStyle}>ID</th>
                 <th style={thStyle}>Ngày đến</th>
                 <th style={thStyle}>Giờ đến</th>
-                
+
                 <th style={thStyle}>Loại xe</th>
                 <th style={thStyle}>Dịch vụ </th>
 
@@ -526,7 +531,7 @@ const MyBill = () => {
 
                   <td style={tdStyle}>{booking.booking.target_date}</td>
                   <td style={tdStyle}>{booking.booking.target_time}</td>
-                 
+
                   <td style={tdStyle}>{booking.booking.model_car}</td>
                   <td style={tdStyle}>{booking.booking.service_name}</td>
                   <td style={tdStyle}>{booking.booking.status}</td>
@@ -538,17 +543,15 @@ const MyBill = () => {
                     </Button>
 
                     {booking.booking.status_payment === "Đã thanh toán" && (
-                      <Link to={`/mybill/${booking.booking.id}/review`}>  <Button
-                      name="redirect"
-                      style={buttonStyle}
-                     
-                    >
-                      Đánh giá
-                    </Button></Link>
-                    
+                      <Link to={`/mybill/${booking.booking.id}/review`}>
+                        {" "}
+                        <Button name="redirect" style={buttonStyle}>
+                          Đánh giá
+                        </Button>
+                      </Link>
                     )}
-                     {booking.booking.status_payment != "Đã thanh toán" &&
-                    <Button
+                    {booking.booking.status_payment != "Đã thanh toán" && (
+                      <Button
                         name="redirect"
                         style={buttonStyle}
                         onClick={() => {
@@ -558,7 +561,7 @@ const MyBill = () => {
                       >
                         Xem hóa đơn
                       </Button>
-}
+                    )}
                   </td>
                 </tr>
               ))}
