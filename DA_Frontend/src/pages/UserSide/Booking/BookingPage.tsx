@@ -18,6 +18,7 @@ import instance from "../../../api/instance";
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [fullHours, setFullHours] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const [currentPage1, setCurrentPage1] = useState(1);
@@ -266,6 +267,20 @@ const BookingPage = (props: any) => {
     }
     if (name === "email") {
       setEmail(value);
+    }
+    if (name === "target_date") {
+      console.log("Selected Date:", value);
+
+      instance.post("/checktime", { target_date: value }).then((res) => {
+        // Log the response data to verify
+        console.log("Response Data:", res);
+
+        // Set the fullHours state
+        setFullHours(res.data);
+
+        // Log the updated state
+        console.log("Full Hours:", fullHours);
+      });
     }
 
     if (name === "mileage") {
@@ -693,7 +708,7 @@ const BookingPage = (props: any) => {
                       placeholder="Ngày và Thời gian Đến"
                     />
                   </div>
-                
+
                   <div className="col">
                     <select
                       onChange={handleInputChange}
@@ -701,17 +716,18 @@ const BookingPage = (props: any) => {
                       className="form-control"
                       placeholder="Ngày và Thời gian Đến"
                     >
-                      <option value="" disabled selected >
+                      <option value="" disabled selected>
                         Vui lòng chọn giờ đến
                       </option>
                       {DataTime.map((timeObj) => (
-                        <option
-                          key={timeObj.hour}
-                          value={timeObj.formattedHour}
-                        >
-                          {timeObj.hour}
-                        </option>
-                      ))}
+  <option
+    key={timeObj.hour}
+    value={timeObj.formattedHour}
+    disabled={fullHours.includes(timeObj.formattedHour)}
+  >
+    {timeObj.hour} {fullHours.includes(timeObj.formattedHour) ? '(Full)' : ''}
+  </option>
+))}
                     </select>
                   </div>
 
