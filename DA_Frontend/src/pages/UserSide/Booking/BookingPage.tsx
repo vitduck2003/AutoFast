@@ -18,11 +18,13 @@ import instance from "../../../api/instance";
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [currentHour, setCurrentHour] = useState(0);
   const [fullHours, setFullHours] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const [currentPage1, setCurrentPage1] = useState(1);
   const itemsPerPage1 = 5;
+  const [day, setDay] = useState();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -63,7 +65,6 @@ const BookingPage = (props: any) => {
     }
   }, []);
   const DataTime = [
-    { hour: "6h", formattedHour: "06:00:00" },
     { hour: "8h", formattedHour: "08:00:00" },
     { hour: "10h", formattedHour: "10:00:00" },
     { hour: "13h", formattedHour: "13:00:00" },
@@ -94,6 +95,19 @@ const BookingPage = (props: any) => {
       padding: "8px",
     },
   };
+  useEffect(() => {
+    const updateCurrentHour = () => {
+      const now = new Date();
+      setCurrentHour(now.getHours());
+      console.log(currentHour);
+    };
+
+    updateCurrentHour(); // Initial call
+
+    const intervalId = setInterval(updateCurrentHour, 10000); // Update every minute
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
   const validateForm = () => {
     const errors: Partial<FormData> = {};
 
@@ -270,6 +284,14 @@ const BookingPage = (props: any) => {
     }
     if (name === "target_date") {
       console.log("Selected Date:", value);
+      const selectedDate = new Date(value);
+      const today = new Date();
+      const isToday = selectedDate.toDateString() === today.toDateString();
+      if (isToday) {
+        setDay(true);
+      } else {
+        setDay(false);
+      }
 
       instance.post("/checktime", { target_date: value }).then((res) => {
         // Log the response data to verify
@@ -719,15 +741,38 @@ const BookingPage = (props: any) => {
                       <option value="" disabled selected>
                         Vui lòng chọn giờ đến
                       </option>
-                      {DataTime.map((timeObj) => (
-  <option
-    key={timeObj.hour}
-    value={timeObj.formattedHour}
-    disabled={fullHours.includes(timeObj.formattedHour)}
-  >
-    {timeObj.hour} {fullHours.includes(timeObj.formattedHour) ? '(Full)' : ''}
-  </option>
-))}
+                      {DataTime.map((timeObj) => {
+                        const formattedHourNumeric = parseInt(
+                          timeObj.formattedHour.split(":")[0],
+                          10
+                        );
+
+                        // Determine if the option should be disabled
+                        let isDisabled = false;
+
+                        if (day) {
+                          isDisabled =
+                            fullHours.includes(timeObj.formattedHour) ||
+                            formattedHourNumeric <= currentHour;
+                        } else {
+                          isDisabled = fullHours.includes(
+                            timeObj.formattedHour
+                          );
+                        }
+
+                        return (
+                          <option
+                            key={timeObj.hour}
+                            value={timeObj.formattedHour}
+                            disabled={isDisabled}
+                          >
+                            {timeObj.hour}{" "}
+                            {fullHours.includes(timeObj.formattedHour)
+                              ? "(Full)"
+                              : ""}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 
