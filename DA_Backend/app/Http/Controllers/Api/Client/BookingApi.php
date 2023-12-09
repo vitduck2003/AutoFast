@@ -244,6 +244,7 @@ class BookingApi extends Controller
             DB::raw('SUM(CASE WHEN `target_time` = "17:00:00" THEN 1 ELSE 0 END) AS `17:00:00`')
         )
         ->where('target_date', $target_date)
+        ->where('status', '!=', 'Đã được hủy')
         ->get();
     
         $fullhour = [];
