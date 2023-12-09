@@ -23,6 +23,7 @@ class LoginController extends Controller
 
         
             if($request->isMethod('POST')){
+                
                 if(Auth::attempt(['phone'=>$request->phone,'password'=>$request->password])){
                     if ($user && Hash::check($credentials['password'], $user->password)) {
                         if ($user->role_id == 1) {

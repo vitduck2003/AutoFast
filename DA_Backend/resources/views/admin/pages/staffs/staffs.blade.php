@@ -8,6 +8,7 @@
             <div class="staff">
                 <div class="staff-body">
                     <h4 class="staff-title">Đây là toàn bộ nhân viên</h4>
+                    <a href="{{ route('show.form.add') }}" class="btn btn-success">Thêm nhân viên</a>
                     <table id="datatable" class="table table-striped "
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>

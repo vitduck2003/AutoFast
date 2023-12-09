@@ -231,5 +231,35 @@ class BookingApi extends Controller
         'success' => true,
        ], 200);
     }
+
+    public function checkTime(Request $request){
+        $target_date = $request->input('target_date');
+     
+    $checktime = DB::table('booking')
+        ->select(
+            DB::raw('SUM(CASE WHEN `target_time` = "08:00:00" THEN 1 ELSE 0 END) AS `08:00:00`'),
+            DB::raw('SUM(CASE WHEN `target_time` = "10:00:00" THEN 1 ELSE 0 END) AS `10:00:00`'),
+            DB::raw('SUM(CASE WHEN `target_time` = "13:00:00" THEN 1 ELSE 0 END) AS `13:00:00`'),
+            DB::raw('SUM(CASE WHEN `target_time` = "15:00:00" THEN 1 ELSE 0 END) AS `15:00:00`'),
+            DB::raw('SUM(CASE WHEN `target_time` = "17:00:00" THEN 1 ELSE 0 END) AS `17:00:00`')
+        )
+        ->where('target_date', $target_date)
+        ->where('status', '!=', 'Đã được hủy')
+        ->get();
+    
+        $fullhour = [];
+        foreach ($checktime[0] as $key => $value) {
+            if ($value >= 5) {
+                $fullhour[] = $key;
+            }
+        }
+        if($fullhour){
+            return response()->json($fullhour);
+        }else{
+            return response()->json($fullhour);
+        }
     }
 
+    }
+ 
+   

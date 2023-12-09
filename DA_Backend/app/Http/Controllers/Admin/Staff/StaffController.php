@@ -84,10 +84,10 @@ class StaffController extends Controller
             $checkemail = User::where('email', $validatedData['email'])->exists();
             $checkphone = User::where('phone', $validatedData['phone'])->exists();
             if ($checkemail) {
-                return response()->json(['message' => 'Email đã tồn tại', 'success' => false], 200);
+                return redirect()->route('show.form.add')->with('warning', 'Email đã tồn tại');
             }
             if ($checkphone) {
-                return response()->json(['message' => 'Số điện thoại đã tồn tại', 'success' => false], 200);
+                return redirect()->route('show.form.add')->with('warning', 'Số điện thoại đã tồn tại');
             }
 
             $user = new User();            

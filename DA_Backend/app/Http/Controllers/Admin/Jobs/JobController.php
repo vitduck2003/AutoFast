@@ -60,8 +60,17 @@ foreach ($jobs as $job) {
     }
     public function startJob(Request $request)
     {
-       
+        
         $bookingId = $request->input('bookingId');
+        $userId = session('id');
+        $content = "Bắt đầu làm";
+        DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insert([
+                'user_id' => $userId,
+                'content' => $content,
+                'booking_id'=>$bookingId
+            ]);
         $staffId = $request->input('staffId');
         $roomId = $request->input('room');
        $saveStaffAndRoom =  DB::table('booking')
@@ -88,6 +97,15 @@ foreach ($jobs as $job) {
     public function confirmComplete($id)
     {
         $status = 'Đã hoàn thành';
+        $userId = session('id');
+        $content = "Đã hoàn thành";
+        DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insert([
+                'user_id' => $userId,
+                'content' => $content,
+                'booking_id'=>$id
+            ]);
         $booking = DB::table('booking')->where('id', $id)->first();
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
         DB::table('staff')->where('id', $booking->id_staff)->update(['status' => 'Đang đợi việc']);

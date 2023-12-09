@@ -273,16 +273,16 @@
                                 <li><a href="{{ url('admin/staffJob') }}">Nhân viên và công việc</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Phòng</li>
+                        <li class="menu-title">Cầu</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="bx bx-file"></i>
-                                <span>Quản lí phòng</span>
+                                <span>Quản lí cầu</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <span class="badge badge-pill badge-danger float-right" id="bookingDoing"></span>
-                                <li><a href="{{ url('admin/room') }}">Danh sách phòng</a></li>
-                                <li><a href="{{ url('admin/room/formAdd') }}">Thêm phòng</a></li>
+                                <li><a href="{{ url('admin/room') }}">Danh sách cầu</a></li>
+                                <li><a href="{{ url('admin/room/formAdd') }}">Thêm cầu</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">Hóa đơn</li>
@@ -347,7 +347,6 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ url('admin/staff') }}">Tất cả nhân viên</a></li>
-                                <li><a href="{{ route('show.form.add') }}">Thêm nhân viên</a></li>
                                 <li><a href="{{ url('admin/staff-action') }}">Danh sách nhân viên không hoạt động</a>
                                 </li>
 

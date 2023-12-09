@@ -61,4 +61,13 @@ class ProfileApi extends Controller
             $user->save();
             return response()->json(['message' => 'Cập nhật người dùng thành công'], 200);
     }
+    public function changePassword(Request $request, $id){
+        $user = Profile::findOrFail($id);
+        if (!$user) {
+            return response()->json(['error'=> 'Không tồn tại người dùng'],404);
+        }
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+        return response()->json(['message' => 'Cập nhật mật khẩu thành công'], 200);
+    }
 }

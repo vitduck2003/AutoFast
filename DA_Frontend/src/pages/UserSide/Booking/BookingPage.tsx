@@ -18,10 +18,13 @@ import instance from "../../../api/instance";
 const BookingPage = (props: any) => {
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [currentHour, setCurrentHour] = useState(0);
+  const [fullHours, setFullHours] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const [currentPage1, setCurrentPage1] = useState(1);
   const itemsPerPage1 = 5;
+  const [day, setDay] = useState();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -62,8 +65,7 @@ const BookingPage = (props: any) => {
     }
   }, []);
   const DataTime = [
-    { hour: "06:00", formattedHour: "06:00:00" },
-    { hour: "08:00", formattedHour: "08:00:00" },
+    { hour: "8:00", formattedHour: "08:00:00" },
     { hour: "10:00", formattedHour: "10:00:00" },
     { hour: "13:00", formattedHour: "13:00:00" },
     { hour: "15:00", formattedHour: "15:00:00" },
@@ -93,6 +95,19 @@ const BookingPage = (props: any) => {
       padding: "8px",
     },
   };
+  useEffect(() => {
+    const updateCurrentHour = () => {
+      const now = new Date();
+      setCurrentHour(now.getHours());
+      console.log(currentHour);
+    };
+
+    updateCurrentHour(); // Initial call
+
+    const intervalId = setInterval(updateCurrentHour, 10000); // Update every minute
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
   const validateForm = () => {
     const errors: Partial<FormData> = {};
 
@@ -266,6 +281,28 @@ const BookingPage = (props: any) => {
     }
     if (name === "email") {
       setEmail(value);
+    }
+    if (name === "target_date") {
+      console.log("Selected Date:", value);
+      const selectedDate = new Date(value);
+      const today = new Date();
+      const isToday = selectedDate.toDateString() === today.toDateString();
+      if (isToday) {
+        setDay(true);
+      } else {
+        setDay(false);
+      }
+
+      instance.post("/checktime", { target_date: value }).then((res) => {
+        // Log the response data to verify
+        console.log("Response Data:", res);
+
+        // Set the fullHours state
+        setFullHours(res.data);
+
+        // Log the updated state
+        console.log("Full Hours:", fullHours);
+      });
     }
 
     if (name === "mileage") {
@@ -693,7 +730,7 @@ const BookingPage = (props: any) => {
                       placeholder="Ngày và Thời gian Đến"
                     />
                   </div>
-                
+
                   <div className="col">
                     <select
                       onChange={handleInputChange}
@@ -701,17 +738,41 @@ const BookingPage = (props: any) => {
                       className="form-control"
                       placeholder="Ngày và Thời gian Đến"
                     >
-                      <option value="" disabled selected >
+                      <option value="" disabled selected>
                         Vui lòng chọn giờ đến
                       </option>
-                      {DataTime.map((timeObj) => (
-                        <option
-                          key={timeObj.hour}
-                          value={timeObj.formattedHour}
-                        >
-                          {timeObj.hour}
-                        </option>
-                      ))}
+                      {DataTime.map((timeObj) => {
+                        const formattedHourNumeric = parseInt(
+                          timeObj.formattedHour.split(":")[0],
+                          10
+                        );
+
+                        // Determine if the option should be disabled
+                        let isDisabled = false;
+
+                        if (day) {
+                          isDisabled =
+                            fullHours.includes(timeObj.formattedHour) ||
+                            formattedHourNumeric <= currentHour;
+                        } else {
+                          isDisabled = fullHours.includes(
+                            timeObj.formattedHour
+                          );
+                        }
+
+                        return (
+                          <option
+                            key={timeObj.hour}
+                            value={timeObj.formattedHour}
+                            disabled={isDisabled}
+                          >
+                            {timeObj.hour}{" "}
+                            {fullHours.includes(timeObj.formattedHour)
+                              ? "(Full)"
+                              : ""}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 

@@ -227,7 +227,7 @@ const AccountSetting = () => {
             <form className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-ln">Last Name</label>
+                  <label htmlFor="account-ln">Họ và tên</label>
                   <input
                     className="form-control"
                     type="text"
@@ -240,7 +240,7 @@ const AccountSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-email">E-mail Address</label>
+                  <label htmlFor="account-email">E-mail</label>
                   <input
                     className="form-control"
                     type="email"
@@ -253,7 +253,7 @@ const AccountSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-phone">Phone Number</label>
+                  <label htmlFor="account-phone">Số điện thoại</label>
                   <input
                     className="form-control"
                     type="text"
@@ -266,7 +266,7 @@ const AccountSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-confirm-pass">Address</label>
+                  <label htmlFor="account-confirm-pass">Địa chỉ</label>
                   <input
                     className="form-control"
                     type="text"
@@ -278,7 +278,7 @@ const AccountSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-pass">New Password</label>
+                  <label htmlFor="account-pass">Mật khẩu mới</label>
                   <input
                     className="form-control"
                     type="password"
@@ -290,7 +290,7 @@ const AccountSetting = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label htmlFor="account-confirm-pass">Confirm Password</label>
+                  <label htmlFor="account-confirm-pass">Nhập lại mật khẩu mới</label>
                   <input
                     className="form-control"
                     type="password"
