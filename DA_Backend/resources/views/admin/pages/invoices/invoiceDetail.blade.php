@@ -36,7 +36,7 @@
                                     {{ $invoice->email }}<br>
                                     {{ $invoice->model_car }}<br>
                                     {{ $invoice->mileage }} Km<br>
-                                    {{ $service->service_name }}<br>
+                                    {{ $invoice->service_name }}<br>
                                     {{ $invoice->status_payment }}<br>
                                 </address>
                             </div>

@@ -44,10 +44,6 @@ class InvoiceController extends Controller
             return redirect()->back()->with('error','Mã giảm giá không đúng');
         }
     }
-
-       
-
-
     public function index(){
         $bills = DB::table('bill')
         ->join('booking', 'bill.id_booking', '=', 'booking.id')
@@ -62,6 +58,32 @@ class InvoiceController extends Controller
     {
         $data = $request->except('_token');
         $id = $data['id_booking'];
+        $service = DB::table('booking_detail')
+        ->join('services', 'services.id', 'booking_detail.id_service')
+        ->select('services.service_name')
+        ->where('booking_detail.id_booking', '=', $id)
+        ->first();
+        $booking_coppy = DB::table('booking')
+        ->where('id', $id)
+        ->first();
+        $insert_boonking_coppy = DB::table('booking_coppy')
+        ->insert([
+            'id' => $booking_coppy->id,
+            'name' => $booking_coppy->name,
+            'phone' => $booking_coppy->phone,
+            'email' => $booking_coppy->email,
+            'user_id' => $booking_coppy->user_id ? $booking_coppy->user_id : null,
+            'note' => $booking_coppy->note ? $booking_coppy->note : null,
+            'model_car' => $booking_coppy->model_car,
+            'mileage' => $booking_coppy->mileage,
+            'status' => $booking_coppy->status,
+            'service_name' => $service->service_name,
+            'status_bill' => $booking_coppy->status_bill ? $booking_coppy->status_bill : null,
+            'created_at' => $booking_coppy->created_at
+        ]);
+        $booking_detail_coppy = DB::table('booking_detail_coppy')
+        ->where('id_booking', $id)
+        ->first();
         DB::table('bill')->insert([
             'id_booking' => $data['id_booking'],
             'total_amount' => $data['total_amount'],
@@ -73,21 +95,16 @@ class InvoiceController extends Controller
     }
     public function detailInvoice($id){
         $invoice = DB::table('bill')
-        ->join('booking', 'booking.id', '=', 'bill.id_booking')
-        ->join('jobs', 'jobs.id_booking', '=', 'booking.id')
-        ->select('bill.id', 'booking.name', 'booking.phone', 'booking.email', 'booking.model_car', 'booking.mileage', 'bill.created_at', 'bill.total_amount', 'booking.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
+        ->join('booking_coppy', 'booking_coppy.id', '=', 'bill.id_booking')
+        ->join('jobs', 'jobs.id_booking', '=', 'booking_coppy.id')
+        ->select('bill.id', 'booking_coppy.name', 'booking_coppy.phone', 'booking_coppy.email', 'booking_coppy.model_car', 'booking_coppy.mileage', 'booking_coppy.service_name', 'bill.created_at', 'bill.total_amount', 'booking_coppy.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
         ->where('bill.id', '=', $id)
-        ->first();
-        $service = DB::table('booking_detail')
-        ->join('services', 'services.id', 'booking_detail.id_service')
-        ->select('services.service_name')
-        ->where('booking_detail.id_booking', '=', $invoice->id_booking)
         ->first();
         $jobs = DB::table('jobs')
         ->select('item_name', 'item_price', 'note')
         ->where('id_booking', '=', $invoice->id_booking)
         ->get();
-        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs', 'service'));
+        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs'));
     }
     public function updatePayment($id){
         $status = "Đã thanh toán";

@@ -86,7 +86,6 @@ class BookingApi extends Controller
               ->where('booking_detail.id_service','=',$data['service'])
               ->select('services.service_name')->first();
 
-
               $userdata = [
                 'name' => $data['full_name'],
                 'email' => $data['email'],
