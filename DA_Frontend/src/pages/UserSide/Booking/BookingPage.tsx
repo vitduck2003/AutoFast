@@ -117,8 +117,8 @@ const BookingPage = (props: any) => {
     }
 
     // Kiểm tra số điện thoại
-    const phonePattern = /^(03|07|09)\d{8}$/; // Regular expression
-    if (!formData.phone.trim() || !phonePattern.test(formData.phone)) {
+    const phonePattern = /^(0)\d{9}$/; // Biểu thức chính quy
+    if (!phonePattern.test(formData.phone.trim())) {
       errors.phone = "Số điện thoại không hợp lệ";
     }
 
