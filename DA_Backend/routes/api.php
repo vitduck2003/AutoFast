@@ -175,3 +175,4 @@ Route::prefix('client')->group(function () {
     Route::post('applyCoupons', [CouponApi::class, 'applyCoupon']);
 });
 Route::get('/bookingDetail',[BookingController::class, 'getBookingDetail']);
+Route::post('/checktime', [BookingApi::class, 'checkTime']);
