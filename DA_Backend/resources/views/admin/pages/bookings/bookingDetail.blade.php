@@ -93,21 +93,17 @@
                                     <tr>
                                         <th>Hoạt động</th>
                                         <th>Người thực hiện</th>
+                                        <th>Thời gian thực hiện</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($logs as $log)
                                     <tr>
-                                        <td>Hủy</td>
-                                        <td>Người 1</td>
+                                        <td>{{$log->content}}</td>
+                                        <td>{{$log->admin_name}}</td>
+                                        <td>{{$log->created_at}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Bắt đầu làm</td>
-                                        <td>Người 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hoàn thành</td>
-                                        <td>Người 3</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

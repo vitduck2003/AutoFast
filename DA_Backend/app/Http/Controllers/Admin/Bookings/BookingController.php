@@ -45,15 +45,16 @@ class BookingController extends Controller
     public function confirm($id)
     {
         $userId = session('id');
-        $confirmedAt = now();
+        $content = "Xác nhận";
         $status = 'Đang đợi khách đến';
-        $logId = DB::table('log')
+        DB::table('log')
             ->join('users', 'users.id', '=', 'log.user_id')
-            ->insertGetId([
+            ->insert([
                 'user_id' => $userId,
-                'confirmed_at' => $confirmedAt,
+                'content' => $content,
+                'booking_id'=>$id
             ]);
-        DB::table('booking')->where('id', $id)->update(['log_id' => $logId, 'status' => $status]);
+        DB::table('booking')->where('id', $id)->update(['status' => $status]);
         //mail
         $databk = DB::table('booking')->where('id',$id)->get();
         $data = $databk[0]; 
@@ -88,23 +89,31 @@ class BookingController extends Controller
     public function restore($id)
     {
         $status = 'Chờ xác nhận';
-        $logId = DB::table('booking')->where('id', $id)->value('log_id');
-        DB::table('log')->where('id', $logId)->delete();
-        DB::table('booking')->where('id', $id)->update(['log_id' => null, 'status' => $status]);
+        $userId = session('id');
+        $content = "Khôi phục";
+        DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insert([
+                'user_id' => $userId,
+                'content' => $content,
+                'booking_id'=>$id
+            ]);
+        DB::table('booking')->where('id', $id)->update(['status' => $status]);
         return redirect()->back()->with('message', 'Khôi phục lịch thành công');
     }
     public function revoke($id)
     {
         $status = 'Đã được hủy';
         $userId = session('id');
-        $CanceledAt = now();
-        $logId = DB::table('log')
+        $content = "Hủy";
+        DB::table('log')
             ->join('users', 'users.id', '=', 'log.user_id')
-            ->insertGetId([
+            ->insert([
                 'user_id' => $userId,
-                'canceled_at' => $CanceledAt,
+                'content' => $content,
+                'booking_id'=>$id
             ]);
-        DB::table('booking')->where('id', $id)->update(['log_id' => $logId, 'status' => $status]);
+        DB::table('booking')->where('id', $id)->update(['status' => $status]);
         DB::table('notification')->insert(['booking_id'=>$id,'title' => 'Công việc','content' => 'Đã hủy lịch bảo dưỡng của ','created_at' =>now()]);
         return redirect()->back()->with('error', 'Hủy lịch thành công');
     }
@@ -176,6 +185,15 @@ class BookingController extends Controller
     public function priority(Request $request){
         $data = $request->all();
         $id = $data['idBooking'];
+        $userId = session('id');
+        $content = "Chuyển đến lịch ưu tiên";
+        DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->insert([
+                'user_id' => $userId,
+                'content' => $content,
+                'booking_id'=>$id
+            ]);
         $status = 'Lịch ưu tiên';
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
         DB::table('notification')->insert(['booking_id'=>$id,'title' => 'Công việc','content' => 'Lịch bảo dưỡng đặc biệt ưu tiên cho khách hàng ','created_at' =>now()]);
@@ -266,8 +284,12 @@ class BookingController extends Controller
        ->select('item_name', 'item_price', 'target_time_done', 'note')
        ->where('id_booking', $booking->id)
        ->get();
-        
-        return view('admin/pages/bookings/bookingDetail', compact('booking', 'jobs', 'service'));
+        $logs=DB::table('log')
+                ->join('users', 'users.id', '=', 'log.user_id')
+                ->where('log.booking_id', $id)
+                ->select('users.name as admin_name', 'log.content','log.created_at')
+                ->get();
+        return view('admin/pages/bookings/bookingDetail', compact('booking', 'jobs', 'service','logs'));
     }
     public function getRoom()
     {

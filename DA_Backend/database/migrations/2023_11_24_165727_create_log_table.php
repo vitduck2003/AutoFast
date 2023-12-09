@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('log', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->timestamp('canceled_at')->nullable();
-            $table->timestamp('confirmed_at')->nullable();
+            $table->integer('booking_id');
+            $table->string('content');
             $table->timestamps();
         });
     }

@@ -12,13 +12,13 @@
         <div class="col-6">
             <div class="staff">
                 <div class="staff-body">
-                    <h4 class="staff-title">Đây là thêm phòng</h4>
+                    <h4 class="staff-title">Đây là thêm cầu</h4>
                     <form action="{{route('room-create')}}" method="POST" style="display: inline;"
                         enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="mb-3">
-                            <label class="form-label">Tên phòng</label>
+                            <label class="form-label">Tên cầu</label>
                             <input type="text" class="form-control" name="name" >
                         </div>
                         <div class="mb-3">
