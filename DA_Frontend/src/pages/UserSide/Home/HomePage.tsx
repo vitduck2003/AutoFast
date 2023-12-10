@@ -314,7 +314,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
             </h6>
             <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
           </div>
-          <div className="row g-4">
+          <div className="row g-5">
             {staffData.map((item:any) =>{
               return  <div
               key={item.id}

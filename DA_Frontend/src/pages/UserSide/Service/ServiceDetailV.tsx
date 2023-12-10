@@ -8,8 +8,9 @@ const itemsPerPage = 8;
 
 const ServiceDetailV = (props) => {
   const slideStyle = {
+    marginTop: "20px",
     width: "100%",
-    maxWidth: "600px", /* Điều chỉnh chiều rộng tối đa của danh sách */
+    maxWidth: "1300px", /* Điều chỉnh chiều rộng tối đa của danh sách */
     margin: "0 auto"
   }
   const slideStyle2 = {
@@ -88,26 +89,23 @@ const ServiceDetailV = (props) => {
                     onChange={handlePageChange}
                 />
             </div>
-           <div style={{ columns: "2", columnGap: "20px" }}>
-    {review.map((item: any) => {
-        return (
-            <div key={item.id}>
-                <ul className="list-group" style={slideStyle}>
-                    <li className="list-group-item" style={slideStyle2}>
-                        <h5 className="mb-1" style={{ marginBottom: "30px", fontWeight: 'bold', color: "#333" }}>Khách Hàng: {item.name}</h5>
-                        <div style={{ paddingTop: "20px" }}>
-                            <label htmlFor="" style={{ color: "#333", fontWeight: 'bold' }}>Mô Tả:</label>
-                            <p className="mb-1">{item.content}</p>
-                        </div>
-                        <div style={{ paddingTop: "20px" }}>
-                            <label htmlFor="" style={{ color: "#333", fontWeight: 'bold', marginRight: "20px" }}>Đánh Giá: </label>
-                            <Rate allowHalf disabled value={item.rating} />
-                        </div>
-                    </li>
-                </ul>
+            <div style={{  columns: '1' }}>
+    <div style={{ width: '100%', textAlign: 'center', margin: '20px 0' }}>
+        <h2>Đánh Giá Khách Hàng</h2>
+    </div>
+    {review.map((item: any) => (
+        <div key={item.id} style={{ flex: '0 0 calc(50% - 10px)', maxWidth: '1300px',  margin: '10px', border: '1px solid #ccc', borderRadius: '20px', padding: '15px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff' }}>
+            <h5 style={{ marginBottom: '10px', fontWeight: 'bold', color: '#333', fontSize: '1.2rem' }}>Khách Hàng: {item.name}</h5>
+            <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '10px', fontSize: '1rem' }}>
+                <label htmlFor="" style={{ color: '#333', fontWeight: 'bold', fontSize: '1rem' }}>Bình Luận:</label>
+                <p style={{ marginBottom: '10px', fontSize: '0.9rem' }}>{item.content}</p>
             </div>
-        );
-    })}
+            <div style={{  paddingTop: '10px' }}>
+                <label htmlFor="" style={{ color: '#333', fontWeight: 'bold', marginRight: '20px' }}>Đánh Giá: </label>
+                <Rate allowHalf disabled value={item.rating} />
+            </div>
+        </div>
+    ))}
 </div>
         </div>
     );
