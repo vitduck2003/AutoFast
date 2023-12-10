@@ -117,7 +117,7 @@ const BookingPage = (props: any) => {
     }
 
     // Kiểm tra số điện thoại
-    const phonePattern = /^(0)\d{9}$/; // Biểu thức chính quy
+    const phonePattern = /^(0)\d{9}$/;
     if (!phonePattern.test(formData.phone.trim())) {
       errors.phone = "Số điện thoại không hợp lệ";
     }
@@ -139,10 +139,29 @@ const BookingPage = (props: any) => {
     }
 
     // Kiểm tra số KM của xe
-    const mileageValue = parseInt(formData.mileage, 10);
-    if (isNaN(mileageValue) || mileageValue < 0) {
-      errors.mileage = "Số KM không hợp lệ";
-    }
+    // const mileageValue = parseInt(formData.mileage, 10);
+    // if (isNaN(mileageValue) || mileageValue < 0) {
+    //   errors.mileage = "Số KM không hợp lệ";
+    // }
+//     const mileageValue = formData.mileage.trim() ? parseInt(formData.mileage, 10) : null;
+// if (mileageValue !== null && (isNaN(mileageValue) || mileageValue <= 0)) {
+//   errors.mileage = "Số KM không hợp lệ";
+// }
+
+const mileageValue = formData.mileage.trim();
+
+if (!mileageValue) {
+  errors.mileage = "Vui lòng nhập số KM";
+} else if (mileageValue.length > 10) {
+  // Kiểm tra độ dài của chuỗi số
+  errors.mileage = "Số KM bạn nhập không hợp lệ";
+} else {
+  // Chuyển đổi giá trị sang số nguyên và kiểm tra
+  const numericMileageValue = parseInt(mileageValue, 10);
+  if (isNaN(numericMileageValue) || numericMileageValue <= 0) {
+    errors.mileage = "Vui lòng nhập số KM hợp lệ";
+  }
+}
 
     // Kiểm tra gói bảo dưỡng
     if (formData.service === "0") {
