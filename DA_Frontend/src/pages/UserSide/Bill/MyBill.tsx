@@ -7,6 +7,7 @@ import { Button, Input, Space, Table } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import { Link } from "react-router-dom";
+import { notification } from "antd";
 
 type Props = {};
 
@@ -25,6 +26,7 @@ const MyBill = () => {
   const [selectJob, setSelectJob] = useState();
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
+  
   const applyDiscount = () => {
     if (selectBooking && selectBooking.id) {
       instance
@@ -32,8 +34,26 @@ const MyBill = () => {
           coupon_code: discountCode,
           booking_id: selectBooking.id
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err));
+        .then((res) => {
+          if (res.data.message === "Mã giảm giá đã được áp dụng thành công") {
+            notification.success({
+              message: "Mã Giảm giá được áp dụng thành công",
+              description: "",
+            });
+          } else {
+            notification.error({
+              message: "Mã Giảm giá không hợp lệ",
+              description: "",
+            });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          notification.error({
+            message: "Đã xảy ra lỗi",
+            description: "",
+          });
+        });
     } else {
       console.log("Lỗi");
     }
