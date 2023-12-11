@@ -408,7 +408,7 @@ const BookingPage = (props: any) => {
               setTimeout(() => {
                 navigate(`/`); // Navigate to the verification page with the phone number
                 resolve();
-              }, 3000); // Delay for 3 seconds
+              }, 1000); // Delay for 3 seconds
             });
           }
         })
@@ -428,7 +428,7 @@ const BookingPage = (props: any) => {
         } else {
           navigate(`/mybooking`);
         }
-      }, 3000);
+      }, 1000);
     }
   };
   const totalCost = selectedServiceItems.reduce(
