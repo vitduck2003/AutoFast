@@ -92,6 +92,7 @@ import ServiceDetailV from "./pages/UserSide/Service/ServiceDetailV";
 import AboutDetail from "./pages/UserSide/AboutUs/AboutDetail";
 import { getMenu } from "./api/Client/menu";
 import Review from "./pages/UserSide/Review/Review";
+import ResetPass from "./pages/UserSide/Account/ResetPass";
 
 function App() {
   const [staffs, setStaffs] = useState<IStaff[]>([]);
@@ -315,6 +316,12 @@ const onHandleRemoveServiceItem = (id: number) => {
             <Route
               index
               element={<AccountSetting />}
+            />
+          </Route>
+          <Route path="respass">
+            <Route
+              index
+              element={<ResetPass />}
             />
           </Route>
           Search Booking

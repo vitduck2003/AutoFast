@@ -125,6 +125,9 @@ const BaseLayout = (props: any) => {
                       <Link style={dropdownContentLinkStyle} to={`/account`}>
                         Quản lý tài khoản
                       </Link>
+                      <Link style={dropdownContentLinkStyle} to={`/respass`}>
+                        Đổi Mật Khẩu
+                      </Link>
                       <Link style={dropdownContentLinkStyle} to={`/mybill`}>
                         Quản lý Hóa đơn{" "}
                       </Link>
