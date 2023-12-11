@@ -6,21 +6,26 @@ import Header from "./Header";
 const BaseLayout = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
   const [userName, setUserName] = useState(); //
-  const [img, setImg] = useState(); //
+  const [img, setImg] = useState(); 
+  const [userId, setUserId] = useState()//
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   // Kiểm tra Session Storage khi trang được tải
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
     console.log({ sessionData });
+    console.log(sessionData);
+    
     if (sessionData) {
       // Session Storage tồn tại, người dùng đã đăng nhập
       const userData = JSON.parse(sessionData); // Parse the JSON string into an object
       setImg(userData.avatar);
       setUserName(userData.name);
+      setUserId(userData.id)
       setIsLoggedIn(true);
     }
   }, []);
-
+  console.log(userId);
+  
   console.log(userName);
   function clearSession() {
     // Xóa toàn bộ dữ liệu từ Session Storage
@@ -125,7 +130,7 @@ const BaseLayout = (props: any) => {
                       <Link style={dropdownContentLinkStyle} to={`/account`}>
                         Quản lý tài khoản
                       </Link>
-                      <Link style={dropdownContentLinkStyle} to={`/respass`}>
+                      <Link style={dropdownContentLinkStyle} to={`/respass/${userId}`}>
                         Đổi Mật Khẩu
                       </Link>
                       <Link style={dropdownContentLinkStyle} to={`/mybill`}>

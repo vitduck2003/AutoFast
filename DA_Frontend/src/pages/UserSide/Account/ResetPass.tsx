@@ -31,7 +31,7 @@ const ResetPass = (props: Props) => {
 
     // Gửi yêu cầu API để thay đổi mật khẩu
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/client/profile/change-password', {
+      const response = await fetch('/api/client/profile/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import aboutimg from '../../../assets/img/about.jpg'; 
 import khabanhimg from '../../../assets/img/ngobakha.jpg';
 import khanhskyimg from '../../../assets/img/khanhsky.jpg';
 import huanhoahongimg from '../../../assets/img/huanhoahong.jpg';
 import traizanimeimg from '../../../assets/img/boizanime.jpg';
+import instance from '../../../api/instance';
 
 const AboutUsPage = ({about, abouts, aboutz, technicians}   ) => {
 console.log(about);
@@ -11,7 +12,28 @@ console.log(abouts);
 console.log(aboutz);
 console.log(technicians);
 
+  const [staffData,setStaffData]=useState([]);
+  const getStaffData = async () => {
+    try {
+      const response = await instance.get('/client/staff');
+      
+      // Assuming the API response has a data property that contains the actual data
+      setStaffData(response.data)
   
+      // Handle the data as needed
+      console.log('Staff Data:', staffData);
+  
+      return staffData;
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching staff data:', error);
+      throw error; // You may choose to handle errors differently based on your application's needs
+    }
+  };
+  useEffect(() => {
+    // Fetch data when the component mounts
+    getStaffData();
+  }, []);
   return (
     <div>
         {/* Service  */}
@@ -115,35 +137,52 @@ console.log(technicians);
         </div>
     </div>
  {/* Team Start */}
- <div className="container-xxl py-5" id=''>
-  <div className="container">
-    <div className="text-center wow fadeInUp a" data-wow-delay="0.1s">
-      <h6 className="text-primary text-uppercase">Các kỹ sư của chúng tôi</h6>
-      <h1 className="mb-5">Các kỹ sư chuyên nghiệp của chúng tôi</h1>
-    </div>
-
-    <div className="row g-4">
-      {technicians.map((item: any) => (
-        <div key={item.id} className="col-lg-3 col-md-6 wow fadeInUp s32" data-wow-delay="0.1s">
-          <div className="team-item s3">
-            <div className="position-relative overflow-hidden s2">
-              <img style={{ width: '500px' }} className="img-fluid s2" src={item.image} alt="" />
-              <div className="team-overlay position-absolute start-0 top-0 w-100 h-100 1s">
-                <a className="btn btn-square mx-1 5" href=""><i className="fab fa-facebook-f"></i></a>
-                <a className="btn btn-square mx-1 4" href=""><i className="fab fa-twitter"></i></a>
-                <a className="btn btn-square mx-1 3" href=""><i className="fab fa-instagram"></i></a>
+ <div className="container-xxl py-5">
+        <div className="container">
+          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 className="text-primary text-uppercase">
+              Các kỹ sư của chúng tôi
+            </h6>
+            <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
+          </div>
+          <div className="row g-5">
+            {staffData.map((item:any) =>{
+              return  <div
+              key={item.id}
+              className="col-lg-3 col-md-6 wow fadeInUp"
+              data-wow-delay="0.1s"
+            >
+              <div className="team-item">
+                <div className="position-relative overflow-hidden">
+                  <img
+                    style={{ width: "500px" }}
+                    className="img-fluid"
+                    src={`http://localhost:8000/storage/`+item.avatar}
+                    alt=""
+                  />
+                  {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
+                    <a className="btn btn-square mx-1" href="">
+                      <i className="fab fa-facebook-f"></i>
+                    </a>
+                    <a className="btn btn-square mx-1" href="">
+                      <i className="fab fa-twitter"></i>
+                    </a>
+                    <a className="btn btn-square mx-1" href="">
+                      <i className="fab fa-instagram"></i>
+                    </a>
+                  </div> */}
+                </div>
+                <div className="bg-light text-center p-4">
+                  <h5 className="fw-bold mb-0">{item.name}</h5>
+                  <small>{item.description}</small>
+                </div>
               </div>
             </div>
-            <div className="bg-light text-center p-4 3">
-              <h5 className="fw-bold mb-0">{item.name}</h5>
-              <small>{item.information}</small>
-            </div>
+            
+          })}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
+      </div>
     </div>
   )
 }

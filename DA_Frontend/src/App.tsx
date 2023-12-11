@@ -318,7 +318,7 @@ const onHandleRemoveServiceItem = (id: number) => {
               element={<AccountSetting />}
             />
           </Route>
-          <Route path="respass">
+          <Route path="respass/:id">
             <Route
               index
               element={<ResetPass />}
