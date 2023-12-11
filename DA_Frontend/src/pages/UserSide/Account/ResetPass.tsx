@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {};
 
@@ -8,8 +8,21 @@ const ResetPass = (props: Props) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const [userId, setUserId] = useState(0)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+useEffect(() => {
+    const sessionData = sessionStorage.getItem("user");
+    console.log({ sessionData });
+    console.log(sessionData);
+    
+    if (sessionData) {
+      // Session Storage tồn tại, người dùng đã đăng nhập
+      const userData = JSON.parse(sessionData); // Parse the JSON string into an object
+      setUserId(userData.id)
+   
+    }
+  }, []);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     if (id === 'currentPassword') {
       setCurrentPassword(value);
@@ -31,14 +44,15 @@ const ResetPass = (props: Props) => {
 
     // Gửi yêu cầu API để thay đổi mật khẩu
     try {
-      const response = await fetch('/api/client/profile/change-password', {
-        method: 'POST',
+      const response = await fetch(`http://127.0.0.1:8000/api/client/profile/change-password/${userId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          currentPassword,
-          newPassword,
+          current_password: currentPassword,
+         new_password: newPassword,
+         confirm_password: confirmPassword
         }),
       });
 
