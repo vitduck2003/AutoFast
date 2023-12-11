@@ -64,10 +64,20 @@ class ProfileApi extends Controller
     public function changePassword(Request $request, $id){
         $user = Profile::findOrFail($id);
         if (!$user) {
-            return response()->json(['error'=> 'Không tồn tại người dùng'],404);
+            return response()->json(['error' => 'Không tồn tại người dùng'], 404);
         }
-        $user->password = Hash::make($request->input('password'));
+    
+        if (!Hash::check($request->input('current_password'), $user->password)) {
+            return response()->json(['message' => 'Mật khẩu hiện tại không chính xác'], 401);
+        }
+    
+        if ($request->input('new_password') !== $request->input('confirm_password')) {
+            return response()->json(['message' => 'Mật khẩu mới không trùng khớp'], 401);
+        }
+    
+        $user->password = Hash::make($request->input('new_password'));
         $user->save();
-        return response()->json(['message' => 'Cập nhật mật khẩu thành công'], 200);
+    
+        return response()->json(['message' => 'Mật khẩu đã được thay đổi thành công'], 200);
     }
 }

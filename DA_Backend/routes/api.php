@@ -143,6 +143,8 @@ Route::prefix('client')->group(function () {
         Route::get('/{id}', [ProfileApi::class, 'show']);
         Route::put('update/{id}', [ProfileApi::class, 'update']);
         Route::post('update/avatar/{id}', [ProfileApi::class, 'uploadAvatar']);
+        Route::put('change-password/{id}', [ProfileApi::class, 'changePassword']);
+
     });
     //staff api
     Route::prefix('staff')->group(function () {
@@ -176,3 +178,4 @@ Route::prefix('client')->group(function () {
 });
 Route::get('/bookingDetail',[BookingController::class, 'getBookingDetail']);
 Route::post('/checktime', [BookingApi::class, 'checkTime']);
+
