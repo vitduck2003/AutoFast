@@ -134,8 +134,11 @@ const BookingPage = (props: any) => {
     }
 
     // Kiểm tra thời gian đến
-    if (!formData.target_date || !formData.target_time) {
-      errors.target_date = "Vui lòng chọn thời gian đến";
+    if (!formData.target_date) {
+      errors.target_date = "Vui lòng chọn ngày đến";
+    }
+    if (!formData.target_time) {
+      errors.target_time = "Vui lòng chọn giờ đến";
     }
 
     // Kiểm tra số KM của xe
@@ -143,25 +146,25 @@ const BookingPage = (props: any) => {
     // if (isNaN(mileageValue) || mileageValue < 0) {
     //   errors.mileage = "Số KM không hợp lệ";
     // }
-//     const mileageValue = formData.mileage.trim() ? parseInt(formData.mileage, 10) : null;
-// if (mileageValue !== null && (isNaN(mileageValue) || mileageValue <= 0)) {
-//   errors.mileage = "Số KM không hợp lệ";
-// }
+    //     const mileageValue = formData.mileage.trim() ? parseInt(formData.mileage, 10) : null;
+    // if (mileageValue !== null && (isNaN(mileageValue) || mileageValue <= 0)) {
+    //   errors.mileage = "Số KM không hợp lệ";
+    // }
 
-const mileageValue = formData.mileage.trim();
+    const mileageValue = formData.mileage.trim();
 
-if (!mileageValue) {
-  errors.mileage = "Vui lòng nhập số KM";
-} else if (mileageValue.length > 10) {
-  // Kiểm tra độ dài của chuỗi số
-  errors.mileage = "Số KM bạn nhập không hợp lệ";
-} else {
-  // Chuyển đổi giá trị sang số nguyên và kiểm tra
-  const numericMileageValue = parseInt(mileageValue, 10);
-  if (isNaN(numericMileageValue) || numericMileageValue <= 0) {
-    errors.mileage = "Vui lòng nhập số KM hợp lệ";
-  }
-}
+    if (!mileageValue) {
+      errors.mileage = "Vui lòng nhập số KM";
+    } else if (mileageValue.length > 10) {
+      // Kiểm tra độ dài của chuỗi số
+      errors.mileage = "Số KM bạn nhập không hợp lệ";
+    } else {
+      // Chuyển đổi giá trị sang số nguyên và kiểm tra
+      const numericMileageValue = parseInt(mileageValue, 10);
+      if (isNaN(numericMileageValue) || numericMileageValue <= 0) {
+        errors.mileage = "Vui lòng nhập số KM hợp lệ";
+      }
+    }
 
     // Kiểm tra gói bảo dưỡng
     if (formData.service === "0") {
@@ -169,8 +172,7 @@ if (!mileageValue) {
     }
 
     setFormErrors(errors);
-
-    return Object.keys(errors).length === 0; // Trả về true nếu không có lỗi
+    return Object.keys(errors).length === 0;
   };
 
   const dataService = props.service;
@@ -794,9 +796,12 @@ if (!mileageValue) {
                       })}
                     </select>
                   </div>
-
+                  <br />
                   {formErrors.target_date && (
                     <p style={{ color: "red" }}>{formErrors.target_date}</p>
+                  )}
+                  {formErrors.target_time && (
+                    <p style={{ color: "red" }}>{formErrors.target_time}</p>
                   )}
                 </div>
 
