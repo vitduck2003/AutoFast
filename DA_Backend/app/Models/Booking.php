@@ -18,6 +18,7 @@ class Booking extends Model
         'model_car',
         'mileage',
         'note',
-        'status'
+        'status',
+        'discount'
     ];
 };

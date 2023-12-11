@@ -26,18 +26,17 @@ class CouponApi extends Controller
     public function applyCoupon(Request $request)
     {
         $coupon_code = $request->input('coupon_code');
-
-        $discount = Coupon::where('coupon_code', $coupon_code)
-            ->where('created_at', '>', now())
-            ->first();
-
-        if ($discount) {
+        $booking_id = $request->input('booking_id');
+        $discount = Coupon::where('coupon_code', $coupon_code)->first();
+        if($discount){
+            DB::table('booking')
+            ->where('id', $booking_id)
+            ->update(['discount' => $discount->coupon_number]);
+            return response()->json(['message' => 'Mã giảm giá đã được áp dụng thành công',], 200);
+        }else{
             return response()->json(['message' => 'Mã giảm giá không hợp lệ'], 404);
         }
-
-        // Áp dụng mã giảm giá tại đây và trả về kết quả
-
-        return response()->json(['message' => 'Mã giảm giá đã được áp dụng thành công', 'discount' => $discount], 200);
+          
     }
 
 }

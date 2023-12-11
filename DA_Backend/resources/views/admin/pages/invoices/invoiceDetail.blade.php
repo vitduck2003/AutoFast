@@ -79,13 +79,13 @@
                                                     ({{ $job->note }})
                                                 @endif
                                             </td>
-                                            <td class="text-right">{{ number_format($job->item_price, 0, ',', '.') }} VND
+                                            <td class="text-right">{{ number_format($job->item_price, 0, ',', '.') }} VNĐ
                                             </td>
                                         </tr>
                                     @endforeach
                                     <tr>
                                         <td colspan="2" class="text-right">Giảm giá</td>
-                                        <td class="text-right">0</td>
+                                        <td class="text-right"><h5>{{ number_format($invoice->total_discount) }} VNĐ<h5></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="border-0 text-right">

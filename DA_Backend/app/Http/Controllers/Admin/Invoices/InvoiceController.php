@@ -79,7 +79,8 @@ class InvoiceController extends Controller
             'status' => $booking_coppy->status,
             'service_name' => $service->service_name,
             'status_bill' => $booking_coppy->status_bill ? $booking_coppy->status_bill : null,
-            'created_at' => $booking_coppy->created_at
+            'created_at' => $booking_coppy->created_at,
+            'discount' => $booking_coppy->discount ? $booking_coppy->discount : null
         ]);
         $booking_detail_coppy = DB::table('booking_detail_coppy')
         ->where('id_booking', $id)
@@ -87,6 +88,7 @@ class InvoiceController extends Controller
         DB::table('bill')->insert([
             'id_booking' => $data['id_booking'],
             'total_amount' => $data['total_amount'],
+            'total_discount' => $data['total_discount'],
             'status_payment' => "Chưa thanh toán",
             'created_at' => now()->toDateTimeString()
         ]);
@@ -97,7 +99,7 @@ class InvoiceController extends Controller
         $invoice = DB::table('bill')
         ->join('booking_coppy', 'booking_coppy.id', '=', 'bill.id_booking')
         ->join('jobs', 'jobs.id_booking', '=', 'booking_coppy.id')
-        ->select('bill.id', 'booking_coppy.name', 'booking_coppy.phone', 'booking_coppy.email', 'booking_coppy.model_car', 'booking_coppy.mileage', 'booking_coppy.service_name', 'bill.created_at', 'bill.total_amount', 'booking_coppy.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
+        ->select('bill.id', 'booking_coppy.name', 'booking_coppy.phone', 'booking_coppy.email', 'booking_coppy.model_car', 'booking_coppy.mileage', 'booking_coppy.service_name', 'bill.created_at', 'bill.total_amount','bill.total_discount' , 'booking_coppy.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
         ->where('bill.id', '=', $id)
         ->first();
         $jobs = DB::table('jobs')

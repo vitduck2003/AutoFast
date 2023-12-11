@@ -27,6 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
+        
                             @foreach($bookings as $booking)
                             <tr>      
                                 <td>{{ $booking->id }}</td>
@@ -43,10 +44,13 @@
                                 @endif
                                 <td>
                                    @if($booking->status_bill == "Chưa tạo hóa đơn")
+                                  
                                    <form action="{{ route('create.invoice') }}" method="POST" style="display: inline;">
                                     @csrf
+                                    
                                     <input type="text" name="total_amount" hidden value="{{ $booking->total_prices }}">
                                     <input type="text" name="id_booking" hidden value="{{ $booking->id }}">
+                                     <input type="text" name="total_discount" hidden value="{{ $booking->total_discount }}">
                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn tạo hóa đơn không?')">Tạo hóa đơn</button>
                                 </form>
                                    @endif
