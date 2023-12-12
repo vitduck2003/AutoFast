@@ -30,7 +30,7 @@ const MyBill = () => {
   const applyDiscount = () => {
     if (selectBooking && selectBooking.id) {
       instance
-        .post("/client/coupons", {
+        .post("/client/applyCoupons", {
           coupon_code: discountCode,
           booking_id: selectBooking.id
         })
