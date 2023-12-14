@@ -30,7 +30,15 @@ public function lich_dat_thanh_cong($userdata) {
    });
 
 }
+public function hen_dat_lich($userdata) {
+   $data = $userdata;
+   Mail::send('henlich', $data, function($message) use($userdata) {
+      $message->to($userdata['email'], $userdata['name'])->subject
+         ('Hẹn bạn quay lại đặt lịch ');
+      $message->from('baoduongautofast@gmail.com','Gara Autofast');
+   });
 
+}
 
    public function attachment_email() {
       $data = array('name'=>"Virat Gandhi");

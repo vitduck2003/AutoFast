@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
-
+use App\Http\Controllers\MailController;
 class InvoiceController extends Controller
 {
     public function check_coupon(Request $request){
@@ -110,12 +110,34 @@ class InvoiceController extends Controller
     }
     public function updatePayment($id){
         $status = "Đã thanh toán";
-        DB::table('bill')
+      DB::table('bill')
         ->where('id', $id)
         ->update([
             'status_payment' => $status,
             'method_payment' => "Tiền mặt"
-        ]);   
+        ]);
+   
+           try{
+                $mail = new MailController();
+                $data = DB::table('bill')
+                ->join('booking_coppy','booking_coppy.id','=','bill.id_booking')
+                ->where('bill.id', $id)
+                ->first();
+          
+                $userdata = [
+                    'name' => $data->name,
+                    'email' => $data->email,
+                    'mileage' => $data->mileage ,
+                    'model_car'=>$data->model_car,
+                    'service_name'=>$data->service_name,
+                ];
+          
+                $mail ->hen_dat_lich($userdata);
+            }catch(\Exception $e){
+
+                };
+                
+    
         return redirect()->back()->with('message','Cập nhật thành công');
     }
 }
