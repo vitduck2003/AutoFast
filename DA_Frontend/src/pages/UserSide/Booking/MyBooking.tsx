@@ -23,6 +23,10 @@ const MyBooking = () => {
   const [selectJob,setSelectJob]=useState();
   const [showNotification, setShowNotification] = useState(false);
   const [api, contextHolder] = notification.useNotification();
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountApplied, setDiscountApplied] = useState(false);
+
+  
 
   const openNotification = (mess, text_color, bg_color, title) => {
     setShowNotification(true);
@@ -244,10 +248,12 @@ const MyBooking = () => {
   
   
   
-  const showJobDetails = (jobs) => {
-    setSelectedJobDetails(jobs);
-    console.log(jobs);
+  const showJobDetails = (booking) => {
+    setSelectedJobDetails(booking.jobs);
+    setSelectedBooking(booking);
+    
   };
+
 
   // Function to close job details view
   const closeJobDetails = () => {
@@ -340,6 +346,39 @@ const MyBooking = () => {
     cursor: 'pointer',
   };
   
+
+  
+  
+  
+  
+  const applyDiscount = () => {
+      instance.post("/client/applyCoupons", {
+          coupon_code: discountCode,
+          booking_id: selectBooking.booking.id
+        })
+        .then((res) => {
+          if (res.data.message === "Mã giảm giá đã được áp dụng thành công") {
+            notification.success({
+              message: "Mã Giảm giá được áp dụng thành công",
+              description: "",
+            });
+          } else {
+            notification.error({
+              message: "Mã Giảm giá không hợp lệ",
+              description: "",
+            });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          notification.error({
+            message: "Đã xảy ra lỗi",
+            description: "",
+          });
+        });
+    
+  };
+
   return ( 
     <div>
    
@@ -473,7 +512,35 @@ const MyBooking = () => {
               ))}
             </tbody>
           </table>
+          
         </div>
+<div style={{ marginBottom: "10px" }}>
+                  <b style={{ marginRight: "10px" }}>Mã giảm giá: </b>
+                  <input
+                    type="text"
+                    value={discountCode}
+                    onChange={(e) => setDiscountCode(e.target.value)}
+                    style={{
+                      marginRight: "10px",
+                      padding: "5px",
+                      borderRadius: "4px",
+                      border: "1px solid #ccc",
+                    }}
+                  />
+                  <button
+                    onClick={applyDiscount}
+                    style={{
+                      padding: "8px 12px",
+                      backgroundColor: "#4CAF50",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Xác nhận
+                  </button>
+                </div>
         <button style={closeButtonStyle} onClick={closeJobDetails}>
           Đóng
         </button>
@@ -517,7 +584,7 @@ const MyBooking = () => {
               
               
                 <td style={tdStyle}>
-  <Button onClick={() => showJobDetails(booking.jobs)}>
+  <Button onClick={() => showJobDetails(booking)}>
     Xem chi tiết
   </Button>
   {booking.booking.status === "Chờ xác nhận" ? (
