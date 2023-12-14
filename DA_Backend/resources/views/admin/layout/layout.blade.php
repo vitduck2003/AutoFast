@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -49,12 +48,15 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .employee-details h2 {
             text-align: center;
         }
+
         .employee-details p {
             margin-bottom: 10px;
         }
+
         .employee-details img {
             display: block;
             margin: 0 auto;
@@ -62,6 +64,7 @@
             height: auto;
             border-radius: 50%;
         }
+
         .drop-container {
             position: relative;
             display: flex;
@@ -134,23 +137,26 @@
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                         </a>
                     </div>
-
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
                 </div>
 
                 <div class="d-flex">
@@ -195,7 +201,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" id="show_noti"
                             aria-labelledby="page-header-notifications-dropdown">
-                                                </div>
+                        </div>
 
                     </div>
                     <div class="dropdown d-inline-block">
@@ -423,43 +429,28 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-        $.ajax({
-            url: '/api/booking-info',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                $('#bookingPen').text(data.bookingPending);
-                $('#bookingWait').text(data.bookingWait);
-                $('#bookingPrio').text(data.bookingPrio);
-                $('#bookingCom').text(data.bookingComplete);
-                $('#bookingCan').text(data.bookingCancel);
-                $('#bookingDoing').text(data.bookingDoing);
-                if (data.bookingPending == 0) {
-                    $('#bookingPen').css('display', 'none');
+        $(document).ready(function   () {                                                      url: '/ap                                             t                                    da                 n',
+                     succes                    a) {
+                                 ngPen').te                    ending);
+                        $('#bookingWa                    ookingWa                             $('#booki                    ta.book                                  $('#book                    t                    e);
+                    $(                                      ngCancel);
+                                             ).text(data.bookingDoing);
+                                  ta                    == 0) {
+                                                          display', 'none');
+                                                      if (data.bookingWait == 0)                                                  Wait').css('displ                                              }
+                    if (dat                                                          $('#boo                    di                                             }
+                            data.                    ==                                                        ').                        ');                         }
+                                   ok                        {
+                                   #                                        ne');
+                    }
+                             f                         gGo                                                         oing').css('display', 'none');
+                          
+                         ,
+                error: function () {
+                    console.log('Kết nối api thất bại rồi');
                 }
-                if (data.bookingWait == 0) {
-                    $('#bookingWait').css('display', 'none');
-                }
-                if (data.bookingPrio == 0) {
-                    $('#bookingPrio').css('display', 'none');
-                }
-                if (data.bookingComplete == 0) {
-                    $('#bookingCom').css('display', 'none');
-                }
-                if (data.bookingCancel == 0) {
-                    $('#bookingCan').css('display', 'none');
-                }
-                if (data.bookingGoing == 0) {
-                    $('#bookingDoing').css('display', 'none');
-                }
-
-            },
-            error: function() {
-                console.log('Kết nối api thất bại rồi');
-            }
+            });
         });
-    });
         const show_noti = document.getElementById('show_noti');
         fetch('/api/admin/notifications')
             .then(response => {
@@ -495,26 +486,36 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="m-0"> Thông báo </h6>
-                        </div>
+                         </div>
                         <div class="col-auto">
-                            <a href="{{route('notifications-view')}}" class="small"> View All</a>
+                            <a href="{{route('notifications-view' )}}" class="small"> View All</a>
                         </div>
                     </div>
                 </div>
-                `+ content +`
+                `+ content + `
                 
                 <div class="p-2 border-top">
-                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="">
-                        <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
-                    </a>
+                    <a class="btn btn-sm btn-link fonte-14 btn-block text-center" href="">
+                 <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                   >
                 </div>
             `;
-            })
+     })
             .catch(error => {
                 console.error(error);
             });
     </script>
+    <script>$(document).ready(function() {
+    // Kích hoạt plugin MetisMenu
+    $('#side-menu').metisMenu();
 
+    // Xử lý sự kiện nhấp vào mục menu cha
+    $('#side-menu .menu-title').on('click', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('active').next('.submenu').slideToggle(200);
+    });
+    });
+    </script>
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
