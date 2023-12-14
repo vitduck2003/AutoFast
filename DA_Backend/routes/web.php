@@ -221,10 +221,11 @@ Route::middleware(['checkauth'])->group(function () {
   });
 
   Route::get('sendbasicemail', [MailController::class, 'basic_email']);
+  route::get('detail-invoice-mail/{id}', [InvoiceController::class, 'detailInvoicemail'])->name('detail.invoicemail');
   Route::get('sendhtmlemail', [MailController::class, 'html_email']);
   Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
   Route::prefix('admin')->group(function () {
-    Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
+  Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
   });
 
 });

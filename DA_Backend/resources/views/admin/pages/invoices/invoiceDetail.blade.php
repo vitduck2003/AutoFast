@@ -102,9 +102,9 @@
                         <div class="d-print-none mt-4">
                             <div class="float-right">
                                 <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light mr-2"><i
-                                        class="fa fa-print"></i> In Hóa đơn</a>
-                                <a href="#" class="btn btn-primary waves-effect waves-light mr-2">Gửi qua Email</a>
-                                @if ($invoice->status_payment == 'Chưa thanh toán')
+                                            class="fa fa-print"></i> In Hóa đơn</a>
+                                   <a href="{{ route('detail.invoicemail', $invoice->id) }}" class="btn btn-primary waves-effect waves-light mr-2">Gửi qua Email</a>
+                                  @if ($invoice->status_payment == 'Chưa thanh toán')
                                     <a href="{{ route('status.payment', ['id' => $invoice->id]) }}"
                                         class="btn btn-success waves-effect waves-light">Đã thanh toán</a>
                                 @endif

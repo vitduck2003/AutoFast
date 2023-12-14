@@ -140,4 +140,34 @@ class InvoiceController extends Controller
     
         return redirect()->back()->with('message','Cập nhật thành công');
     }
+
+    public function detailInvoicemail($id){
+        $invoice = DB::table('bill')
+        ->join('booking_coppy', 'booking_coppy.id', '=', 'bill.id_booking')
+        ->join('jobs', 'jobs.id_booking', '=', 'booking_coppy.id')
+        ->select('bill.id', 'booking_coppy.name', 'booking_coppy.phone', 'booking_coppy.email', 'booking_coppy.model_car', 'booking_coppy.mileage', 'booking_coppy.service_name', 'bill.created_at', 'bill.total_amount','bill.total_discount' , 'booking_coppy.id as id_booking', 'bill.created_at', 'bill.status_payment', 'bill.method_payment')
+        ->where('bill.id', '=', $id)
+        ->first();
+        $jobs = DB::table('jobs')
+        ->select('item_name', 'item_price', 'note')
+        ->where('id_booking', '=', $invoice->id_booking)
+        ->get();
+   
+     
+        $mail = new MailController();
+        $data = DB::table('bill')
+        ->join('booking_coppy','booking_coppy.id','=','bill.id_booking')
+        ->where('bill.id', $id)
+        ->first();
+  
+        $userdata = [
+            'invoice' => $invoice,
+            'jobs' => $jobs,
+            'email'  => $invoice->email,
+            'name' => $invoice->name
+          ];
+        //   dd($userdata);
+        $mail ->sendbill($userdata);
+  
+    }
 }

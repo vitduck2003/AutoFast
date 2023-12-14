@@ -39,6 +39,17 @@ public function hen_dat_lich($userdata) {
    });
 
 }
+public function sendbill($userdata) {
+   $data = $userdata;
+   Mail::send('billMail', $data, function($message) use($userdata) {
+      $message->to($userdata['email'], $userdata['name'])->subject
+         ('Hẹn bạn quay lại đặt lịch ');
+      $message->from('baoduongautofast@gmail.com','Gara Autofast');
+   });
+
+   echo 'dc roi day';
+
+}
 
    public function attachment_email() {
       $data = array('name'=>"Virat Gandhi");
