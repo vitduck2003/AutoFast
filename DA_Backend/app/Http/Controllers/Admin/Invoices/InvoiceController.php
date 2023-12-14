@@ -153,7 +153,7 @@ class InvoiceController extends Controller
         ->where('id_booking', '=', $invoice->id_booking)
         ->get();
    
-     
+     try{
         $mail = new MailController();
         $data = DB::table('bill')
         ->join('booking_coppy','booking_coppy.id','=','bill.id_booking')
@@ -168,6 +168,11 @@ class InvoiceController extends Controller
           ];
         //   dd($userdata);
         $mail ->sendbill($userdata);
-  
+     }catch(Exception $e){
+
+     }
+
+          return redirect()->route('detail.invoice', ['id' => $id]); 
     }
+  
 }

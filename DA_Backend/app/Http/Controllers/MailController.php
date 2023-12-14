@@ -47,7 +47,7 @@ public function sendbill($userdata) {
       $message->from('baoduongautofast@gmail.com','Gara Autofast');
    });
 
-   echo 'dc roi day';
+  
 
 }
 
