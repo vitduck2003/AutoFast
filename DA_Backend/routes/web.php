@@ -21,7 +21,6 @@ use App\Http\Controllers\Admin\Home\DashboardController;
 use App\Http\Controllers\Admin\Account\AccountController;
 use App\Http\Controllers\Admin\Bookings\BookingController;
 use App\Http\Controllers\Admin\Invoices\InvoiceController;
-use App\Http\Controllers\Admin\Layout\LayoutController;
 use App\Http\Controllers\Admin\Services\ServiceController;
 use App\Http\Controllers\Admin\Profile\ProfileAdminController;
 use App\Http\Controllers\Admin\ServiceItems\ServiceItemController;
@@ -52,16 +51,26 @@ Route::get('/api/bookings-wait/{id}', [BookingController::class, 'getBookingWait
 Route::get('/api/bookings-priority/{id}', [BookingController::class, 'getBookingPriority']);
 Route::get('/api/bookings-cancel/{id}', [BookingController::class, 'getBookingCancel']);
 Route::get('/api/bookings-complete/{id}', [BookingController::class, 'getBookingComplete']);
-Route::get('/api/booking-info', [LayoutController::class, 'admin']);
 Route::get('api/room', [BookingController::class, 'getRoom']);
 Route::get('api/staff', [BookingController::class, 'getStaff']);
 
 Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
+route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
+route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
+route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
 
-
-
+Route::prefix('admin')->group(function () {
+  Route::get('invoice', function () {
+    return view('admin/pages/invoices/invoice');
+  });
+  route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
+  route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
+  route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
+  route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
+});
 Route::middleware(['checkauth'])->group(function () {
 
 
@@ -80,8 +89,6 @@ Route::middleware(['checkauth'])->group(function () {
     Route::get('bookings-cancel', [BookingController::class, 'bookingCancel'])->name('booking.cancel');
     Route::get('bookings-complete', [BookingController::class, 'bookingComplete'])->name('booking.complete');
     Route::get('booking-detail/{id}', [BookingController::class, 'bookingDetail'])->name('booking.detail');
-    Route::get('booking-edit-view/{id}', [BookingController::class, 'bookingEditView'])->name('booking.edit.view');
-    Route::post('booking-edit', [BookingController::class, 'bookingEdit'])->name('booking.edit');
 
     Route::get('jobs', [JobController::class, 'index']);
     Route::get('job-detail/{id}', [JobController::class, 'jobDetail'])->name('jobs.detail');
@@ -89,18 +96,11 @@ Route::middleware(['checkauth'])->group(function () {
     Route::get('add/job/{id}', [JobController::class, 'viewAddJob'])->name('view.add.job');
     Route::post('add/job', [JobController::class, 'addJob'])->name('add.job');
     Route::post('delete/job/', [JobController::class, 'deleteJob'])->name('delete.job.detail');
-    Route::get('delete/job/{id}', [BookingController::class, 'deleteJob'])->name('delete.job.detail.get');
+
 
     Route::post('start-job', [JobController::class, 'startJob'])->name('booking.startJob');
     Route::get('confirm-complete/{id}', [JobController::class, 'confirmComplete'])->name('job.confirm.complete');
 
-    Route::get('invoice', function () {
-      return view('admin/pages/invoices/invoice');
-    });
-    route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
-    route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
-    route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
-    route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
 
     Route::get('staff', [StaffController::class, 'index'])->name('staff');
     Route::get('staff/{id}', [StaffController::class, 'showDetail'])->name('showDetail');
@@ -177,10 +177,7 @@ Route::middleware(['checkauth'])->group(function () {
     Route::put('staff/update/{id}', [StaffController::class, 'update'])->name('staff-update');
     Route::delete('staff/delete/{id}', [StaffController::class, 'remove'])->name('staff-delete');
   });
-  route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create.invoice');
-  route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
-  route::get('detail-invoice/{id}', [InvoiceController::class, 'detailInvoice'])->name('detail.invoice');
-  route::get('update/status-payment/{id}', [InvoiceController::class, 'updatePayment'])->name('status.payment');
+
 
 
 
@@ -224,12 +221,13 @@ Route::middleware(['checkauth'])->group(function () {
     Route::post('coupon', [CouponController::class, 'create_coupon'])->name('coupon.create_coupon');
   });
 
-  Route::get('sendbasicemail', [MailController::class, 'basic_email']);
-  route::get('detail-invoice-mail/{id}', [InvoiceController::class, 'detailInvoicemail'])->name('detail.invoicemail');
-  Route::get('sendhtmlemail', [MailController::class, 'html_email']);
-  Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
+
   Route::prefix('admin')->group(function () {
   Route::get('statistic', [StatisticController::class, 'index'])->name('statistic.index');
   });
 
 });
+Route::get('sendbasicemail', [MailController::class, 'basic_email']);
+route::get('detail-invoice-mail/{id}', [InvoiceController::class, 'detailInvoicemail'])->name('detail.invoicemail');
+Route::get('sendhtmlemail', [MailController::class, 'html_email']);
+Route::get('sendattachmentemail', [MailController::class, 'attachment_email']);
