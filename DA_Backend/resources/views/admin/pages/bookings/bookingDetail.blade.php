@@ -62,7 +62,9 @@
                                         <th style="width: 70px;">ID</th>
                                         <th class="text-center">Tên công việc</th>
                                         <th class="text-center">Giá</th>
+                                        @if($booking->status != "Đã hoàn thành")
                                         <th class="text-center">Thao tác</th>
+                                        @endIf
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,11 +75,13 @@
                                             ({{ $job->note }})
                                         @endif
                                         <td class="text-center">{{ number_format($job->item_price, 0, ',', '.') }} VND</td>
+                                        @if($booking->status != "Đã hoàn thành")
                                         <td class="text-center">
                                             <a href="{{ route('delete.job.detail.get', ['id'=>$job->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?')">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                      <tr>
