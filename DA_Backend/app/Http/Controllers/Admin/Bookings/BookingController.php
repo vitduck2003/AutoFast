@@ -136,7 +136,10 @@ class BookingController extends Controller
         $checkStaff = DB::table('staff')
             ->where('status', 'Đang đợi việc')
             ->count();
-        return view('admin/pages/bookings/bookingWait', compact('bookings', 'checkRoom', 'checkStaff'));
+        $checkBookingPrio = DB::table('booking')
+        ->where('status', "Lịch ưu tiên")
+        ->count();
+        return view('admin/pages/bookings/bookingWait', compact('bookings', 'checkRoom', 'checkStaff', 'checkBookingPrio'));
     }
     public function getBookingWait($id)
     {

@@ -4,8 +4,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
-                    <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
+                    <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng đã được hủy</h4>
+                    <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch đã được hủy</p>
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">

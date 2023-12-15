@@ -4,8 +4,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
-                    <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
+                    <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng đang chờ đến</h4>
+                    <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch đang chờ khách đến.</p>
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -102,6 +102,9 @@
                             <span id="roomError" class="text-danger">
                         </div>
                         @csrf
+                       @if($checkBookingPrio > 0 )
+                       <p class="text-danger mt-2">Hiện đang có {{ $checkBookingPrio }} lịch cần ưu tiên, vui lòng làm trước</p>
+                       @endif
                         <button type="submit" class="btn btn-primary">Bắt đầu</button>
                     </form>
                 </div>
