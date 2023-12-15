@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +12,8 @@
     <link rel="shortcut icon" href="{{ asset('assets\images\favicon.ico') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
-        alpha/css/bootstrap.css" rel="stylesheet">
+        alpha/css/bootstrap.css"
+        rel="stylesheet">
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/fdb36d9438.js" crossorigin="anonymous"></script>
@@ -49,12 +49,15 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         .employee-details h2 {
             text-align: center;
         }
+
         .employee-details p {
             margin-bottom: 10px;
         }
+
         .employee-details img {
             display: block;
             margin: 0 auto;
@@ -62,6 +65,7 @@
             height: auto;
             border-radius: 50%;
         }
+
         .drop-container {
             position: relative;
             display: flex;
@@ -132,23 +136,26 @@
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="30px" width="30px">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="30px"
+                                    width="30px">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
                             </span>
                         </a>
                     </div>
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
+
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
                 </div>
@@ -194,7 +201,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" id="show_noti"
                             aria-labelledby="page-header-notifications-dropdown">
-                                                </div>
+                        </div>
 
                     </div>
                     <div class="dropdown d-inline-block">
@@ -255,7 +262,8 @@
                                 <span class="badge badge-pill badge-danger float-right" id="bookingWait"></span>
                                 <li><a href="{{ url('admin/bookings-wait') }}">Lịch đang chờ khách đến</a></li>
                                 <span class="badge badge-pill badge-danger float-right" id="bookingPrio"></span>
-                                <li><a href="{{ url('admin/bookings-priority') }}">Lịch ưu tiên & chưa có phòng</a></li>
+                                <li><a href="{{ url('admin/bookings-priority') }}">Lịch ưu tiên & chưa có phòng</a>
+                                </li>
                                 <span class="badge badge-pill badge-danger float-right" id="bookingCom"></span>
                                 <li><a href="{{ url('admin/bookings-complete') }}">Lịch đã hoàn thành</a></li>
                                 <span class="badge badge-pill badge-danger float-right" id="bookingCan"></span>
@@ -422,101 +430,105 @@
         <!-- end main content-->
 
     </div>
-
     <script>
-          
-        $(document).ready(function() {
-        $.ajax({
-            url: '/api/booking-info',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                $('#bookingPen').text(data.bookingPending);
-                $('#bookingWait').text(data.bookingWait);
-                $('#bookingPrio').text(data.bookingPrio);
-                $('#bookingCom').text(data.bookingComplete);
-                $('#bookingCan').text(data.bookingCancel);
-                $('#bookingDoing').text(data.bookingDoing);
-                if (data.bookingPending == 0) {
-                    $('#bookingPen').css('display', 'none');
-                }
-                if (data.bookingWait == 0) {
-                    $('#bookingWait').css('display', 'none');
-                }
-                if (data.bookingPrio == 0) {
-                    $('#bookingPrio').css('display', 'none');
-                }
-                if (data.bookingComplete == 0) {
-                    $('#bookingCom').css('display', 'none');
-                }
-                if (data.bookingCancel == 0) {
-                    $('#bookingCan').css('display', 'none');
-                }
-                if (data.bookingGoing == 0) {
-                    $('#bookingDoing').css('display', 'none');
-                }
+      $(document).ready(function() {
+    $.ajax({
+        url: '/api/booking-info',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            $('#bookingPen').text(data.bookingPending);
+            $('#bookingWait').text(data.bookingWait);
+            $('#bookingPrio').text(data.bookingPrio);
+            $('#bookingCom').text(data.bookingComplete);
+            $('#bookingCan').text(data.bookingCancel);
+            $('#bookingDoing').text(data.bookingDoing);
 
-            },
-            error: function() {
-                console.log('Kết nối api thất bại rồi');
+            if (data.bookingPending == 0) {
+                $('#bookingPen').css('display', 'none');
             }
-        });
+            if (data.bookingWait == 0) {
+                $('#bookingWait').css('display', 'none');
+            }
+            if (data.bookingPrio == 0) {
+                $('#bookingPrio').css('display', 'none');
+            }
+            if (data.bookingComplete == 0) {
+                $('#bookingCom').css('display', 'none');
+            }
+            if (data.bookingCancel == 0) {
+                $('#bookingCan').css('display', 'none');
+            }
+            if (data.bookingDoing == 0) {
+                $('#bookingDoing').css('display', 'none');
+            }
+        },
+        error: function() {
+            console.log('Kết nối API thất bại');
+        }
     });
-        const show_noti = document.getElementById('show_noti');
-        fetch('/api/admin/notifications')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Lỗi khi gọi API');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const recentNotifications = data.slice(0, 3);
-                var content = recentNotifications.map(function (data) {
-                    return `
-                <div data-simplebar="" style="max-height: 230px;">
-                
-                <a href="" class="text-reset notification-item">
-                <div class="media">
-                <div class="media-body">
-                <h6 class="mt-0 mb-1"> ${data.title}</h6>
-                <div class="font-size-12 text-muted">
-                <p class="mb-1"> ${data.content} ${data.name}</p>
-                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}
-                </p>
-                </div>
-                </div>
-                </div>
-                </a>
-                
-                </div>
+
+    const show_noti = document.getElementById('show_noti');
+    fetch('/api/admin/notifications')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi khi gọi API');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const recentNotifications = data.slice(0, 3);
+            var content = recentNotifications.map(function(data) {
+                return `
+                    <div data-simplebar="" style="max-height: 230px;">
+                        <a href="" class="text-reset notification-item">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">${data.title}</h6>
+                                    <div class="font-size-12 text-muted">
+                                        <p class="mb-1">${data.content} ${data.name}</p>
+                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> ${data.display_time}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 `;
-                }).join('')
-                show_noti.innerHTML = `
+            }).join('');
+
+            show_noti.innerHTML = `
                 <div class="p-3">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h6 class="m-0"> Thông báo </h6>
+                            <h6 class="m-0">Thông báo</h6>
                         </div>
                         <div class="col-auto">
-                            <a href="{{route('notifications-view')}}" class="small"> View All</a>
+                            <a href="{{ route('notifications-view') }}" class="small">View All</a>
                         </div>
                     </div>
                 </div>
-                `+ content +`
-                
+            ` + content + `
                 <div class="p-2 border-top">
-                    <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="">
-                        <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
+                    <a class="btn btn-sm btn-link fonte-14 btn-block text-center" href="">
+                        <i class="mdi mdi-arrow-right-circle mr-1"></i>View More..
                     </a>
                 </div>
             `;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+        })
+        .catch(error => {
+            console.error(error);
+        });
 
+    // Kích hoạt plugin MetisMenu
+    $('#side-menu').metisMenu();
+
+    // Xử lý sự kiện nhấp vào mục menu cha
+    $('#side-menu .menu-title').on('click', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('active').next('.submenu').slideToggle(200);
+    });
+});
+    </script>
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

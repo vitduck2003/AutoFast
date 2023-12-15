@@ -114,7 +114,7 @@
             <!-- end row -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4 float-sm-left">Thống kê</h4>
+                    <h4 class="card-title mb-4 float-sm-left">Thống kê các công việc đã hoản thành</h4>
                     <div class="float-sm-right">
                         <select id="chart-option">
                             <option value="week">Tuần</option>
@@ -130,36 +130,53 @@
     </div>
     <!-- end row -->
     <div class="row">
-        <div class="col-xl-4">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Các dịch vụ</h4>
-                    <ul class="verti-timeline list-unstyled">
-                        @foreach ($services as $service)
-                        <li class="event-list">
-                            <div class="event-timeline-dot">
-                                <i class="bx bx-right-arrow-circle font-size-18"></i>
-                            </div>
-                            <div class="media">
-                                <div class="mr-3">
-                                    <h5 class="font-size-14">{{ ucwords(strtolower($service->service_name))  }}<i
-                                            class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ml-2"></i>
-                                    </h5>
-                                </div>
-                                <div class="media-body">
-                                    <div>
-                                        Trọn Gói {{ ucwords(strtolower($service->service_name))  }}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
+                    <h4 class="card-title mb-4">Đơn đặt lịch gần đây</h4>
+                    <div class="table-responsive">
+                        <table class="table table-centered table-nowrap mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên khách</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trang thái </th>
+                                    <th>Cầu</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach($bookings as $bk)
+                                    <tr>
+                                    <td><a href="javascript: void(0);" class="text-body font-weight-bold">{{ $bk->id }}</a>
+                                    </td>
+                                    <td>{{ $bk->name }}</td>
+                                    <td>
+                                        {{$bk->created_at}}
+                                    </td>
+                                    <td>
+                                        {{$bk->status}}
+                                    </td>
+                                    <td>
+                                    {{$bk->room_name}}
+                                    </td>
+                                    <td>
+                                    <a href="{{ route('booking.detail', ['id'=> $bk->id]) }}"><button type="button"
+                                            class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
+                                            data-toggle="modal" data-target=".exampleModal">
+                                           Chi tiết
+                                        </button></a>
+                                    </td>
+                                </tr>
+                                    @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table-responsive -->
                 </div>
             </div>
         </div>
-
-    </div>
     <!-- end row -->
 
     </div>
