@@ -365,7 +365,7 @@ class BookingController extends Controller
             ->get();
         $service_items_other_present = DB::table('jobs')
             ->select('item_name', 'note')
-            ->where('note', '=', 'Dịch vụ thêm')
+            ->whereNotNull('note')
             ->where('id_booking', '=', $id)
             ->get();
         return view('admin/pages/bookings/bookingEdit', compact('booking', 'services', 'service_present', 'service_items_other', 'service_items_other_present'));

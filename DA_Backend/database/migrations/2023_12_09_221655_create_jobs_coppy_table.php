@@ -20,10 +20,10 @@ return new class extends Migration
             $table->integer('id_booking');
             $table->integer('id_staff')->nullable();
             $table->string('item_name');
-            $table->float('item_price');
+            $table->float('item_price',255);
             $table->string('target_time_done');
             $table->string('images_done')->nullable();
-            $table->float('price')->nullable();
+            $table->float('price',255)->nullable();
             $table->string('status');
             $table->text('note')->nullable();
             $table->timestamps();
