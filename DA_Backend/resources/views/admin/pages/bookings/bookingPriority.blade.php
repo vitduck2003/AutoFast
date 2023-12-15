@@ -67,6 +67,9 @@
                             <select class="form-control" id="staffSelect" name="staff">
                                 <option value="">-- Chọn nhân viên --</option>
                             </select>   
+                            @if($checkStaff < 1)
+                          <p class="text-danger mt-2">Tất cả nhân viên đã bận, hãy chuyển sang ưu tiên</p>
+                          @endif
                             <span id="staffError" class="text-danger">
                         </div>
                         <div class="form-group">
@@ -74,6 +77,9 @@
                             <select class="form-control" id="roomSelect" name="room">
                                 <option value="">-- Chọn phòng --</option>
                             </select>
+                            @if($checkRoom < 1)
+                            <p class="text-danger mt-2">Tất cả phòng đã bận, hãy chuyển sang ưu tiên</p>
+                            @endif
                             <span id="roomError" class="text-danger">
                         </div>
                         @csrf 

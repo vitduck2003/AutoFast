@@ -35,15 +35,20 @@
                                     <form action="{{ route('booking.confirm', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn xác nhận lịch không?')">Xác nhận</button>
+                                        <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có muốn xác nhận lịch không?')">Xác nhận</button>
                                     </form>
                                     <form action="{{ route('booking.revoke', ['id' => $booking->id]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
+                                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn hủy lịch không?')">Hủy</button>
                                     </form>
+                                  
+                                        <a href="{{ route('booking.edit.view', ['id'=>$booking->id]) }}">
+                                            <button type="submit" class="btn btn-primary text-center">Sửa</button>
+                                        </a>
+
                                     <a href="{{ route('booking.detail', ['id'=> $booking->id]) }}">
-                                        <button type="button" class="btn btn-success">
+                                        <button type="button" class="btn btn-info">
                                             Chi tiết
                                         </button>
                                     </a>

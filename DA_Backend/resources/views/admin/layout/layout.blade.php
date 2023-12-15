@@ -126,11 +126,9 @@
 
 <body data-sidebar="dark">
     <div id="layout-wrapper">
-
         <header id="page-topbar">
             <div class="navbar-header">
                 <div class="d-flex">
-                    <!-- LOGO -->
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
@@ -143,16 +141,17 @@
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="30px" width="30px">
                             </span>
                             <span class="logo-lg">
                                 <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
                             </span>
                         </a>
                     </div>
-
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
                 </div>
-
                 <div class="d-flex">
 
                     <div class="dropdown d-inline-block d-lg-none ml-2">
@@ -219,16 +218,18 @@
                                 xuất</a>
                         </div>
                     </div>
-
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                            <i class="bx bx-cog bx-spin"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- ========== Left Sidebar Start ========== -->
         <div class="vertical-menu">
-
             <div data-simplebar="" class="h-100">
-
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
@@ -423,6 +424,7 @@
     </div>
 
     <script>
+          
         $(document).ready(function() {
         $.ajax({
             url: '/api/booking-info',
@@ -551,7 +553,7 @@
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
     @yield('script');
 

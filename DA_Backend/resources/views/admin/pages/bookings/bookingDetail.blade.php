@@ -54,23 +54,30 @@
                         <div class="py-2 mt-3">
                             <h3 class="font-size-15 font-weight-bold">Danh sách dịch vụ</h3>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style="width: 70px;">ID</th>
-                                        <th>Tên công việc</th>
-                                        <th class="text-right">Giá</th>
+                                        <th class="text-center">Tên công việc</th>
+                                        <th class="text-center">Giá</th>
+                                        <th class="text-center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($jobs as $job)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $job->item_name }} @if ($job->note !== null)
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center">{{ $job->item_name }} @if ($job->note !== null)
                                             ({{ $job->note }})
                                         @endif
-                                        <td class="text-right">{{ number_format($job->item_price, 0, ',', '.') }} VND</td>
+                                        <td class="text-center">{{ number_format($job->item_price, 0, ',', '.') }} VND</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('delete.job.detail.get', ['id'=>$job->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                      <tr>
@@ -78,7 +85,7 @@
                                             <strong>Tổng tiền</strong>
                                         </td>
                                         <td class="border-0 text-right">
-                                            <h4 class="m-0">{{ number_format($booking->total_price, 0, ',', '.') }} VND</h4>
+                                            <h4 class="m-0">{{ number_format($total_price->total_price, 0, ',', '.') }} VND</h4>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,4 +119,37 @@
             </div>
         </div>
     </div>
+    <script>
+           @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
 @endsection

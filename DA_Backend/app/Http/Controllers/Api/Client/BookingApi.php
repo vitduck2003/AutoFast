@@ -53,27 +53,26 @@ class BookingApi extends Controller
                         'status' => 'Đang chờ nhận việc',
                     ]);
                 }
-
-                foreach ($data['service_item_other'] as $id_other) {
-                    $itemServiceOther = DB::table('service_items')
-                        ->where('id', '=', $id_other)
-                        ->first();
-
-                    if ($itemServiceOther) {
-                        $jobId = DB::table('jobs')->insertGetId([
-                            'id_booking' => $bookingId,
-                            'id_booking_detail' => $bookingDetailId,
-                            'id_service' => null,
-                            'item_name' => $itemServiceOther->item_name,
-                            'item_price' => $itemServiceOther->price,
-                            'target_time_done' => $itemServiceOther->time_done,
-                            'images_done' => null,
-                            'price' => $itemServiceOther->price,
-                            'status' => 'Đang chờ nhận việc',
-                            'note' => 'Dịch vụ thêm'
-                        ]);
+                    foreach ($data['service_item_other'] as $id_other) {
+                        $itemServiceOther = DB::table('service_items')
+                            ->where('id', '=', $id_other)
+                            ->first();
+    
+                        if ($itemServiceOther) {
+                            $jobId = DB::table('jobs')->insertGetId([
+                                'id_booking' => $bookingId,
+                                'id_booking_detail' => $bookingDetailId,
+                                'id_service' => null,
+                                'item_name' => $itemServiceOther->item_name,
+                                'item_price' => $itemServiceOther->price,
+                                'target_time_done' => $itemServiceOther->time_done,
+                                'images_done' => null,
+                                'price' => $itemServiceOther->price,
+                                'status' => 'Đang chờ nhận việc',
+                                'note' => 'Dịch vụ thêm'
+                            ]);
+                        }
                     }
-                }
              //send mailer
              DB::table('notification')->insert(['booking_id'=>$bookingId,'title' => 'Công việc','content' => 'Có lịch bảo dưỡng mới của','created_at' =>now()]);
 
