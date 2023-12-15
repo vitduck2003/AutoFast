@@ -129,7 +129,7 @@ const BookingPage = (props: any) => {
     }
 
     // Kiểm tra loại xe
-    if (formData.model_car === "Lựa chọn loại xe của bạn") {
+    if (!formData.model_car) {
       errors.model_car = "Vui lòng chọn loại xe";
     }
 
@@ -760,7 +760,7 @@ const BookingPage = (props: any) => {
                       placeholder="Ngày và Thời gian Đến"
                     >
                       <option value="" disabled selected>
-                        Vui lòng chọn giờ đến
+                        Giờ đến dự kiến
                       </option>
                       {DataTime.map((timeObj) => {
                         const formattedHourNumeric = parseInt(
@@ -797,14 +797,14 @@ const BookingPage = (props: any) => {
                     </select>
                   </div>
                   <br />
-                  {formErrors.target_date && (
-                    <p style={{ color: "red" }}>{formErrors.target_date}</p>
+                  
+                </div>
+                {formErrors.target_date && (
+                    <span style={{ color: "red", marginRight: "100px" }}>{formErrors.target_date}</span>
                   )}
                   {formErrors.target_time && (
-                    <p style={{ color: "red" }}>{formErrors.target_time}</p>
+                    <span style={{ color: "red" }}>{formErrors.target_time}</span>
                   )}
-                </div>
-
                 <div style={{ marginTop: "20px" }} className="form-group">
                   <label htmlFor="">Số KM của xe</label>
                   <input
