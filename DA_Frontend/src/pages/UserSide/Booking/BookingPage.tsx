@@ -207,7 +207,7 @@ const BookingPage = (props: any) => {
     service_item_other: [];
   };
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     user_id: "",
     full_name: "",
     phone: "",
@@ -223,30 +223,27 @@ const BookingPage = (props: any) => {
   });
 
   useEffect(() => {
-    if (phone != "") {
-      // Điện thoại không được trống, Set dữ liệu theo tên, phone, email
-      setFormData({
-        user_id: user_id,
-        full_name: name, // Thay đổi dữ liệu theo trường
+    if (phone !== "") {
+      // Điện thoại không trống, cập nhật formData
+      setFormData((prevData) => ({
+        ...prevData,
+        user_id: user_id || prevData.user_id,
+        full_name: name || prevData.full_name,
         phone: phone,
-        email: email, // Thay đổi dữ liệu theo trường
-        note: "",
-        model_car: "",
-        status: "Chờ xác nhận",
-        target_date: "",
-        target_time: "",
-        service: "",
-        mileage: "",
-        service_item_other: [],
-      });
-    } else {
-      // No phone number, set initial empty form data
-      // Không có số điện thoại data not empty
+        email: email || prevData.email,
+        // Giữ nguyên các trường khác
+      }));
+    }
+  }, [user_id, name, phone, email]); // Phụ thuộc vào user_id, name, phone, và email
+  
+  useEffect(() => {
+    if (phone === "") {
+      // Điện thoại trống, thiết lập lại formData
       setFormData({
         user_id: "",
-        full_name: "", // Replace with actual data // Thay đổi dữ liệu theo trường
+        full_name: "",
         phone: "",
-        email: "", // Replace with actual data // Thay đổi dữ liệu theo trường
+        email: "",
         note: "",
         model_car: "",
         status: "Chờ xác nhận",
@@ -257,7 +254,8 @@ const BookingPage = (props: any) => {
         service_item_other: [],
       });
     }
-  }, [phone]);
+  }, [phone]); // Phụ thuộc chỉ vào phone
+  
   const handleCheckboxChange = (e, item) => {
     // Phần select action để cộng vào cả tổng giá tiền
     if (e.target.checked) {
@@ -288,7 +286,7 @@ const BookingPage = (props: any) => {
     });
   };
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
