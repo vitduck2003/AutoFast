@@ -116,12 +116,7 @@ const BaseLayout = (props: any) => {
                       style={userTextStyle}
                       onClick={toggleDropdown}
                     >
-                      Xin chào,
-                      <img
-                        style={avatarUser}
-                        src={img ? `http://localhost:8000/storage/${img}` : ""}
-                      />
-                      {userName}
+                      Xin chào <span style={{color: "blue"}}>{userName}</span>
                     </small>
                     <div style={dropdownContentStyle}>
                       <Link style={dropdownContentLinkStyle} to="/mybooking">
