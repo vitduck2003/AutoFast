@@ -152,7 +152,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4 float-sm-left">Thống kê</h4>
                     <div class="float-sm-right">
-                        <select id="chart-option">
+                        <select id="chart-option"  class="form-control">
                             <option value="week">Tuần</option>
                             <option value="month">Tháng</option>
                             <option value="year">Năm</option>
@@ -174,13 +174,14 @@
                             <h4 class="card-title mb-4">Doanh thu</h4>
                         </div>
                         <div class="mb-3">
-                            <select id="revenue-option" class="form-select">
+                            <select id="revenue-option" class="form-control">
                                 <option value="today">Hôm nay</option>
                                 <option value="week">Tuần</option>
                                 <option value="month">Tháng</option>
                                 <option value="year">Năm</option>
                             </select>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-sm-6">

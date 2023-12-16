@@ -136,20 +136,20 @@
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%"  height="max">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%" height="100%">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="30px"
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%"  height="100%"
                                     width="30px">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt height="100">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%" height="100%">
                             </span>
                         </a>
                     </div>
@@ -223,7 +223,7 @@
 
                         <li>
                             <a href="{{ route('admin.home') }}" class="waves-effect">
-                                <i class="bx bx-home-circle"></i>
+                            <i class="fa-solid fa-house"></i>
                                 <span>Trang chủ</span>
                             </a>
 
@@ -231,7 +231,7 @@
                         <li class="menu-title">Đặt lịch</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-file"></i>
+                            <i class="fa-solid fa-calendar-days"></i>
                                 <span>Quản lí đặt lịch</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -251,7 +251,7 @@
                         <li class="menu-title">Công việc</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-file"></i>
+                            <i class="fa-solid fa-briefcase"></i>
                                 <span>Quản lí công việc</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -263,7 +263,7 @@
                         <li class="menu-title">Cầu</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-file"></i>
+                            <i class="fa-solid fa-warehouse"></i>
                                 <span>Quản lí cầu</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -275,7 +275,7 @@
                         <li class="menu-title">Hóa đơn</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-file"></i>
+                            <i class="fa-solid fa-file-invoice"></i>
                                 <span>Quản lí hóa đơn</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -285,8 +285,7 @@
                         <li class="menu-title">Dịch vụ</li>
                         <li>
                             <a class="has-arrow waves-effect">
-                                <i class="bx bx-tone"></i>
-                                <span>Quản lí dịch vụ</span>
+                            <i class="fa-solid fa-screwdriver-wrench"></i>                                <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('service.index') }}">Tất cả dịch vụ</a></li>
@@ -296,8 +295,7 @@
                         <li class="menu-title">Phụ Tùng</li>
                         <li>
                             <a class="has-arrow waves-effect">
-                                <i class="bx bx-tone"></i>
-                                <span>Quản lí phụ tùng</span>
+                            <i class="fa-solid fa-wrench"></i>                                <span>Quản lí phụ tùng</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('serviceitem.index') }}">Tất cả phụ tùng</a></li>
@@ -307,7 +305,7 @@
                         <li class="menu-title">Khuyến Mại</li>
                         <li>
                             <a class="has-arrow waves-effect">
-                                <i class="bx bx-tone"></i>
+                            <i class="fa-solid fa-ticket"></i>
                                 <span>Quản lí khuyến mại</span>
                             </a>
 
@@ -319,7 +317,7 @@
                         <li class="menu-title">Tài khoản</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-list-ul"></i>
+                            <i class="fa-solid fa-circle-user"></i>
                                 <span>Quản lí tài khoản</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -329,7 +327,7 @@
                         <li class="menu-title">Nhân viên</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-list-ul"></i>
+                            <i class="fa-solid fa-users-gear"></i>
                                 <span>Quản lí nhân viên</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
@@ -342,7 +340,7 @@
                         <li class="menu-title">Đánh giá</li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="bx bx-list-ul"></i>
+                            <i class="fa-solid fa-star"></i>
                                 <span>Quản lí Đánh giá</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
