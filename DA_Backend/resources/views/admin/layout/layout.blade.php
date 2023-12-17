@@ -285,7 +285,8 @@
                         <li class="menu-title">Dịch vụ</li>
                         <li>
                             <a class="has-arrow waves-effect">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>                                <span>Quản lí dịch vụ</span>
+                            <i class="fa-solid fa-screwdriver-wrench"></i>                                
+                            <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('service.index') }}">Tất cả dịch vụ</a></li>
@@ -295,7 +296,8 @@
                         <li class="menu-title">Phụ Tùng</li>
                         <li>
                             <a class="has-arrow waves-effect">
-                            <i class="fa-solid fa-wrench"></i>                                <span>Quản lí phụ tùng</span>
+                            <i class="fa-solid fa-wrench"></i>                                
+                            <span>Quản lí phụ tùng</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('serviceitem.index') }}">Tất cả phụ tùng</a></li>
