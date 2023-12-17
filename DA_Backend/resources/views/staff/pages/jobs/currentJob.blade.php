@@ -24,43 +24,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($jobs as $job)
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="job_ids[]" value="{{ $job->id }}">
-                                        </div>
-                                    </td>
-                                    <td>{{ $job->id }}</td>
-                                    <td>{{ $job->name }}</td>
-                                    <td>{{ $job->item_name }}</td>
-                                    <td>{{ $job->item_price }}</td>
-                                    <td>{{ $job->model_car }}</td>
-                                    <td>{{ $job->target_time_done }} phút</td>
-                                    <td class="text-success">{{ $job->status }}</td>
-                                    <td>
-                                        @if($job->status == 'Đang chờ nhận việc')
-                                            <form method="post" action="{{ route('staff.job.action') }}" style="display: inline;">
-                                                @csrf
-                                                <input type="hidden" name="job_ids[]" value="{{ $job->id }}">
-                                                <button type="submit" value="start" name="action" class="btn btn-primary">Bắt đầu làm</button>
-                                            </form>
-                                        @endif
-                                        @if($job->status == 'Đang làm')
-                                        <form method="post" action="{{ route('staff.job.action') }}" style="display: inline;">
-                                            @csrf
-                                            <input type="hidden" name="job_ids[]" value="{{ $job->id }}">
-                                            <button type="submit" value="done" name="action" class="btn btn-success">Hoàn thành</button>
-                                        </form>
-                                        @endif
-                                    </td>
-                                </tr>
+                                @foreach ($jobs as $job)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="job_ids[]"
+                                                    value="{{ $job->id }}">
+                                            </div>
+                                        </td>
+                                        <td>{{ $job->id }}</td>
+                                        <td>{{ $job->name }}</td>
+                                        <td>{{ $job->item_name }}</td>
+                                        <td>{{ $job->item_price }}</td>
+                                        <td>{{ $job->model_car }}</td>
+                                        <td>{{ $job->target_time_done }} phút</td>
+                                        <td class="text-success">{{ $job->status }}</td>
+                                        <td>
+                                            @if ($job->status == 'Đang chờ nhận việc')
+                                                <form method="post" action="{{ route('staff.job.action') }}"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="job_ids[]" value="{{ $job->id }}">
+                                                    <button type="submit" value="start" name="action"
+                                                        class="btn btn-primary">Bắt đầu làm</button>
+                                                </form>
+                                            @endif
+                                            @if ($job->status == 'Đang làm')
+                                                <form method="post" action="{{ route('staff.job.action') }}"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="job_ids[]" value="{{ $job->id }}">
+                                                    <button type="submit" value="done" name="action"
+                                                        class="btn btn-success">Hoàn thành</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         <div class="text-center mt-3">
-                            <button name="action" value="start" type="submit" class="btn btn-primary">Bắt đầu làm</button>
-                            <button id="completeAllButton" name="action" value="done" type="submit" class="btn btn-success">Hoàn thành</button>
+                            <button id="startAllButton" name="action" value="start" type="submit"
+                                class="btn btn-primary toggle-button">Bắt đầu làm</button>
+                            <button id="completeAllButton" name="action" value="done" type="submit"
+                                class="btn btn-success toggle-button">Hoàn thành</button>
                         </div>
                     </form>
                 </div>
@@ -68,7 +75,7 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
     <script>
-          @if (Session::has('message'))
+        @if (Session::has('message'))
             toastr.options = {
                 "closeButton": true,
                 "progressBar": true
@@ -100,25 +107,38 @@
             toastr.warning("{{ session('warning') }}");
         @endif
         document.addEventListener('DOMContentLoaded', function() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            var completeAllButton = document.getElementById('completeAllButton');
-    
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                    var disableCompleteAllButton = false;
-    
-                    checkedCheckboxes.forEach(function(checkedCheckbox) {
-                        var status = checkedCheckbox.closest('tr').querySelector('.text-success').textContent.trim();
-    
-                        if (status === 'Đang chờ nhận việc') {
-                            disableCompleteAllButton = true;
-                        }
-                    });
-    
-                    completeAllButton.disabled = disableCompleteAllButton;
-                });
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var completeAllButton = document.getElementById('completeAllButton');
+    var startAllButton = document.getElementById('startAllButton');
+
+    function updateButtonState() {
+        var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        var disableCompleteAllButton = false;
+        var disableStartAllButton = false;
+
+        if (checkedCheckboxes.length === 0) {
+            completeAllButton.disabled = true;
+            startAllButton.disabled = true;
+        } else {
+            checkedCheckboxes.forEach(function(checkedCheckbox) {
+                var status = checkedCheckbox.closest('tr').querySelector('.text-success').textContent.trim();
+                if (status === 'Đang chờ nhận việc') {
+                    disableCompleteAllButton = true;
+                } else if (status === 'Đang làm') {
+                    disableStartAllButton = true;
+                }
             });
-        });
+
+            completeAllButton.disabled = disableCompleteAllButton;
+            startAllButton.disabled = disableStartAllButton;
+        }
+    }
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', updateButtonState);
+    });
+
+    updateButtonState();
+});
     </script>
 @endsection

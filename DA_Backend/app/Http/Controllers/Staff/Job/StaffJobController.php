@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Staff\Job;
 
+use Carbon\Carbon;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Staff;
@@ -46,6 +47,7 @@ class StaffJobController extends Controller
                 $job = Job::find($jobId);
                 if ($job) {
                     $job->status = 'Đã hoàn thành';
+                    $job->created_at = Carbon::now();
                     $job->save();
                 }
                 $statusStaff = Staff::find($job->id_staff);
