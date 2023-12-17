@@ -175,7 +175,7 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user"
-                                src="{{ session('avatar') ? Storage::url(session('avatar')) : '' }}">
+                                src="{{ session('avatar') ? Storage::url(session('avatar')) : 'https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg' }}">
                             <span class="d-none d-xl-inline-block ml-1">{{session('user_name')}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
