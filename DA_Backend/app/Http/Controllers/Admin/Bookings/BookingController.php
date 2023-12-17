@@ -58,7 +58,6 @@ class BookingController extends Controller
                 'booking_id' => $id
             ]);
         DB::table('booking')->where('id', $id)->update(['status' => $status]);
-        //mail
         $databk = DB::table('booking')->where('id', $id)->get();
         $data = $databk[0];
 
@@ -66,22 +65,22 @@ class BookingController extends Controller
             ->select('item_name', 'item_price', 'service_name')
             ->join('services', 'services.id', '=', 'jobs.id_service')
             ->where('id_booking', $data->id)->get();
-        $userdata = [
-            'name' => $data->name,
-            'email' => $data->email,
-            'phone' => $data->phone,
-            'target_date' => $data->target_date ? $data->target_date : 'trống',
-            'target_time' => $data->target_time ?  $data->target_time : 'trống',
-            'model_car' => $data->model_car ? $data->model_car : 'trống',
-            'mileage' => $data->mileage ? $data->mileage : 'trống',
-            'note' => $data->note ? $data->note : 'trống',
-            'total_price' => $data->total_price,
-
-            'serice_item' => $data_service,
-            'service_name' => $data_service[0]->service_name
-        ];
 
         try {
+            $userdata = [
+                'name' => $data->name,
+                'email' => $data->email,
+                'phone' => $data->phone,
+                'target_date' => $data->target_date ? $data->target_date : 'trống',
+                'target_time' => $data->target_time ?  $data->target_time : 'trống',
+                'model_car' => $data->model_car ? $data->model_car : 'trống',
+                'mileage' => $data->mileage ? $data->mileage : 'trống',
+                'note' => $data->note ? $data->note : 'trống',
+                'total_price' => $data->total_price,
+    
+                'serice_item' => $data_service,
+                'service_name' => $data_service[0]->service_name
+            ];
             $mail = new MailController();
             $mail->lich_dat_thanh_cong($userdata);
         } catch (\Exception $e) {

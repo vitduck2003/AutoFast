@@ -148,8 +148,7 @@ Route::middleware(['checkauth'])->group(function () {
   Route::prefix('staff')->group(function () {
     Route::get('current-jobs', [StaffJobController::class, 'currentJob'])->name('staff.currentJob');
     Route::get('jobs-complete', [StaffJobController::class, 'jobComplete'])->name('staff.jobsComplete');
-    Route::post('job-start', [StaffJobController::class, 'startJob'])->name('staff.job.start');
-    Route::get('job-done/{id}', [StaffJobController::class, 'jobDone'])->name('staff.job.done');
+    Route::post('job/action', [StaffJobController::class, 'jobAction'])->name('staff.job.action');
     Route::get('profile/{id}', [ProfileController::class, 'showDetail'])->name('profile');
     Route::put('profile/update/{id}', [ProfileController::class, 'update'])->name('update-profile');
     Route::put('profile/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('update-avatar');

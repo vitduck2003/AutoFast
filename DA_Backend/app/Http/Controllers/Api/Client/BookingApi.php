@@ -247,7 +247,7 @@ class BookingApi extends Controller
     
         $fullhour = [];
         foreach ($checktime[0] as $key => $value) {
-            if ($value >= 5) {
+            if ($value > 3) {
                 $fullhour[] = $key;
             }
         }
