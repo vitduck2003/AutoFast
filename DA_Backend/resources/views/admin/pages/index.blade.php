@@ -187,7 +187,6 @@
                         <div class="col-sm-6">
                             <p class="text-muted">
                                 <span id="desc" class="text-success mr-2"></span>
-                                Doanh thu thật tuyệt vời
                             </p>
                             <h3 id="revenue-value">{{ number_format($todayRevenue, 0, ',', '.') }} đ</h3>
                             <p class="mt-4">
@@ -244,7 +243,8 @@
                     <h4 class="card-title mb-4">Nhân viên</h4>
                     <div class="text-center">
                         <div class="mb-4">
-                            <i class="bx bx-map-pin text-primary display-4"></i>
+                            <!-- <i class="fa-solid fa-users-gear text-primary display-4"></i> -->
+                            <i class='bx bx-user text-primary display-4' ></i>
                         </div>
                         <h3>{{ $staff }}</h3>
                         <p>Nhân viên</p>
