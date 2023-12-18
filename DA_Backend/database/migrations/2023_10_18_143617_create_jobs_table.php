@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->float('item_price',255);
             $table->string('target_time_done');
+            $table->string('license_plate')->nullable();
             $table->string('images_done')->nullable();
             $table->float('price',255)->nullable();
             $table->string('status');

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->time('target_time');
             $table->text('note')->nullable();
             $table->string('model_car');
+            $table->string('license_plate')->nullable();
             $table->integer('mileage');
             $table->string('status');
             $table->string('status_bill')->nullable();
