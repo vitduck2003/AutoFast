@@ -140,16 +140,10 @@ const BookingPage = (props: any) => {
     if (!formData.target_time) {
       errors.target_time = "Vui lòng chọn giờ đến";
     }
+    if(!formData.bsx){
+      errors.bsx = "Vui lòng nhập biển số xe";
+    }
 
-    // Kiểm tra số KM của xe
-    // const mileageValue = parseInt(formData.mileage, 10);
-    // if (isNaN(mileageValue) || mileageValue < 0) {
-    //   errors.mileage = "Số KM không hợp lệ";
-    // }
-    //     const mileageValue = formData.mileage.trim() ? parseInt(formData.mileage, 10) : null;
-    // if (mileageValue !== null && (isNaN(mileageValue) || mileageValue <= 0)) {
-    //   errors.mileage = "Số KM không hợp lệ";
-    // }
 
     const mileageValue = formData.mileage.trim();
 
@@ -205,6 +199,7 @@ const BookingPage = (props: any) => {
     service: string;
     mileage: string;
     service_item_other: [];
+    bsx:String
   };
 
   const [formData, setFormData] = useState({
@@ -220,6 +215,7 @@ const BookingPage = (props: any) => {
     service: "",
     mileage: "",
     service_item_other: [],
+    bsx:""
   });
 
   useEffect(() => {
@@ -252,6 +248,7 @@ const BookingPage = (props: any) => {
         service: "",
         mileage: "",
         service_item_other: [],
+        bsx:""
       });
     }
   }, [phone]); // Phụ thuộc chỉ vào phone
@@ -459,17 +456,6 @@ const BookingPage = (props: any) => {
                   Họ và tên *
                 </label>
 
-                {/* <input
-
-  onChange={name === "" ? handleInputChange : undefined}
-  name="full_name"
-  type="text"
-  className="form-control"
-  placeholder="Nhập họ và tên"
-  value={name}
-  disabled={name !== ""}
-/> */}
-
                 {name === "" ? (
                   <input
                     onChange={handleInputChange}
@@ -533,6 +519,21 @@ const BookingPage = (props: any) => {
 
                 {formErrors.email && (
                   <p style={{ color: "red" }}>{formErrors.email}</p>
+                )}
+                
+                <label>Biển số xe *</label>
+                <input
+                  onChange={handleInputChange}
+                  name="bsx"
+                  type="string"
+                  className="form-control"
+                  placeholder="Nhập biển số xe của bạn "
+                 
+                 
+                />
+
+                {formErrors.bsx && (
+                  <p style={{ color: "red" }}>{formErrors.bsx}</p>
                 )}
                 <b>
                   <label style={{ marginTop: "50px" }} htmlFor="">
