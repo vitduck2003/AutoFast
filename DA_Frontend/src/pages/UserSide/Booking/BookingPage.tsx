@@ -546,15 +546,14 @@ const BookingPage = (props: any) => {
                   aria-label="Default select example"
                 >
                   <option selected>Lựa chọn loại xe của bạn</option>
-                  <option value="Sedan">Sedan</option>
-                  <option value="HatchBack">HatchBack</option>
-                  <option value="SUV">SUV</option>
-                  <option value="Crossover">Crossover (CUV)</option>
-                  <option value="MPV">MPV</option>
-                  <option value="Coupe">Coupe</option>
-                  <option value="Convertible">Convertible</option>
-                  <option value="Pickup"> Pickup</option>
-                  <option value="Limousine">Limousine</option>
+                  <option value="HatchBack">HatchBack (Xe hơi cỡ nhỏ)</option>
+                  <option value="Sedan">Sedan (Xe hơi cỡ trung)</option>
+                  <option value="SUV">SUV (Xe thể thao đa dụng)</option>
+                  <option value="Crossover">Crossover (Xe thể thao việt dã)</option>
+                  <option value="MPV">MPV (Xe đa năng)</option>
+                  <option value="Coupe">Coupe (Xe thể thao hai cửa)</option>
+                  <option value="Convertible">Convertible (Xe mui trần)</option>
+                  <option value="Pickup"> Pickup (Xe bán tải)</option>
                 </select>
                 {formErrors.model_car && (
                   <p style={{ color: "red" }}>{formErrors.model_car}</p>
