@@ -13,7 +13,7 @@ class ServiceApi extends Controller
     public function index()
     {
         try {
-            $data = Service::query()->orderBy('id')->get();
+            $data = Service::query()->get();
             return response()->json($data);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
