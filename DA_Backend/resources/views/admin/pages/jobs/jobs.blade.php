@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jobs as $job):
+                            @foreach($jobs as $job)
                             <tr>
                                 <td>{{ $job->room_name }}</td>
                                 <td>{{ $job->name }}</td>

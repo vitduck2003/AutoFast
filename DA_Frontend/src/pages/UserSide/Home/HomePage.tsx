@@ -257,7 +257,8 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       <div className="container">
         <h1 className=" text-center" style={slideStyle2}>Dịch Vụ </h1>
         <div className="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
-  {serviceHome.slice().reverse().map((item: any) => {
+
+  {serviceHome.slice().map((item: any) => {
     return (
       <div key={item.id} className="col mb-5">
         <div className="service-catalogue-item mx-lg-4 mb-4 sal-animate" data-sal="slide-up" style={slideStyle3} data-sal-duration="1600" data-sal-delay="0">
