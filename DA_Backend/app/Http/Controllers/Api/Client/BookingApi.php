@@ -243,6 +243,7 @@ class BookingApi extends Controller
         )
         ->where('target_date', $target_date)
         ->where('status', '!=', 'Đã được hủy')
+        ->where('status', '!=', 'Đã hoàn thành')
         ->get();
     
         $fullhour = [];
