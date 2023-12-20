@@ -341,12 +341,9 @@
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
 
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
     <!-- Saas dashboard init -->
     <script src="{{ asset('assets/js/pages/saas-dashboard.init.js') }}"></script>
-
-    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     @yield('script');
 

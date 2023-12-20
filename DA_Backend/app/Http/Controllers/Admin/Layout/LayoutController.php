@@ -22,6 +22,7 @@ class LayoutController extends Controller
             ->count();
         $bookingComplete = DB::table('booking')
             ->where('status', "Đã hoàn thành")
+            ->where('status_bill', "Chưa tạo hóa đơn")
             ->count();
         $bookingPrio = DB::table('booking')
             ->where('status', "Lịch ưu tiên")
