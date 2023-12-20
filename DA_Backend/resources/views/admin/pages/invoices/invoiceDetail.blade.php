@@ -22,6 +22,7 @@
                                     <strong>Số điện thoại</strong><br>
                                     <strong>Email:</strong><br>
                                     <strong>Tên xe:</strong><br>
+                                    <strong>Biển số xe:</strong><br>
                                     <strong>Số km đã đi:</strong><br>
                                     <strong>Dịch vụ:</strong><br>
                                     <strong>Trạng thái thanh toán:</strong><br>
@@ -35,6 +36,7 @@
                                     {{ $invoice->phone }}<br>
                                     {{ $invoice->email }}<br>
                                     {{ $invoice->model_car }}<br>
+                                    {{ $license_plate->license_plate ? $license_plate->license_plate:'29C44147' }}<br>
                                     {{ $invoice->mileage }} Km<br>
                                     {{ $invoice->service_name }}<br>
                                     {{ $invoice->status_payment }}<br>

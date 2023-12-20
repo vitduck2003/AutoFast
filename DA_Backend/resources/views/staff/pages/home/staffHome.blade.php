@@ -162,7 +162,7 @@
                                     {{$bk->room_name}}
                                     </td>
                                     <td>
-                                    <a href="{{ route('booking.detail', ['id'=> $bk->id]) }}"><button type="button"
+                                    <a href="{{ route('booking.detail.get', ['id'=> $bk->id]) }}"><button type="button"
                                             class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                             data-toggle="modal" data-target=".exampleModal">
                                            Chi tiết
@@ -310,8 +310,8 @@
         labels: <?php echo json_encode($labels); ?>,
         datasets: [{
             data: <?php echo json_encode($data); ?>,
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], 
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00FF00'], 
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00FF00']
         }]
     };
 

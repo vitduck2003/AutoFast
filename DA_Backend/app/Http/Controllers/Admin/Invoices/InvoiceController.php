@@ -106,7 +106,8 @@ class InvoiceController extends Controller
         ->select('item_name', 'item_price', 'note')
         ->where('id_booking', '=', $invoice->id_booking)
         ->get();
-        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs'));
+        $license_plate=DB::table('booking')->where('booking.id', '=', $id)->select('license_plate')->first();
+        return view('admin/pages/invoices/invoiceDetail', compact('invoice', 'jobs', 'license_plate'));
     }
     public function updatePayment($id){
         $status = "Đã thanh toán";

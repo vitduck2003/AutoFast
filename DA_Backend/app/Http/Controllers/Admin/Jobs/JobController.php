@@ -116,6 +116,8 @@ foreach ($jobs as $job) {
     public function viewAddJob($id)
     {
         $jobs = DB::table('service_items')
+            ->where('item_name', 'LIKE', 'Thay%')
+            ->orWhere('id_service', '=', NULL)
             ->get();
         return view('admin/pages/jobs/addJob', compact('jobs', 'id'));
     }
@@ -136,6 +138,7 @@ foreach ($jobs as $job) {
             ->select('item_name', 'time_done', 'price')
             ->where('id', $data['service_item'])
             ->first();
+
         $addJob = DB::table('jobs')
             ->insert(
                 [

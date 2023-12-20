@@ -213,6 +213,9 @@ Route::middleware(['checkauth'])->group(function () {
     Route::put('profile/update/avatar/{id}', [ProfileController::class, 'updateAvatar'])->name('update-avatar');
     Route::get('profile/show/password/{id}', [ProfileController::class, 'showPass'])->name('show-password');
     Route::put('profile/update/password/{id}', [ProfileController::class, 'changePassword'])->name('change-password');
+    Route::get('booking-detail/{id}', [StaffJobController::class, 'bookingDetail'])->name('booking.detail.get');
+
+
   });
 
 });

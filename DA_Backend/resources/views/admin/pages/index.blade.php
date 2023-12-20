@@ -47,12 +47,44 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <h4 class="card-title m-3">Thống kê dịch vụ được đặt</h4>
+            <div class="card ">
                 <div class="card-body">
-                    <canvas id="pie-chart"></canvas>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title mb-4">Doanh thu</h4>
+                        </div>
+                        <div class="mb-3">
+                            <select id="revenue-option" class="form-control">
+                                <option value="today">Hôm nay</option>
+                                <option value="week">Tuần</option>
+                                <option value="month">Tháng</option>
+                                <option value="year">Năm</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                        <svg width="64px" height="64px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#556EE6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.248"></g><g id="SVGRepo_iconCarrier"> <title>currency-revenue-solid</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Q3_icons" data-name="Q3 icons"> <path d="M44,7.1V14a2,2,0,0,1-2,2H35a2,2,0,0,1-2-2.3A2.1,2.1,0,0,1,35.1,12h2.3A18,18,0,0,0,6.1,22.2a2,2,0,0,1-2,1.8h0a2,2,0,0,1-2-2.2A22,22,0,0,1,40,8.9V7a2,2,0,0,1,2.3-2A2.1,2.1,0,0,1,44,7.1Z"></path> <path d="M4,40.9V34a2,2,0,0,1,2-2h7a2,2,0,0,1,2,2.3A2.1,2.1,0,0,1,12.9,36H10.6A18,18,0,0,0,41.9,25.8a2,2,0,0,1,2-1.8h0a2,2,0,0,1,2,2.2A22,22,0,0,1,8,39.1V41a2,2,0,0,1-2.3,2A2.1,2.1,0,0,1,4,40.9Z"></path> <path d="M24.7,22c-3.5-.7-3.5-1.3-3.5-1.8s.2-.6.5-.9a3.4,3.4,0,0,1,1.8-.4,6.3,6.3,0,0,1,3.3.9,1.8,1.8,0,0,0,2.7-.5,1.9,1.9,0,0,0-.4-2.8A9.1,9.1,0,0,0,26,15.3V13a2,2,0,0,0-4,0v2.2c-3,.5-5,2.5-5,5.2s3.3,4.9,6.5,5.5,3.3,1.3,3.3,1.8-1.1,1.4-2.5,1.4h0a6.7,6.7,0,0,1-4.1-1.3,2,2,0,0,0-2.8.6,1.8,1.8,0,0,0,.3,2.6A10.9,10.9,0,0,0,22,32.8V35a2,2,0,0,0,4,0V32.8a6.3,6.3,0,0,0,3-1.3,4.9,4.9,0,0,0,2-4h0C31,23.8,27.6,22.6,24.7,22Z"></path> </g> </g> </g></svg>
+                            <p class="text-muted">
+                                <span id="desc" class="text-success mr-2"></span>
+                            </p>
+                            <h3 id="revenue-value">{{ number_format($todayRevenue, 0, ',', '.') }} đ</h3>
+                            <p class="mt-4">
+                                Xin chào! Chúc bạn ngày mới vui vẻ
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <p class="text-muted mb-0"></p>
+                    <div class="text-center mt-5"><a href="{{ url('service') }}"
+                            class="btn btn-primary waves-effect waves-light btn-sm">Đến quản lí<i
+                                class="mdi mdi-arrow-right ml-1"></i></a>
+                    </div>
                 </div>
             </div>
+                
+            
         </div>
         <div class="col-xl-8">
             <div class="row">
@@ -168,6 +200,48 @@
     <div class="row">
     <div class="col-xl-4">
             <div class="card">
+            <h4 class="card-title m-3">Thống kê dịch vụ được đặt</h4>
+                <div class="card-body">
+                    <canvas id="pie-chart"></canvas>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Các dịch vụ</h4>
+                    <ul class="verti-timeline list-unstyled">
+                        @foreach ($services as $service)
+                        <li class="event-list">
+                            <div class="event-timeline-dot">
+                                <i class="bx bx-right-arrow-circle font-size-18"></i>
+                            </div>
+                            <div class="media">
+                                <div class="mr-3">
+                                    <h5 class="font-size-14">{{ ucwords(strtolower($service->service_name))  }}<i
+                                            class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ml-2"></i>
+                                    </h5>
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        Trọn Gói {{ ucwords(strtolower($service->service_name))  }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                    <div class="text-center mt-5"><a href="{{ url('service') }}"
+                            class="btn btn-primary waves-effect waves-light btn-sm">Đến quản lí<i
+                                class="mdi mdi-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-4">
+            <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Nhân viên</h4>
                     <div class="text-center">
@@ -237,78 +311,6 @@
                 </div>
             </div>
         </div>
-       
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Các dịch vụ</h4>
-                    <ul class="verti-timeline list-unstyled">
-                        @foreach ($services as $service)
-                        <li class="event-list">
-                            <div class="event-timeline-dot">
-                                <i class="bx bx-right-arrow-circle font-size-18"></i>
-                            </div>
-                            <div class="media">
-                                <div class="mr-3">
-                                    <h5 class="font-size-14">{{ ucwords(strtolower($service->service_name))  }}<i
-                                            class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ml-2"></i>
-                                    </h5>
-                                </div>
-                                <div class="media-body">
-                                    <div>
-                                        Trọn Gói {{ ucwords(strtolower($service->service_name))  }}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                    <div class="text-center mt-5"><a href="{{ url('service') }}"
-                            class="btn btn-primary waves-effect waves-light btn-sm">Đến quản lí<i
-                                class="mdi mdi-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
- <div class="col-xl-4">
-            <div class="card ">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title mb-4">Doanh thu</h4>
-                        </div>
-                        <div class="mb-3">
-                            <select id="revenue-option" class="form-control">
-                                <option value="today">Hôm nay</option>
-                                <option value="week">Tuần</option>
-                                <option value="month">Tháng</option>
-                                <option value="year">Năm</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                        <svg width="64px" height="64px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#556EE6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.248"></g><g id="SVGRepo_iconCarrier"> <title>currency-revenue-solid</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Q3_icons" data-name="Q3 icons"> <path d="M44,7.1V14a2,2,0,0,1-2,2H35a2,2,0,0,1-2-2.3A2.1,2.1,0,0,1,35.1,12h2.3A18,18,0,0,0,6.1,22.2a2,2,0,0,1-2,1.8h0a2,2,0,0,1-2-2.2A22,22,0,0,1,40,8.9V7a2,2,0,0,1,2.3-2A2.1,2.1,0,0,1,44,7.1Z"></path> <path d="M4,40.9V34a2,2,0,0,1,2-2h7a2,2,0,0,1,2,2.3A2.1,2.1,0,0,1,12.9,36H10.6A18,18,0,0,0,41.9,25.8a2,2,0,0,1,2-1.8h0a2,2,0,0,1,2,2.2A22,22,0,0,1,8,39.1V41a2,2,0,0,1-2.3,2A2.1,2.1,0,0,1,4,40.9Z"></path> <path d="M24.7,22c-3.5-.7-3.5-1.3-3.5-1.8s.2-.6.5-.9a3.4,3.4,0,0,1,1.8-.4,6.3,6.3,0,0,1,3.3.9,1.8,1.8,0,0,0,2.7-.5,1.9,1.9,0,0,0-.4-2.8A9.1,9.1,0,0,0,26,15.3V13a2,2,0,0,0-4,0v2.2c-3,.5-5,2.5-5,5.2s3.3,4.9,6.5,5.5,3.3,1.3,3.3,1.8-1.1,1.4-2.5,1.4h0a6.7,6.7,0,0,1-4.1-1.3,2,2,0,0,0-2.8.6,1.8,1.8,0,0,0,.3,2.6A10.9,10.9,0,0,0,22,32.8V35a2,2,0,0,0,4,0V32.8a6.3,6.3,0,0,0,3-1.3,4.9,4.9,0,0,0,2-4h0C31,23.8,27.6,22.6,24.7,22Z"></path> </g> </g> </g></svg>
-                            <p class="text-muted">
-                                <span id="desc" class="text-success mr-2"></span>
-                            </p>
-                            <h3 id="revenue-value">{{ number_format($todayRevenue, 0, ',', '.') }} đ</h3>
-                            <p class="mt-4">
-                                Xin chào! Chúc bạn ngày mới vui vẻ
-                            </p>
-                        </div>
-                        
-                    </div>
-                    <p class="text-muted mb-0"></p>
-                    <div class="text-center mt-5"><a href="{{ url('service') }}"
-                            class="btn btn-primary waves-effect waves-light btn-sm">Đến quản lí<i
-                                class="mdi mdi-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
     <!-- end row -->
 

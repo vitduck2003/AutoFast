@@ -63,9 +63,9 @@
                             <div class="p-2">
                                 <form class="form-horizontal" action="{{ route('login.submit') }}" method="POST">
                                     <div class="form-group">
-                                        <label for="username">Số điện thoại</label>
+                                        <label for="username">Tài khoản</label>
                                         <input type="text" name="phone" class="form-control" id="phone"
-                                            placeholder="Nhập số điện thoại">
+                                            placeholder="Tài khoản">
                                     </div>
 
                                     <div class="form-group">

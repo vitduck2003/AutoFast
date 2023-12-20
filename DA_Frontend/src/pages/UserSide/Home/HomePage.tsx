@@ -310,9 +310,9 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
         <div className="container">
           <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="text-primary text-uppercase">
-              Các kỹ sư của chúng tôi
+              Các nhân viên của chúng tôi
             </h6>
-            <h1 className="mb-5">Các kỹ sư chuyên nghiệp</h1>
+            <h1 className="mb-5">Các nhân viên của chúng tôi</h1>
           </div>
           <div className="row g-5">
             {staffData.map((item:any) =>{
@@ -324,7 +324,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
               <div className="team-item">
                 <div className="position-relative overflow-hidden">
                 <img
-  style={{ maxWidth: "500px", maxHeight: "500px" }}
+  style={{ maxWidth: "282px",width: "282px", maxHeight: "200px",height: "200px" }}
   className="img-fluid"
   src={`http://localhost:8000/storage/` + item.avatar}
   alt=""

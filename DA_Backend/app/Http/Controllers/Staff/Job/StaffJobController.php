@@ -99,4 +99,33 @@ class StaffJobController extends Controller
         }
         return view('staff/pages/jobs/jobComplete', compact('jobs'));
     }
+    public function bookingDetail($id)
+    {
+        $booking = DB::table('booking')
+            ->select('id', 'name', 'phone', 'email', 'target_date', 'target_time', 'note', 'status', 'total_price', 'model_car', 'mileage', 'license_plate',  'created_at')
+            ->where('id', $id)
+            ->first();
+        $service = DB::table('booking_detail')
+            ->join('services', 'services.id', 'booking_detail.id_service')
+            ->select('services.service_name')
+            ->where('booking_detail.id_booking', $id)
+            ->first();
+        $jobs = DB::table('jobs')
+            ->select('id', 'item_name', 'item_price', 'target_time_done', 'note')
+            ->where('id_booking', $booking->id)
+            ->get();
+        $total_price = DB::table('jobs')
+            ->select(DB::raw('sum(item_price) as total_price'))
+            ->where('id_booking', $booking->id)
+            ->first();
+        DB::table('booking')
+            ->where('id', $id)
+            ->update(['total_price' => $total_price->total_price]);
+        $logs = DB::table('log')
+            ->join('users', 'users.id', '=', 'log.user_id')
+            ->where('log.booking_id', $id)
+            ->select('users.name as admin_name', 'log.content', 'log.created_at')
+            ->get();
+        return view('staff/pages/jobs/bookingDetail', compact('booking', 'jobs', 'service', 'logs', 'total_price'));
+    }
 }

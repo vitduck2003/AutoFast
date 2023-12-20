@@ -35,9 +35,9 @@
                                 <td>
                                     <div style="display:flex">
                                         <div >
-                                        <a href="{{route('service.edit',$row)}}" class="btn btn-success">  
-                                         Sửa
-                                        </a>
+                                            <a href="{{route('service.edit',$row)}}" class="btn btn-success">  
+                                            Sửa
+                                            </a>
                                         </div>
                                         <div>
                                         <form action="{{route('service.destroy',$row)}}" method="post">

@@ -134,7 +134,7 @@
             <div class="navbar-header">
                 <div class="d-flex">
                     <div class="navbar-brand-box">
-                        <a href="home" class="logo logo-dark">
+                        <a href="{{ route('admin.home') }}" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%"  height="max">
                             </span>
@@ -259,6 +259,15 @@
                         </li>
                         <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fa-solid fa-file-invoice"></i>
+                                <span>Quản lí hóa đơn</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
+                            </ul>
+                        </li>
+                        <li class="my-2">
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-warehouse"></i>
                                 <span>Quản lí cầu</span>
                             </a>
@@ -268,15 +277,7 @@
                                 <li><a href="{{ url('admin/room/formAdd') }}">Thêm cầu</a></li>
                             </ul>
                         </li>
-                        <li class="my-2">
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="fa-solid fa-file-invoice"></i>
-                                <span>Quản lí hóa đơn</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
-                            </ul>
-                        </li>
+                        
                         <li class="my-2">
                             <a class="has-arrow waves-effect">
                             <i class="fa-solid fa-screwdriver-wrench"></i>                                
