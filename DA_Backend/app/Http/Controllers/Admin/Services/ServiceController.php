@@ -37,7 +37,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('admin\pages\services\create');
+        return view('admin\pages\services\create');;
     }
 
     /**
@@ -60,7 +60,7 @@ class ServiceController extends Controller
         }
     
         $model->save();
-        return redirect()->route('service.index');
+        return redirect()->route('service.index')->with('success','Dịch vụ được thêm thành công');
     }
 
     /**
@@ -107,7 +107,7 @@ class ServiceController extends Controller
         }
         $model->save();
 
-        return back();
+        return back()->with('success','Dịch vụ được sửa thành công');
     }
 
     /**
@@ -123,6 +123,6 @@ class ServiceController extends Controller
      Storage::disk('public')->delete($ser->image_service);
     }
         $ser->delete($id);
-        return back();
+        return back()->with('success','Dịch vụ được xóa thành công');
     }
 }

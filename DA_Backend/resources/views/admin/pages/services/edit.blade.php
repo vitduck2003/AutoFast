@@ -2,6 +2,11 @@
 
 
 @section('content')
+   @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 <form action="{{ route('service.update',$service->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
