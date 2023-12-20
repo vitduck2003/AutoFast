@@ -285,6 +285,7 @@ const AccountSetting = () => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     id="account-pass"
+                    disabled
                   />
                 </div>
               </div>
@@ -297,6 +298,7 @@ const AccountSetting = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     id="account-confirm-pass"
+                    disabled
                   />
                 </div>
               </div>
