@@ -18,6 +18,7 @@
                                     <th>Công việc</th>
                                     <th>Giá</th>
                                     <th>Xe</th>
+                                    <th>Biển số</th>
                                     <th>Thời gian xong</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
@@ -37,6 +38,7 @@
                                         <td>{{ $job->item_name }}</td>
                                         <td>{{ $job->item_price }}</td>
                                         <td>{{ $job->model_car }}</td>
+                                        <td>{{ $job->license_plate }}</td>
                                         <td>{{ $job->target_time_done }} phút</td>
                                         <td class="text-success">{{ $job->status }}</td>
                                         <td>
