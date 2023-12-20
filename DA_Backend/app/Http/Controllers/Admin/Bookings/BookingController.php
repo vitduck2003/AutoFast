@@ -294,7 +294,7 @@ class BookingController extends Controller
     public function bookingDetail($id)
     {
         $booking = DB::table('booking')
-            ->select('id', 'name', 'phone', 'email', 'target_date', 'target_time', 'note', 'status', 'total_price', 'model_car', 'mileage',  'created_at')
+            ->select('id', 'name', 'phone', 'email', 'target_date', 'target_time', 'note', 'status', 'total_price', 'model_car', 'mileage', 'license_plate',  'created_at')
             ->where('id', $id)
             ->first();
         $service = DB::table('booking_detail')

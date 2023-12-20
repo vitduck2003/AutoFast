@@ -110,30 +110,32 @@
 
         <header id="page-topbar">
             <div class="navbar-header">
-                <div class="d-flex">
-                    <!-- LOGO -->
+            <div class="d-flex">
                     <div class="navbar-brand-box">
                         <a href="home" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%"  height="max">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%" height="100%">
                             </span>
                         </a>
 
                         <a href="home" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%"  height="100%"
+                                    width="30px">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('assets\images\logo\logo.png') }}" alt="" height="100%" width="100%">
+                                <img src="{{ asset('assets\images\logo\logo.png') }}" width="100%" height="100%">
                             </span>
                         </a>
                     </div>
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
 
-
-
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
                 </div>
 
                 <div class="d-flex">

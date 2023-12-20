@@ -323,12 +323,12 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
             >
               <div className="team-item">
                 <div className="position-relative overflow-hidden">
-                  <img
-                    style={{ width: "500px" }}
-                    className="img-fluid"
-                    src={`http://localhost:8000/storage/`+item.avatar}
-                    alt=""
-                  />
+                <img
+  style={{ maxWidth: "500px", maxHeight: "500px" }}
+  className="img-fluid"
+  src={`http://localhost:8000/storage/` + item.avatar}
+  alt=""
+/>
                   {/* <div className="team-overlay position-absolute start-0 top-0 w-100 h-100">
                     <a className="btn btn-square mx-1" href="">
                       <i className="fab fa-facebook-f"></i>

@@ -21,6 +21,7 @@
                                     <strong>Số điện thoại</strong><br>
                                     <strong>Email:</strong><br>
                                     <strong>Tên xe:</strong><br>
+                                    <strong>Biển số xe:</strong><br>
                                     <strong>Số km đã đi:</strong><br>
                                     <strong>Dịch vụ:</strong><br>
                                 </address>
@@ -32,6 +33,7 @@
                                     {{ $booking->phone }}<br>
                                     {{ $booking->email }}<br>
                                     {{ $booking->model_car }}<br>
+                                    {{ $booking->license_plate }}<br>
                                     {{ $booking->mileage }} Km<br>
                                     {{ $service->service_name }}<br>
                                 </address>

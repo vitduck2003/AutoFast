@@ -15,7 +15,7 @@
 
         <div class="row">
             @foreach($rooms as $room)
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-4 col-sm-6">
                 <div style="@if($room->status == 'Đang trống') background-color:#FFB319 @else background-color:#008FFB @endif" class="card text-center">
                     <div class="card-body">
                         <h5 class="font-size-15">{{$room->name}}</h5>
