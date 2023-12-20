@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+            <div class="form-group" >
                 <strong>ảnh new</strong>
-                <input type="file" name="image" class="form-control" placeholder="new Email">
+                <input style="height:50px" type="file" name="image" class="form-control" placeholder="new Email">
                 @error('image_new')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

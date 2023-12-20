@@ -18,7 +18,6 @@
                                 <th>Xe</th>
                                 <th>Thời gian xong</th>
                                 <th>Trạng thái</th>
-                                <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,15 +28,8 @@
                                 <td>{{ $job->item_name }}</td>
                                 <td>{{ $job->item_price }}</td>
                                 <td>{{ $job->model_car }}</td>
-                                <td>{{ $job->target_time_done }}</td>
+                                <td>{{ $job->created_at ? $job->created_at : $job->target_time_done." phút"}}</td>
                                 <td class="text-success">{{ $job->status }}</td>
-                                <td>
-                                    <form method="post" action="{{ route('staff.job.start') }}">
-                                        @csrf
-                                        <input type="hidden" name="job_id" value="{{ $job->id }}">
-                                        <button type="submit" class="btn btn-danger">Làm lại</button>
-                                    </form>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>

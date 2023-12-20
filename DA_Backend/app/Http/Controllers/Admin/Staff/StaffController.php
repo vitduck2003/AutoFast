@@ -144,7 +144,9 @@ class StaffController extends Controller
             $staff = Staff::findOrFail($id);
             $user = User::findOrFail($staff->id_user);
             if ($request->hasFile('avatar')) {
-                Storage::delete($user->avatar);
+                if ($user->avatar) {
+                    Storage::delete('public/' . $user->avatar);
+                }
                 $path = $request->file('avatar')->store('public/avatar');
                 $path=substr($path, 7);
                 $user->avatar = $path;

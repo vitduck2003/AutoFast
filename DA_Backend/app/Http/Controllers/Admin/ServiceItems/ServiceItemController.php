@@ -62,7 +62,7 @@ class ServiceItemController extends Controller
         }
        
         $model->save();
-        return redirect()->route('serviceitem.index');
+        return redirect()->route('serviceitem.index')->with('success','Phụ tùng được thêm thành công');
     }
 
     /**
@@ -118,7 +118,7 @@ class ServiceItemController extends Controller
             $define->save_file_path( $model->image ,2);
         }
         $model->save();
-        return back();
+        return back()->with('success','Phụ tùng được cập nhật thành công');;
     }
 
     /**
@@ -134,6 +134,6 @@ class ServiceItemController extends Controller
             Storage::disk('public')->delete($seritem->image);
         }
         $seritem->delete($id);
-        return back();
+        return back()->with('success','Phụ tùng được xóa thành công');;
     }
 }

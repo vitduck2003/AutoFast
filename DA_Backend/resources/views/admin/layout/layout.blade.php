@@ -219,17 +219,15 @@
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled" id="side-menu">
-                        <li class="menu-title">Menu</li>
 
-                        <li>
+                        <li class="my-2">
                             <a href="{{ route('admin.home') }}" class="waves-effect">
                             <i class="fa-solid fa-house"></i>
                                 <span>Trang chủ</span>
                             </a>
 
                         </li>
-                        <li class="menu-title">Đặt lịch</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-calendar-days"></i>
                                 <span>Quản lí đặt lịch</span>
@@ -248,8 +246,7 @@
                                 <li><a href="{{ url('admin/bookings-cancel') }}">Lịch đã hủy</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Công việc</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-briefcase"></i>
                                 <span>Quản lí công việc</span>
@@ -260,8 +257,7 @@
                                 <li><a href="{{ url('admin/staffJob') }}">Nhân viên và công việc</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Cầu</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-warehouse"></i>
                                 <span>Quản lí cầu</span>
@@ -272,8 +268,7 @@
                                 <li><a href="{{ url('admin/room/formAdd') }}">Thêm cầu</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Hóa đơn</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-file-invoice"></i>
                                 <span>Quản lí hóa đơn</span>
@@ -282,28 +277,27 @@
                                 <li><a href="{{ route('invoice') }}">Tất cả hóa đơn</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Dịch vụ</li>
-                        <li>
+                        <li class="my-2">
                             <a class="has-arrow waves-effect">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>                                <span>Quản lí dịch vụ</span>
+                            <i class="fa-solid fa-screwdriver-wrench"></i>                                
+                            <span>Quản lí dịch vụ</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('service.index') }}">Tất cả dịch vụ</a></li>
 
                             </ul>
                         </li>
-                        <li class="menu-title">Phụ Tùng</li>
-                        <li>
+                        <li class="my-2">
                             <a class="has-arrow waves-effect">
-                            <i class="fa-solid fa-wrench"></i>                                <span>Quản lí phụ tùng</span>
+                            <i class="fa-solid fa-wrench"></i>                                
+                            <span>Quản lí phụ tùng</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{{ route('serviceitem.index') }}">Tất cả phụ tùng</a></li>
 
                             </ul>
                         </li>
-                        <li class="menu-title">Khuyến Mại</li>
-                        <li>
+                        <li class="my-2">
                             <a class="has-arrow waves-effect">
                             <i class="fa-solid fa-ticket"></i>
                                 <span>Quản lí khuyến mại</span>
@@ -314,8 +308,7 @@
                                 <li><a href="{{ route('coupon.form.add') }}">Thêm mã giảm giá</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Tài khoản</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-circle-user"></i>
                                 <span>Quản lí tài khoản</span>
@@ -324,8 +317,7 @@
                                 <li><a href="{{ url('admin/user') }}">Danh sách tài khoản</a></li>
                             </ul>
                         </li>
-                        <li class="menu-title">Nhân viên</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-users-gear"></i>
                                 <span>Quản lí nhân viên</span>
@@ -337,8 +329,7 @@
 
                             </ul>
                         </li>
-                        <li class="menu-title">Đánh giá</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-star"></i>
                                 <span>Quản lí Đánh giá</span>
@@ -349,8 +340,7 @@
                             </ul>
                         </li>
 
-                        <li class="menu-title">Tin tức</li>
-                        <li>
+                        <li class="my-2">
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fa-solid fa-newspaper"></i>
                                 <span>Quản lí tin tức</span>

@@ -2,6 +2,11 @@
 
 
 @section('content')
+   @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 <form action="{{route('new.update',$new)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -20,7 +25,7 @@
             <div class="form-group">
                 <strong>ảnh new</strong>
                 <td ><img style="width:50px" src="{{asset('storage/images/'.$new->image)}}" alt=""></td>
-                <input type="file" name="image" class="form-control" placeholder="new Email">
+                <input type="file" style="height:50px" name="image" class="form-control" placeholder="new Email">
                 @error('image_new')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -41,9 +46,7 @@
             <div class="form-group">
                 <strong>nội dung</strong>
                 <br>
-                <textarea id="" name="content" rows="4" cols="50">
-                    {{$new->content}}
-                    </textarea>
+                <textarea id="" name="content" rows="4" cols="50">{{$new->content}}  </textarea>
                 @error('content')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ảnh dịch vụ</strong>
-                <input type="file" name="image_service" class="form-control" placeholder="Company Email">
+                <input  style="height:50px"  type="file" name="image_service" class="form-control" placeholder="Company Email">
                 @error('image_service')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

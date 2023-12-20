@@ -4,10 +4,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Đây là toàn bộ lịch đã đặt của khách hàng cần bạn xác nhận</h4>
-                    <p class="card-title-desc">Chào sếp, nay có rất nhiều lịch cần bạn xác nhận hãy hoàn thành nào.</p>
+                      @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
                     <a href="{{route('service.create')}}" class="btn btn-success">thêm mới</a>
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                  
+                  <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -20,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $row):
+                            @foreach($data as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->service_name }}</td>

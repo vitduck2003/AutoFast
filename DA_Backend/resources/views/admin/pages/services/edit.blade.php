@@ -2,6 +2,11 @@
 
 
 @section('content')
+   @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 <form action="{{ route('service.update',$service->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -20,7 +25,7 @@
             <div class="form-group">
                 <strong>ảnh dịch vụ</strong>
                 <img style="width:50px" src="{{asset('storage/images/'.$service->image_service)}}" alt="">
-                <input type="file" name="image_service" class="form-control" 
+                <input type="file"  style="height:50px"  name="image_service" class="form-control" 
                     value="{{ $service->image_service }}">
                 @error('image_service')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

@@ -51,7 +51,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ảnh phụ tùng</strong>
-                <input type="file" name="image" class="form-control" placeholder="Company Email">
+                <input  style="height:50px"  type="file" name="image" class="form-control" placeholder="Company Email">
                 @error('image')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror

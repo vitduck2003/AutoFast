@@ -49,7 +49,7 @@ class NewController extends Controller
 
         }
         $model->save();
-        return redirect()->route('new.index');
+        return redirect()->route('new.index')->with('success','Tin tức được thêm thành công');
     }
 
     /**
@@ -92,7 +92,7 @@ class NewController extends Controller
             $define->save_file_path( $model->image ,3);
         }
         $model->save();
-        return back();
+        return back()->with('success','Tin tức được sửa thành công');;
     }
 
     /**
@@ -108,6 +108,6 @@ class NewController extends Controller
             Storage::disk('public')->delete($new->image);
         }
         $new->delete($id);
-        return back();
+        return back()->with('success','Tin tức được xóa thành công');;
     }
 }

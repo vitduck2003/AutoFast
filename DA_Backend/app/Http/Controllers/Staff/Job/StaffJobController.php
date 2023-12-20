@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Staff\Job;
 
+use Carbon\Carbon;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Staff;
@@ -37,45 +38,51 @@ class StaffJobController extends Controller
         }
         return view('staff/pages/jobs/currentJob', compact('jobs'));
     }
-    public function startJob(Request $request)
+    public function jobAction(Request $request)
     {
+        $action = $request->input('action');
         $jobIds = $request->input('job_ids');
-
-        foreach ($jobIds as $jobId) {
-            $job = Job::find($jobId);
-
-            if ($job) {
-                $job->status = 'Đang làm';
-                $job->save();
+        if ($action == 'done') {
+            foreach ($jobIds as $jobId) {
+                $job = Job::find($jobId);
+                if ($job) {
+                    $job->status = 'Đã hoàn thành';
+                    $job->created_at = Carbon::now();
+                    $job->save();
+                }
+                $statusStaff = Staff::find($job->id_staff);
+                if ($statusStaff) {
+                    $statusStaff->status = "Đang đợi việc";
+                    $statusStaff->save();
+                }
+                DB::table('notification')->insert(['booking_id' => $job->id_booking, 'title' => 'Công việc', 'content' => 'Đã hoàn thành lịch của', 'created_at' => now()]);
             }
-            $statusStaff = Staff::find($job->id_staff);
-            if ($statusStaff) {
-                $statusStaff->status = "Đang làm";
-                $statusStaff->save();
+            return redirect()->back()->with('message', 'Công việc đã hoàn thành');
+        } elseif ($action == 'start') {
+            foreach ($jobIds as $jobId) {
+                $job = Job::find($jobId);
+
+                if ($job) {
+                    $job->status = 'Đang làm';
+                    $job->save();
+                }
+                $statusStaff = Staff::find($job->id_staff);
+                if ($statusStaff) {
+                    $statusStaff->status = "Đang làm";
+                    $statusStaff->save();
+                }
             }
+            return redirect()->back()->with('message', 'Công việc đã bắt đầu làm');
         }
-
-        return redirect()->back();
     }
-   public function jobDone($id)
-{
-    $job = Job::find($id);
-
-    if ($job) {
-        $job->status = 'Đã hoàn thành';
-        $job->save();
-    }
-    DB::table('notification')->insert(['booking_id'=>$job->id_booking,'title' => 'Công việc','content' => 'Đã hoàn thành lịch của','created_at' =>now()]);
-    return redirect()->back();
-}
     public function jobComplete()
     {
         $phone = session('phone');
         $user = User::where('phone', $phone)->first();
         $staff = Staff::where('id_user', $user->id)->first();
         $jobs = DB::table('jobs')
-        ->join('booking', 'booking.id', 'jobs.id_booking')
-        ->select('booking.name', 'jobs.*')
+            ->join('booking', 'booking.id', 'jobs.id_booking')
+            ->select('booking.name', 'jobs.*')
             ->where('jobs.id_staff', $staff->id)
             ->where('jobs.status', 'LIKE', 'Đã hoàn thành')
             ->get();
